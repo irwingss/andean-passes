@@ -179,9 +179,13 @@ def pasos():
     fut = pd.read_csv(DB / 'APD_climate_future.csv').query("ssp == 370 and period == '2081-2100'").set_index('col_id')
     atlas = {}
     (DST / 'atlas').mkdir(exist_ok=True)
+    (DST / 'miniaturas').mkdir(exist_ok=True)
     for f in sorted((L1 / 'outputs/supp/atlas').glob('S4_*.png')):
         i = re.search(r'APD\d+', f.name)[0]
         shutil.copy(f, DST / f'atlas/{i}.png')
+        with Image.open(f) as im:                                # 2x the popup width, for phones
+            assert im.size == (2007, 1417), f                    # the popup reserves this aspect ratio
+            im.convert('RGB').resize((540, 381), Image.LANCZOS).save(DST / f'miniaturas/{i}.jpg', quality=75, optimize=True)
         atlas[i] = f'atlas/{i}.png'
     pts, cp = geoms(DB / 'APD_flanks.gpkg', 'flank_points', ['col_id', 'side_lab', 'flank_m'])
     fl = {}

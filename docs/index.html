@@ -120,7 +120,7 @@
   #leyenda .item i.punto { width: 11px; border-radius: 50%; }
 
   /* map chip */
-  #etiqueta { position: absolute; z-index: 800; left: 50%; top: 12px; transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 7px 14px; border-radius: 99px; font-size: 12px; box-shadow: var(--sombra); max-width: calc(100% - 140px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #etiqueta { position: absolute; z-index: 800; left: 50%; top: 12px; transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 7px 14px; border-radius: 99px; font-size: 12px; box-shadow: var(--sombra); max-width: calc(100% - 140px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
   #etiqueta[hidden] { display: none; }
   .leaflet-image-layer, .capa-px { image-rendering: pixelated; }
   .leaflet-container { font: inherit; background: #2b2b2b; }
@@ -137,9 +137,28 @@
   #leyenda.plegada #ley-cuerpo { display: none; }
 
   /* sheet of File S4 */
-  #hoja { position: fixed; inset: 0; z-index: 2000; background: rgba(15,20,17,.82); display: flex; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out; }
+  #hoja { position: fixed; inset: 0; z-index: 2000; background: rgba(15,20,17,.88); display: flex; flex-direction: column; }
   #hoja[hidden] { display: none; }
+  #hoja .barra { flex: none; display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; color: #fff; font-weight: 600; }
+  #hoja .barra span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #hoja .barra a { color: #fff; font-weight: 500; font-size: 12px; white-space: nowrap; }
+  #hoja .barra button { flex: none; width: 40px; height: 40px; border: 0; border-radius: 8px; background: rgba(255,255,255,.14); color: #fff; font-size: 16px; cursor: pointer; }
+  #hoja .lienzo { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0 12px 12px; }
   #hoja img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 8px; }
+
+  /* popup of a col */
+  .pop .cod { font-size: 11px; color: var(--tenue); font-variant-numeric: tabular-nums; }
+  .pop h3 { margin: 1px 0 8px; padding-right: 14px; font: 600 15px/1.25 "Source Serif 4", Georgia, serif; }
+  .pop .mini { display: block; margin-bottom: 8px; border: 1px solid var(--linea); border-radius: 6px; overflow: hidden; cursor: zoom-in; }
+  .pop .mini img { display: block; width: 100%; aspect-ratio: 540 / 381; background: #eef0ec; }
+  .pop .fil { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .pop .fil b { display: block; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .pop .fil span { font-size: 10.5px; color: var(--gris); }
+  .pop .tipo { margin-top: 8px; font-size: 11.5px; color: var(--gris); }
+  .pop .acc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .leaflet-container a.btn { color: var(--tinta); }
+  .leaflet-container a.btn.primario { color: #fff; }
+  #ficha { scroll-margin-top: 64px; }
 
   /* drawer buttons, phone only */
   .cerrar { display: none; flex: none; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12); color: #fff; border-radius: 99px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
@@ -170,6 +189,13 @@
     #etiqueta { top: 8px; max-width: calc(100% - 120px); font-size: 11.5px; padding: 6px 12px; }
     .leaflet-control-attribution { max-width: 100vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 9px; }
     .leaflet-bottom.leaflet-left { bottom: 14px; }
+    .leaflet-container a.leaflet-popup-close-button { width: 34px; height: 34px; font: 20px/34px Tahoma, Verdana, sans-serif; }
+    .pop .btn { flex: 1; justify-content: center; }
+  }
+  @media (max-height: 500px) and (min-width: 801px) {   /* phones in landscape */
+    #app { grid-template-columns: 320px 1fr; }
+    header { padding: 10px 16px; } header .kicker, header p { display: none; } header h1 { font-size: 16px; margin: 0; }
+    #leyenda { max-height: calc(100% - 60px); }
   }
 </style>
 </head>
@@ -217,7 +243,7 @@
     <div id="leyenda" hidden><button type="button" class="ley-cab" id="ley-cab" aria-expanded="true" aria-label="Legend"><span>Legend</span></button><div id="ley-cuerpo"></div></div>
   </main>
 </div>
-<div id="hoja" hidden><img alt="Sheet of the gateway in File S4"></div>
+<div id="hoja" role="dialog" aria-modal="true" aria-label="Sheet of the gateway in File S4" hidden><div class="barra"><span id="hoja-t"></span><a id="hoja-a" target="_blank" rel="noopener">Full size</a><button type="button" id="hoja-x" aria-label="Close sheet">✕</button></div><div class="lienzo"><img alt=""></div></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const ANDES = [[-56, -82], [13, -60]];
@@ -232,8 +258,11 @@ const bases = {
 bases.Dark.addTo(mapa);
 L.control.layers(bases, null, { position: 'topright' }).addTo(mapa);
 L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(mapa);
-mapa.createPane('lineas').style.zIndex = 420;   // above rasters
-mapa.createPane('puntos').style.zIndex = 430;
+const TACTIL = matchMedia('(hover: none)').matches;
+mapa.createPane('vectores').style.zIndex = 425;   // above rasters
+// one canvas for lines and points: a canvas in a higher pane would swallow every click meant for the one below;
+// the tolerance widens the hit area of thin marks for a finger
+const VEC = { pane: 'vectores', renderer: L.canvas({ pane: 'vectores', tolerance: TACTIL ? 12 : 2 }) };
 
 const $ = id => document.getElementById(id);
 const fmt = x => x == null ? 'n/a' : x.toLocaleString('en-US').replace(/,/g, ' ');
@@ -253,9 +282,26 @@ function panel(si) {
 }
 $('abrir-panel').addEventListener('click', () => panel(true));
 $('cerrar-panel').addEventListener('click', () => panel(false));
-addEventListener('keydown', e => e.key === 'Escape' && e.target !== $('buscar') && (panel(false), $('hoja').hidden = true));
+addEventListener('keydown', e => { if (e.key === 'Escape' && e.target !== $('buscar')) $('hoja').hidden ? panel(false) : cerrarHoja(); });
 L.DomEvent.disableClickPropagation($('abrir-panel'));
-$('hoja').addEventListener('click', () => $('hoja').hidden = true);
+L.DomEvent.disableClickPropagation($('etiqueta'));
+$('etiqueta').addEventListener('click', () => sel && globo(sel));   // brings back a closed popup
+function verHoja(c) {
+  const h = $('hoja'), img = h.querySelector('img');
+  img.src = 'capas/' + c.atlas; img.alt = `Sheet of ${nombre(c)}`;
+  $('hoja-t').textContent = nombre(c); $('hoja-a').href = img.src;
+  if (h.hidden) { h.hidden = false; history.pushState({ hoja: 1 }, ''); }
+  $('hoja-x').focus();
+}
+const cerrarHoja = () => history.back();
+addEventListener('popstate', () => $('hoja').hidden = true);
+$('hoja').addEventListener('click', e => e.target.closest('img, a') || cerrarHoja());   // not on the image: a pinch must not close it
+document.addEventListener('click', e => {   // capture: a Leaflet popup stops propagation
+  const a = e.target.closest('a[data-hoja]');
+  if (!a || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  e.preventDefault();
+  verHoja(C.find(c => c.id === a.dataset.hoja));
+}, true);
 
 // ---------- legend: one floating box that lists only what is on the map
 const leyendas = new Map();
@@ -271,6 +317,9 @@ if (MOVIL.matches) plegar(true);
 
 // ---------- cols
 let C = [], sel = null, marca = null, rutasCol = null;
+const capasPuntos = { todas: null, p100: null, puertas: null };
+// on the shared canvas the last drawn wins the click: gateways over other cols, all of them over the lines
+const ordenar = () => [capasPuntos.todas, capasPuntos.p100, capasPuntos.puertas, marca].forEach(g => g && mapa.hasLayer(g) && g.eachLayer(l => l.bringToFront()));
 const CLASES = { puerta: 'Gateways', p100: 'Depth ≥ 100 m', todas: 'All cols' };
 const ZONAS = { tropical: 'Tropical', temperate: 'Extratropical' };
 const filtro = { clase: 'puerta', grupo: '' };
@@ -331,6 +380,20 @@ const json = url => { let p; return () => p = p || fetch(url).then(r => r.json()
 const rutas = json('capas/rutas.geojson');
 const fila = (k, v) => v == null ? '' : `<tr><td>${k}</td><td>${v}</td></tr>`;
 
+// a real link, so a long press or ctrl+click opens the image alone; a plain click opens it over the map
+const enlaceHoja = (c, clase) => `<a class="${clase}" href="capas/${c.atlas}" target="_blank" rel="noopener" data-hoja="${c.id}">▤ Sheet, File S4</a>`;
+const POPUP = { minWidth: 262, maxWidth: 262, offset: [0, -4], autoPanPaddingTopLeft: [10, 52], autoPanPaddingBottomRight: [10, MOVIL.matches ? 84 : 20] };
+function globo(c) {
+  const d = Object.assign(document.createElement('div'), { className: 'pop', innerHTML: `<div class="cod">${c.id} · ${c.puerta ? 'Gateway' : 'Col'} · ${ZONAS[c.grupo]}${c.pais ? ' · ' + c.pais : ''}</div>
+    <h3>${esc(nombre(c))}</h3>
+    ${c.atlas ? `<a class="mini" href="capas/${c.atlas}" target="_blank" rel="noopener" data-hoja="${c.id}"><img src="capas/miniaturas/${c.id}.jpg" alt="Sheet of ${esc(nombre(c))}, File S4"></a>` : ''}
+    <div class="fil"><div><b>${fmt(c.alt)}</b><span>m, crossing</span></div><div><b>${fmt(c.prof)}</b><span>m, depth</span></div><div><b>${fmt(c.iso)}</b><span>km, isolation</span></div></div>
+    ${c.tipo ? `<div class="tipo">${TIPOS[c.tipo][0].toUpperCase() + TIPOS[c.tipo].slice(1)}${c.critica ? ' · critical gateway' : ''}</div>` : ''}
+    <div class="acc">${c.atlas ? enlaceHoja(c, 'btn primario') : ''}<button type="button" class="btn">All data</button></div>` });
+  d.querySelector('button').onclick = () => { panel(true); $('ficha').scrollIntoView({ block: 'start' }); };
+  L.popup({ ...POPUP, maxHeight: Math.max(240, mapa.getSize().y - 150) }).setLatLng([c.lat, c.lon]).setContent(d).openOn(mapa);
+}
+
 function elegir(id, volar = true) {
   const c = C.find(x => x.id === id);
   if (!c) return;
@@ -339,12 +402,14 @@ function elegir(id, volar = true) {
   history.replaceState(null, '', '#' + c.id);
   marca?.remove(); rutasCol?.remove(); rutasCol = null;
   mapa.closePopup();
-  marca = L.layerGroup([L.circleMarker([c.lat, c.lon], { pane: 'puntos', radius: 9, color: '#fff', weight: 3, fillColor: ROJO, fillOpacity: 1 }).bindTooltip(nombre(c), { direction: 'top', offset: [0, -8] }),
-    ...(c.flancos || []).map(([la, lo, s]) => L.circleMarker([la, lo], { pane: 'puntos', radius: 5, color: '#000', weight: 1, fillColor: s === 'W' ? '#E69F00' : '#56B4E9', fillOpacity: 1 }).bindTooltip(s + ' flank, 1000 m'))]).addTo(mapa);
+  marca = L.layerGroup([...(c.flancos || []).map(([la, lo, s]) => L.circleMarker([la, lo], { ...VEC, bubblingMouseEvents: false, radius: 5, color: '#000', weight: 1, fillColor: s === 'W' ? '#E69F00' : '#56B4E9', fillOpacity: 1 }).bindTooltip(s + ' flank, 1000 m')),
+    L.circleMarker([c.lat, c.lon], { ...VEC, interactive: false, radius: 9, color: '#fff', weight: 3, fillColor: ROJO, fillOpacity: 1 })]).addTo(mapa);
+  ordenar();
   rutas().then(g => { if (sel !== c) return;
-    rutasCol = L.geoJSON(g, { pane: 'lineas', filter: f => f.properties.col === c.id, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 3 }) }).addTo(mapa); });
+    rutasCol = L.geoJSON(g, { ...VEC, interactive: false, filter: f => f.properties.col === c.id, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 3 }) }).addTo(mapa); ordenar(); });
   $('etiqueta').hidden = false; $('etiqueta').textContent = `${nombre(c)} · ${fmt(c.alt)} m`;
-  if (volar) mapa.flyTo([c.lat, c.lon], c.flancos ? 9 : 10, { duration: .7 });
+  if (volar) { mapa.once('moveend', () => sel === c && globo(c)); mapa.flyTo([c.lat, c.lon], c.flancos ? 9 : 10, { duration: .7 }); }
+  else globo(c);
 
   $('vacia').hidden = true; $('ficha').hidden = false;
   $('ficha').innerHTML = `<div class="cab"><div class="cod">${c.id} · ${c.puerta ? 'Gateway' : 'Col'} · ${ZONAS[c.grupo]}</div>
@@ -356,18 +421,17 @@ function elegir(id, volar = true) {
       ${fila('Change in overlap, 2081–2100 SSP3-7.0', c.dto)}${fila('Change in precipitation gap', c.dpg)}${fila('Fraction of ΔT* reached', c.frac)}
       ${fila('Crest in a protected area', c.crest_pa ? 'yes' : 'no')}${fila('Protected within 5 km', c.pa5 == null ? null : c.pa5 + ' %')}${fila('gHM at the crest', c.ghm)}
       ${fila('Montane corridor lost within 25 km', c.loss == null ? null : c.loss + ' km')}${fila('Critical gateway', c.critica ? (c.pres ? 'yes, high pressure' : 'yes') : 'no')}</table>` : ''}
-    <div class="acciones"><button class="btn primario" id="ir-col">◎ Zoom to col</button>${c.atlas ? `<button class="btn" id="ver-hoja">▤ Sheet, File S4</button>` : ''}</div>`;
+    <div class="acciones"><button class="btn primario" id="ir-col">◎ Zoom to col</button>${c.atlas ? enlaceHoja(c, 'btn') : ''}</div>`;
   $('ir-col').onclick = () => { panel(false); mapa.flyTo([c.lat, c.lon], 11, { duration: .6 }); };
-  if (c.atlas) $('ver-hoja').onclick = () => { $('hoja').querySelector('img').src = 'capas/' + c.atlas; $('hoja').hidden = false; };
   panel(false);
 }
 function quitar() {
   sel = null; marca?.remove(); rutasCol?.remove(); marca = rutasCol = null;
   $('buscar').value = ''; $('combo').classList.remove('lleno');
+  mapa.closePopup();
   $('ficha').hidden = true; $('vacia').hidden = false; $('etiqueta').hidden = true;
   history.replaceState(null, '', location.pathname + location.search); pintarLista();
 }
-window.elegir = elegir;
 
 // ---------- layers as switches, created on first use
 const capasTesela = new Set();
@@ -393,16 +457,18 @@ function construir(I) {
   const tesela = (k, zmax = 9) => () => L.tileLayer(`capas/${k}/{z}/{x}/{y}.png`, { minNativeZoom: 3, maxNativeZoom: zmax, maxZoom: 16, bounds: ANDES, opacity: opac(), className: 'capa-px', errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' });
   const brechas = json('capas/brechas.geojson');
   const COLU = { 2000: '#ffd400', 2500: '#ff2d55', 3000: '#ff9f40' };
-  const brecha = th => async () => L.geoJSON(await brechas(), { pane: 'lineas', filter: f => f.properties.umbral === th, style: { color: COLU[th], weight: th === 2500 ? 4 : 3 },
+  const brecha = th => async () => L.geoJSON(await brechas(), { ...VEC, filter: f => f.properties.umbral === th, style: { color: COLU[th], weight: th === 2500 ? 4 : 3 },
     onEachFeature: (f, l) => l.bindPopup(`<b>Montane gap below ${th} m</b><br>${fmt(f.properties.km)} km of divide<br>Lowest crossing: ${fmt(f.properties.min)} m<br>Latitude ${f.properties.lat[0]} to ${f.properties.lat[1]}`) });
   const CORR = { kept: ['#0072B2', 'Montane corridor kept'], lost: [ROJO, 'Lost by 2081–2100 (at least 7 of 8 GCMs)'], gap: ['#999999', 'Montane gap today'] };
-  const corredor = async () => L.geoJSON(await json('capas/corredor.geojson')(), { pane: 'lineas', style: f => ({ color: CORR[f.properties.clase][0], weight: 4 }),
+  const corredor = async () => L.geoJSON(await json('capas/corredor.geojson')(), { ...VEC, style: f => ({ color: CORR[f.properties.clase][0], weight: 4 }),
     onEachFeature: (f, l) => { const p = f.properties; l.bindPopup(`<b>${CORR[p.clase][1]}</b><br>${fmt(p.km)} km<br>${p.pa} % inside protected areas<br>Mean gHM ${p.ghm}`); } });
-  const divisoria = async () => L.geoJSON(await json('capas/divisoria.geojson')(), { pane: 'lineas', style: f => f.properties.tipo === 'W|E' ? { color: '#fff', weight: 1.4 } : { color: '#882255', weight: 1.2, dashArray: '4 4' } });
-  const andes = async () => L.geoJSON(await json('capas/andes.geojson')(), { pane: 'lineas', style: { color: '#b9c0ba', weight: .7, fill: false } });
-  const rutasCapa = async () => L.geoJSON(await rutas(), { pane: 'lineas', style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 1.5 }) });
-  const puntos = (f, color, r) => () => L.layerGroup(C.filter(f).map(c => L.circleMarker([c.lat, c.lon], { pane: 'puntos', radius: r, color: '#000', weight: .7, fillColor: color, fillOpacity: 1 })
-    .bindTooltip(`${esc(nombre(c))} · ${fmt(c.alt)} m`, { direction: 'top' }).on('click', () => elegir(c.id, false))));
+  const divisoria = async () => L.geoJSON(await json('capas/divisoria.geojson')(), { ...VEC, interactive: false, style: f => f.properties.tipo === 'W|E' ? { color: '#fff', weight: 1.4 } : { color: '#882255', weight: 1.2, dashArray: '4 4' } });
+  const andes = async () => L.geoJSON(await json('capas/andes.geojson')(), { ...VEC, interactive: false, style: { color: '#b9c0ba', weight: .7, fill: false } });
+  const rutasCapa = async () => L.geoJSON(await rutas(), { ...VEC, interactive: false, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 1.5 }) });
+  const puntos = (f, color, r) => () => L.layerGroup(C.filter(f).map(c => {
+    const m = L.circleMarker([c.lat, c.lon], { ...VEC, bubblingMouseEvents: false, radius: r, color: '#000', weight: .7, fillColor: color, fillOpacity: 1 }).on('click', () => elegir(c.id, false));
+    return TACTIL ? m : m.bindTooltip(`${esc(nombre(c))} · ${fmt(c.alt)} m`, { direction: 'top' });   // on touch the tap opens the popup
+  }));
   const relieve = () => L.layerGroup(I.relieve.map(r => L.imageOverlay('capas/' + r.png, r.bounds, { opacity: opac(), zIndex: 5 })));
 
   const GRUPOS = [
@@ -448,6 +514,8 @@ function construir(I) {
         if (!chk.checked) { capasTesela.delete(capa); return capa && capa.remove(); }
         capa = capa || await crear();
         if (chk.checked) { capa.addTo(mapa); if (capa.setOpacity || capa instanceof L.LayerGroup && clave === 'relieve') capasTesela.add(capa); }
+        if (clave in capasPuntos) capasPuntos[clave] = capa;
+        ordenar();
       });
       div.append(lab);
     }
