@@ -250,13 +250,13 @@ const ANDES = [[-56, -82], [13, -60]];
 const mapa = L.map('mapa', { preferCanvas: true, zoomSnap: 0.5, zoomControl: false }).fitBounds(ANDES);
 L.control.zoom({ position: 'topleft' }).addTo(mapa);
 const bases = {
-  'Dark': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
-  'Light': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
-  'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18, attribution: 'Esri, Maxar, Earthstar Geographics' }),
-  'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }),
+  'Dark': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', { zIndex: 0, maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
+  'Light': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { zIndex: 0, maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
+  'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { zIndex: 0, maxZoom: 18, attribution: 'Esri, Maxar, Earthstar Geographics' }),
+  'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { zIndex: 0, maxZoom: 19, attribution: '© OpenStreetMap' }),
 };
 bases.Dark.addTo(mapa);
-L.control.layers(bases, null, { position: 'topright' }).addTo(mapa);
+L.control.layers(bases, null, { position: 'topright', autoZIndex: false }).addTo(mapa);   // autoZIndex would lift each basemap over the rasters
 L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(mapa);
 const TACTIL = matchMedia('(hover: none)').matches;
 mapa.createPane('vectores').style.zIndex = 425;   // above rasters
@@ -319,6 +319,17 @@ if (MOVIL.matches) plegar(true);
 let C = [], sel = null, marca = null, rutasCol = null;
 const capasPuntos = { todas: null, p100: null, puertas: null };
 // on the shared canvas the last drawn wins the click: gateways over other cols, all of them over the lines
+const RADIO = { puertas: [5, 10], p100: [2.5, 8], todas: [1.6, 7] };   // radius at zoom 5 or less, and at zoom 10 or more
+const radio = k => { const [a, b] = RADIO[k]; return a + (b + (TACTIL ? 2 : 0) - a) * Math.min(1, Math.max(0, (mapa.getZoom() - 5) / 5)); };
+const radioAnillo = () => radio('puertas') + 4;
+let anillo = null;
+mapa.on('zoomend', () => {
+  for (const k in RADIO) capasPuntos[k]?.eachLayer(l => l.setRadius(radio(k)));
+  anillo?.setRadius(radioAnillo());
+});
+// the canvas gives a click to the last drawn mark in reach: among close cols take the nearest to the finger instead
+const enMapa = c => { const g = capasPuntos[c.puerta ? 'puertas' : c.prof >= 100 ? 'p100' : 'todas']; return g && mapa.hasLayer(g); };
+const cercano = p => C.filter(enMapa).reduce((a, c) => { const d = mapa.latLngToContainerPoint([c.lat, c.lon]).distanceTo(p); return d < a[0] ? [d, c] : a; }, [Infinity])[1];
 const ordenar = () => [capasPuntos.todas, capasPuntos.p100, capasPuntos.puertas, marca].forEach(g => g && mapa.hasLayer(g) && g.eachLayer(l => l.bringToFront()));
 const CLASES = { puerta: 'Gateways', p100: 'Depth ≥ 100 m', todas: 'All cols' };
 const ZONAS = { tropical: 'Tropical', temperate: 'Extratropical' };
@@ -403,7 +414,7 @@ function elegir(id, volar = true) {
   marca?.remove(); rutasCol?.remove(); rutasCol = null;
   mapa.closePopup();
   marca = L.layerGroup([...(c.flancos || []).map(([la, lo, s]) => L.circleMarker([la, lo], { ...VEC, bubblingMouseEvents: false, radius: 5, color: '#000', weight: 1, fillColor: s === 'W' ? '#E69F00' : '#56B4E9', fillOpacity: 1 }).bindTooltip(s + ' flank, 1000 m')),
-    L.circleMarker([c.lat, c.lon], { ...VEC, interactive: false, radius: 9, color: '#fff', weight: 3, fillColor: ROJO, fillOpacity: 1 })]).addTo(mapa);
+    anillo = L.circleMarker([c.lat, c.lon], { ...VEC, interactive: false, radius: radioAnillo(), color: '#fff', weight: 3, fillColor: ROJO, fillOpacity: 1 })]).addTo(mapa);
   ordenar();
   rutas().then(g => { if (sel !== c) return;
     rutasCol = L.geoJSON(g, { ...VEC, interactive: false, filter: f => f.properties.col === c.id, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 3 }) }).addTo(mapa); ordenar(); });
@@ -426,7 +437,7 @@ function elegir(id, volar = true) {
   panel(false);
 }
 function quitar() {
-  sel = null; marca?.remove(); rutasCol?.remove(); marca = rutasCol = null;
+  sel = null; marca?.remove(); rutasCol?.remove(); marca = rutasCol = anillo = null;
   $('buscar').value = ''; $('combo').classList.remove('lleno');
   mapa.closePopup();
   $('ficha').hidden = true; $('vacia').hidden = false; $('etiqueta').hidden = true;
@@ -446,7 +457,7 @@ const AYUDA = {
   andes: 'Outline of the Andes in the GMBA Mountain Inventory v2.',
   puertas: 'A gateway is a col at least 100 m deep that is the lowest within 100 km along the divide either way.',
   p100: 'Cols at least 100 m deep: the local minima of the crossing height that stand out from their surroundings.',
-  todas: 'Every local minimum of the crossing height along the divide.',
+  todas: 'Local minima of the crossing height less than 100 m deep. With the two layers above they make up the whole census.',
   rutas: 'Steepest-descent traces from each gateway to 1000 m on both sides. Sides whose trace fell back on the nearest lowland cell have no route.',
   pa: 'Protected areas as rasterized for the analysis: polygons, status designated, inscribed or established, not marine, without UNESCO-MAB reserves.',
   ghm: 'Human modification, 0 to 1 (Kennedy et al. 2019), in the tropical Andes. High pressure in the paper means 0.4 or more.',
@@ -462,24 +473,27 @@ function construir(I) {
   const CORR = { kept: ['#0072B2', 'Montane corridor kept'], lost: [ROJO, 'Lost by 2081–2100 (at least 7 of 8 GCMs)'], gap: ['#999999', 'Montane gap today'] };
   const corredor = async () => L.geoJSON(await json('capas/corredor.geojson')(), { ...VEC, style: f => ({ color: CORR[f.properties.clase][0], weight: 4 }),
     onEachFeature: (f, l) => { const p = f.properties; l.bindPopup(`<b>${CORR[p.clase][1]}</b><br>${fmt(p.km)} km<br>${p.pa} % inside protected areas<br>Mean gHM ${p.ghm}`); } });
-  const divisoria = async () => L.geoJSON(await json('capas/divisoria.geojson')(), { ...VEC, interactive: false, style: f => f.properties.tipo === 'W|E' ? { color: '#fff', weight: 1.4 } : { color: '#882255', weight: 1.2, dashArray: '4 4' } });
+  let fondoClaro = false, capaDiv = null;   // the W|E divide is white on dark basemaps, black on light ones
+  const estiloDiv = f => f.properties.tipo === 'W|E' ? { color: fondoClaro ? '#000' : '#fff', weight: 1.4 } : { color: '#882255', weight: 1.2, dashArray: '4 4' };
+  mapa.on('baselayerchange', e => { fondoClaro = e.name === 'Light' || e.name === 'OpenStreetMap'; capaDiv?.setStyle(estiloDiv); });
+  const divisoria = async () => capaDiv = L.geoJSON(await json('capas/divisoria.geojson')(), { ...VEC, interactive: false, style: estiloDiv });
   const andes = async () => L.geoJSON(await json('capas/andes.geojson')(), { ...VEC, interactive: false, style: { color: '#b9c0ba', weight: .7, fill: false } });
   const rutasCapa = async () => L.geoJSON(await rutas(), { ...VEC, interactive: false, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 1.5 }) });
-  const puntos = (f, color, r) => () => L.layerGroup(C.filter(f).map(c => {
-    const m = L.circleMarker([c.lat, c.lon], { ...VEC, bubblingMouseEvents: false, radius: r, color: '#000', weight: .7, fillColor: color, fillOpacity: 1 }).on('click', () => elegir(c.id, false));
+  const puntos = (f, color, k) => () => L.layerGroup(C.filter(f).map(c => {
+    const m = L.circleMarker([c.lat, c.lon], { ...VEC, bubblingMouseEvents: false, radius: radio(k), color: '#000', weight: .7, fillColor: color, fillOpacity: 1 }).on('click', e => elegir(cercano(mapa.mouseEventToContainerPoint(e.originalEvent)).id, false));   // e.containerPoint is the centre of the mark, not the finger
     return TACTIL ? m : m.bindTooltip(`${esc(nombre(c))} · ${fmt(c.alt)} m`, { direction: 'top' });   // on touch the tap opens the popup
   }));
   const relieve = () => L.layerGroup(I.relieve.map(r => L.imageOverlay('capas/' + r.png, r.bounds, { opacity: opac(), zIndex: 5 })));
 
   const GRUPOS = [
     ['Cols', [
-      ['puertas', 'Gateways', `${C.filter(c => c.puerta).length} cols`, puntos(c => c.puerta, ROJO, 5), ROJO, `<h5>Cols</h5>${item(ROJO, 'Gateway', 1, 'punto')}`],
-      ['p100', 'Depth ≥ 100 m', `${fmt(C.filter(c => c.prof >= 100).length)} cols`, puntos(c => c.prof >= 100 && !c.puerta, '#f2c14e', 2.5), '#f2c14e', `<h5>Cols, depth ≥ 100 m</h5>${item('#f2c14e', 'Not a gateway', 1, 'punto')}`],
-      ['todas', 'All cols', `${fmt(C.length)} cols`, puntos(c => c.prof < 100, '#d8dcd6', 1.6), '#d8dcd6', `<h5>Cols, depth under 100 m</h5>${item('#d8dcd6', 'Other cols', 1, 'punto')}`],
+      ['puertas', 'Gateways', `${C.filter(c => c.puerta).length} cols`, puntos(c => c.puerta, ROJO, 'puertas'), ROJO, `<h5>Cols</h5>${item(ROJO, 'Gateway', 1, 'punto')}`],
+      ['p100', 'Depth ≥ 100 m', `${fmt(C.filter(c => c.prof >= 100).length)} cols`, puntos(c => c.prof >= 100 && !c.puerta, '#f2c14e', 'p100'), '#f2c14e', `<h5>Cols, depth ≥ 100 m</h5>${item('#f2c14e', 'Not a gateway', 1, 'punto')}`],
+      ['todas', 'Depth under 100 m', `${fmt(C.filter(c => c.prof < 100).length)} cols`, puntos(c => c.prof < 100, '#d8dcd6', 'todas'), '#d8dcd6', `<h5>Cols, depth under 100 m</h5>${item('#d8dcd6', 'Other cols', 1, 'punto')}`],
       ['rutas', 'Descent routes', 'gateways, to 1000 m', rutasCapa, '#56B4E9', `<h5>Descent routes</h5>${item('#E69F00', 'W side', 1, 'linea')}${item('#56B4E9', 'E side', 1, 'linea')}`],
     ]],
     ['Divide', [
-      ['divisoria', 'Continental divide', 'GLO-30, W|E and I|E', divisoria, '#ffffff', `<h5>Divide</h5>${item('#ffffff', 'W|E divide (GLO-30)', 1, 'linea')}${item('#882255', 'I|E divide (HydroBASINS)', 1, 'linea')}`],
+      ['divisoria', 'Continental divide', 'GLO-30, W|E and I|E', divisoria, '#ffffff', `<h5>Divide</h5>${item('#8b938c', 'W|E divide (GLO-30)', 1, 'linea')}${item('#882255', 'I|E divide (HydroBASINS)', 1, 'linea')}`],
       ['dominios', 'Drainage domains', 'map M1 · raster 15″', tesela('dominios'), '#56B4E9', `<h5>Drainage domains</h5>${pal('dominios')}`],
       ['andes', 'Andes outline', 'GMBA v2', andes, '#b9c0ba', `<h5>Outline</h5>${item('#b9c0ba', 'Andes (GMBA v2)', 1, 'linea')}`],
     ]],
