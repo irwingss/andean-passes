@@ -321,14 +321,15 @@ const capasPuntos = { todas: null, p100: null, puertas: null };
 // on the shared canvas the last drawn wins the click: gateways over other cols, all of them over the lines
 const RADIO = { puertas: [5, 10], p100: [2.5, 8], todas: [1.6, 7] };   // radius at zoom 5 or less, and at zoom 10 or more
 const radio = k => { const [a, b] = RADIO[k]; return a + (b + (TACTIL ? 2 : 0) - a) * Math.min(1, Math.max(0, (mapa.getZoom() - 5) / 5)); };
-const radioAnillo = () => radio('puertas') + 4;
+const clase = c => c.puerta ? 'puertas' : c.prof >= 100 ? 'p100' : 'todas';
+const radioAnillo = () => radio(clase(sel)) + 4;   // the selected col is its own mark, enlarged
 let anillo = null;
 mapa.on('zoomend', () => {
   for (const k in RADIO) capasPuntos[k]?.eachLayer(l => l.setRadius(radio(k)));
   anillo?.setRadius(radioAnillo());
 });
 // the canvas gives a click to the last drawn mark in reach: among close cols take the nearest to the finger instead
-const enMapa = c => { const g = capasPuntos[c.puerta ? 'puertas' : c.prof >= 100 ? 'p100' : 'todas']; return g && mapa.hasLayer(g); };
+const enMapa = c => { const g = capasPuntos[clase(c)]; return g && mapa.hasLayer(g); };
 const cercano = p => C.filter(enMapa).reduce((a, c) => { const d = mapa.latLngToContainerPoint([c.lat, c.lon]).distanceTo(p); return d < a[0] ? [d, c] : a; }, [Infinity])[1];
 const ordenar = () => [capasPuntos.todas, capasPuntos.p100, capasPuntos.puertas, marca].forEach(g => g && mapa.hasLayer(g) && g.eachLayer(l => l.bringToFront()));
 const CLASES = { puerta: 'Gateways', p100: 'Depth ≥ 100 m', todas: 'All cols' };
@@ -337,6 +338,7 @@ const filtro = { clase: 'puerta', grupo: '' };
 const pasa = (c, k = filtro.clase) => k === 'todas' || (k === 'puerta' ? c.puerta : c.prof >= 100);
 const TIPOS = { open: 'open', hydric_only: 'closed in moisture only', thermal_only: 'closed in temperature only', closed: 'closed' };
 const ROJO = '#D55E00';
+const COLOR = { puertas: ROJO, p100: '#f2c14e', todas: '#d8dcd6' };
 
 function chips() {
   const pinta = (cont, opciones, campo, todos) => {
@@ -414,7 +416,7 @@ function elegir(id, volar = true) {
   marca?.remove(); rutasCol?.remove(); rutasCol = null;
   mapa.closePopup();
   marca = L.layerGroup([...(c.flancos || []).map(([la, lo, s]) => L.circleMarker([la, lo], { ...VEC, bubblingMouseEvents: false, radius: 5, color: '#000', weight: 1, fillColor: s === 'W' ? '#E69F00' : '#56B4E9', fillOpacity: 1 }).bindTooltip(s + ' flank, 1000 m')),
-    anillo = L.circleMarker([c.lat, c.lon], { ...VEC, interactive: false, radius: radioAnillo(), color: '#fff', weight: 3, fillColor: ROJO, fillOpacity: 1 })]).addTo(mapa);
+    anillo = L.circleMarker([c.lat, c.lon], { ...VEC, interactive: false, radius: radioAnillo(), color: '#fff', weight: 3, fillColor: COLOR[clase(c)], fillOpacity: 1 })]).addTo(mapa);
   ordenar();
   rutas().then(g => { if (sel !== c) return;
     rutasCol = L.geoJSON(g, { ...VEC, interactive: false, filter: f => f.properties.col === c.id, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 3 }) }).addTo(mapa); ordenar(); });
@@ -487,9 +489,9 @@ function construir(I) {
 
   const GRUPOS = [
     ['Cols', [
-      ['puertas', 'Gateways', `${C.filter(c => c.puerta).length} cols`, puntos(c => c.puerta, ROJO, 'puertas'), ROJO, `<h5>Cols</h5>${item(ROJO, 'Gateway', 1, 'punto')}`],
-      ['p100', 'Depth ≥ 100 m', `${fmt(C.filter(c => c.prof >= 100).length)} cols`, puntos(c => c.prof >= 100 && !c.puerta, '#f2c14e', 'p100'), '#f2c14e', `<h5>Cols, depth ≥ 100 m</h5>${item('#f2c14e', 'Not a gateway', 1, 'punto')}`],
-      ['todas', 'Depth under 100 m', `${fmt(C.filter(c => c.prof < 100).length)} cols`, puntos(c => c.prof < 100, '#d8dcd6', 'todas'), '#d8dcd6', `<h5>Cols, depth under 100 m</h5>${item('#d8dcd6', 'Other cols', 1, 'punto')}`],
+      ['puertas', 'Gateways', `${C.filter(c => c.puerta).length} cols`, puntos(c => c.puerta, COLOR.puertas, 'puertas'), COLOR.puertas, `<h5>Cols</h5>${item(ROJO, 'Gateway', 1, 'punto')}`],
+      ['p100', 'Depth ≥ 100 m', `${fmt(C.filter(c => c.prof >= 100).length)} cols`, puntos(c => c.prof >= 100 && !c.puerta, COLOR.p100, 'p100'), COLOR.p100, `<h5>Cols, depth ≥ 100 m</h5>${item('#f2c14e', 'Not a gateway', 1, 'punto')}`],
+      ['todas', 'Depth under 100 m', `${fmt(C.filter(c => c.prof < 100).length)} cols`, puntos(c => c.prof < 100, COLOR.todas, 'todas'), COLOR.todas, `<h5>Cols, depth under 100 m</h5>${item('#d8dcd6', 'Other cols', 1, 'punto')}`],
       ['rutas', 'Descent routes', 'gateways, to 1000 m', rutasCapa, '#56B4E9', `<h5>Descent routes</h5>${item('#E69F00', 'W side', 1, 'linea')}${item('#56B4E9', 'E side', 1, 'linea')}`],
     ]],
     ['Divide', [
