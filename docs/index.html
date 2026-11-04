@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Andean Passes Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root {
+    --tinta: #18201c; --gris: #5d665f; --tenue: #8b938c; --linea: #e3e6e1; --fondo: #f6f7f4; --carta: #ffffff;
+    --acento: #23745B; --acento-claro: #e5f1ec; --sombra: 0 1px 2px rgba(20,30,25,.06), 0 8px 24px rgba(20,30,25,.08);
+    --r: 10px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font: 13px/1.45 Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif; color: var(--tinta); background: var(--fondo); }
+  button, input { font: inherit; color: inherit; }
+  #app { display: grid; grid-template-columns: 380px 1fr; height: 100%; }
+  #panel { overflow-y: auto; background: var(--fondo); border-right: 1px solid var(--linea); display: flex; flex-direction: column; }
+  #mapa { position: relative; background: #2b2b2b; }
+
+  header { padding: 20px 20px 16px; background: linear-gradient(160deg, #1d5c49 0%, #23745B 55%, #6a1d52 140%); color: #fff; }
+  header .kicker { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; opacity: .75; font-weight: 600; }
+  header h1 { font: 600 21px/1.2 "Source Serif 4", Georgia, serif; margin: 6px 0 8px; }
+  header p { margin: 0; font-size: 12px; opacity: .85; }
+
+  section { padding: 16px 20px; border-bottom: 1px solid var(--linea); }
+  .titulo { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 10px; }
+  .titulo h2 { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--gris); margin: 0; font-weight: 600; }
+  .titulo small { color: var(--tenue); font-size: 11px; }
+
+  /* searchable col selector */
+  .combo { position: relative; }
+  .combo input { width: 100%; padding: 11px 36px 11px 38px; border: 1px solid #d3d8d2; border-radius: var(--r); background: var(--carta); outline: none; transition: border-color .15s, box-shadow .15s; }
+  .combo input:focus { border-color: var(--acento); box-shadow: 0 0 0 3px rgba(35,116,91,.15); }
+  .combo .lupa { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--tenue); pointer-events: none; }
+  .combo .x { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; color: var(--tenue); display: none; }
+  .combo .x:hover { background: var(--fondo); color: var(--tinta); }
+  .combo.lleno .x { display: block; }
+  #lista { position: absolute; z-index: 1000; left: 0; right: 0; top: calc(100% + 6px); max-height: min(420px, 60vh); overflow-y: auto; margin: 0; padding: 6px; list-style: none; background: var(--carta); border: 1px solid var(--linea); border-radius: var(--r); box-shadow: var(--sombra); display: none; }
+  .combo.abierto #lista { display: block; }
+  #lista .grupo { position: sticky; top: -6px; background: var(--carta); padding: 8px 8px 4px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+  #lista li[role=option] { padding: 7px 8px; border-radius: 7px; cursor: pointer; display: flex; gap: 8px; align-items: center; }
+  #lista li[role=option] .n { flex: 1; min-width: 0; }
+  #lista li[role=option] .c { font-size: 11px; color: var(--tenue); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  #lista li[aria-selected=true] { background: var(--acento-claro); }
+  #lista li mark { background: #fbe9a6; color: inherit; border-radius: 2px; }
+  #lista .vacio { padding: 14px 8px; color: var(--tenue); text-align: center; }
+
+  .filtros { margin-top: 12px; }
+  .filtros > span { display: block; font-size: 10.5px; color: var(--tenue); margin: 8px 0 5px; text-transform: uppercase; letter-spacing: .06em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip { border: 1px solid #d3d8d2; background: var(--carta); border-radius: 99px; padding: 3px 9px; font-size: 12px; cursor: pointer; transition: all .12s; }
+  .chip:hover { border-color: var(--acento); }
+  .chip[aria-pressed=true] { background: var(--acento); border-color: var(--acento); color: #fff; }
+  .chip .k { opacity: .65; margin-left: 3px; font-variant-numeric: tabular-nums; }
+
+  /* selected-col card */
+  #ficha { margin-top: 14px; background: var(--carta); border: 1px solid var(--linea); border-radius: var(--r); box-shadow: var(--sombra); overflow: hidden; }
+  #ficha[hidden] { display: none; }
+  #ficha .cab { padding: 14px 14px 10px; border-left: 4px solid var(--acento); }
+  #ficha .cod { font-size: 11px; color: var(--tenue); font-variant-numeric: tabular-nums; }
+  #ficha h3 { margin: 2px 0 4px; font: 600 16px/1.25 "Source Serif 4", Georgia, serif; }
+  #ficha .meta { font-size: 12px; color: var(--gris); }
+  .cifras { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--linea); }
+  .cifras div { padding: 10px 14px; }
+  .cifras div:nth-child(even) { border-left: 1px solid var(--linea); }
+  .cifras div:nth-child(n+3) { border-top: 1px solid var(--linea); }
+  .cifras b { display: block; font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+  .cifras span { font-size: 11px; color: var(--gris); }
+  table.datos { width: 100%; border-collapse: collapse; border-top: 1px solid var(--linea); font-size: 12px; }
+  table.datos td { padding: 5px 14px; vertical-align: top; }
+  table.datos td:first-child { color: var(--gris); }
+  table.datos td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  table.datos tr + tr td { border-top: 1px solid #f0f1ee; }
+  .acciones { display: flex; gap: 6px; padding: 10px 14px 12px; border-top: 1px solid var(--linea); flex-wrap: wrap; }
+  .btn { border: 1px solid #d3d8d2; background: var(--carta); border-radius: 8px; padding: 6px 10px; font-size: 12px; cursor: pointer; text-decoration: none; color: var(--tinta); display: inline-flex; align-items: center; gap: 5px; }
+  .btn:hover { border-color: var(--acento); color: var(--acento); }
+  .btn.primario { background: var(--acento); border-color: var(--acento); color: #fff; }
+  .btn.primario:hover { background: #1b5e49; color: #fff; }
+  .vacia { margin-top: 14px; padding: 14px; border: 1px dashed #cfd5ce; border-radius: var(--r); color: var(--gris); font-size: 12px; text-align: center; }
+
+  /* layer switches */
+  .capas-grupo { margin-bottom: 12px; }
+  .capas-grupo h4 { margin: 0 0 4px; font-size: 11.5px; font-weight: 600; color: var(--gris); }
+  .sw { display: flex; align-items: center; gap: 10px; padding: 6px 8px; margin: 0 -8px; border-radius: 8px; cursor: pointer; position: relative; }
+  .sw:hover { background: #eceee9; }
+  .sw input { appearance: none; flex: none; width: 30px; height: 18px; border-radius: 99px; background: #cfd4ce; position: relative; cursor: pointer; transition: background .15s; margin: 0; }
+  .sw input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .15s; }
+  .sw input:checked { background: var(--acento); }
+  .sw input:checked::after { transform: translateX(12px); }
+  .sw input:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+  .sw .muestra { flex: none; width: 14px; height: 14px; border-radius: 4px; }
+  .sw .t { flex: 1; }
+  .sw .t small { display: block; color: var(--tenue); font-size: 11px; }
+  .ayuda { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1px solid #cfd4ce; background: var(--carta); color: var(--gris); font-size: 11px; font-weight: 600; cursor: help; padding: 0; }
+  .ayuda:hover, .ayuda:focus-visible { border-color: var(--acento); color: var(--acento); outline: none; }
+  .tip { display: none; position: absolute; z-index: 900; left: 8px; right: 8px; top: calc(100% + 2px); background: var(--tinta); color: #f2f4f1; font-size: 11.5px; line-height: 1.5; padding: 9px 11px; border-radius: 8px; box-shadow: var(--sombra); pointer-events: none; }
+  .ayuda:focus-visible + .tip { display: block; }
+  @media (hover: hover) { .ayuda:hover + .tip { display: block; } }
+  .sw.ver .tip { display: block; }
+  .op { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--gris); margin-top: 4px; }
+  .op input { flex: 1; accent-color: var(--acento); }
+  .op output { width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  .nota { padding: 16px 20px 24px; font-size: 11.5px; color: var(--gris); }
+  .nota p { margin: 0 0 8px; }
+  a { color: var(--acento); }
+
+  /* floating legend */
+  #leyenda { position: absolute; z-index: 800; right: 12px; bottom: 28px; width: 250px; max-height: calc(100% - 120px); overflow-y: auto; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-radius: var(--r); box-shadow: var(--sombra); padding: 10px 12px; font-size: 11.5px; }
+  #leyenda[hidden] { display: none; }
+  #leyenda h5 { margin: 0 0 6px; font-size: 11px; font-weight: 600; color: var(--tinta); }
+  #leyenda .bloque + .bloque { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--linea); }
+  #leyenda .item { display: flex; align-items: center; gap: 7px; margin: 2px 0; color: var(--gris); }
+  #leyenda .item i { flex: none; width: 16px; height: 11px; border-radius: 2px; border: 1px solid rgba(0,0,0,.08); }
+  #leyenda .item i.linea { height: 3px; border: 0; border-radius: 1px; }
+  #leyenda .item i.punto { width: 11px; border-radius: 50%; }
+
+  /* map chip */
+  #etiqueta { position: absolute; z-index: 800; left: 50%; top: 12px; transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 7px 14px; border-radius: 99px; font-size: 12px; box-shadow: var(--sombra); max-width: calc(100% - 140px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #etiqueta[hidden] { display: none; }
+  .leaflet-image-layer, .capa-px { image-rendering: pixelated; }
+  .leaflet-container { font: inherit; background: #2b2b2b; }
+  .leaflet-popup-content-wrapper { border-radius: var(--r); box-shadow: var(--sombra); }
+  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; line-height: 1.5; }
+  .leaflet-control-layers, .leaflet-bar { border: 0 !important; box-shadow: var(--sombra) !important; border-radius: 8px !important; }
+
+  /* collapsible legend */
+  #leyenda .ley-cab { display: flex; width: 100%; align-items: center; justify-content: space-between; border: 0; background: none; padding: 0 0 6px; margin: 0; cursor: pointer; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--tenue); }
+  #leyenda .ley-cab::after { content: "▾"; font-size: 12px; transition: transform .15s; }
+  #leyenda.plegada { width: auto; padding: 6px 12px; }
+  #leyenda.plegada .ley-cab { padding: 0; gap: 8px; }
+  #leyenda.plegada .ley-cab::after { transform: rotate(180deg); }
+  #leyenda.plegada #ley-cuerpo { display: none; }
+
+  /* sheet of File S4 */
+  #hoja { position: fixed; inset: 0; z-index: 2000; background: rgba(15,20,17,.82); display: flex; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out; }
+  #hoja[hidden] { display: none; }
+  #hoja img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 8px; }
+
+  /* drawer buttons, phone only */
+  .cerrar { display: none; flex: none; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12); color: #fff; border-radius: 99px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .abrir { display: none; position: absolute; z-index: 900; left: 50%; bottom: 30px; transform: translateX(-50%); align-items: center; gap: 8px; border: 0; background: var(--acento); color: #fff; border-radius: 99px; padding: 12px 20px; font-size: 14px; font-weight: 600; box-shadow: 0 2px 6px rgba(0,0,0,.25), 0 8px 24px rgba(0,0,0,.25); cursor: pointer; white-space: nowrap; }
+
+  @media (max-width: 800px) {
+    html, body { height: 100dvh; overflow: hidden; }
+    #app { display: block; height: 100dvh; }
+    #mapa { position: absolute; inset: 0; }
+    #panel { position: fixed; inset: 0; z-index: 1500; border-right: 0; overscroll-behavior: contain; transform: translateY(100%); visibility: hidden; transition: transform .25s ease, visibility 0s .25s; }
+    #app.panel-abierto #panel { transform: none; visibility: visible; transition: transform .25s ease; }
+    header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 16px; }
+    header .kicker, header p { display: none; } header h1 { flex: 1; font-size: 16px; margin: 0; }
+    .cerrar { display: inline-flex; }
+    .abrir { display: flex; }
+    section { padding: 12px 16px; }
+    .combo input { font-size: 16px; padding-top: 10px; padding-bottom: 10px; }
+    .combo .x { width: 36px; height: 36px; right: 2px; }
+    #lista { max-height: 45dvh; }
+    #lista li[role=option] { padding: 10px 8px; }
+    .chip { padding: 6px 11px; font-size: 13px; }
+    .btn { padding: 9px 12px; font-size: 13px; }
+    .sw { padding: 9px 8px; }
+    .ayuda { width: 28px; height: 28px; font-size: 13px; }
+    .op input { height: 28px; }
+    #leyenda { width: 210px; bottom: 22px; right: 8px; max-height: calc(100% - 90px); padding: 8px 10px; font-size: 11px; }
+    #leyenda:not(.plegada) { bottom: 88px; max-height: calc(100% - 150px); }
+    #etiqueta { top: 8px; max-width: calc(100% - 120px); font-size: 11.5px; padding: 6px 12px; }
+    .leaflet-control-attribution { max-width: 100vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 9px; }
+    .leaflet-bottom.leaflet-left { bottom: 14px; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="panel">
+    <header>
+      <div style="flex:1;min-width:0">
+      <div class="kicker">Andean Passes Database · viewer</div>
+      <h1>Gateways through the Andes</h1>
+      <p>The cols of the W–E continental divide, 11°N to 55°S, and the map layers of the census, the montane gaps and the conservation analysis. Working viewer, article in preparation.</p>
+      </div>
+      <button type="button" class="cerrar" id="cerrar-panel" aria-label="Close panel and show the map">Map ✕</button>
+    </header>
+
+    <section>
+      <div class="titulo"><h2>Col</h2><small id="cuenta"></small></div>
+      <div class="combo" id="combo">
+        <svg class="lupa" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="buscar" type="text" role="combobox" aria-expanded="false" aria-controls="lista" aria-autocomplete="list" autocomplete="off" placeholder="Search by name or code: Porculla, Táchira, APD00641">
+        <button class="x" id="limpiar" aria-label="Clear selection">✕</button>
+        <ul id="lista" role="listbox" aria-label="Cols"></ul>
+      </div>
+      <div class="filtros"><span>Type</span><div class="chips" id="f-clase"></div>
+      <span>Zone</span><div class="chips" id="f-grupo"></div></div>
+      <div class="vacia" id="vacia">Pick a col, or click one on the map, to see its census data and its descent routes.</div>
+      <div id="ficha" hidden></div>
+    </section>
+
+    <section>
+      <div class="titulo"><h2>Map layers</h2><small>from the paper</small></div>
+      <div id="capas"></div>
+      <label class="op">Raster opacity <input id="opacidad" type="range" min="0.2" max="1" step="0.05" value="0.9"><output id="op-v">90 %</output></label>
+    </section>
+
+    <div class="nota">
+      <p>Rasters are shown as tiles on the 15″ grid of the census (HydroSHEDS) and the 30″ grid of the human modification layer. Lines are simplified for the web to about 200 m.</p>
+      <p>Sources: Copernicus GLO-30; HydroSHEDS and HydroBASINS (Lehner &amp; Grill 2013); GMBA Mountain Inventory v2 (Snethlage et al. 2022); Global Human Modification (Kennedy et al. 2019); WDPA, November 2026 (UNEP-WCMC &amp; IUCN), shown as a derived map, the original vectors are not redistributed. Pass names from OpenStreetMap remain under ODbL.</p>
+      <p>Download GeoJSON: <a href="capas/divisoria.geojson" download>divide</a> · <a href="capas/brechas.geojson" download>montane gaps</a> · <a href="capas/corredor.geojson" download>montane corridor</a> · <a href="capas/rutas.geojson" download>descent routes</a></p>
+    </div>
+  </aside>
+  <main id="mapa">
+    <button type="button" class="abrir" id="abrir-panel" aria-controls="panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Cols &amp; layers</button>
+    <div id="etiqueta" hidden></div>
+    <div id="leyenda" hidden><button type="button" class="ley-cab" id="ley-cab" aria-expanded="true" aria-label="Legend"><span>Legend</span></button><div id="ley-cuerpo"></div></div>
+  </main>
+</div>
+<div id="hoja" hidden><img alt="Sheet of the gateway in File S4"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const ANDES = [[-56, -82], [13, -60]];
+const mapa = L.map('mapa', { preferCanvas: true, zoomSnap: 0.5, zoomControl: false }).fitBounds(ANDES);
+L.control.zoom({ position: 'topleft' }).addTo(mapa);
+const bases = {
+  'Dark': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
+  'Light': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
+  'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18, attribution: 'Esri, Maxar, Earthstar Geographics' }),
+  'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }),
+};
+bases.Dark.addTo(mapa);
+L.control.layers(bases, null, { position: 'topright' }).addTo(mapa);
+L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(mapa);
+mapa.createPane('lineas').style.zIndex = 420;   // above rasters
+mapa.createPane('puntos').style.zIndex = 430;
+
+const $ = id => document.getElementById(id);
+const fmt = x => x == null ? 'n/a' : x.toLocaleString('en-US').replace(/,/g, ' ');
+const sinAcento = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const item = (c, t, a = 1, f = '') => `<div class="item"><i class="${f}" style="background:${c};opacity:${a}"></i>${t}</div>`;
+const opac = () => +$('opacidad').value;
+const MOVIL = matchMedia('(max-width: 800px)');
+const nombre = c => c.nombre || 'Unnamed col';
+
+// ---------- phone: the panel is a full-screen drawer over the map
+function panel(si) {
+  if (!MOVIL.matches || $('app').classList.contains('panel-abierto') === si) return;
+  $('app').classList.toggle('panel-abierto', si);
+  $('abrir-panel').setAttribute('aria-expanded', si);
+  if (!si) { abrir(false); document.activeElement?.blur(); }
+}
+$('abrir-panel').addEventListener('click', () => panel(true));
+$('cerrar-panel').addEventListener('click', () => panel(false));
+addEventListener('keydown', e => e.key === 'Escape' && e.target !== $('buscar') && (panel(false), $('hoja').hidden = true));
+L.DomEvent.disableClickPropagation($('abrir-panel'));
+$('hoja').addEventListener('click', () => $('hoja').hidden = true);
+
+// ---------- legend: one floating box that lists only what is on the map
+const leyendas = new Map();
+function leyenda(clave, html) {
+  html ? leyendas.set(clave, html) : leyendas.delete(clave);
+  $('ley-cuerpo').innerHTML = [...leyendas.values()].map(h => `<div class="bloque">${h}</div>`).join('');
+  $('leyenda').hidden = !leyendas.size;
+}
+const plegar = si => { $('leyenda').classList.toggle('plegada', si); $('ley-cab').setAttribute('aria-expanded', !si); };
+$('ley-cab').addEventListener('click', () => plegar(!$('leyenda').classList.contains('plegada')));
+L.DomEvent.disableClickPropagation($('leyenda')); L.DomEvent.disableScrollPropagation($('leyenda'));
+if (MOVIL.matches) plegar(true);
+
+// ---------- cols
+let C = [], sel = null, marca = null, rutasCol = null;
+const CLASES = { puerta: 'Gateways', p100: 'Depth ≥ 100 m', todas: 'All cols' };
+const ZONAS = { tropical: 'Tropical', temperate: 'Extratropical' };
+const filtro = { clase: 'puerta', grupo: '' };
+const pasa = (c, k = filtro.clase) => k === 'todas' || (k === 'puerta' ? c.puerta : c.prof >= 100);
+const TIPOS = { open: 'open', hydric_only: 'closed in moisture only', thermal_only: 'closed in temperature only', closed: 'closed' };
+const ROJO = '#D55E00';
+
+function chips() {
+  const pinta = (cont, opciones, campo, todos) => {
+    const n = v => C.filter(c => campo === 'clase' ? pasa(c, v) && (!filtro.grupo || c.grupo === filtro.grupo) : pasa(c) && (!v || c.grupo === v)).length;
+    $(cont).innerHTML = [...(todos ? [['', 'All']] : []), ...Object.entries(opciones)].map(([v, t]) =>
+      `<button class="chip" data-v="${v}" aria-pressed="${filtro[campo] === v}">${t}<span class="k">${fmt(n(v))}</span></button>`).join('');
+    $(cont).onclick = e => { const b = e.target.closest('.chip'); if (!b) return; filtro[campo] = b.dataset.v; chips(); pintarLista(); };
+  };
+  pinta('f-clase', CLASES, 'clase', false);
+  pinta('f-grupo', ZONAS, 'grupo', true);
+}
+
+let visibles = [], activo = -1;
+function pintarLista() {
+  const q = sinAcento($('buscar').value.trim());
+  const enSel = sel && $('buscar').value === nombre(sel);
+  visibles = C.filter(c => pasa(c) && (!filtro.grupo || c.grupo === filtro.grupo) && (enSel || !q || c.clave.includes(q)));
+  $('cuenta').textContent = `${fmt(visibles.length)} of ${fmt(C.length)}`;
+  const resaltar = s => {
+    if (!q || enSel) return esc(s);
+    const i = sinAcento(s).indexOf(q);
+    return i < 0 ? esc(s) : esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + q.length)) + '</mark>' + esc(s.slice(i + q.length));
+  };
+  // ponytail: list capped at 200 rows, the search box reaches the rest
+  const fila = visibles.slice(0, 200);
+  $('lista').innerHTML = fila.map((c, k) => `<li role="option" id="op-${k}" data-i="${k}" data-id="${c.id}" aria-selected="false"><span class="n">${resaltar(nombre(c))}</span><span class="c">${fmt(c.alt)} m · ${c.id}</span></li>`).join('') ||
+    '<li class="vacio">No col matches. Try another name or clear the filters.</li>';
+  marcar(enSel ? fila.indexOf(sel) : (q ? 0 : -1));
+}
+function marcar(i) {
+  $('lista').querySelector('[aria-selected=true]')?.setAttribute('aria-selected', 'false');
+  activo = i;
+  const li = $('op-' + i);
+  if (li) { li.setAttribute('aria-selected', 'true'); li.scrollIntoView({ block: 'nearest' }); $('buscar').setAttribute('aria-activedescendant', li.id); }
+  else $('buscar').removeAttribute('aria-activedescendant');
+}
+const abrir = si => { $('combo').classList.toggle('abierto', si); $('buscar').setAttribute('aria-expanded', si); };
+$('buscar').addEventListener('focus', () => { $('buscar').select(); pintarLista(); abrir(true); });
+$('buscar').addEventListener('input', () => { $('combo').classList.toggle('lleno', !!$('buscar').value); pintarLista(); abrir(true); });
+$('buscar').addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') { e.preventDefault(); abrir(true); marcar(Math.min(activo + 1, Math.min(visibles.length, 200) - 1)); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); marcar(Math.max(activo - 1, 0)); }
+  else if (e.key === 'Enter' && visibles[activo]) { e.preventDefault(); elegir(visibles[activo].id); }
+  else if (e.key === 'Escape') { abrir(false); sel && ($('buscar').value = nombre(sel)); }
+});
+$('lista').addEventListener('mousedown', e => { const li = e.target.closest('[role=option]'); if (li) { e.preventDefault(); elegir(li.dataset.id); } });
+document.addEventListener('mousedown', e => { if (!$('combo').contains(e.target)) { abrir(false); if (sel) $('buscar').value = nombre(sel); } });
+document.addEventListener('pointerdown', e => e.target.closest('.ayuda') || document.querySelectorAll('.sw.ver').forEach(s => s.classList.remove('ver')), true);
+$('limpiar').addEventListener('click', () => quitar());
+
+const json = url => { let p; return () => p = p || fetch(url).then(r => r.json()); };   // fetched once, on first use
+const rutas = json('capas/rutas.geojson');
+const fila = (k, v) => v == null ? '' : `<tr><td>${k}</td><td>${v}</td></tr>`;
+
+function elegir(id, volar = true) {
+  const c = C.find(x => x.id === id);
+  if (!c) return;
+  sel = c;
+  $('buscar').value = nombre(c); $('combo').classList.add('lleno'); abrir(false); $('buscar').blur();
+  history.replaceState(null, '', '#' + c.id);
+  marca?.remove(); rutasCol?.remove(); rutasCol = null;
+  mapa.closePopup();
+  marca = L.layerGroup([L.circleMarker([c.lat, c.lon], { pane: 'puntos', radius: 9, color: '#fff', weight: 3, fillColor: ROJO, fillOpacity: 1 }).bindTooltip(nombre(c), { direction: 'top', offset: [0, -8] }),
+    ...(c.flancos || []).map(([la, lo, s]) => L.circleMarker([la, lo], { pane: 'puntos', radius: 5, color: '#000', weight: 1, fillColor: s === 'W' ? '#E69F00' : '#56B4E9', fillOpacity: 1 }).bindTooltip(s + ' flank, 1000 m'))]).addTo(mapa);
+  rutas().then(g => { if (sel !== c) return;
+    rutasCol = L.geoJSON(g, { pane: 'lineas', filter: f => f.properties.col === c.id, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 3 }) }).addTo(mapa); });
+  $('etiqueta').hidden = false; $('etiqueta').textContent = `${nombre(c)} · ${fmt(c.alt)} m`;
+  if (volar) mapa.flyTo([c.lat, c.lon], c.flancos ? 9 : 10, { duration: .7 });
+
+  $('vacia').hidden = true; $('ficha').hidden = false;
+  $('ficha').innerHTML = `<div class="cab"><div class="cod">${c.id} · ${c.puerta ? 'Gateway' : 'Col'} · ${ZONAS[c.grupo]}</div>
+      <h3>${esc(nombre(c))}</h3>
+      <div class="meta">${c.pais ? c.pais + ' · ' : ''}${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}${c.terminal ? ' · end of the chain, out of the tests' : ''}</div></div>
+    <div class="cifras"><div><b>${fmt(c.alt)}</b><span>m, crossing height</span></div><div><b>${fmt(c.prof)}</b><span>m, depth</span></div>
+      <div><b>${fmt(c.iso)}</b><span>km, isolation along the divide</span></div><div><b>${fmt(c.ancho)}</b><span>km, width at +100 m</span></div></div>
+    ${c.tipo ? `<table class="datos">${fila('Moisture and temperature type', TIPOS[c.tipo])}${fila('Thermal overlap, present', c.to)}${fila('Aridity gap, log ratio', c.ai)}
+      ${fila('Change in overlap, 2081–2100 SSP3-7.0', c.dto)}${fila('Change in precipitation gap', c.dpg)}${fila('Fraction of ΔT* reached', c.frac)}
+      ${fila('Crest in a protected area', c.crest_pa ? 'yes' : 'no')}${fila('Protected within 5 km', c.pa5 == null ? null : c.pa5 + ' %')}${fila('gHM at the crest', c.ghm)}
+      ${fila('Montane corridor lost within 25 km', c.loss == null ? null : c.loss + ' km')}${fila('Critical gateway', c.critica ? (c.pres ? 'yes, high pressure' : 'yes') : 'no')}</table>` : ''}
+    <div class="acciones"><button class="btn primario" id="ir-col">◎ Zoom to col</button>${c.atlas ? `<button class="btn" id="ver-hoja">▤ Sheet, File S4</button>` : ''}</div>`;
+  $('ir-col').onclick = () => { panel(false); mapa.flyTo([c.lat, c.lon], 11, { duration: .6 }); };
+  if (c.atlas) $('ver-hoja').onclick = () => { $('hoja').querySelector('img').src = 'capas/' + c.atlas; $('hoja').hidden = false; };
+  panel(false);
+}
+function quitar() {
+  sel = null; marca?.remove(); rutasCol?.remove(); marca = rutasCol = null;
+  $('buscar').value = ''; $('combo').classList.remove('lleno');
+  $('ficha').hidden = true; $('vacia').hidden = false; $('etiqueta').hidden = true;
+  history.replaceState(null, '', location.pathname + location.search); pintarLista();
+}
+window.elegir = elegir;
+
+// ---------- layers as switches, created on first use
+const capasTesela = new Set();
+const AYUDA = {
+  dominios: 'Each cell belongs to the ocean its water reaches: Pacific and Caribbean basins (W), Atlantic basins (E) or endorheic basins (I), from HydroBASINS, within the footprint of the census.',
+  umbrales: 'Terrain below the three elevation thresholds of the montane gap, 2500 m by default and 2000 and 3000 m for sensitivity (HydroSHEDS 15″ DEM). Terrain at 3000 m or above is left transparent.',
+  brechas2500: 'Stretches of the divide whose W–E crossing height is below 2500 m: the montane corridor is broken there. Click one for its length.',
+  brechas2000: 'As the 2500 m gaps, at the lower sensitivity threshold.',
+  brechas3000: 'As the 2500 m gaps, at the upper sensitivity threshold.',
+  corredor: 'Tropical divide by bins of 0.5 km. Lost: montane today and below the raised 2500 m isotherm by 2081–2100 under SSP3-7.0 in at least 7 of 8 GCMs. The isotherm rises by the local warming divided by the local lapse rate.',
+  divisoria: 'W–E continental divide from Copernicus GLO-30 by marker-controlled flooding, and the I|E divide of the endorheic basins from HydroBASINS.',
+  andes: 'Outline of the Andes in the GMBA Mountain Inventory v2.',
+  puertas: 'A gateway is a col at least 100 m deep that is the lowest within 100 km along the divide either way.',
+  p100: 'Cols at least 100 m deep: the local minima of the crossing height that stand out from their surroundings.',
+  todas: 'Every local minimum of the crossing height along the divide.',
+  rutas: 'Steepest-descent traces from each gateway to 1000 m on both sides. Sides whose trace fell back on the nearest lowland cell have no route.',
+  pa: 'Protected areas as rasterized for the analysis: polygons, status designated, inscribed or established, not marine, without UNESCO-MAB reserves.',
+  ghm: 'Human modification, 0 to 1 (Kennedy et al. 2019), in the tropical Andes. High pressure in the paper means 0.4 or more.',
+  relieve: 'GLO-30 hillshades of the three focal windows of the figures: Huancabamba, Southern Colombia and Táchira.',
+};
+function construir(I) {
+  const pal = k => I.pal[k].map(([c, a, t]) => item(c, t, a)).join('');
+  const tesela = (k, zmax = 9) => () => L.tileLayer(`capas/${k}/{z}/{x}/{y}.png`, { minNativeZoom: 3, maxNativeZoom: zmax, maxZoom: 16, bounds: ANDES, opacity: opac(), className: 'capa-px', errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' });
+  const brechas = json('capas/brechas.geojson');
+  const COLU = { 2000: '#ffd400', 2500: '#ff2d55', 3000: '#ff9f40' };
+  const brecha = th => async () => L.geoJSON(await brechas(), { pane: 'lineas', filter: f => f.properties.umbral === th, style: { color: COLU[th], weight: th === 2500 ? 4 : 3 },
+    onEachFeature: (f, l) => l.bindPopup(`<b>Montane gap below ${th} m</b><br>${fmt(f.properties.km)} km of divide<br>Lowest crossing: ${fmt(f.properties.min)} m<br>Latitude ${f.properties.lat[0]} to ${f.properties.lat[1]}`) });
+  const CORR = { kept: ['#0072B2', 'Montane corridor kept'], lost: [ROJO, 'Lost by 2081–2100 (at least 7 of 8 GCMs)'], gap: ['#999999', 'Montane gap today'] };
+  const corredor = async () => L.geoJSON(await json('capas/corredor.geojson')(), { pane: 'lineas', style: f => ({ color: CORR[f.properties.clase][0], weight: 4 }),
+    onEachFeature: (f, l) => { const p = f.properties; l.bindPopup(`<b>${CORR[p.clase][1]}</b><br>${fmt(p.km)} km<br>${p.pa} % inside protected areas<br>Mean gHM ${p.ghm}`); } });
+  const divisoria = async () => L.geoJSON(await json('capas/divisoria.geojson')(), { pane: 'lineas', style: f => f.properties.tipo === 'W|E' ? { color: '#fff', weight: 1.4 } : { color: '#882255', weight: 1.2, dashArray: '4 4' } });
+  const andes = async () => L.geoJSON(await json('capas/andes.geojson')(), { pane: 'lineas', style: { color: '#b9c0ba', weight: .7, fill: false } });
+  const rutasCapa = async () => L.geoJSON(await rutas(), { pane: 'lineas', style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 1.5 }) });
+  const puntos = (f, color, r) => () => L.layerGroup(C.filter(f).map(c => L.circleMarker([c.lat, c.lon], { pane: 'puntos', radius: r, color: '#000', weight: .7, fillColor: color, fillOpacity: 1 })
+    .bindTooltip(`${esc(nombre(c))} · ${fmt(c.alt)} m`, { direction: 'top' }).on('click', () => elegir(c.id, false))));
+  const relieve = () => L.layerGroup(I.relieve.map(r => L.imageOverlay('capas/' + r.png, r.bounds, { opacity: opac(), zIndex: 5 })));
+
+  const GRUPOS = [
+    ['Cols', [
+      ['puertas', 'Gateways', `${C.filter(c => c.puerta).length} cols`, puntos(c => c.puerta, ROJO, 5), ROJO, `<h5>Cols</h5>${item(ROJO, 'Gateway', 1, 'punto')}`],
+      ['p100', 'Depth ≥ 100 m', `${fmt(C.filter(c => c.prof >= 100).length)} cols`, puntos(c => c.prof >= 100 && !c.puerta, '#f2c14e', 2.5), '#f2c14e', `<h5>Cols, depth ≥ 100 m</h5>${item('#f2c14e', 'Not a gateway', 1, 'punto')}`],
+      ['todas', 'All cols', `${fmt(C.length)} cols`, puntos(c => c.prof < 100, '#d8dcd6', 1.6), '#d8dcd6', `<h5>Cols, depth under 100 m</h5>${item('#d8dcd6', 'Other cols', 1, 'punto')}`],
+      ['rutas', 'Descent routes', 'gateways, to 1000 m', rutasCapa, '#56B4E9', `<h5>Descent routes</h5>${item('#E69F00', 'W side', 1, 'linea')}${item('#56B4E9', 'E side', 1, 'linea')}`],
+    ]],
+    ['Divide', [
+      ['divisoria', 'Continental divide', 'GLO-30, W|E and I|E', divisoria, '#ffffff', `<h5>Divide</h5>${item('#ffffff', 'W|E divide (GLO-30)', 1, 'linea')}${item('#882255', 'I|E divide (HydroBASINS)', 1, 'linea')}`],
+      ['dominios', 'Drainage domains', 'map M1 · raster 15″', tesela('dominios'), '#56B4E9', `<h5>Drainage domains</h5>${pal('dominios')}`],
+      ['andes', 'Andes outline', 'GMBA v2', andes, '#b9c0ba', `<h5>Outline</h5>${item('#b9c0ba', 'Andes (GMBA v2)', 1, 'linea')}`],
+    ]],
+    ['Montane gaps · crossing below the threshold', [
+      ['umbrales', 'Terrain below 2000, 2500 and 3000 m', 'raster 15″', tesela('umbrales'), '#2b7bba', `<h5>Terrain elevation</h5>${pal('umbrales')}`],
+      ...[2500, 2000, 3000].map(th => ['brechas' + th, `Gaps below ${th} m`, th === 2500 ? 'Fig. 1b · default' : 'sensitivity', brecha(th), COLU[th], `<h5>Montane gaps</h5>${item(COLU[th], 'Crossing below ' + th + ' m', 1, 'linea')}`]),
+    ]],
+    ['Future and conservation', [
+      ['corredor', 'Montane corridor, SSP3-7.0', 'Fig. 4a · tropical divide', corredor, ROJO, `<h5>Montane corridor</h5>${Object.values(CORR).map(([c, t]) => item(c, t, 1, 'linea')).join('')}`],
+      ['pa', 'Protected areas', 'Fig. 4a · raster 15″', tesela('pa'), I.pal.pa[0][0], `<h5>Protection</h5>${pal('pa')}`],
+      ['ghm', 'Human modification', 'tropical Andes · raster 30″', tesela('ghm', 8), I.pal.ghm[2][0], `<h5>Human modification, gHM</h5>${pal('ghm')}`],
+    ]],
+    ['Terrain', [['relieve', 'Hillshades', 'three focal windows', relieve, '#8b938c', '']]],
+  ];
+  const inter = {};
+  for (const [titulo, capas] of GRUPOS) {
+    const div = Object.assign(document.createElement('div'), { className: 'capas-grupo', innerHTML: `<h4>${titulo}</h4>` });
+    for (const [clave, nom, sub, crear, color, ley] of capas) {
+      const lab = Object.assign(document.createElement('label'), { className: 'sw',
+        innerHTML: `<input type="checkbox"><span class="muestra" style="background:${color}"></span><span class="t">${nom}<small>${sub}</small></span>` +
+          `<button type="button" class="ayuda" aria-label="What is ${nom}?">?</button><span class="tip" role="tooltip">${AYUDA[clave]}</span>` });
+      lab.querySelector('.ayuda').addEventListener('click', e => {
+        e.preventDefault();
+        const ver = !lab.classList.contains('ver');
+        document.querySelectorAll('.sw.ver').forEach(s => s.classList.remove('ver'));
+        lab.classList.toggle('ver', ver);
+      });
+      const chk = inter[clave] = lab.querySelector('input');
+      let capa;
+      chk.addEventListener('change', async () => {
+        leyenda(clave, chk.checked && ley);
+        if (!chk.checked) { capasTesela.delete(capa); return capa && capa.remove(); }
+        capa = capa || await crear();
+        if (chk.checked) { capa.addTo(mapa); if (capa.setOpacity || capa instanceof L.LayerGroup && clave === 'relieve') capasTesela.add(capa); }
+      });
+      div.append(lab);
+    }
+    $('capas').append(div);
+  }
+  ['dominios', 'divisoria', 'brechas2500', 'puertas'].forEach(k => { inter[k].checked = true; inter[k].dispatchEvent(new Event('change')); });
+}
+
+fetch('capas/indice.json').then(r => r.json()).then(I => {
+  C = I.cols;
+  C.forEach(c => c.clave = sinAcento((c.nombre || '') + ' ' + c.id));
+  C.sort((a, b) => (b.prof >= 100) - (a.prof >= 100) || a.alt - b.alt);
+  chips(); pintarLista(); construir(I);
+  mapa.invalidateSize(); mapa.fitBounds(ANDES);
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (C.some(c => c.id === h)) elegir(h);
+});
+addEventListener('hashchange', () => { const h = decodeURIComponent(location.hash.slice(1)); h !== sel?.id && elegir(h); });
+
+$('opacidad').addEventListener('input', e => {
+  $('op-v').textContent = Math.round(e.target.value * 100) + ' %';
+  capasTesela.forEach(l => l.setOpacity ? l.setOpacity(+e.target.value) : l.eachLayer(x => x.setOpacity(+e.target.value)));
+});
+</script>
+</body>
+</html>
