@@ -76,23 +76,6 @@ def tiles(nombre, idx, pal, aff=AFF, zmax=ZMAX):
     print(nombre, n, 'tiles', flush=True)
 
 
-def relieve():
-    """Hillshades of the three focal windows as grey PNG in Web Mercator rows; returns name, file and Leaflet bounds."""
-    out = []
-    y = lambda lat: math.asinh(math.tan(math.radians(lat)))  # noqa: E731
-    (DST / 'relieve').mkdir(exist_ok=True)
-    for k, nombre in (('huancabamba', 'Huancabamba'), ('scolombia', 'Southern Colombia'), ('tachira', 'Táchira')):
-        with rasterio.open(INT / f'M1_hillshade_{k}.tif') as r:
-            a, b = r.read(1), r.bounds
-        n = math.ceil(a.shape[0] * (y(b.top) - y(b.bottom)) / math.radians(b.top - b.bottom))
-        lat = np.degrees(np.arctan(np.sinh(y(b.top) - (np.arange(n) + .5) * (y(b.top) - y(b.bottom)) / n)))
-        fil = ((b.top - lat) / (b.top - b.bottom) * a.shape[0]).astype(int).clip(0, a.shape[0] - 1)
-        im = Image.fromarray((np.nan_to_num(a[fil]).clip(0, 1) * 255).astype(np.uint8), 'L')
-        im.quantize(32).save(DST / f'relieve/{k}.png', optimize=True)
-        out.append({'nombre': nombre, 'png': f'relieve/{k}.png', 'bounds': [[b.bottom, b.left], [b.top, b.right]]})
-    return out
-
-
 def rasters():
     dom, c = geoms(INT / 'M1_domains.gpkg', columns=['dom'])
     d = features.rasterize(((g, 'WEI'.index(v) + 1) for g, v in zip(dom, c['dom'])), out_shape=SHAPE, transform=AFF, dtype=np.uint8)
@@ -220,4 +203,4 @@ if __name__ == '__main__':
     vectores(gw)
     if 'tiles' in sys.argv:
         rasters()
-    (DST / 'indice.json').write_text(json.dumps({'pal': PAL, 'relieve': relieve(), 'cols': cols}, separators=(',', ':'), ensure_ascii=False, default=lambda x: x.item()), encoding='utf-8')
+    (DST / 'indice.json').write_text(json.dumps({'pal': PAL, 'cols': cols}, separators=(',', ':'), ensure_ascii=False, default=lambda x: x.item()), encoding='utf-8')
