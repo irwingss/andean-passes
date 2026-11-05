@@ -1,0 +1,9 @@
+﻿Model,n,Slope of height at the equator (per km),Height x latitude interaction (per km per degree),95% CI low,95% CI high,p,Deviance explained,Moran's I of residuals,Moran p
+"Main: annual index TOann, worse side, flank 1000 m",61,-0.451,0.0059,0.0033,0.0085,5.6e-05,0.976,0.02,0.34
+Western side only,61,-0.401,0.0048,0.0025,0.0071,0.00015,0.976,-0.029,0.74
+Eastern side only,61,-0.448,0.0071,0.0045,0.0098,2.6e-06,0.975,0.022,0.31
+Flank at 500 m,61,-0.416,0.0032,4e-04,0.006,0.028,0.977,0.014,0.42
+Flank at 1500 m,61,-0.412,0.0068,0.0042,0.0094,5.1e-06,0.964,-0.001,0.69
+All cols with depth of at least 100 m,2515,-0.532,0.0069,0.0065,0.0073,2e-229,0.972,0.397,0
+Janzen's monthly index TOmon (0-12 scale),61,-5.68,0.0248,-0.0246,0.0743,0.33,0.956,0.047,0.097
+"TOenv, monthly crest vs annual flank envelope (0-12 scale)",61,,0.0907,0.0527,0.1287,2.2e-05,0.95,,

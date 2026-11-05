@@ -1,0 +1,15 @@
+{
+  "title": "Andean Passes Database (APD v1.0): code, derived data and supplementary material",
+  "upload_type": "software",
+  "description": "Code, derived data, figures and supplementary tables for the article 'Climatic Permeability of Andean Mountain passes: a continental census under present and future climates'. Census of every col along the Pacific-Atlantic drainage divide of the Andes (11°N-55°S) from Copernicus GLO-30 by marker-controlled priority flooding; crest-flank thermal overlap and moisture gaps (WorldClim 2.1, Global Aridity Index v3.1, MODIS cloud frequency); test of Janzen's prediction; projections with eight CMIP6 models under three scenarios; montane corridor, protection and human modification. The code is under MIT; data, figures and tables follow LICENSE-DATA.md, with non-commercial terms for files derived from WorldClim, EarthEnv and the WDPA.",
+  "creators": [
+    {"name": "Saldaña, Irwing S.", "affiliation": "Skyfall Bioscience, Peru", "orcid": "0000-0001-5761-2882"},
+    {"name": "Vallejos Bardales, L. Martin", "affiliation": "Universidade Federal do Rio de Janeiro, Brazil"},
+    {"name": "Ugaz-Cherre, Armando", "affiliation": "Universidad Nacional de Piura, Peru"}
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": ["Andes", "mountain passes", "continental divide", "Janzen's hypothesis", "thermal overlap", "climate change", "protected areas"],
+  "language": "eng",
+  "version": "1.0.0"
+}

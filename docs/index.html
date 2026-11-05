@@ -415,7 +415,7 @@ function elegir(id, volar = true) {
       <div class="meta">${c.pais ? c.pais + ' · ' : ''}${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}${c.terminal ? ' · end of the chain, out of the tests' : ''}</div></div>
     <div class="cifras"><div><b>${fmt(c.alt)}</b><span>m, crossing height</span></div><div><b>${fmt(c.prof)}</b><span>m, depth</span></div>
       <div><b>${fmt(c.iso)}</b><span>km, isolation along the divide</span></div><div><b>${fmt(c.ancho)}</b><span>km, width at +100 m</span></div></div>
-    ${c.tipo ? `<table class="datos">${fila('Moisture and temperature type', TIPOS[c.tipo])}${fila('Thermal overlap, present', c.to)}${fila('Aridity gap, log ratio', c.ai)}
+    ${c.tipo ? `<table class="datos">${fila('Moisture and temperature type', TIPOS[c.tipo])}${fila('Thermal overlap, present', c.to)}${fila('Aridity gap, log ratio (larger absolute value; negative = crest drier)', c.ai)}
       ${fila('Change in overlap, 2081–2100 SSP3-7.0', c.dto)}${fila('Change in precipitation gap', c.dpg)}${fila('Fraction of ΔT* reached', c.frac)}
       ${fila('Crest in a protected area', c.crest_pa ? 'yes' : 'no')}${fila('Protected within 5 km', c.pa5 == null ? null : c.pa5 + ' %')}${fila('gHM at the crest', c.ghm)}
       ${fila('Montane corridor lost within 25 km', c.loss == null ? null : c.loss + ' km')}${fila('Critical gateway', c.critica ? (c.pres ? 'yes, high pressure' : 'yes') : 'no')}</table>` : ''}
@@ -435,11 +435,11 @@ function quitar() {
 const capasTesela = new Set();
 const AYUDA = {
   dominios: 'Each cell belongs to the ocean its water reaches: Pacific and Caribbean basins (W), Atlantic basins (E) or endorheic basins (I), from HydroBASINS, within the footprint of the census.',
-  umbrales: 'Terrain below the three elevation thresholds of the montane gap, 2500 m by default and 2000 and 3000 m for sensitivity (HydroSHEDS 15″ DEM). Terrain at 3000 m or above is left transparent.',
-  brechas2500: 'Stretches of the divide whose W–E crossing height is below 2500 m: the montane corridor is broken there. Click one for its length.',
-  brechas2000: 'As the 2500 m gaps, at the lower sensitivity threshold.',
-  brechas3000: 'As the 2500 m gaps, at the upper sensitivity threshold.',
-  corredor: 'Tropical divide by bins of 0.5 km. Lost: montane today and below the raised 2500 m isotherm by 2081–2100 under SSP3-7.0 in at least 7 of 8 GCMs. The isotherm rises by the local warming divided by the local lapse rate.',
+  umbrales: 'Terrain below the three elevation thresholds of the montane gap, 2000 m by default and 1500 and 2500 m for sensitivity (HydroSHEDS 15″ DEM). Terrain at 2500 m or above is left transparent.',
+  brechas2000: 'Stretches of the divide whose W–E crossing height is below 2000 m: the montane corridor is broken there. Click one for its length.',
+  brechas1500: 'As the 2000 m gaps, at the lower sensitivity threshold.',
+  brechas2500: 'As the 2000 m gaps, at the upper sensitivity threshold.',
+  corredor: 'Tropical divide by bins of 0.5 km. Lost: montane today and below the raised 2000 m isotherm by 2081–2100 under SSP3-7.0 in at least 7 of 8 GCMs. The isotherm rises by the local warming divided by the local lapse rate.',
   divisoria: 'W–E continental divide from Copernicus GLO-30 by marker-controlled flooding, and the I|E divide of the endorheic basins from HydroBASINS.',
   andes: 'Outline of the Andes in the GMBA Mountain Inventory v2.',
   puertasT: 'A gateway is a col at least 100 m deep that is the lowest within 100 km along the divide either way. Tropical: between 11°N and 23.5°S. One of the 31 lies at the end of the chain and stays out of the tests, which leaves the 30 tropical gateways of the paper.',
@@ -454,8 +454,8 @@ function construir(I) {
   const pal = k => I.pal[k].map(([c, a, t]) => item(c, t, a)).join('');
   const tesela = (k, zmax = 9) => () => L.tileLayer(`capas/${k}/{z}/{x}/{y}.png`, { minNativeZoom: 3, maxNativeZoom: zmax, maxZoom: 16, bounds: ANDES, opacity: opac(), className: 'capa-px', errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' });
   const brechas = json('capas/brechas.geojson');
-  const COLU = { 2000: '#ffd400', 2500: '#ff2d55', 3000: '#ff9f40' };
-  const brecha = th => async () => L.geoJSON(await brechas(), { ...VEC, filter: f => f.properties.umbral === th, style: { color: COLU[th], weight: th === 2500 ? 4 : 3 },
+  const COLU = { 1500: '#ffd400', 2000: '#ff2d55', 2500: '#ff9f40' };
+  const brecha = th => async () => L.geoJSON(await brechas(), { ...VEC, filter: f => f.properties.umbral === th, style: { color: COLU[th], weight: th === 2000 ? 4 : 3 },
     onEachFeature: (f, l) => l.bindPopup(`<b>Montane gap below ${th} m</b><br>${fmt(f.properties.km)} km of divide<br>Lowest crossing: ${fmt(f.properties.min)} m<br>Latitude ${f.properties.lat[0]} to ${f.properties.lat[1]}`) });
   const CORR = { kept: ['#0072B2', 'Montane corridor kept'], lost: [ROJO, 'Lost by 2081–2100 (at least 7 of 8 GCMs)'], gap: ['#999999', 'Montane gap today'] };
   const corredor = async () => L.geoJSON(await json('capas/corredor.geojson')(), { ...VEC, style: f => ({ color: CORR[f.properties.clase][0], weight: 4 }),
@@ -485,8 +485,8 @@ function construir(I) {
       ['andes', 'Andes outline', 'GMBA v2', andes, '#b9c0ba', `<h5>Outline</h5>${item('#b9c0ba', 'Andes (GMBA v2)', 1, 'linea')}`],
     ]],
     ['Montane gaps · crossing below the threshold', [
-      ['umbrales', 'Terrain below 2000, 2500 and 3000 m', 'raster 15″', tesela('umbrales'), '#2b7bba', `<h5>Terrain elevation</h5>${pal('umbrales')}`],
-      ...[2000, 2500, 3000].map(th => ['brechas' + th, `Gaps below ${th} m`, th === 2500 ? 'Fig. 1b · default' : 'sensitivity', brecha(th), COLU[th], `<h5>Montane gaps</h5>${item(COLU[th], 'Crossing below ' + th + ' m', 1, 'linea')}`]),
+      ['umbrales', 'Terrain below 1500, 2000 and 2500 m', 'raster 15″', tesela('umbrales'), '#2b7bba', `<h5>Terrain elevation</h5>${pal('umbrales')}`],
+      ...[1500, 2000, 2500].map(th => ['brechas' + th, `Gaps below ${th} m`, th === 2000 ? 'Fig. 1b · default' : 'sensitivity', brecha(th), COLU[th], `<h5>Montane gaps</h5>${item(COLU[th], 'Crossing below ' + th + ' m', 1, 'linea')}`]),
     ]],
     ['Future and conservation', [
       ['corredor', 'Montane corridor, SSP3-7.0', 'Fig. 4a · tropical divide', corredor, ROJO, `<h5>Montane corridor</h5>${Object.values(CORR).map(([c, t]) => item(c, t, 1, 'linea')).join('')}`],
@@ -498,7 +498,7 @@ function construir(I) {
   const apagar = k => { const c = inter[k]; if (c.checked) { c.checked = false; c.dispatchEvent(new Event('change')); } };
   // rasters that would pile up: turning one on turns the others off. Protected areas go over any of them.
   const LIMPIA = ['dominios', 'andes'];
-  const EXCLUYE = { dominios: ['umbrales', 'ghm'], umbrales: [...LIMPIA, 'ghm'], ghm: [...LIMPIA, 'umbrales'], brechas2000: LIMPIA, brechas2500: LIMPIA, brechas3000: LIMPIA };
+  const EXCLUYE = { dominios: ['umbrales', 'ghm'], umbrales: [...LIMPIA, 'ghm'], ghm: [...LIMPIA, 'umbrales'], brechas1500: LIMPIA, brechas2000: LIMPIA, brechas2500: LIMPIA };
   for (const [titulo, capas] of GRUPOS) {
     const div = Object.assign(document.createElement('div'), { className: 'capas-grupo', innerHTML: `<h4>${titulo}</h4>` });
     for (const [clave, nom, sub, crear, color, ley] of capas) {

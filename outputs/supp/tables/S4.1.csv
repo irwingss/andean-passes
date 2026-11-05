@@ -1,0 +1,31 @@
+﻿No,File,APD id,Gateway,Country,Level-1 unit,Latitude,Longitude,Crossing height (m),Depth (m),Isolation N (km),Isolation S (km),Width (km),W flank route (km),E flank route (km),Flank by nearest cell,Thermal overlap,Aridity gap,Cloud gap (%),Type,ΔT* (°C),"Fraction of ΔT*, SSP3-7.0 2081-2100","Change in overlap, SSP3-7.0 2081-2100",Models agreeing on sign
+1,S4_01_APD00203.png,APD00203,Táchira depression,Venezuela,Táchira,7.686,-72.416,1023,3854,563,9907,3.1,0.7,1.4,"",0.906,-0.101,1.2,Open,1,4.36,-0.24 (-0.33 to -0.10),1
+2,S4_02_APD00429.png,APD00429,Chocontá,Colombia,Cundinamarca,5.103,-73.669,2718,1425,539,268,8.2,135,66.3,"",0.153,-0.888,-5.6,Open,10.4,0.39,0.33 (0.18 to 0.45),1
+3,S4_03_APD00537.png,APD00537,Meta-Huila,Colombia,Meta,3.288,-74.616,1920,1534,914,271,2.6,15.7,7.4,"",0.354,0.317,17,Open,6.3,0.62,0.41 (0.26 to 0.48),1
+4,S4_04_APD00641.png,APD00641,Aguas Claras,Colombia,Huila,1.628,-75.98,1763,3573,1203,8036,4.6,43.6,3.2,"",0.54,0.501,8.8,Open,4.6,0.88,0.39 (0.30 to 0.43),1
+5,S4_05_APD00729.png,APD00729,La Rejoya,Colombia,Nariño / Putumayo,1.237,-76.987,2738,1456,160,1051,3.6,53.4,46.6,"",-0.049,0.631,18.4,Closed in temperature only,11.5,0.32,0.35 (0.25 to 0.41),1
+6,S4_06_APD00779.png,APD00779,San Pedro de Huaca,Ecuador,Carchi,0.653,-77.684,3184,759,129,755,5.6,100.9,65.5,"",-0.102,-0.659,-3.1,Closed in temperature only,11.2,0.32,0.37 (0.27 to 0.43),1
+7,S4_07_APD00868.png,APD00868,El Chasqui,Ecuador,Cotopaxi,-0.648,-78.591,3496,1852,196,227,7.2,132.9,75.3,E,-0.153,-1.075,5.4,Closed in temperature only,12.5,0.28,0.33 (0.20 to 0.44),1
+8,S4_08_APD00956.png,APD00956,Palmira,Ecuador,Chimborazo,-2.062,-78.742,3248,1175,486,267,5.1,50.2,68.8,E,0.099,-1.416,-6.2,Open,10.8,0.33,0.30 (0.21 to 0.38),1
+9,S4_09_APD01003.png,APD01003,Charon Ventanas,Ecuador,Cañar,-2.648,-78.891,3283,1129,130,137,2.5,49,119.9,"",0.014,-0.435,1.5,Closed in temperature only,11.6,0.3,0.30 (0.22 to 0.36),1
+10,S4_10_APD01067.png,APD01067,Portete de Tarqui,Ecuador,Azuay,-3.106,-79.111,2761,991,897,153,3.1,35.4,140.6,"",0.22,-1.052,10.4,Open,10.4,0.32,0.25 (0.16 to 0.31),1
+11,S4_11_APD01134.png,APD01134,Nudo de Cajanuma,Ecuador,Loja,-4.084,-79.205,2389,1559,1292,240,2,79.5,69.4,"",0.366,0.379,15.2,Open,8.2,0.42,0.27 (0.15 to 0.33),1
+12,S4_12_APD01238.png,APD01238,Abra de Porculla,Peru,Piura,-5.84,-79.506,2145,3738,1614,6366,2,10,47.4,"",0.688,0.783,-6,Open,4.3,0.8,0.25 (0.16 to 0.30),1
+13,S4_13_APD01284.png,APD01284,Huambos,Peru,Cajamarca,-6.45,-78.963,2301,1760,135,6226,5.1,34.7,40.1,"",0.667,0.953,-13.5,Open,4.8,0.78,0.25 (0.16 to 0.29),1
+14,S4_14_APD01339.png,APD01339,Abra el Gavilán,Peru,Cajamarca,-7.247,-78.469,3226,936,110,5137,2,37,130.4,"",0.339,0.985,8.7,Open,9.6,0.44,0.30 (0.22 to 0.35),1
+15,S4_15_APD01451.png,APD01451,Abra Cahuacona,Peru,Ancash,-8.569,-77.691,4129,774,109,939,3.6,40,97.6,E,-0.125,1.691,31,Closed in temperature only,16.4,0.24,0.28 (0.21 to 0.36),1
+16,S4_16_APD01516.png,APD01516,Abra Kahuish,Peru,Ancash,-9.686,-77.254,4582,1698,147,398,2.1,64,101.5,W E,-0.388,2.682,38.4,Closed,20.3,0.2,0.27 (0.19 to 0.37),1
+17,S4_17_APD01626.png,APD01626,Abra la Viuda,Peru,Junín,-11.215,-76.481,4627,1052,161,154,1.5,58.2,118.1,E,-0.284,2.697,40.8,Closed,20,0.2,0.25 (0.19 to 0.29),1
+18,S4_18_APD01693.png,APD01693,Huancaya,Peru,Junín / Lima,-12.037,-75.795,4534,787,549,292,2.6,118.9,103.7,E,-0.087,2.988,38.8,Closed,16.9,0.26,0.30 (0.23 to 0.36),1
+19,S4_19_APD01753.png,APD01753,Abra Tipicocha,Peru,Huancavelica,-12.814,-75.494,4575,680,102,135,6.7,86.1,136.9,E,-0.134,3.296,34.4,Closed,18.7,0.22,0.24 (0.20 to 0.28),1
+20,S4_20_APD01845.png,APD01845,Laramarca,Peru,Huancavelica,-13.742,-74.933,4114,1663,1048,1848,3.6,72.8,165.9,E,-0.08,3.63,25.8,Closed,17.5,0.23,0.24 (0.20 to 0.27),1
+21,S4_21_APD01891.png,APD01891,San Pedro de Palco,Peru,Ayacucho,-14.384,-74.502,4144,493,122,1726,14.3,56.6,172.3,E,-0.043,4.115,20.2,Closed,18,0.23,0.23 (0.21 to 0.26),1
+22,S4_22_APD01967.png,APD01967,Pilluni-Quillcaccasa,Peru,Apurímac,-14.606,-73.427,4322,663,132,421,4.6,141.5,134.5,E,-0.017,3.513,29.1,Closed,18.5,0.23,0.23 (0.20 to 0.25),1
+23,S4_23_APD02047.png,APD02047,Orcopampa,Peru,Arequipa,-14.952,-72.253,4727,692,153,171,3.6,142.8,200.5,E,-0.119,2.953,33.2,Closed,21.2,0.19,0.22 (0.17 to 0.26),1
+24,S4_24_APD02108.png,APD02108,Tisco,Peru,Arequipa,-15.153,-71.551,4291,945,553,244,6.1,122.1,212.8,W E,0.076,2.926,-31.4,Closed,18.5,0.22,0.22 (0.16 to 0.25),1
+25,S4_25_APD02207.png,APD02207,Anavili,Peru,Puno,-15.858,-70.577,4185,1407,894,824,12.8,128.6,225.2,W E,0.162,3.667,26.2,Closed in moisture only,16,0.26,0.23 (0.18 to 0.25),1
+26,S4_26_APD02335.png,APD02335,Uchusuma,Chile,Arica y Parinacota,-17.671,-69.668,4257,1242,364,196,7.6,117.2,256.4,E,0.102,3.456,-41.8,Closed in moisture only,17.3,0.26,0.24 (0.21 to 0.29),1
+27,S4_27_APD02396.png,APD02396,Portezuelo de Chaca,Chile,Arica y Parinacota,-18.828,-69.197,4256,1470,560,255,6.1,73.7,331.2,E,0.06,3.669,-28,Closed,19,0.24,0.24 (0.21 to 0.28),1
+28,S4_28_APD02483.png,APD02483,Waylla-Wila Qullu,Bolivia,Potosí,-20.367,-68.71,4005,2171,2906,219,3,94,450.2,E W,0.249,3.098,-33.6,Closed in moisture only,17.3,0.27,0.21 (0.17 to 0.24),1
+29,S4_29_APD02541.png,APD02541,Ascotán,Chile,Antofagasta,-21.723,-68.273,3966,2501,3131,1821,3.1,117.6,377.7,E W,0.401,-2.965,-52.7,Closed in moisture only,14.7,0.31,0.20 (0.15 to 0.23),1
+30,S4_30_APD02599.png,APD02599,Río Blanco,Bolivia,Potosí,-22.669,-67.754,4715,1100,101,147,3.1,200.1,302.5,E W,0.296,3.792,-43,Closed in moisture only,16.2,0.29,0.22 (0.17 to 0.28),1

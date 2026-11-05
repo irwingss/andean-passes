@@ -1,0 +1,9 @@
+﻿Analysis,Variables,n,rho,p,"Deviance, smooth alone","Deviance, full model"
+"Spearman, tropical",TOann and aridity gap,30,-0.34,0.067,,
+"Spearman, tropical",TOann and cloud gap,30,-0.28,0.13,,
+"Spearman, tropical",aridity gap and cloud gap,30,0.69,2.5e-05,,
+"Spearman, tropical",crossing height and aridity gap,30,0.79,2.6e-07,,
+"Spearman, tropical",crossing height and cloud gap,30,0.77,5.6e-07,,
+"Spearman, all gateways",TOann and aridity gap,61,-0.78,2.1e-13,,
+GAM,"aridity gap on crossing height, TOann and position along the divide",30,,,0.92,0.93
+GAM,"cloud gap on crossing height, TOann and position along the divide",30,,,0.66,0.72

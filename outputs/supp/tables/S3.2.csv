@@ -1,0 +1,6 @@
+﻿Type,Medians (main),Terciles,Cloud gap as moisture axis,Medians of all 61 gateways,"Same type as main rule, terciles","Same type as main rule, cloud gap"
+Open,10,6,10,2,6,10
+Closed in temperature only,5,2,5,5,2,4
+Closed in moisture only,5,2,5,3,2,5
+Closed,10,3,10,20,3,9
+Intermediate,0,17,0,0,0,0

@@ -1,0 +1,16 @@
+﻿Gap,North end (latitude),South end (latitude),Longitude of lowest point,Country,Level-1 unit,Length (km),Lowest crossing height (m),At least 10 km,"Lowest col, APD id","Lowest col, name"
+1,10.229,9.771,-69.486,Venezuela,Lara,71.2,679,TRUE,APD00012,
+2,9.763,9.761,-69.582,Venezuela,Lara,1,1950,FALSE,APD00021,
+3,9.711,9.695,-69.624,Venezuela,Lara,8.1,1794,FALSE,APD00025,
+4,9.649,9.607,-69.888,Venezuela,Lara,39.9,1405,TRUE,APD00040,
+5,9.549,9.544,-69.961,Venezuela,Portuguesa,2,1922,FALSE,APD00044,
+6,9.502,9.501,-70.005,Venezuela,Lara / Portuguesa,1,1977,FALSE,APD00047,
+7,7.928,7.624,-72.416,Venezuela,Táchira,59.3,1023,TRUE,APD00203,Táchira depression
+8,7.607,7.602,-72.434,Venezuela,Táchira,1.5,1956,FALSE,APD00205,
+9,3.29,3.287,-74.616,Colombia,Meta,1.5,1920,FALSE,APD00537,Meta-Huila
+10,3.233,3.232,-74.664,Colombia,Huila / Meta,1,1964,FALSE,APD00540,
+11,1.722,1.719,-75.863,Colombia,Caquetá / Huila,1.5,1975,FALSE,APD00634,
+12,1.714,1.709,-75.91,Colombia,Caquetá,5.1,1784,FALSE,APD00636,Alto de los Andakies
+13,1.681,1.681,-75.94,Colombia,Huila,1,1933,FALSE,APD00638,
+14,1.669,1.66,-75.96,Colombia,Huila,3.6,1807,FALSE,APD00659,
+15,1.65,1.582,-75.98,Colombia,Huila,12.2,1763,TRUE,APD00641,Aguas Claras

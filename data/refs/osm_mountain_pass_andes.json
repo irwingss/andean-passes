@@ -1,0 +1,4525 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-02T00:08:19Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 96186662,
+  "lat": -26.8736732,
+  "lon": -68.2991060,
+  "tags": {
+    "ele": "4726",
+    "mountain_pass": "yes",
+    "name": "Paso de San Francisco",
+    "name:en": "San Francisco Pass",
+    "wikidata": "Q3367775",
+    "wikipedia": "es:Paso de San Francisco"
+  }
+},
+{
+  "type": "node",
+  "id": 96186986,
+  "lat": -31.1444628,
+  "lon": -70.4127503,
+  "tags": {
+    "ele": "3221",
+    "mountain_pass": "yes",
+    "name": "Paso de la Laguna de la Overa III",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 96203265,
+  "lat": -45.2327506,
+  "lon": -71.3465385,
+  "tags": {
+    "ele": "865",
+    "mountain_pass": "yes",
+    "name": "Paso Pampa Alta (Puesto Viejo)",
+    "wikidata": "Q7129377",
+    "wikipedia": "es:Paso Pampa Alta-Puesto Viejo"
+  }
+},
+{
+  "type": "node",
+  "id": 96307037,
+  "lat": -18.2101844,
+  "lon": -69.1023421,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo de Huacollo",
+    "ref": "84",
+    "source": "Tratado de Paz y Amistad entre Chile y Bolivia"
+  }
+},
+{
+  "type": "node",
+  "id": 252602080,
+  "lat": -54.6906747,
+  "lon": -67.8434880,
+  "tags": {
+    "ele": "450",
+    "mountain_pass": "yes",
+    "name": "Paso Garibaldi",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 260482772,
+  "lat": 4.9970229,
+  "lon": -74.5368605,
+  "tags": {
+    "ele": "1700",
+    "mountain_pass": "yes",
+    "name": "Alto del Trigo"
+  }
+},
+{
+  "type": "node",
+  "id": 280852248,
+  "lat": -39.5824404,
+  "lon": -71.4613084,
+  "tags": {
+    "ele": "1210",
+    "mountain_pass": "yes",
+    "name": "Paso Mamuil Malal",
+    "wikidata": "Q6746000",
+    "wikipedia": "es:Paso Mamuil Malal"
+  }
+},
+{
+  "type": "node",
+  "id": 280891814,
+  "lat": 5.0443393,
+  "lon": -75.3325289,
+  "tags": {
+    "ele": "3679",
+    "mountain_pass": "yes",
+    "name": "Páramo de Letras"
+  }
+},
+{
+  "type": "node",
+  "id": 286574082,
+  "lat": -33.3077072,
+  "lon": -70.5980534,
+  "tags": {
+    "ele": "1146",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Pie Andino",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 303516570,
+  "lat": -37.4536537,
+  "lon": -71.1240533,
+  "tags": {
+    "access": "permissive",
+    "ele": "2062",
+    "mountain_pass": "yes",
+    "name": "Paso Pichachén",
+    "note": "Paso cerrado por inicio de temporada invernal",
+    "opening_hours": "Nov-Apr; Mo-Su 08:00-18:00",
+    "website": "https://www.argentina.gob.ar/seguridad/pasosinternacionales/detalle/ruta/34/Pichach%C3%A9n",
+    "wikidata": "Q6065857",
+    "wikimedia_commons": "Category:Pichachén Pass",
+    "wikipedia": "es:Paso Pichachén"
+  }
+},
+{
+  "type": "node",
+  "id": 307344017,
+  "lat": -34.8849650,
+  "lon": -70.2896878,
+  "tags": {
+    "alt_name": "Paso Damas",
+    "ele": "3068",
+    "mountain_pass": "yes",
+    "name": "Paso de las Damas"
+  }
+},
+{
+  "type": "node",
+  "id": 311236676,
+  "lat": -18.2846661,
+  "lon": -69.0741590,
+  "tags": {
+    "alt_name": "Portezuelo de Tambo Quemado",
+    "ele": "4680",
+    "mountain_pass": "yes",
+    "name": "Paso Chungará - Tambo Quemado",
+    "name:en": "Chungara–Tambo Quemado",
+    "ref": "Hito 18",
+    "source": "Tratado de Paz y Amistad entre Chile y Bolivia",
+    "wikidata": "Q429527",
+    "wikipedia": "es:Paso Chungará-Tambo Quemado"
+  }
+},
+{
+  "type": "node",
+  "id": 311442605,
+  "lat": -23.8412830,
+  "lon": -67.4680683,
+  "tags": {
+    "ele": "4578",
+    "mountain_pass": "yes",
+    "name": "Abra El Laco"
+  }
+},
+{
+  "type": "node",
+  "id": 311442626,
+  "lat": -23.8117035,
+  "lon": -67.3570718,
+  "tags": {
+    "ele": "4458",
+    "mountain_pass": "yes",
+    "name": "Abra Sico"
+  }
+},
+{
+  "type": "node",
+  "id": 311443529,
+  "lat": -22.4209984,
+  "lon": -68.0439298,
+  "tags": {
+    "ele": "4450",
+    "mountain_pass": "yes",
+    "name": "Paso Las Viscachas"
+  }
+},
+{
+  "type": "node",
+  "id": 311701366,
+  "lat": -30.1927704,
+  "lon": -69.8254554,
+  "tags": {
+    "alt_name": "Paso del Agua Negra",
+    "ele": "4730",
+    "man_made": "gantry",
+    "mountain_pass": "yes",
+    "name": "Paso de Agua Negra",
+    "name:en": "Agua Negra Pass",
+    "natural": "saddle",
+    "wikidata": "Q2055637",
+    "wikipedia": "es:Paso de Agua Negra"
+  }
+},
+{
+  "type": "node",
+  "id": 319770268,
+  "lat": -17.6530890,
+  "lon": -66.4575509,
+  "tags": {
+    "ele": "3820",
+    "mountain_pass": "yes",
+    "name": "Paso de Montaña Bombeo"
+  }
+},
+{
+  "type": "node",
+  "id": 324338025,
+  "lat": 4.4685352,
+  "lon": -74.2124207,
+  "tags": {
+    "ele": "3223.9",
+    "mountain_pass": "yes",
+    "name": "Alto del Cabra"
+  }
+},
+{
+  "type": "node",
+  "id": 338403144,
+  "lat": -2.7775730,
+  "lon": -79.2407247,
+  "tags": {
+    "ele": "4198",
+    "mountain_pass": "yes",
+    "name": "Tres Cruces",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 343571790,
+  "lat": -36.9951987,
+  "lon": -71.4954370,
+  "tags": {
+    "ele": "1493",
+    "mountain_pass": "yes",
+    "name": "Paso Atacalco"
+  }
+},
+{
+  "type": "node",
+  "id": 344730574,
+  "lat": -0.6537386,
+  "lon": -78.7149630,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "La Ensillada (Boquerón)"
+  }
+},
+{
+  "type": "node",
+  "id": 346571805,
+  "lat": -41.1548485,
+  "lon": -71.8053621,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de las Nubes"
+  }
+},
+{
+  "type": "node",
+  "id": 349063399,
+  "lat": -50.9411092,
+  "lon": -73.1841584,
+  "tags": {
+    "ele": "1180",
+    "mountain_pass": "yes",
+    "name": "Paso John Garner",
+    "name:en": "John Garner Pass",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 365950809,
+  "lat": -39.1269944,
+  "lon": -71.6650930,
+  "tags": {
+    "ele": "1305",
+    "mountain_pass": "yes",
+    "name": "Paso Las Mellizas"
+  }
+},
+{
+  "type": "node",
+  "id": 371613059,
+  "lat": -38.8336190,
+  "lon": -71.2680275,
+  "tags": {
+    "ele": "1303",
+    "mountain_pass": "yes",
+    "name": "Paso de Icalma",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 389394059,
+  "lat": -13.3584756,
+  "lon": -74.7399849,
+  "tags": {
+    "ele": "4780",
+    "mountain_pass": "yes",
+    "name": "Abra Apacheta"
+  }
+},
+{
+  "type": "node",
+  "id": 410892272,
+  "lat": -13.2266975,
+  "lon": -72.5054043,
+  "tags": {
+    "alt_name": "Abra Runkuraqay",
+    "ele": "3998",
+    "mountain_pass": "yes",
+    "name": "Abra Runkurakay",
+    "name:en": "Runkurakay's Pass",
+    "name:es": "Abra Runkurakay",
+    "name:qu": "Abra Runkuraqay",
+    "name:zh": "Inka trail第二天第二個山峰",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 410892347,
+  "lat": -13.2067658,
+  "lon": -72.5302907,
+  "tags": {
+    "ele": "3700",
+    "mountain_pass": "yes",
+    "name": "Paso de Phuyupatamarca"
+  }
+},
+{
+  "type": "node",
+  "id": 420777904,
+  "lat": -13.1380314,
+  "lon": -72.3022604,
+  "tags": {
+    "ele": "4350",
+    "mountain_pass": "yes",
+    "name": "Abra Malaga"
+  }
+},
+{
+  "type": "node",
+  "id": 421804863,
+  "lat": -13.1055872,
+  "lon": -72.9960836,
+  "tags": {
+    "ele": "3730",
+    "mountain_pass": "yes",
+    "name": "Abra Kollpacasa"
+  }
+},
+{
+  "type": "node",
+  "id": 434754875,
+  "lat": -22.8808429,
+  "lon": -67.7986105,
+  "tags": {
+    "ele": "4480",
+    "junction": "yes",
+    "mountain_pass": "yes",
+    "name": "Paso Portezuelo del Cajón",
+    "ref": "3",
+    "source": "Tratado de Paz y Amistad entre Chile y Bolivia",
+    "wikidata": "Q7231718",
+    "wikipedia": "es:Paso Portezuelo del Cajón"
+  }
+},
+{
+  "type": "node",
+  "id": 436609484,
+  "lat": -13.1949830,
+  "lon": -71.9384367,
+  "tags": {
+    "alt_name": "Abra Azulcocha",
+    "ele": "4461",
+    "mountain_pass": "yes",
+    "name": "Abra Lares",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 458040116,
+  "lat": -38.6634639,
+  "lon": -70.8968434,
+  "tags": {
+    "ele": "1885",
+    "mountain_pass": "yes",
+    "name": "Paso Pino Hachado",
+    "name:en": "Pino Hachado Pass",
+    "wikidata": "Q7196378",
+    "wikipedia": "es:Paso de Pino Hachado"
+  }
+},
+{
+  "type": "node",
+  "id": 467662297,
+  "lat": -13.9326192,
+  "lon": -71.9801596,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Incacconcaina",
+    "source": "MTC"
+  }
+},
+{
+  "type": "node",
+  "id": 497243441,
+  "lat": -17.3995598,
+  "lon": -65.8689760,
+  "tags": {
+    "alt_name": "Wakanki",
+    "ele": "3713",
+    "mountain_pass": "yes",
+    "name": "Waqanqui"
+  }
+},
+{
+  "type": "node",
+  "id": 529115153,
+  "lat": -41.2166988,
+  "lon": -71.8548150,
+  "tags": {
+    "barrier": "bollard",
+    "mountain_pass": "yes",
+    "name": "Paso Vuriloche",
+    "natural": "saddle",
+    "wikidata": "Q6065888",
+    "wikipedia": "es:Paso Vuriloche"
+  }
+},
+{
+  "type": "node",
+  "id": 568482266,
+  "lat": -48.9600353,
+  "lon": -72.8158808,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Dos Lagunas",
+    "wikidata": "Q93883760",
+    "wikipedia": "es:Paso Dos Lagunas"
+  }
+},
+{
+  "type": "node",
+  "id": 592113756,
+  "lat": 6.3443426,
+  "lon": -72.3160762,
+  "tags": {
+    "ele": "4440",
+    "mountain_pass": "yes",
+    "name": "Alto de Cusirí"
+  }
+},
+{
+  "type": "node",
+  "id": 592119517,
+  "lat": 6.4074202,
+  "lon": -72.2710989,
+  "tags": {
+    "ele": "4305",
+    "mountain_pass": "yes",
+    "name": "Alto con Mojón"
+  }
+},
+{
+  "type": "node",
+  "id": 592119527,
+  "lat": 6.4186613,
+  "lon": -72.2699324,
+  "tags": {
+    "ele": "4465",
+    "mountain_pass": "yes",
+    "name": "Alto Los Balcones",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 592119560,
+  "lat": 6.4418720,
+  "lon": -72.2687118,
+  "tags": {
+    "ele": "4574",
+    "mountain_pass": "yes",
+    "name": "Alto El Castillo"
+  }
+},
+{
+  "type": "node",
+  "id": 592137816,
+  "lat": 6.5478475,
+  "lon": -72.3206682,
+  "tags": {
+    "ele": "4210",
+    "mountain_pass": "yes",
+    "name": "Alto de los Frailes"
+  }
+},
+{
+  "type": "node",
+  "id": 592144920,
+  "lat": 6.3500287,
+  "lon": -72.2931687,
+  "tags": {
+    "ele": "4378",
+    "mountain_pass": "yes",
+    "name": "Alto de Patio Bolos",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 592151838,
+  "lat": 6.5132423,
+  "lon": -72.2885754,
+  "tags": {
+    "ele": "4676",
+    "mountain_pass": "yes",
+    "name": "Alto de la Sierra",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 618340000,
+  "lat": 4.8582098,
+  "lon": -74.4098279,
+  "tags": {
+    "ele": "2707",
+    "mountain_pass": "yes",
+    "name": "Alto de la Tribuna",
+    "natural": "peak"
+  }
+},
+{
+  "type": "node",
+  "id": 633602184,
+  "lat": -13.3317333,
+  "lon": -72.8658874,
+  "tags": {
+    "ele": "4150",
+    "mountain_pass": "yes",
+    "name": "Abra San Juan",
+    "name:es": "Abra San Juan",
+    "name:fr": "Col San Juan"
+  }
+},
+{
+  "type": "node",
+  "id": 633602355,
+  "lat": -13.3373703,
+  "lon": -72.7689140,
+  "tags": {
+    "ele": "4660",
+    "mountain_pass": "yes",
+    "name": "Abra Mariano Llamoca",
+    "note": "Elevation as per sign",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 633754435,
+  "lat": -13.3511033,
+  "lon": -74.1886743,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Toccto",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 635692591,
+  "lat": -18.9833631,
+  "lon": -69.1189103,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo de Mulluri",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 687515208,
+  "lat": -35.2056530,
+  "lon": -70.5203564,
+  "tags": {
+    "ele": "2510",
+    "mountain_pass": "yes",
+    "name": "Paso Vergara",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 703222307,
+  "lat": 3.8852677,
+  "lon": -74.5248288,
+  "tags": {
+    "divipola": "73873",
+    "ele": "2554",
+    "mountain_pass": "yes",
+    "name": "Alto Guanacas",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 3cc5b17706995d1be87c75688a1eee56",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703228101,
+  "lat": 5.6125047,
+  "lon": -72.8010852,
+  "tags": {
+    "divipola": "15759",
+    "ele": "3532.3",
+    "fixme": "Revisar: este punto fue creado por importación directa",
+    "is_in": "Colombia; Boyacá ; Sogamoso",
+    "mountain_pass": "yes",
+    "name": "Alto El Uval",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 87931edb6e75d077a977bc4aa5519a64",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703228152,
+  "lat": 5.5302741,
+  "lon": -72.7226319,
+  "tags": {
+    "divipola": "15377",
+    "ele": "3240",
+    "is_in": "Colombia; Boyacá ; Labranzagrande",
+    "mountain_pass": "yes",
+    "name": "Alto De Mogotes",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 584a92593720419bef1768037af4151c",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703230287,
+  "lat": 5.6281236,
+  "lon": -72.8523763,
+  "tags": {
+    "divipola": "15759",
+    "ele": "3754.2",
+    "fixme": "Revisar: este punto fue creado por importación directa",
+    "is_in": "Colombia; Boyacá ; Sogamoso",
+    "mountain_pass": "yes",
+    "name": "Alto De Melgarejo",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 28e5599d25429306cd286fd85cf087f0",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703230579,
+  "lat": 5.6494262,
+  "lon": -72.7711785,
+  "tags": {
+    "divipola": "15759",
+    "ele": "3730",
+    "is_in": "Colombia; Boyacá ; Sogamoso",
+    "mountain_pass": "yes",
+    "name": "Alto El Bizcocho",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 1f1304a6387c52a6793e0364af54de9f",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703231672,
+  "lat": 6.5215727,
+  "lon": -72.3321534,
+  "tags": {
+    "divipola": "15332",
+    "ele": "4452.9",
+    "is_in": "Colombia; Boyacá ; Güicán",
+    "mountain_pass": "yes",
+    "name": "Alto Boquerón del Carmen",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 1dc235023f75214ed779a80bdf4c4b6d",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703231681,
+  "lat": 6.6223368,
+  "lon": -72.3351968,
+  "tags": {
+    "divipola": "15332",
+    "ele": "4385",
+    "is_in": "Colombia; Boyacá ; Güicán",
+    "mountain_pass": "yes",
+    "name": "Alto Los Celestos",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, e23e1743b6609138c186df65d9d32e69",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703231683,
+  "lat": 6.6069499,
+  "lon": -72.2848937,
+  "tags": {
+    "divipola": "15332",
+    "ele": "3675",
+    "is_in": "Colombia; Boyacá ; Güicán",
+    "mountain_pass": "yes",
+    "name": "Alto de Cuchitiva",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 788ae58d2b7370ea28af76cbfefa81c1",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703341728,
+  "lat": 4.8958047,
+  "lon": -73.7622260,
+  "tags": {
+    "divipola": "25326",
+    "ele": "3238.8",
+    "is_in": "Colombia; Cundinamarca ; Guatavita",
+    "mountain_pass": "yes",
+    "name": "Alto El Paramo",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 2a22114b8042a96f56346c9516cc6afc",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 703523973,
+  "lat": 6.0762737,
+  "lon": -72.9447566,
+  "tags": {
+    "divipola": "68264",
+    "ele": "3960",
+    "is_in": "Colombia; Santander ; Encino",
+    "mountain_pass": "yes",
+    "name": "Alto La Honda",
+    "note": "OROGRAFIA, MONTAÑAS Y CERROS, 19271d4568b46852c1da56112845731d",
+    "source": "OCHA Colombia 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 752061647,
+  "lat": 6.3769085,
+  "lon": -72.2915747,
+  "tags": {
+    "ele": "4780",
+    "mountain_pass": "yes",
+    "name": "Alto de Bellavista",
+    "source": "survey",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 754656853,
+  "lat": 4.4947295,
+  "lon": -73.7315197,
+  "tags": {
+    "ele": "3780",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 762808095,
+  "lat": 10.8257300,
+  "lon": -73.6413577,
+  "tags": {
+    "ele": "4855",
+    "mountain_pass": "yes",
+    "name": "Paso de San Cristóbal"
+  }
+},
+{
+  "type": "node",
+  "id": 762928919,
+  "lat": 11.0759244,
+  "lon": -73.4269118,
+  "tags": {
+    "ele": "1049.7",
+    "mountain_pass": "yes",
+    "name": "Boquerón",
+    "source": "GPS"
+  }
+},
+{
+  "type": "node",
+  "id": 762928922,
+  "lat": 11.0430832,
+  "lon": -73.4540612,
+  "tags": {
+    "ele": "1186",
+    "mountain_pass": "yes",
+    "name": "Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 780630647,
+  "lat": 4.7290437,
+  "lon": -74.3597052,
+  "tags": {
+    "ele": "2612.3",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 783136040,
+  "lat": 5.0717396,
+  "lon": -74.1109795,
+  "tags": {
+    "ele": "3444.8",
+    "mountain_pass": "yes",
+    "name": "Alto de Carrasposo"
+  }
+},
+{
+  "type": "node",
+  "id": 805870372,
+  "lat": -10.2884271,
+  "lon": -76.8374079,
+  "tags": {
+    "ele": "4600",
+    "fixme": "exact position",
+    "mountain_pass": "yes",
+    "name": "Abra Carnicero",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 805875139,
+  "lat": -8.9125675,
+  "lon": -77.5817389,
+  "tags": {
+    "ele": "4750",
+    "mountain_pass": "yes",
+    "name": "Punta Union",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 805881661,
+  "lat": -10.3722418,
+  "lon": -76.8447026,
+  "tags": {
+    "ele": "4780",
+    "mountain_pass": "yes",
+    "name": "Abra Huayhuash",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 805883699,
+  "lat": -10.2671928,
+  "lon": -76.9769334,
+  "tags": {
+    "ele": "4800",
+    "mountain_pass": "yes",
+    "name": "Yauche"
+  }
+},
+{
+  "type": "node",
+  "id": 805885645,
+  "lat": -10.3919408,
+  "lon": -76.8808207,
+  "tags": {
+    "ele": "5000",
+    "mountain_pass": "yes",
+    "name": "Paso Punta Cuyoc",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 805893695,
+  "lat": -10.1569679,
+  "lon": -76.9116565,
+  "tags": {
+    "ele": "4700",
+    "mountain_pass": "yes",
+    "name": "Cacanapunta",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 805894368,
+  "lat": -9.1309498,
+  "lon": -77.5108769,
+  "tags": {
+    "alt_name": "Poroquingua",
+    "alt_name:qu": "Purukinwa",
+    "ele": "4890",
+    "mountain_pass": "yes",
+    "name": "Punta Olímpica",
+    "name:qu": "P'urukiñwa",
+    "natural": "saddle",
+    "source": "srtm",
+    "wikidata": "Q13190378"
+  }
+},
+{
+  "type": "node",
+  "id": 889582200,
+  "lat": 4.2873298,
+  "lon": -74.2165849,
+  "tags": {
+    "ele": "3830",
+    "mountain_pass": "yes",
+    "name": "Alto de Pasca"
+  }
+},
+{
+  "type": "node",
+  "id": 896571701,
+  "lat": 6.3712546,
+  "lon": -72.3191549,
+  "tags": {
+    "ele": "4508",
+    "mountain_pass": "yes",
+    "name": "Alto de Conejo",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 968238340,
+  "lat": -13.1789252,
+  "lon": -72.1484566,
+  "tags": {
+    "alt_name": "Abra Wacahuassi",
+    "ele": "4640",
+    "mountain_pass": "yes",
+    "name": "Abra Wakawasi",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 988701939,
+  "lat": 4.5127707,
+  "lon": -74.0484386,
+  "tags": {
+    "ele": "3510",
+    "mountain_pass": "yes",
+    "name": "Alto de Cruz Verde"
+  }
+},
+{
+  "type": "node",
+  "id": 1013321248,
+  "lat": 6.5254492,
+  "lon": -72.3422216,
+  "tags": {
+    "ele": "4360",
+    "mountain_pass": "yes",
+    "name": "Alto de Cardenillo"
+  }
+},
+{
+  "type": "node",
+  "id": 1014429902,
+  "lat": 4.5679418,
+  "lon": -74.0321501,
+  "tags": {
+    "ele": "3560",
+    "mountain_pass": "yes",
+    "name": "Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 1019503182,
+  "lat": 5.0296757,
+  "lon": -74.0276044,
+  "tags": {
+    "ele": "2982.7",
+    "mountain_pass": "yes",
+    "name": "Alto del Zipa"
+  }
+},
+{
+  "type": "node",
+  "id": 1021505962,
+  "lat": 3.9308108,
+  "lon": -74.1231642,
+  "tags": {
+    "ele": "3745",
+    "mountain_pass": "yes",
+    "name": "Paso de los Andes",
+    "note": "Ruta de la Conquista: Ruta de la Fragua, ascendía por el río Ariari a salir al Paramo de Sumapaz. Federmann 1539, Lope Montalvo de Lugo 1540, Hernán Perez de Quesada 1540, Gonzalo Jimenez de Quesada 1570."
+  }
+},
+{
+  "type": "node",
+  "id": 1031192571,
+  "lat": 10.8706631,
+  "lon": -73.7429825,
+  "tags": {
+    "ele": "4750",
+    "mountain_pass": "yes",
+    "name": "Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 1052794684,
+  "lat": -13.6358733,
+  "lon": -71.5893619,
+  "tags": {
+    "ele": "4185",
+    "mountain_pass": "yes",
+    "name": "Abra Cuyuni",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1119465264,
+  "lat": 4.9777661,
+  "lon": -73.7347886,
+  "tags": {
+    "ele": "2995.5",
+    "mountain_pass": "yes",
+    "name": "Alto de Cruz Verde"
+  }
+},
+{
+  "type": "node",
+  "id": 1134859249,
+  "lat": -38.7294256,
+  "lon": -70.8654145,
+  "tags": {
+    "ele": "1850",
+    "mountain_pass": "yes",
+    "name": "Portezuelo",
+    "name:en": "Sumit",
+    "name:pt": "Cume"
+  }
+},
+{
+  "type": "node",
+  "id": 1136853569,
+  "lat": -36.9267317,
+  "lon": -71.4405638,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Coltrahue"
+  }
+},
+{
+  "type": "node",
+  "id": 1265145403,
+  "lat": -10.5537243,
+  "lon": -76.8655779,
+  "tags": {
+    "ele": "4847",
+    "mountain_pass": "yes",
+    "name": "Punta Chanca",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1272843265,
+  "lat": -33.6333164,
+  "lon": -69.8747368,
+  "tags": {
+    "ele": "4035",
+    "mountain_pass": "yes",
+    "name": "Paso Portillo de Piuquenes",
+    "natural": "saddle",
+    "source": "GPS",
+    "wikipedia": "es:Paso del Portillo"
+  }
+},
+{
+  "type": "node",
+  "id": 1300337666,
+  "lat": -25.1304193,
+  "lon": -68.4648120,
+  "tags": {
+    "ele": "4505",
+    "mountain_pass": "yes",
+    "name": "Paso de Azufre",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1347759289,
+  "lat": -13.0177975,
+  "lon": -72.9636857,
+  "tags": {
+    "ele": "3850",
+    "mountain_pass": "yes",
+    "name": "Abra Huarina",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1349908682,
+  "lat": 4.4574399,
+  "lon": -73.7501676,
+  "tags": {
+    "ele": "3898.5",
+    "mountain_pass": "yes",
+    "name": "Paso",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 1355544967,
+  "lat": -13.2253014,
+  "lon": -72.8927831,
+  "tags": {
+    "ele": "4600",
+    "mountain_pass": "yes",
+    "name": "Abra Choquetacarbo"
+  }
+},
+{
+  "type": "node",
+  "id": 1355545087,
+  "lat": -13.3114051,
+  "lon": -72.8800333,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Chungana"
+  }
+},
+{
+  "type": "node",
+  "id": 1361033825,
+  "lat": 6.4920029,
+  "lon": -72.3428313,
+  "tags": {
+    "ele": "4.368m",
+    "mountain_pass": "yes",
+    "name": "Alto del Padre"
+  }
+},
+{
+  "type": "node",
+  "id": 1365603501,
+  "lat": -8.8432531,
+  "lon": -77.7464428,
+  "tags": {
+    "ele": "4770",
+    "mountain_pass": "yes",
+    "name": "Vientunan",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1365603774,
+  "lat": -8.8576621,
+  "lon": -77.7553932,
+  "tags": {
+    "ele": "4860",
+    "mountain_pass": "yes",
+    "name": "Osoruri",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1398912273,
+  "lat": 6.5366018,
+  "lon": -75.1397518,
+  "tags": {
+    "ele": "1560",
+    "mountain_pass": "yes",
+    "name": "Alto de Cisneros La Quiebra"
+  }
+},
+{
+  "type": "node",
+  "id": 1438643522,
+  "lat": -9.6076650,
+  "lon": -77.2857760,
+  "tags": {
+    "ele": "4700",
+    "mountain_pass": "yes",
+    "name": "Punta Yanashallash",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1440058612,
+  "lat": -8.8260680,
+  "lon": -77.6735370,
+  "tags": {
+    "ele": "4830",
+    "mountain_pass": "yes",
+    "name": "Gara Gara",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1440059942,
+  "lat": -8.8106590,
+  "lon": -77.6358800,
+  "tags": {
+    "ele": "4460",
+    "mountain_pass": "yes",
+    "name": "Mesapata",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1440060176,
+  "lat": -8.8265260,
+  "lon": -77.5896970,
+  "tags": {
+    "ele": "4610",
+    "mountain_pass": "yes",
+    "name": "Yanacon",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1440118860,
+  "lat": -15.9202340,
+  "lon": -68.4597150,
+  "tags": {
+    "ele": "5045",
+    "mountain_pass": "yes",
+    "name": "Abra de la Calzada",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1477959469,
+  "lat": -14.4833601,
+  "lon": -70.9891928,
+  "tags": {
+    "alt_name": "La Raya",
+    "ele": "4313",
+    "mountain_pass": "yes",
+    "name": "Abra La Raya",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1489290007,
+  "lat": 10.8540941,
+  "lon": -73.5669184,
+  "tags": {
+    "ele": "4.540m",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 1489290010,
+  "lat": 10.8457451,
+  "lon": -73.5661665,
+  "tags": {
+    "ele": "4.845m",
+    "mountain_pass": "yes",
+    "name": "Arista"
+  }
+},
+{
+  "type": "node",
+  "id": 1489290020,
+  "lat": 10.8492638,
+  "lon": -73.5884154,
+  "tags": {
+    "ele": "4.023m",
+    "mountain_pass": "yes",
+    "name": "Paso"
+  }
+},
+{
+  "type": "node",
+  "id": 1495875857,
+  "lat": 4.7272957,
+  "lon": -75.3814665,
+  "tags": {
+    "ele": "4370",
+    "mountain_pass": "yes",
+    "name": "Alto de La Línea"
+  }
+},
+{
+  "type": "node",
+  "id": 1503674379,
+  "lat": -10.2112601,
+  "lon": -76.8734014,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Carhuac"
+  }
+},
+{
+  "type": "node",
+  "id": 1503674381,
+  "lat": -10.2990078,
+  "lon": -76.9227403,
+  "tags": {
+    "ele": "4960",
+    "mountain_pass": "yes",
+    "name": "Paso Seria",
+    "source": "survey/cyclemap (lineas de altura)"
+  }
+},
+{
+  "type": "node",
+  "id": 1503674391,
+  "lat": -10.2874432,
+  "lon": -76.8555878,
+  "tags": {
+    "ele": "4810",
+    "mountain_pass": "yes",
+    "name": "Paso Siula",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1528949387,
+  "lat": 4.6143913,
+  "lon": -75.2856996,
+  "tags": {
+    "ele": "3.680 m",
+    "mountain_pass": "yes",
+    "name": "Alto de Las Nieves",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 1549421893,
+  "lat": 4.7647435,
+  "lon": -75.3794026,
+  "tags": {
+    "ele": "4425",
+    "mountain_pass": "yes",
+    "name": "Alto de La Línea"
+  }
+},
+{
+  "type": "node",
+  "id": 1556463130,
+  "lat": -13.2430188,
+  "lon": -72.4839983,
+  "tags": {
+    "ele": "4215",
+    "mountain_pass": "yes",
+    "name": "Warmi Wañusca",
+    "name:en": "Dead Woman's Pass",
+    "source": "cyclemap",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1558211852,
+  "lat": -41.0693322,
+  "lon": -71.8277762,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Pérez Rosales",
+    "wikidata": "Q6065863",
+    "wikipedia": "es:Paso Pérez Rosales"
+  }
+},
+{
+  "type": "node",
+  "id": 1592890021,
+  "lat": -22.4374907,
+  "lon": -65.1694461,
+  "tags": {
+    "ele": "4720",
+    "mountain_pass": "yes",
+    "name": "Abra Fundición",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1594446823,
+  "lat": -6.7334345,
+  "lon": -77.8941385,
+  "tags": {
+    "ele": "3616",
+    "mountain_pass": "yes",
+    "name": "Calla Calla",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1607130620,
+  "lat": -22.0971329,
+  "lon": -65.1900153,
+  "tags": {
+    "ele": "4380",
+    "mountain_pass": "yes",
+    "name": "Abra de Rota",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1610493462,
+  "lat": -17.4069014,
+  "lon": -66.1182036,
+  "tags": {
+    "ele": "2715",
+    "mountain_pass": "yes",
+    "name": "El Abra"
+  }
+},
+{
+  "type": "node",
+  "id": 1683976442,
+  "lat": -16.1862129,
+  "lon": -68.2555731,
+  "tags": {
+    "ele": "5152",
+    "mountain_pass": "yes",
+    "name": "Paso Chakoti",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1707162352,
+  "lat": -54.9628932,
+  "lon": -67.7773964,
+  "tags": {
+    "ele": "850",
+    "mountain_pass": "yes",
+    "name": "Paso Virginia",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1707162536,
+  "lat": -55.0029961,
+  "lon": -67.6737000,
+  "tags": {
+    "ele": "790",
+    "mountain_pass": "yes",
+    "name": "Paso Australia",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1725949246,
+  "lat": -25.6331626,
+  "lon": -67.2315023,
+  "tags": {
+    "ele": "4442",
+    "mountain_pass": "yes",
+    "name": "Abra Falda Cienaga"
+  }
+},
+{
+  "type": "node",
+  "id": 1752876870,
+  "lat": -41.1858560,
+  "lon": -71.5476930,
+  "tags": {
+    "ele": "1936",
+    "highway": "passing_place",
+    "mountain_pass": "yes",
+    "name": "Paso Brecha Negra"
+  }
+},
+{
+  "type": "node",
+  "id": 1829874489,
+  "lat": -49.1858460,
+  "lon": -73.1441448,
+  "tags": {
+    "ele": "1517",
+    "mountain_pass": "yes",
+    "name": "Paso Marconi",
+    "name:de": "Marconipass",
+    "wikidata": "Q93812156",
+    "wikipedia": "es:Paso Marconi"
+  }
+},
+{
+  "type": "node",
+  "id": 1829875492,
+  "lat": -49.3961805,
+  "lon": -73.1136097,
+  "tags": {
+    "ele": "1428",
+    "mountain_pass": "yes",
+    "name": "Paso del Viento",
+    "natural": "saddle",
+    "wikidata": "Q113865900",
+    "wikipedia": "es:Paso del Viento"
+  }
+},
+{
+  "type": "node",
+  "id": 1857775592,
+  "lat": -9.5466954,
+  "lon": -77.6200353,
+  "tags": {
+    "ele": "4204",
+    "mountain_pass": "yes",
+    "name": "Abra Punta Callan",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 1866781942,
+  "lat": 5.2313960,
+  "lon": -73.8331960,
+  "tags": {
+    "ele": "3112.3",
+    "mountain_pass": "yes",
+    "name": "Alto de Curuca",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 1905070711,
+  "lat": -40.7125374,
+  "lon": -71.9444516,
+  "tags": {
+    "alt_name": "Portezuelo de Puyehue",
+    "ele": "1305",
+    "mountain_pass": "yes",
+    "name": "Paso Cardenal Antonio Samoré",
+    "old_name": "Paso Puyehue"
+  }
+},
+{
+  "type": "node",
+  "id": 1910960988,
+  "lat": 6.4797465,
+  "lon": -72.3232689,
+  "tags": {
+    "ele": "4614",
+    "mountain_pass": "yes",
+    "name": "Alto de Témpanos"
+  }
+},
+{
+  "type": "node",
+  "id": 1942996291,
+  "lat": 4.7061219,
+  "lon": -74.3654804,
+  "tags": {
+    "ele": "2473.1",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 1942996595,
+  "lat": 4.7108131,
+  "lon": -74.3519374,
+  "tags": {
+    "ele": "2786.7",
+    "mountain_pass": "yes",
+    "name": "Alto Cavista"
+  }
+},
+{
+  "type": "node",
+  "id": 1961644311,
+  "lat": -25.9618067,
+  "lon": -70.4578315,
+  "tags": {
+    "ele": "803",
+    "mountain_pass": "yes",
+    "name": "Portezuelo de Las Bombas"
+  }
+},
+{
+  "type": "node",
+  "id": 1994188431,
+  "lat": -11.2700091,
+  "lon": -76.4446969,
+  "tags": {
+    "ele": "4710",
+    "mountain_pass": "yes",
+    "name": "Abra Alpamarca",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2005411470,
+  "lat": -11.0405299,
+  "lon": -76.5282870,
+  "tags": {
+    "ele": "4780",
+    "mountain_pass": "yes",
+    "name": "Abra Antajirca",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2012423576,
+  "lat": -19.8181989,
+  "lon": -63.7234390,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Montaña Incahuasi"
+  }
+},
+{
+  "type": "node",
+  "id": 2040337103,
+  "lat": -13.9439771,
+  "lon": -71.6281703,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Callacunca"
+  }
+},
+{
+  "type": "node",
+  "id": 2044278173,
+  "lat": -11.5696088,
+  "lon": -76.2680134,
+  "tags": {
+    "ele": "4900",
+    "mountain_pass": "yes",
+    "name": "Abra Sungrar"
+  }
+},
+{
+  "type": "node",
+  "id": 2050781807,
+  "lat": 6.0332427,
+  "lon": -72.9613441,
+  "tags": {
+    "ele": "3820",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 2072628307,
+  "lat": -24.4991241,
+  "lon": -65.3079560,
+  "tags": {
+    "ele": "1380",
+    "mountain_pass": "yes",
+    "name": "Abra Santa Laura",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2085256023,
+  "lat": 6.4449914,
+  "lon": -72.2604090,
+  "tags": {
+    "ele": "4810.6",
+    "mountain_pass": "yes",
+    "name": "Paso del Afanado",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 2099465887,
+  "lat": -14.9861695,
+  "lon": -71.0052931,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Mataracocha",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2123873742,
+  "lat": 6.3219318,
+  "lon": -72.3057750,
+  "tags": {
+    "ele": "4180",
+    "mountain_pass": "yes",
+    "name": "Alto del Oso",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 2125204305,
+  "lat": -13.0810877,
+  "lon": -75.0489673,
+  "tags": {
+    "ele": "4875",
+    "mountain_pass": "yes",
+    "name": "Abra Chonta"
+  }
+},
+{
+  "type": "node",
+  "id": 2125976443,
+  "lat": -13.0740091,
+  "lon": -75.0320715,
+  "tags": {
+    "ele": "4979",
+    "mountain_pass": "yes",
+    "name": "Abra Huayraccasa"
+  }
+},
+{
+  "type": "node",
+  "id": 2130943875,
+  "lat": -10.3545495,
+  "lon": -76.8939396,
+  "tags": {
+    "alt_name": "Paso Santa Rosa",
+    "mountain_pass": "yes",
+    "name": "Paso Jurau",
+    "name:en": "Jurau Pass",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2187984137,
+  "lat": -39.7888652,
+  "lon": -71.6812487,
+  "tags": {
+    "ele": "1215",
+    "mountain_pass": "yes",
+    "name": "Paso Carirriñe",
+    "wikidata": "Q5039671",
+    "wikipedia": "es:Paso Carirriñe"
+  }
+},
+{
+  "type": "node",
+  "id": 2204145475,
+  "lat": 5.0307315,
+  "lon": -74.5260670,
+  "tags": {
+    "ele": "1615.2",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 2247144557,
+  "lat": 4.8737109,
+  "lon": -74.2931026,
+  "tags": {
+    "ele": "2851.7",
+    "mountain_pass": "yes",
+    "name": "El Vino"
+  }
+},
+{
+  "type": "node",
+  "id": 2306998391,
+  "lat": -13.6218483,
+  "lon": -71.8575523,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Occoruro"
+  }
+},
+{
+  "type": "node",
+  "id": 2322717550,
+  "lat": -13.1992277,
+  "lon": -71.6181096,
+  "tags": {
+    "ele": "3550",
+    "mountain_pass": "yes",
+    "name": "Abra Acjanaco",
+    "source": "MTC"
+  }
+},
+{
+  "type": "node",
+  "id": 2356185490,
+  "lat": -18.5279686,
+  "lon": -69.0073505,
+  "tags": {
+    "historic": "boundary_stone",
+    "mountain_pass": "yes",
+    "name": "Portezuelo de Japu",
+    "ref": "80",
+    "source": "Tratado de Paz y Amistad entre Chile y Bolivia"
+  }
+},
+{
+  "type": "node",
+  "id": 2357194331,
+  "lat": -19.1104862,
+  "lon": -69.2774463,
+  "tags": {
+    "ele": "4032",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Vilacollo",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2367945609,
+  "lat": -15.0896567,
+  "lon": -71.6817516,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Bajada"
+  }
+},
+{
+  "type": "node",
+  "id": 2370203570,
+  "lat": -13.0848156,
+  "lon": -74.5729190,
+  "tags": {
+    "alt_name": "Abra Bambamali",
+    "ele": "4506",
+    "mountain_pass": "yes",
+    "name": "Abra Pampamali",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2380190015,
+  "lat": -55.0224377,
+  "lon": -67.7232017,
+  "tags": {
+    "ele": "680",
+    "mountain_pass": "yes",
+    "name": "Paso Ventarron",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2387781224,
+  "lat": -10.1155212,
+  "lon": -76.9096968,
+  "tags": {
+    "ele": "4520",
+    "fixme": "exact position",
+    "mountain_pass": "yes",
+    "name": "Abra Cuncush",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2405402331,
+  "lat": 10.8334018,
+  "lon": -73.6210008,
+  "tags": {
+    "ele": "5095.2",
+    "mountain_pass": "yes",
+    "name": "Collado"
+  }
+},
+{
+  "type": "node",
+  "id": 2405415067,
+  "lat": 10.7716937,
+  "lon": -73.6730635,
+  "tags": {
+    "ele": "4275",
+    "mountain_pass": "yes",
+    "name": "Paso"
+  }
+},
+{
+  "type": "node",
+  "id": 2409331816,
+  "lat": -26.6756443,
+  "lon": -67.2183875,
+  "tags": {
+    "ele": "3996",
+    "mountain_pass": "yes",
+    "name": "Portezuelo de Pasto Ventura"
+  }
+},
+{
+  "type": "node",
+  "id": 2413760720,
+  "lat": -16.2036782,
+  "lon": -68.2286829,
+  "tags": {
+    "ele": "5016",
+    "mountain_pass": "yes",
+    "name": "Paso Condoriri",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2513314389,
+  "lat": 5.0371215,
+  "lon": -74.5410212,
+  "tags": {
+    "ele": "1.895 m",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 2513628223,
+  "lat": -18.3757534,
+  "lon": -66.7062082,
+  "tags": {
+    "ele": "4425",
+    "highway": "milestone",
+    "mountain_pass": "yes",
+    "name": "Paso Montaña (4425 mts)"
+  }
+},
+{
+  "type": "node",
+  "id": 2521939179,
+  "lat": -14.4665599,
+  "lon": -69.6410860,
+  "tags": {
+    "ele": "4700",
+    "mountain_pass": "yes",
+    "name": "Abra Sallaco",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2539162424,
+  "lat": -13.3580737,
+  "lon": -74.7426751,
+  "tags": {
+    "ele": "4746",
+    "mountain_pass": "yes",
+    "name": "Abra Apacheta"
+  }
+},
+{
+  "type": "node",
+  "id": 2641985749,
+  "lat": -11.3894707,
+  "lon": -75.8514297,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Carica"
+  }
+},
+{
+  "type": "node",
+  "id": 2641985753,
+  "lat": -12.2521501,
+  "lon": -75.0917786,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Parhuamuro"
+  }
+},
+{
+  "type": "node",
+  "id": 2641985754,
+  "lat": -12.2907555,
+  "lon": -75.0849169,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Tucuhuaganan"
+  }
+},
+{
+  "type": "node",
+  "id": 2642818173,
+  "lat": -13.7676680,
+  "lon": -71.1791960,
+  "tags": {
+    "alt_name": "Abra Q'ampa",
+    "ele": "5076",
+    "mountain_pass": "yes",
+    "name": "Campa",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2642818512,
+  "lat": -13.7764256,
+  "lon": -71.2739737,
+  "tags": {
+    "ele": "4850",
+    "mountain_pass": "yes",
+    "name": "Abra La Arapa",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2642820003,
+  "lat": -13.8193150,
+  "lon": -71.2437820,
+  "tags": {
+    "ele": "4900",
+    "mountain_pass": "yes",
+    "name": "Abra Apuchata",
+    "natural": "saddle",
+    "source": "bing"
+  }
+},
+{
+  "type": "node",
+  "id": 2645408842,
+  "lat": -8.6580631,
+  "lon": -77.7333266,
+  "tags": {
+    "ele": "4375",
+    "mountain_pass": "yes",
+    "name": "Paso Shayhua",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2651665084,
+  "lat": -12.0642321,
+  "lon": -75.9762221,
+  "tags": {
+    "ele": "4470",
+    "mountain_pass": "yes",
+    "name": "Abra Tiopata"
+  }
+},
+{
+  "type": "node",
+  "id": 2657540658,
+  "lat": -7.9375417,
+  "lon": -78.0122053,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra de la Cruz",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2657611674,
+  "lat": -9.4661223,
+  "lon": -77.0703161,
+  "tags": {
+    "ele": "4384",
+    "mountain_pass": "yes",
+    "name": "Wage Punta",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2670820461,
+  "lat": -13.1918508,
+  "lon": -72.0936303,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Pumahuancajasa",
+    "name:en": "Pumahuancajasa Pass",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2731591048,
+  "lat": -46.0708606,
+  "lon": -72.0398694,
+  "tags": {
+    "ele": "1120",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Ibáñez"
+  }
+},
+{
+  "type": "node",
+  "id": 2740329993,
+  "lat": -51.5861948,
+  "lon": -72.3480526,
+  "tags": {
+    "ele": "605",
+    "mountain_pass": "yes",
+    "name": "Paso Dorotea",
+    "natural": "saddle",
+    "wikidata": "Q6065810",
+    "wikipedia": "es:Paso Dorotea"
+  }
+},
+{
+  "type": "node",
+  "id": 2784088166,
+  "lat": -13.1860638,
+  "lon": -72.9956004,
+  "tags": {
+    "ele": "4100",
+    "mountain_pass": "yes",
+    "name": "Abra Chucuito",
+    "source": "MapBox ; local knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 2832942197,
+  "lat": -9.8606936,
+  "lon": -77.0765146,
+  "tags": {
+    "ele": "4689",
+    "mountain_pass": "yes",
+    "name": "Abra Yanashalla"
+  }
+},
+{
+  "type": "node",
+  "id": 2856686032,
+  "lat": 4.9615289,
+  "lon": -73.7017445,
+  "tags": {
+    "ele": "3409.3",
+    "mountain_pass": "yes",
+    "name": "Alto",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 2908202182,
+  "lat": -24.7767471,
+  "lon": -68.5610799,
+  "tags": {
+    "ele": "4856",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Llullaillaco Sur"
+  }
+},
+{
+  "type": "node",
+  "id": 2969654586,
+  "lat": -13.1542152,
+  "lon": -72.9810808,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Negrilla",
+    "source": "MapBox ; local knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 2969722598,
+  "lat": -14.4014326,
+  "lon": -71.5520180,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Tocio",
+    "source": "bing; http://www.mtc.gob.pe/estadisticas/estadistica/mapas/TRANSPORTES/VIAL/08_CUSCO_VIAL.pdf"
+  }
+},
+{
+  "type": "node",
+  "id": 2980132581,
+  "lat": -10.1545587,
+  "lon": -77.2691864,
+  "tags": {
+    "ele": "4230",
+    "mountain_pass": "yes",
+    "name": "Abra Yantahuain",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2981884002,
+  "lat": -11.0429152,
+  "lon": -76.6617329,
+  "tags": {
+    "alt_name": "Punta Chucopampa",
+    "ele": "4858",
+    "mountain_pass": "yes",
+    "name": "Abra Chucopampa",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2982418252,
+  "lat": -10.8135402,
+  "lon": -76.7015561,
+  "tags": {
+    "ele": "4937",
+    "mountain_pass": "yes",
+    "name": "Abra Rapaz",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2993478285,
+  "lat": -9.4191963,
+  "lon": -77.3759557,
+  "tags": {
+    "alt_name": "Paso Chocho",
+    "ele": "5080",
+    "mountain_pass": "yes",
+    "name": "Paso Huapi",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 2996452479,
+  "lat": -11.0834453,
+  "lon": -76.5259957,
+  "tags": {
+    "ele": "4760",
+    "mountain_pass": "yes",
+    "name": "Abra Mio",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3039838130,
+  "lat": -8.8593626,
+  "lon": -77.9838531,
+  "tags": {
+    "ele": "4680",
+    "mountain_pass": "yes",
+    "name": "Paso Tocanca"
+  }
+},
+{
+  "type": "node",
+  "id": 3116074386,
+  "lat": -13.4288164,
+  "lon": -74.6745361,
+  "tags": {
+    "ele": "4900",
+    "fixme": "exact position",
+    "mountain_pass": "yes",
+    "name": "Abra Ritipata",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3129914934,
+  "lat": 4.4462749,
+  "lon": -74.2323594,
+  "tags": {
+    "ele": "3354",
+    "mountain_pass": "yes",
+    "name": "Alto de Romeral"
+  }
+},
+{
+  "type": "node",
+  "id": 3197298708,
+  "lat": -49.4862275,
+  "lon": -73.0146878,
+  "tags": {
+    "ele": "1012",
+    "mountain_pass": "yes",
+    "name": "Paso Huemul",
+    "natural": "saddle",
+    "wikidata": "Q113867541",
+    "wikipedia": "es:Paso Huemul"
+  }
+},
+{
+  "type": "node",
+  "id": 3261305238,
+  "lat": -35.9817541,
+  "lon": -70.3941310,
+  "tags": {
+    "ele": "2553",
+    "mountain_pass": "yes",
+    "name": "Paso Pehuenche",
+    "natural": "saddle",
+    "wikidata": "Q8558850",
+    "wikipedia": "es:Paso Pehuenche"
+  }
+},
+{
+  "type": "node",
+  "id": 3266840447,
+  "lat": -10.0752254,
+  "lon": -77.3428334,
+  "tags": {
+    "ele": "4350",
+    "mountain_pass": "yes",
+    "name": "Abra Hatun"
+  }
+},
+{
+  "type": "node",
+  "id": 3288250888,
+  "lat": -24.4515329,
+  "lon": -68.2897483,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Socompa",
+    "wikidata": "Q22702925",
+    "wikipedia": "es:Paso Socompa"
+  }
+},
+{
+  "type": "node",
+  "id": 3303141962,
+  "lat": -16.8796693,
+  "lon": -67.4501117,
+  "tags": {
+    "ele": "5127",
+    "mountain_pass": "yes",
+    "name": "La Salvadora",
+    "natural": "peak"
+  }
+},
+{
+  "type": "node",
+  "id": 3329330289,
+  "lat": 4.6642518,
+  "lon": -75.2976961,
+  "tags": {
+    "ele": "4035.7",
+    "mountain_pass": "yes",
+    "name": "Alto Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 3332513678,
+  "lat": 4.6613045,
+  "lon": -74.2848623,
+  "tags": {
+    "ele": "2742.2",
+    "mountain_pass": "yes",
+    "name": "Alto de Mondoñedo"
+  }
+},
+{
+  "type": "node",
+  "id": 3438523701,
+  "lat": -17.6640650,
+  "lon": -66.8200663,
+  "tags": {
+    "ele": "4486",
+    "mountain_pass": "yes",
+    "name": "La Cumbre"
+  }
+},
+{
+  "type": "node",
+  "id": 3505256718,
+  "lat": -24.6489443,
+  "lon": -68.4889680,
+  "tags": {
+    "ele": "4787",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Llullaillaco Norte",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3510526524,
+  "lat": -5.6984619,
+  "lon": -77.8117542,
+  "tags": {
+    "addr:housenumber": "km365",
+    "addr:street": "Carretera Presidente Fernando Belaúnde Terry",
+    "ele": "2325",
+    "mountain_pass": "yes",
+    "name": "Abra Patricia"
+  }
+},
+{
+  "type": "node",
+  "id": 3531127975,
+  "lat": -52.0727546,
+  "lon": -71.3830608,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso El Chinche"
+  }
+},
+{
+  "type": "node",
+  "id": 3586791371,
+  "lat": 4.7529004,
+  "lon": -74.3832271,
+  "tags": {
+    "ele": "2531",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 3618659973,
+  "lat": -35.4800153,
+  "lon": -70.8243164,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo Las Cruces",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3648024145,
+  "lat": -47.1577280,
+  "lon": -71.8544483,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Roballos"
+  }
+},
+{
+  "type": "node",
+  "id": 3679318899,
+  "lat": -7.2463168,
+  "lon": -78.4693431,
+  "tags": {
+    "ele": "3050",
+    "mountain_pass": "yes",
+    "name": "Abra el Gavilán",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3681010658,
+  "lat": -14.7168355,
+  "lon": -69.6025883,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Toco Toco",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3684478654,
+  "lat": -9.0510950,
+  "lon": -77.5909666,
+  "tags": {
+    "ele": "4767",
+    "mountain_pass": "yes",
+    "name": "Portachuelo de Llanganuco",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3688793685,
+  "lat": -18.0749692,
+  "lon": -69.0713357,
+  "tags": {
+    "ele": "4855",
+    "historic": "boundary_stone",
+    "mountain_pass": "yes",
+    "name": "Paso de Casiri",
+    "ref": "88",
+    "source": "Tratado de Paz y Amistad entre Chile y Bolivia"
+  }
+},
+{
+  "type": "node",
+  "id": 3690704911,
+  "lat": -19.7447443,
+  "lon": -68.7755567,
+  "tags": {
+    "ele": "5085",
+    "mountain_pass": "yes",
+    "name": "Paso Picavilque"
+  }
+},
+{
+  "type": "node",
+  "id": 3715840729,
+  "lat": -35.8618568,
+  "lon": -71.0886267,
+  "tags": {
+    "ele": "1404",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Melado",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3748532617,
+  "lat": -9.1148041,
+  "lon": -77.8718502,
+  "tags": {
+    "ele": "4314",
+    "mountain_pass": "yes",
+    "name": "Abra Chicarhuapunta"
+  }
+},
+{
+  "type": "node",
+  "id": 3756311688,
+  "lat": -8.5715467,
+  "lon": -77.6804377,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Cahuacona",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 3798449885,
+  "lat": -11.5985597,
+  "lon": -76.1927697,
+  "tags": {
+    "ele": "4818",
+    "mountain_pass": "yes",
+    "name": "Ticlio",
+    "name:es": "Abra de Antícona",
+    "wikidata": "Q2088968",
+    "wikimedia_commons": "Category:Paso Ticlio",
+    "wikipedia": "es:Ticlio"
+  }
+},
+{
+  "type": "node",
+  "id": 3868372519,
+  "lat": 10.8516389,
+  "lon": -73.7164397,
+  "tags": {
+    "ele": "4927.3",
+    "mountain_pass": "yes",
+    "name": "Boquerón Divisorio de Aguas"
+  }
+},
+{
+  "type": "node",
+  "id": 4042276573,
+  "lat": 4.7848484,
+  "lon": -73.9109310,
+  "tags": {
+    "ele": "3200",
+    "mountain_pass": "yes",
+    "name": "Santa Helena"
+  }
+},
+{
+  "type": "node",
+  "id": 4050890302,
+  "lat": -26.9870564,
+  "lon": -68.3149607,
+  "tags": {
+    "ele": "4902",
+    "mountain_pass": "yes",
+    "name": "Paso de Incahuasi"
+  }
+},
+{
+  "type": "node",
+  "id": 4051577279,
+  "lat": -27.3168363,
+  "lon": -68.8585765,
+  "tags": {
+    "ele": "4867",
+    "mountain_pass": "yes",
+    "name": "Paso Tres Quebradas o Toro Muerto"
+  }
+},
+{
+  "type": "node",
+  "id": 4128201912,
+  "lat": -54.6584592,
+  "lon": -68.2256966,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Beban Oeste"
+  }
+},
+{
+  "type": "node",
+  "id": 4128204992,
+  "lat": -54.6622390,
+  "lon": -68.2183551,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Beban Este"
+  }
+},
+{
+  "type": "node",
+  "id": 4128225147,
+  "lat": -54.6423837,
+  "lon": -68.3196305,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Mariposa"
+  }
+},
+{
+  "type": "node",
+  "id": 4128233789,
+  "lat": -54.6541121,
+  "lon": -68.3573053,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "paso Valdivieso"
+  }
+},
+{
+  "type": "node",
+  "id": 4158572803,
+  "lat": -9.2790761,
+  "lon": -77.1101419,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Kunkash",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4181097112,
+  "lat": -13.8167468,
+  "lon": -71.2227639,
+  "tags": {
+    "ele": "5200",
+    "mountain_pass": "yes",
+    "name": "Abra Palomani",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4186742917,
+  "lat": -17.3276387,
+  "lon": -66.0150738,
+  "tags": {
+    "junction": "yes",
+    "mountain_pass": "yes",
+    "name": "Cruce a Llachujmayu"
+  }
+},
+{
+  "type": "node",
+  "id": 4199677711,
+  "lat": -10.2171286,
+  "lon": -76.9375577,
+  "tags": {
+    "ele": "4750",
+    "mountain_pass": "yes",
+    "name": "Paso Rondoy",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4223717111,
+  "lat": 5.0915440,
+  "lon": -74.0641450,
+  "tags": {
+    "ele": "3194.8",
+    "mountain_pass": "yes",
+    "name": "Alto del Aguila"
+  }
+},
+{
+  "type": "node",
+  "id": 4254619754,
+  "lat": 4.1354570,
+  "lon": -74.3297399,
+  "tags": {
+    "ele": "3072",
+    "mountain_pass": "yes",
+    "name": "Alto del Bobal",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 4279238221,
+  "lat": -20.4005048,
+  "lon": -66.7158257,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "4237 m"
+  }
+},
+{
+  "type": "node",
+  "id": 4279238347,
+  "lat": -16.5804405,
+  "lon": -68.5295410,
+  "tags": {
+    "ele": "4028",
+    "mountain_pass": "yes",
+    "name": "Lloko Lloko (4028 mts)",
+    "place": "locality"
+  }
+},
+{
+  "type": "node",
+  "id": 4319087082,
+  "lat": -17.5912575,
+  "lon": -69.4750952,
+  "tags": {
+    "ele": "4095",
+    "mountain_pass": "yes",
+    "name": "Paso Visviri"
+  }
+},
+{
+  "type": "node",
+  "id": 4410390929,
+  "lat": -24.2092201,
+  "lon": -66.4757651,
+  "tags": {
+    "ele": "4560",
+    "mountain_pass": "yes",
+    "name": "Alto Chorrillo"
+  }
+},
+{
+  "type": "node",
+  "id": 4421087286,
+  "lat": -38.9690035,
+  "lon": -71.4330422,
+  "tags": {
+    "alt_name": "Paso Santa María",
+    "ele": "1464",
+    "mountain_pass": "yes",
+    "name": "Paso de Llaima",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4456491778,
+  "lat": -37.2426882,
+  "lon": -71.1608613,
+  "tags": {
+    "ele": "1795",
+    "mountain_pass": "yes",
+    "name": "Portezuelo El Fuerte",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4456510924,
+  "lat": -36.1990338,
+  "lon": -70.6048071,
+  "tags": {
+    "ele": "2644",
+    "mountain_pass": "yes",
+    "name": "Paso El Portillo",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4490594788,
+  "lat": -31.8971620,
+  "lon": -70.1976311,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo de la Guardia"
+  }
+},
+{
+  "type": "node",
+  "id": 4512987138,
+  "lat": -55.0054578,
+  "lon": -67.6637860,
+  "tags": {
+    "ele": "743",
+    "mountain_pass": "yes",
+    "name": "Paso de los Dientes",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4513007661,
+  "lat": -55.0139166,
+  "lon": -67.7527838,
+  "tags": {
+    "ele": "546",
+    "mountain_pass": "yes",
+    "name": "Paso de Guerrico"
+  }
+},
+{
+  "type": "node",
+  "id": 4521943751,
+  "lat": -13.6383290,
+  "lon": -71.1012126,
+  "tags": {
+    "alt_name": "Abra Pirhuayani",
+    "ele": "4825",
+    "mountain_pass": "yes",
+    "name": "Abra Pircuyani",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4522432494,
+  "lat": -30.3184140,
+  "lon": -71.2492939,
+  "tags": {
+    "ele": "619",
+    "mountain_pass": "yes",
+    "name": "Paso Las Cardas"
+  }
+},
+{
+  "type": "node",
+  "id": 4522432952,
+  "lat": -30.3184604,
+  "lon": -71.2498001,
+  "tags": {
+    "ele": "620",
+    "mountain_pass": "yes",
+    "name": "Paso Las Cardas"
+  }
+},
+{
+  "type": "node",
+  "id": 4529078187,
+  "lat": -35.2921182,
+  "lon": -71.9761138,
+  "tags": {
+    "ele": "386",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Montecillos",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4547961953,
+  "lat": -37.1214282,
+  "lon": -71.3190400,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo Los Ratones",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4548413123,
+  "lat": -49.2480634,
+  "lon": -73.0389041,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso del Cuadrado",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4553230411,
+  "lat": -15.9887057,
+  "lon": -70.8287005,
+  "tags": {
+    "ele": "4732",
+    "mountain_pass": "yes",
+    "name": "Abra Toroya"
+  }
+},
+{
+  "type": "node",
+  "id": 4574316291,
+  "lat": -36.2494318,
+  "lon": -71.1200124,
+  "tags": {
+    "ele": "2065",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Loma de Arena",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4584923698,
+  "lat": -36.9064635,
+  "lon": -71.3849397,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Pirigallo"
+  }
+},
+{
+  "type": "node",
+  "id": 4635999469,
+  "lat": -28.0697603,
+  "lon": -69.2992499,
+  "tags": {
+    "alt_name": "Paso de Pircas Negras",
+    "mountain_pass": "yes",
+    "name": "Paso Pircas Negras"
+  }
+},
+{
+  "type": "node",
+  "id": 4636228210,
+  "lat": -3.6801410,
+  "lon": -79.2696350,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "2963 m"
+  }
+},
+{
+  "type": "node",
+  "id": 4669917102,
+  "lat": -46.7226660,
+  "lon": -71.7771750,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo",
+    "ref": "D"
+  }
+},
+{
+  "type": "node",
+  "id": 4691617044,
+  "lat": -1.7538965,
+  "lon": -78.8358092,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "3872 m"
+  }
+},
+{
+  "type": "node",
+  "id": 4691617101,
+  "lat": -1.9474018,
+  "lon": -78.9308701,
+  "tags": {
+    "ele": "2580",
+    "mountain_pass": "yes",
+    "name": "Panza Redonda"
+  }
+},
+{
+  "type": "node",
+  "id": 4691617125,
+  "lat": -0.4444287,
+  "lon": -78.6155552,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "3161 m"
+  }
+},
+{
+  "type": "node",
+  "id": 4705911115,
+  "lat": 4.4823836,
+  "lon": -73.7371889,
+  "tags": {
+    "ele": "3805",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 4733400112,
+  "lat": 4.8603548,
+  "lon": -73.9917756,
+  "tags": {
+    "ele": "3000",
+    "mountain_pass": "yes",
+    "name": "Alto de Yerbabuena"
+  }
+},
+{
+  "type": "node",
+  "id": 4735281822,
+  "lat": 5.9856498,
+  "lon": -75.6089616,
+  "tags": {
+    "ele": "2439",
+    "mountain_pass": "yes",
+    "name": "2660"
+  }
+},
+{
+  "type": "node",
+  "id": 4777122821,
+  "lat": -21.4245456,
+  "lon": -65.8198061,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "El Sillar",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 4785217647,
+  "lat": 3.5676244,
+  "lon": -75.9877317,
+  "tags": {
+    "ele": "4012.2",
+    "mountain_pass": "yes",
+    "name": "Paso de la Florida"
+  }
+},
+{
+  "type": "node",
+  "id": 4797210085,
+  "lat": 1.6691043,
+  "lon": -76.2349854,
+  "tags": {
+    "ele": "2271.7",
+    "mountain_pass": "yes",
+    "name": "2300 m"
+  }
+},
+{
+  "type": "node",
+  "id": 4811913976,
+  "lat": 3.7042225,
+  "lon": -75.9598923,
+  "tags": {
+    "ele": "3920",
+    "mountain_pass": "yes",
+    "name": "Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 4816999092,
+  "lat": 3.5346459,
+  "lon": -75.9978899,
+  "tags": {
+    "ele": "3900",
+    "mountain_pass": "yes",
+    "name": "Paso del Hoyo"
+  }
+},
+{
+  "type": "node",
+  "id": 4842494132,
+  "lat": 6.8624250,
+  "lon": -73.3401131,
+  "tags": {
+    "ele": "2425",
+    "mountain_pass": "yes",
+    "name": "Boquerón de Lenguerke"
+  }
+},
+{
+  "type": "node",
+  "id": 4842570995,
+  "lat": 6.6874393,
+  "lon": -73.3804985,
+  "tags": {
+    "ele": "2820",
+    "mountain_pass": "yes",
+    "name": "Alto de las Flores"
+  }
+},
+{
+  "type": "node",
+  "id": 4861189317,
+  "lat": -31.3922657,
+  "lon": -70.5390716,
+  "tags": {
+    "ele": "4026",
+    "mountain_pass": "yes",
+    "name": "Paso del Río Negro",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4861189895,
+  "lat": -31.0907980,
+  "lon": -70.4599531,
+  "tags": {
+    "alt_name": "Paso Vacas Heladas",
+    "ele": "3500",
+    "mountain_pass": "yes",
+    "name": "Paso de Vacas Muertas",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4861191001,
+  "lat": -31.1915295,
+  "lon": -70.5189765,
+  "tags": {
+    "ele": "3556",
+    "mountain_pass": "yes",
+    "name": "Paso de Araya",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4861191821,
+  "lat": -31.2698487,
+  "lon": -70.5280852,
+  "tags": {
+    "ele": "3636",
+    "mountain_pass": "yes",
+    "name": "Paso del Calderón",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4861191897,
+  "lat": -31.2826495,
+  "lon": -70.5301130,
+  "tags": {
+    "ele": "3674",
+    "mountain_pass": "yes",
+    "name": "Portezuelo de Los Muchachos",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4861319964,
+  "lat": -31.1042306,
+  "lon": -70.3650713,
+  "tags": {
+    "ele": "3959",
+    "mountain_pass": "yes",
+    "name": "Paso de La Coipa",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4877386358,
+  "lat": -36.6060156,
+  "lon": -71.0476452,
+  "tags": {
+    "ele": "1758",
+    "mountain_pass": "yes",
+    "name": "Paso Zaña Zaña",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4877386609,
+  "lat": -36.5861071,
+  "lon": -71.0472133,
+  "tags": {
+    "ele": "1785",
+    "mountain_pass": "yes",
+    "name": "Paso Los Moscos",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4884887873,
+  "lat": -44.6137048,
+  "lon": -72.4423215,
+  "tags": {
+    "ele": "580",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Queulat"
+  }
+},
+{
+  "type": "node",
+  "id": 4909802473,
+  "lat": 3.7870025,
+  "lon": -74.3678431,
+  "tags": {
+    "ele": "3778.5",
+    "mountain_pass": "yes",
+    "name": "Paso del Meta"
+  }
+},
+{
+  "type": "node",
+  "id": 4911482547,
+  "lat": 3.4084703,
+  "lon": -74.3915874,
+  "tags": {
+    "ele": "1712.6",
+    "mountain_pass": "yes",
+    "name": "Alto del Oso"
+  }
+},
+{
+  "type": "node",
+  "id": 4934502769,
+  "lat": -12.7951025,
+  "lon": -73.5432449,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Cielo Punco",
+    "source": "MTC"
+  }
+},
+{
+  "type": "node",
+  "id": 4960636657,
+  "lat": -14.6741846,
+  "lon": -69.1490219,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Huchuy Soral",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 4969852869,
+  "lat": -35.4304718,
+  "lon": -71.2808928,
+  "tags": {
+    "ele": "350",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Lihueno",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5043828366,
+  "lat": 4.4727394,
+  "lon": -75.5558529,
+  "tags": {
+    "ele": "3277",
+    "mountain_pass": "yes",
+    "name": "Alto de la Linea",
+    "source:ele": "note 922216"
+  }
+},
+{
+  "type": "node",
+  "id": 5066940704,
+  "lat": 5.8084180,
+  "lon": -73.2574100,
+  "tags": {
+    "ele": "3465",
+    "mountain_pass": "yes",
+    "name": "Boquerón de Ecce Homo"
+  }
+},
+{
+  "type": "node",
+  "id": 5070425717,
+  "lat": -31.1152811,
+  "lon": -70.4761094,
+  "tags": {
+    "ele": "3396",
+    "mountain_pass": "yes",
+    "name": "Paso del Soberano",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5097130882,
+  "lat": -16.5695115,
+  "lon": -67.8534856,
+  "tags": {
+    "ele": "4530",
+    "mountain_pass": "yes",
+    "name": "Abra Pacuani (4530 mts)",
+    "place": "locality",
+    "source:ele": "Opencyclemap"
+  }
+},
+{
+  "type": "node",
+  "id": 5097214004,
+  "lat": -15.7593204,
+  "lon": -68.5668549,
+  "tags": {
+    "elevation": "4741",
+    "mountain_pass": "yes",
+    "name": "Paso Illampu",
+    "place": "locality"
+  }
+},
+{
+  "type": "node",
+  "id": 5097220463,
+  "lat": -15.8460793,
+  "lon": -68.4087801,
+  "tags": {
+    "fixme": "elevation",
+    "mountain_pass": "yes",
+    "name": "Sarani",
+    "place": "locality"
+  }
+},
+{
+  "type": "node",
+  "id": 5097223332,
+  "lat": -15.7705940,
+  "lon": -68.4999837,
+  "tags": {
+    "elevation": "4479",
+    "mountain_pass": "yes",
+    "name": "Chokahuasi (4479 mts)",
+    "place": "locality"
+  }
+},
+{
+  "type": "node",
+  "id": 5098906211,
+  "lat": -16.9046520,
+  "lon": -67.3867605,
+  "tags": {
+    "ele": "4986",
+    "mountain_pass": "yes",
+    "name": "Bengala"
+  }
+},
+{
+  "type": "node",
+  "id": 5110572504,
+  "lat": -9.1695663,
+  "lon": -77.2243028,
+  "tags": {
+    "ele": "4350",
+    "mountain_pass": "yes",
+    "name": "Abra Huachacocha",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5141263789,
+  "lat": -18.8532760,
+  "lon": -69.1537482,
+  "tags": {
+    "ele": "4450",
+    "mountain_pass": "yes",
+    "name": "Puerto de Chulluncalluani",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5157496137,
+  "lat": -13.8377623,
+  "lon": -70.8734672,
+  "tags": {
+    "ele": "5096",
+    "mountain_pass": "yes",
+    "name": "Abra Chimboyo",
+    "natural": "saddle",
+    "source": "MTC"
+  }
+},
+{
+  "type": "node",
+  "id": 5237013618,
+  "lat": 6.4690918,
+  "lon": -73.3367336,
+  "tags": {
+    "ele": "1478.8",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 5252278667,
+  "lat": 5.7638507,
+  "lon": -73.3448956,
+  "tags": {
+    "ele": "3662",
+    "mountain_pass": "yes",
+    "name": "Boquerón Pan de Azúcar"
+  }
+},
+{
+  "type": "node",
+  "id": 5261124841,
+  "lat": -1.7759963,
+  "lon": -78.4404652,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso y Laguna Negra"
+  }
+},
+{
+  "type": "node",
+  "id": 5261444471,
+  "lat": 5.9092919,
+  "lon": -72.5108492,
+  "tags": {
+    "ele": "3412.8",
+    "mountain_pass": "yes",
+    "name": "Alto del Almorzadero"
+  }
+},
+{
+  "type": "node",
+  "id": 5261444675,
+  "lat": 5.7836450,
+  "lon": -72.5068594,
+  "tags": {
+    "ele": "1774.7",
+    "mountain_pass": "yes",
+    "name": "Alto El Encenillo"
+  }
+},
+{
+  "type": "node",
+  "id": 5266947375,
+  "lat": 6.1971043,
+  "lon": -72.3809204,
+  "tags": {
+    "ele": "3334",
+    "mountain_pass": "yes",
+    "name": "Paso de los Bejucos"
+  }
+},
+{
+  "type": "node",
+  "id": 5267044235,
+  "lat": 6.1624263,
+  "lon": -72.4504311,
+  "tags": {
+    "ele": "3423.2",
+    "mountain_pass": "yes",
+    "name": "Paso"
+  }
+},
+{
+  "type": "node",
+  "id": 5335182596,
+  "lat": 10.7350740,
+  "lon": -73.5606095,
+  "tags": {
+    "ele": "3925",
+    "mountain_pass": "yes",
+    "name": "Paso Icachui"
+  }
+},
+{
+  "type": "node",
+  "id": 5351139163,
+  "lat": 10.8238378,
+  "lon": -73.6261171,
+  "tags": {
+    "ele": "4875.7",
+    "mountain_pass": "yes",
+    "name": "Paso de La Reina"
+  }
+},
+{
+  "type": "node",
+  "id": 5351284393,
+  "lat": 10.7974498,
+  "lon": -73.6461041,
+  "tags": {
+    "ele": "4438.4",
+    "mountain_pass": "yes",
+    "name": "Divisoria de Aguas"
+  }
+},
+{
+  "type": "node",
+  "id": 5387483176,
+  "lat": -10.5405053,
+  "lon": -76.9325164,
+  "tags": {
+    "ele": "4540",
+    "mountain_pass": "yes",
+    "name": "Paso Pacomayo",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5444549849,
+  "lat": -36.9715982,
+  "lon": -71.1249626,
+  "tags": {
+    "ele": "1798",
+    "mountain_pass": "yes",
+    "name": "Paso de Buraleo",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5444551210,
+  "lat": -36.9339295,
+  "lon": -71.0869342,
+  "tags": {
+    "ele": "1798",
+    "mountain_pass": "yes",
+    "name": "Paso de Pajaritos",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5468171128,
+  "lat": -37.2118341,
+  "lon": -71.1205283,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Buta Mallín"
+  }
+},
+{
+  "type": "node",
+  "id": 5482831120,
+  "lat": -6.3748720,
+  "lon": -78.0345677,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Passo de Abra Yumal",
+    "name:en": "Abra Yumal Pass",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5489938577,
+  "lat": -9.2031650,
+  "lon": -77.5533664,
+  "tags": {
+    "ele": "4800",
+    "mountain_pass": "yes",
+    "name": "Paso Angel"
+  }
+},
+{
+  "type": "node",
+  "id": 5508263218,
+  "lat": -5.8397707,
+  "lon": -79.5049962,
+  "tags": {
+    "ele": "2145",
+    "mountain_pass": "yes",
+    "name": "Abra de Porculla",
+    "name:es": "Paso de Porculla",
+    "wikidata": "Q4668702",
+    "wikipedia": "es:Paso de Porculla"
+  }
+},
+{
+  "type": "node",
+  "id": 5571873070,
+  "lat": -17.2928236,
+  "lon": -66.0752630,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Montaña"
+  }
+},
+{
+  "type": "node",
+  "id": 5571873191,
+  "lat": -17.2870645,
+  "lon": -66.0654164,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Montaña"
+  }
+},
+{
+  "type": "node",
+  "id": 5577414176,
+  "lat": -8.0769920,
+  "lon": -77.4248211,
+  "tags": {
+    "ele": "4235",
+    "fixme": "exact position",
+    "mountain_pass": "yes",
+    "name": "Abra Alaska",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5595068966,
+  "lat": 4.7792935,
+  "lon": -74.3664909,
+  "tags": {
+    "ele": "2736",
+    "mountain_pass": "yes",
+    "name": "Alto de la Virgen"
+  }
+},
+{
+  "type": "node",
+  "id": 5596902220,
+  "lat": 4.5030870,
+  "lon": -74.2786499,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Alto del Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 5615971317,
+  "lat": -6.2401165,
+  "lon": -78.0404243,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Passo de Tilla",
+    "name:en": "Tilla Pass",
+    "natural": "saddle",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5633252508,
+  "lat": -6.9243510,
+  "lon": -77.7263316,
+  "tags": {
+    "ele": "3730",
+    "mountain_pass": "yes",
+    "name": "Pasa Breve",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5633477069,
+  "lat": -6.7016689,
+  "lon": -76.2876812,
+  "tags": {
+    "ele": "420",
+    "mountain_pass": "yes",
+    "name": "Abra Machungo"
+  }
+},
+{
+  "type": "node",
+  "id": 5736366165,
+  "lat": -11.1303404,
+  "lon": -76.4906862,
+  "tags": {
+    "ele": "4820",
+    "mountain_pass": "yes",
+    "name": "Punta Fierro Cruz",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5748068021,
+  "lat": -10.3477785,
+  "lon": -76.8741473,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso del Trapecio",
+    "name:fr": "Col du Trapecio",
+    "natural": "saddle",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5768241352,
+  "lat": -14.1759665,
+  "lon": -70.3309808,
+  "tags": {
+    "ele": "4873",
+    "mountain_pass": "yes",
+    "name": "Abra Oquepuno",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 5769489310,
+  "lat": -30.3184967,
+  "lon": -71.2499003,
+  "tags": {
+    "ele": "620",
+    "mountain_pass": "yes",
+    "name": "Paso Las Cardas"
+  }
+},
+{
+  "type": "node",
+  "id": 5797669400,
+  "lat": -13.6102616,
+  "lon": -73.5870164,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso 4261"
+  }
+},
+{
+  "type": "node",
+  "id": 5887953082,
+  "lat": -13.8449137,
+  "lon": -71.2907553,
+  "tags": {
+    "description": "4985 m",
+    "mountain_pass": "yes",
+    "name": "Abra Warmisaya"
+  }
+},
+{
+  "type": "node",
+  "id": 6071390506,
+  "lat": -12.0300541,
+  "lon": -76.0759007,
+  "tags": {
+    "ele": "4706",
+    "mountain_pass": "yes",
+    "name": "Abra Suijo"
+  }
+},
+{
+  "type": "node",
+  "id": 6071390507,
+  "lat": -11.9187993,
+  "lon": -76.1083193,
+  "tags": {
+    "ele": "4930",
+    "mountain_pass": "yes",
+    "name": "Punta Ushuayca"
+  }
+},
+{
+  "type": "node",
+  "id": 6169586849,
+  "lat": -36.6781658,
+  "lon": -71.0910997,
+  "tags": {
+    "alt_name": "Paso de Vallejos",
+    "ele": "2096",
+    "mountain_pass": "yes",
+    "name": "Paso de Pincheira",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 6221952795,
+  "lat": -0.3323031,
+  "lon": -78.2026790,
+  "tags": {
+    "ele": "4095",
+    "mountain_pass": "yes",
+    "name": "Paso de Papallacta"
+  }
+},
+{
+  "type": "node",
+  "id": 6246458986,
+  "lat": -8.0205533,
+  "lon": -77.3976896,
+  "tags": {
+    "fixme": "exact position",
+    "mountain_pass": "yes",
+    "name": "Abra Ventanas",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 6261681287,
+  "lat": -15.1409815,
+  "lon": -68.9362156,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Chatalayo"
+  }
+},
+{
+  "type": "node",
+  "id": 6376257656,
+  "lat": -30.2186289,
+  "lon": -70.6528723,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo Tres Cruces",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 6408637985,
+  "lat": -15.0611121,
+  "lon": -68.9908844,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Tambillo"
+  }
+},
+{
+  "type": "node",
+  "id": 6408998346,
+  "lat": -15.0718490,
+  "lon": -68.9540631,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Lorisani"
+  }
+},
+{
+  "type": "node",
+  "id": 6496418760,
+  "lat": 7.4790966,
+  "lon": -72.5138211,
+  "tags": {
+    "ele": "2680",
+    "mountain_pass": "yes",
+    "name": "Alto"
+  }
+},
+{
+  "type": "node",
+  "id": 6502015254,
+  "lat": -32.8249433,
+  "lon": -70.0713017,
+  "tags": {
+    "ele": "3832",
+    "mountain_pass": "yes",
+    "name": "Paso de Uspallata",
+    "natural": "saddle",
+    "place": "locality"
+  }
+},
+{
+  "type": "node",
+  "id": 6778374506,
+  "lat": -2.9012978,
+  "lon": -79.2870291,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Soldados - Chaucha"
+  }
+},
+{
+  "type": "node",
+  "id": 6799666549,
+  "lat": -14.8676517,
+  "lon": -69.0459464,
+  "tags": {
+    "ele": "4707",
+    "mountain_pass": "yes",
+    "name": "Paso Katantika",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 6893993826,
+  "lat": -14.9970349,
+  "lon": -68.9971246,
+  "tags": {
+    "ele": "5040",
+    "mountain_pass": "yes",
+    "name": "Paso Sunchulli",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 6898627628,
+  "lat": -15.0447422,
+  "lon": -68.9653431,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Quellhuacota",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 7103566556,
+  "lat": -16.3404497,
+  "lon": -68.0383966,
+  "tags": {
+    "elevation": "4650",
+    "mountain_pass": "yes",
+    "name": "La Cumbre"
+  }
+},
+{
+  "type": "node",
+  "id": 7113611074,
+  "lat": 3.5426740,
+  "lon": -75.9357552,
+  "tags": {
+    "ele": "3740.5",
+    "mountain_pass": "yes",
+    "name": "Paso de la Danta"
+  }
+},
+{
+  "type": "node",
+  "id": 7153466310,
+  "lat": -17.6641338,
+  "lon": -66.8201346,
+  "tags": {
+    "ele": "4486",
+    "mountain_pass": "yes",
+    "name": "La Cumbre"
+  }
+},
+{
+  "type": "node",
+  "id": 7323291086,
+  "lat": -46.8405852,
+  "lon": -72.1031959,
+  "tags": {
+    "ele": "1100",
+    "mountain_pass": "yes",
+    "name": "Portezuela La Gloria"
+  }
+},
+{
+  "type": "node",
+  "id": 7528536545,
+  "lat": -22.2607407,
+  "lon": -65.1194225,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Cerro Campanario"
+  }
+},
+{
+  "type": "node",
+  "id": 8245761435,
+  "lat": 3.3312544,
+  "lon": -76.6948029,
+  "tags": {
+    "ele": "3835.6",
+    "mountain_pass": "yes",
+    "name": "El Paso"
+  }
+},
+{
+  "type": "node",
+  "id": 8304626790,
+  "lat": 6.8774784,
+  "lon": -72.5011987,
+  "tags": {
+    "ele": "3666",
+    "mountain_pass": "yes",
+    "name": "El Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 8323347100,
+  "lat": 5.6237749,
+  "lon": -72.7413020,
+  "tags": {
+    "ele": "3510",
+    "mountain_pass": "yes",
+    "name": "Boquerón",
+    "source": "OpenTopoMap"
+  }
+},
+{
+  "type": "node",
+  "id": 8406646704,
+  "lat": 1.7176255,
+  "lon": -75.9034508,
+  "tags": {
+    "ele": "1883",
+    "mountain_pass": "yes",
+    "name": "Alto de los Andakies"
+  }
+},
+{
+  "type": "node",
+  "id": 8445729829,
+  "lat": -10.7694142,
+  "lon": -76.6270398,
+  "tags": {
+    "alt_name": "Jatunchacua",
+    "ele": "4825",
+    "mountain_pass": "yes",
+    "name": "Paso Retrochero",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 8501492791,
+  "lat": 4.6643256,
+  "lon": -74.0107875,
+  "tags": {
+    "ele": "3035",
+    "mountain_pass": "yes",
+    "name": "Alto de los Patios"
+  }
+},
+{
+  "type": "node",
+  "id": 8562286306,
+  "lat": 4.8400901,
+  "lon": -73.8080404,
+  "tags": {
+    "ele": "3360.4",
+    "mountain_pass": "yes",
+    "name": "Alto de la Cuchilla"
+  }
+},
+{
+  "type": "node",
+  "id": 8780182740,
+  "lat": 5.6028653,
+  "lon": -72.8653033,
+  "tags": {
+    "ele": "3466.1",
+    "mountain_pass": "yes",
+    "name": "Alto de la Copa"
+  }
+},
+{
+  "type": "node",
+  "id": 8972936961,
+  "lat": -20.3423498,
+  "lon": -68.9792392,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "4244 m"
+  }
+},
+{
+  "type": "node",
+  "id": 9070752581,
+  "lat": 8.5490977,
+  "lon": -71.0128981,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso La Chumajoma"
+  }
+},
+{
+  "type": "node",
+  "id": 9217707592,
+  "lat": -34.2224830,
+  "lon": -69.8013230,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso de Maipo"
+  }
+},
+{
+  "type": "node",
+  "id": 9383675764,
+  "lat": 3.6910634,
+  "lon": -74.4516796,
+  "tags": {
+    "ele": "3550",
+    "mountain_pass": "yes",
+    "name": "Boquerón"
+  }
+},
+{
+  "type": "node",
+  "id": 9412481601,
+  "lat": -21.8827734,
+  "lon": -68.1542739,
+  "tags": {
+    "ele": "4805",
+    "mountain_pass": "yes",
+    "name": "Portezuelo La Cachimba",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 9748539104,
+  "lat": 4.7577551,
+  "lon": -74.3528673,
+  "tags": {
+    "ele": "2785",
+    "mountain_pass": "yes",
+    "name": "Alto de la Mona",
+    "natural": "peak"
+  }
+},
+{
+  "type": "node",
+  "id": 9854392389,
+  "lat": -54.4328476,
+  "lon": -68.7166423,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo de los Guanacos",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 9960763781,
+  "lat": -9.4011586,
+  "lon": -77.4117641,
+  "tags": {
+    "ele": "5343",
+    "mountain_pass": "yes",
+    "name": "Paso Ishinca",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 9967047879,
+  "lat": -9.4392073,
+  "lon": -77.4766776,
+  "tags": {
+    "ele": "4890",
+    "fixme": "check elevation, could be 4890 or 4980",
+    "mountain_pass": "yes",
+    "name": "Paso del Zorro",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 10538448198,
+  "lat": -22.6631109,
+  "lon": -65.3134740,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Blanca",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 10703263972,
+  "lat": -13.4882893,
+  "lon": -71.9354826,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra de Ccorao",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 10940882709,
+  "lat": 4.9359332,
+  "lon": -74.1158216,
+  "tags": {
+    "ele": "2910",
+    "mountain_pass": "yes",
+    "name": "Alto de Canica"
+  }
+},
+{
+  "type": "node",
+  "id": 11149318227,
+  "lat": 4.4492781,
+  "lon": -74.3004943,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Alto de San Miguel"
+  }
+},
+{
+  "type": "node",
+  "id": 11257987282,
+  "lat": -12.3795762,
+  "lon": -75.6399687,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Punta Pumacocha"
+  }
+},
+{
+  "type": "node",
+  "id": 11335255043,
+  "lat": -36.5409715,
+  "lon": -71.0434556,
+  "tags": {
+    "alt_name": "Paso Cerro Colorado",
+    "ele": "1886",
+    "mountain_pass": "yes",
+    "name": "Paso Cajón Colorado",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 11370401419,
+  "lat": -36.7884665,
+  "lon": -71.1279345,
+  "tags": {
+    "alt_name": "Paso Alico",
+    "ele": "2039",
+    "mountain_pass": "yes",
+    "name": "Paso Lagunas de Epulafquen",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 11464341337,
+  "lat": -35.2055709,
+  "lon": -70.5459219,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso del Planchón"
+  }
+},
+{
+  "type": "node",
+  "id": 11474809796,
+  "lat": -35.1623234,
+  "lon": -70.3750464,
+  "tags": {
+    "ele": "2934",
+    "mountain_pass": "yes",
+    "name": "Paso de Tiburcio"
+  }
+},
+{
+  "type": "node",
+  "id": 11493496575,
+  "lat": -36.5024504,
+  "lon": -70.9543607,
+  "tags": {
+    "ele": "2187",
+    "mountain_pass": "yes",
+    "name": "Paso Piuquenes",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 11504843204,
+  "lat": -36.4747090,
+  "lon": -70.9048873,
+  "tags": {
+    "ele": "2094",
+    "mountain_pass": "yes",
+    "name": "Paso Catrinao",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 11890444297,
+  "lat": -43.8371155,
+  "lon": -71.7765275,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo Casanova",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 12537372684,
+  "lat": 5.9361283,
+  "lon": -72.6651593,
+  "tags": {
+    "ele": "3850",
+    "mountain_pass": "yes",
+    "name": "Alto de Juncal"
+  }
+},
+{
+  "type": "node",
+  "id": 12791578530,
+  "lat": 8.5338334,
+  "lon": -71.0787100,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Alto de la Cruz"
+  }
+},
+{
+  "type": "node",
+  "id": 13042349910,
+  "lat": -33.5413665,
+  "lon": -70.4862837,
+  "tags": {
+    "ele": "2227",
+    "mountain_pass": "yes",
+    "name": "El Portezuelo",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13042349932,
+  "lat": -33.6478488,
+  "lon": -70.4081316,
+  "tags": {
+    "ele": "2224",
+    "mountain_pass": "yes",
+    "name": "Portezuelo El Carretón",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13140260798,
+  "lat": -36.8956436,
+  "lon": -71.1397201,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Paso Minas-Ñuble",
+    "name:en": "Minas-Ñuble Pass"
+  }
+},
+{
+  "type": "node",
+  "id": 13227061811,
+  "lat": -31.2953300,
+  "lon": -70.5380707,
+  "tags": {
+    "ele": "3620",
+    "mountain_pass": "yes",
+    "name": "Paso de La Chapetona",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13227061813,
+  "lat": -31.3044859,
+  "lon": -70.5436600,
+  "tags": {
+    "ele": "3640",
+    "mountain_pass": "yes",
+    "name": "Paso del Azufre Sur",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13228822551,
+  "lat": -31.1668075,
+  "lon": -70.4072374,
+  "tags": {
+    "alt_name": "Paso de Las Cuevas",
+    "ele": "3208",
+    "mountain_pass": "yes",
+    "name": "Paso de la Laguna de la Overa II",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13228822552,
+  "lat": -31.1218535,
+  "lon": -70.4260554,
+  "tags": {
+    "ele": "3245",
+    "mountain_pass": "yes",
+    "name": "Paso de la Laguna de la Overa I",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13228822553,
+  "lat": -31.0872226,
+  "lon": -70.4512404,
+  "tags": {
+    "ele": "3522",
+    "mountain_pass": "yes",
+    "name": "Paso de Palacios",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13410072505,
+  "lat": -38.2220375,
+  "lon": -71.7093070,
+  "tags": {
+    "ele": "1536",
+    "mountain_pass": "yes",
+    "name": "Portezuelo Chilpa",
+    "natural": "saddle"
+  }
+},
+{
+  "type": "node",
+  "id": 13542325503,
+  "lat": 0.9913513,
+  "lon": -77.8152904,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Monte El Tambillo"
+  }
+},
+{
+  "type": "node",
+  "id": 13604909618,
+  "lat": -10.9569605,
+  "lon": -76.5667999,
+  "tags": {
+    "ele": "4830",
+    "mountain_pass": "yes",
+    "name": "San Antonio"
+  }
+},
+{
+  "type": "node",
+  "id": 13937481061,
+  "lat": -34.8923355,
+  "lon": -70.0811541,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Portezuelo El Risco Plateado"
+  }
+},
+{
+  "type": "node",
+  "id": 13953965993,
+  "lat": -17.4619069,
+  "lon": -67.1315492,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "La Cubre"
+  }
+},
+{
+  "type": "node",
+  "id": 13964098381,
+  "lat": -37.6137297,
+  "lon": -71.1753348,
+  "tags": {
+    "ele": "2228",
+    "mountain_pass": "yes",
+    "name": "Paso de Pilunchaya"
+  }
+},
+{
+  "type": "node",
+  "id": 14319991664,
+  "lat": -28.9927690,
+  "lon": -67.2559990,
+  "tags": {
+    "mountain_pass": "yes",
+    "name": "Abra Mal Paso",
+    "note": "Ubicación del paso inferida por trazas visibles de tránsito que cruzan la divisoria; el mínimo topográfico natural=saddle se encuentra unos metros al oeste."
+  }
+}
+
+  ]
+}

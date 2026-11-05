@@ -1,0 +1,3 @@
+# Map tiles of WDPA polygons: served to the viewer, kept out of the archive that Zenodo receives from GitHub (git archive)
+docs/capas/pa/** export-ignore
+*.sh text eol=lf

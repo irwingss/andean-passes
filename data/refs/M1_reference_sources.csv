@@ -1,0 +1,29 @@
+name,ref_id,locator,alt_ref_id,alt_locator
+Abra de Porculla,INEI2009P|INEI2010P,"Table 1.4, p. 22 of both editions (entry Porcuya)",INEI2017P,"Table 1.6, p. 25 (entry Porcuya)"
+Suropite (Cuello del Indio),INEI2009P|INEI2010P,"Table 1.4, p. 22 of both editions",INEI2017P,"Table 1.6, p. 25"
+Peña Blanca,INEI2009P|INEI2010P,"Table 1.4, p. 22 of both editions",INEI2017P,"Table 1.6, p. 25"
+Ingana,INEI2009P|INEI2010P,"Table 1.4, p. 22 of both editions",INEI2017P,"Table 1.6, p. 25"
+Cruz de Huacaray,INEI2009P|INEI2010P,"Table 1.4, p. 22 of both editions",INEI2017P,"Table 1.6, p. 25"
+Tembladera,INEI2017L,"Table 1.3, p. 13",,
+Quesería,INEI2017L,"Table 1.3, p. 13",,
+Escalera,INEI2017L,"Table 1.3, p. 13",,
+El Cruce (Olmos),INEI2017L,"Table 1.3, p. 13",,
+Ñaupe,INEI2017L,"Table 1.3, p. 13",,
+Coimolache,INEI2009C,"Table 1.6, p. 10",,
+Cumbre,INEI2009C,"Table 1.6, p. 10",,
+Comullca,INEI2009C,"Table 1.6, p. 10",,
+Pumacama,INEI2009C,"Table 1.6, p. 10",,
+Samangay,INEI2009C,"Table 1.6, p. 10",,
+Fila Larga,INEI2009C,"Table 1.6, p. 10",,
+Anticona (Ticlio),INEI2017LP,"Table 1.4, p. 31 (entry Anticona)",NONE,
+Antajirca,INEI2017LP,"Table 1.4, p. 31",,
+Agua Negra,UPF,Complejo Agua Negra (coquimbo/paso-agua-negra),,
+Pircas Negras,UPF,Complejo Barrancas Blancas (atacama/paso-pircas-negras),,
+Vergara (Planchón),UPF,Complejo Vergara (maule/paso-vergara),,
+Pehuenche,UPF,Complejo Pehuenche (maule/paso-pehuenche),,
+Pino Hachado,UPF,Complejo Pino Hachado (araucania/paso-pino-hachado),,
+Icalma,UPF,Complejo Icalma (araucania/paso-icalma),,
+Mamuil Malal,UPF,Complejo Mamuil Malal (araucania/paso-mamuil-malal),,
+Carirriñe,UPF,Complejo Carirriñe (losrios/paso-carirrine),,
+Cardenal Samoré,UPF,Complejo Cardenal Samoré (loslagos/paso-cardenal-samore),,
+Dorotea,UPF,Complejo Dorotea (magallanes/paso-dorotea),,
