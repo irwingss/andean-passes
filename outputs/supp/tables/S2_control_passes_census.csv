@@ -1,0 +1,37 @@
+control,system,lat,lon,gmba,near_km,near_z,near_depth,near_rank,near_area_sep_km2,near_isolation_km,deep_km,deep_z,deep_depth,deep_rank,deep_area_sep_km2,deep_width_m,deep_isolation_km
+Paso La Gallina,Mérida,8.91,-70.96,Cordillera de Mérida,0.42,3629.7,293.9,tributary,132.3,3.45,0.42,3629.7,293.9,tributary,132.3,1138.0,3.45
+Boquerón de Lenguerke,Oriental Colombia,6.86,-73.34,Cordillera Oriental (Northern Andes),0.26,2424.4,32.1,tributary,,3.15,3.01,1946.0,155.5,tributary,148.7,1352.0,1.46
+Alto de Cruz Verde,Oriental Colombia,4.51,-74.05,Cordillera Oriental (Northern Andes),0.48,3446.9,30.6,continental,938384.3,0.79,1.26,3392.6,241.8,tributary,157.7,3637.0,1.52
+Alto del Trigo,Oriental Colombia,5.0,-74.54,Cordillera Oriental (Northern Andes),1.79,1507.6,73.8,tributary,276.1,6.98,2.53,1855.5,127.9,tributary,4618.4,4104.0,3.77
+Alto de los Andakíes,Oriental Colombia,1.72,-75.9,Cordillera Oriental (Northern Andes),0.33,1813.4,41.1,tributary,422.9,7.73,4.0,1918.1,121.5,tributary,2089.9,2625.0,3.76
+Páramo de Letras,Central Colombia,5.04,-75.33,Cordillera Central (Northern Andes),0.51,3681.7,173.6,tributary,61901.9,2.14,0.51,3681.7,173.6,tributary,61901.9,2373.0,2.14
+Alto de La Línea,Central Colombia,4.47,-75.56,Cordillera Central (Northern Andes),0.59,3261.7,1325.6,tributary,61901.9,7.78,0.59,3261.7,1325.6,tributary,61901.9,1510.0,7.78
+El Paso,Occidental Colombia,3.33,-76.69,Cordillera Occidental (Northern Andes),0.6,3847.3,65.1,tributary,161.5,0.49,0.82,3791.0,131.8,tributary,161.5,710.0,2.29
+Paso de Papallacta,Real Ecuador,-0.33,-78.2,Cordillera Oriental (Northern Andes),0.36,4061.8,429.9,continental,5912760.5,2.24,0.36,4061.8,429.9,continental,5912760.5,1730.0,2.24
+Tres Cruces,Occidental Ecuador,-2.78,-79.24,Cordillera Occidental (Northern Andes),0.35,4156.2,112.2,continental,5912760.5,0.57,0.35,4156.2,112.2,continental,5912760.5,3056.0,0.57
+Abra de Porculla,Occidental Perú,-5.84,-79.5,Cordillera Occidental (Central Andes),0.61,2144.9,904.7,continental,5912760.5,4.41,0.61,2144.9,904.7,continental,5912760.5,1602.0,4.41
+Abra Patricia,Central Perú,-5.7,-77.81,Cordillera Oriental (Central Andes),0.21,2328.2,59.8,tributary,,1.31,1.44,2241.2,131.4,tributary,3775.9,2832.0,2.73
+Calla Calla,Central Perú,-6.73,-77.89,Cordillera Central (Central Andes),0.6,3585.5,181.9,tributary,6571.5,3.65,0.6,3585.5,181.9,tributary,6571.5,4588.0,3.65
+Abra El Gavilán,Occidental Perú,-7.25,-78.47,Cordillera Occidental (Central Andes),0.36,3225.5,773.3,continental,5912760.5,5.16,0.36,3225.5,773.3,continental,5912760.5,1199.0,5.16
+Abra Punta Callán,Negra,-9.55,-77.62,Cordillera Occidental (Central Andes),0.39,4217.0,722.8,terminal,11979.1,10.69,0.39,4217.0,722.8,terminal,11979.1,2860.0,10.69
+Punta Olímpica,Blanca,-9.13,-77.51,Cordillera Occidental (Central Andes),0.15,4902.6,1019.4,continental,5912760.5,4.69,0.15,4902.6,1019.4,continental,5912760.5,552.0,4.69
+Ticlio,Occidental Perú,-11.6,-76.19,Cordillera Occidental (Central Andes),0.28,4811.4,597.6,continental,5912760.5,5.16,0.28,4811.4,597.6,continental,5912760.5,2324.0,5.16
+Abra Málaga,Oriental Perú,-13.14,-72.3,Cordillera Oriental (Central Andes),0.27,4321.8,942.1,tributary,481.6,5.28,0.27,4321.8,942.1,tributary,481.6,733.0,5.28
+Abra Acjanaco,Oriental Perú,-13.2,-71.62,Cordillera Oriental (Central Andes),0.32,3473.6,106.1,tributary,1368840.3,3.42,0.32,3473.6,106.1,tributary,1368840.3,2065.0,3.42
+Abra La Raya,Oriental Perú,-14.48,-70.99,Cordillera Central (Central Andes),0.4,4325.1,849.5,continental,5912760.5,14.07,0.4,4325.1,849.5,continental,5912760.5,2341.0,14.07
+Patapampa,Occidental Perú,-15.75,-71.58,Cordillera Occidental (Central Andes),3.24,4806.4,40.5,terminal,16997.2,7.41,5.73,4680.6,244.8,tributary,1554.4,6105.0,5.8
+"La Cumbre, La Paz",Real Bolivia,-16.34,-68.04,Cordillera Oriental (Central Andes),0.22,4640.9,555.3,tributary,2142.9,9.1,0.22,4640.9,555.3,tributary,2142.9,3688.0,9.1
+"La Cumbre, Oruro-Cochabamba",Oriental Bolivia,-17.66,-66.82,Cordillera Oriental (Central Andes),0.44,4468.1,34.0,tributary,282431.2,0.78,0.92,4423.5,108.2,tributary,282431.2,7821.0,2.55
+Chungará-Tambo Quemado,Occidental Altiplano,-18.28,-69.07,Cordillera Occidental (Central Andes),0.68,4670.2,858.9,tributary,1055.8,8.81,0.68,4670.2,858.9,tributary,1055.8,7534.0,8.81
+Abra de Tres Cruces,Oriental Argentina,-22.9,-65.6,Dry Andes,0.51,3791.0,48.4,tributary,17544.2,9.26,5.03,3887.9,272.1,tributary,17544.2,4514.0,5.69
+Paso Sico,Puna,-23.84,-67.26,Dry Andes,3.82,4097.9,1284.8,tributary,,6.3,3.82,4097.9,1284.8,tributary,,,6.3
+Paso de San Francisco,Occidental Puna,-26.87,-68.3,Dry Andes,4.03,5190.5,49.7,continental,149003.0,5.08,4.22,4637.1,963.3,tributary,,,18.32
+Paso Pircas Negras,Dry Andes,-28.07,-69.3,Dry Andes,0.46,4163.6,893.9,continental,294183.0,6.62,0.46,4163.6,893.9,continental,294183.0,4143.0,6.62
+Paso de Agua Negra,Dry Andes,-30.19,-69.83,Dry Andes,0.52,4761.9,857.5,continental,294183.0,8.12,0.52,4761.9,857.5,continental,294183.0,1635.0,8.12
+Paso de Uspallata,Dry Andes,-32.82,-70.07,Dry Andes,0.54,3827.1,68.1,continental,294183.0,0.42,0.63,3802.1,1406.7,continental,294183.0,1305.0,1.29
+Paso Vergara,Dry Andes,-35.21,-70.52,Dry Andes,0.53,2503.5,1586.6,continental,294183.0,11.24,0.53,2503.5,1586.6,continental,294183.0,1489.0,11.24
+Paso Pehuenche,Dry Andes,-35.98,-70.39,Dry Andes,0.48,2546.3,534.7,continental,294183.0,6.44,0.48,2546.3,534.7,continental,294183.0,2491.0,6.44
+Paso Pino Hachado,Patagónicos,-38.66,-70.9,Patagonian Andes,0.33,1873.2,206.4,continental,112937.9,5.13,0.33,1873.2,206.4,continental,112937.9,1687.0,5.13
+Paso Cardenal Samoré,Patagónicos,-40.71,-71.94,Patagonian Andes,0.43,1298.3,568.4,continental,112937.9,4.17,0.43,1298.3,568.4,continental,112937.9,2439.0,4.17
+Paso Roballos,Patagónicos,-47.16,-71.85,Patagonian Andes,1.07,634.2,30.4,tributary,585.9,8.35,2.63,739.4,124.9,tributary,,2229.0,6.72
+Paso Dorotea,Patagónicos,-51.59,-72.35,Patagonian Andes,0.46,616.0,160.8,continental,10480.8,6.85,0.46,616.0,160.8,continental,10480.8,1832.0,6.85

@@ -1,30 +1,16 @@
-# Andean Passes: paths and fixed parameters. Every R script reads this file, and so do the two flood scripts.
-# Run all scripts from the repository root.
+# Andean Passes: paths and fixed parameters read by the scripts. Run every script from the repository root.
 paths:
-  data_dir: data/raw            # third-party inputs (about 25 GB, not in git); may point outside the repository
+  data_dir: data/raw            # third-party inputs (not in git); may point outside the repository
   interim: data/interim
   outputs: outputs
 
-seed: 20261101
+seed: 20261101                  # random divide cells of the identity test (46) and of the review sheet (42)
 
-# Remote rasters
-remote:
-  glo30_bucket: "https://copernicus-dem-30m.s3.amazonaws.com"
-
-# Operational definitions; sensitivity values are listed after the default
 params:
-  segment_km: 0.5
-  depth_m: [100, 50, 200, 300]
-  gateway_window_km: [100, 50, 250]
-  montane_gap_m: [2000, 1500, 2500]
-  flank_m: [1000, 500, 1500]
-  flank_max_trace_km: 150
-  flank_buffer_km: 5
-  gmba_margin_km: 20
-  tropics_lat: [11, -23.5]
-  huancabamba: {lat: [-7.5, -4.0], max_elev_m: 3000, min_depth_m: 50}   # extra cols kept in the tables for a companion study
+  gmba_margin_km: 20            # margin around the GMBA Andes (D12)
+  tropics_lat: [11, -23.5]      # reported tropics (D1)
 
-# One terrain (hypsometric) ramp for every figure coloured by elevation: metres and colours at each stop
+# One terrain (hypsometric) ramp for figures coloured by elevation: metres and colours at each stop
 style:
   elev_ramp:
     m:   [0, 500, 1500, 2500, 3500, 4500, 5500, 6500]

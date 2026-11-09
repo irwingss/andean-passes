@@ -1,5 +1,0 @@
-﻿Type,n,Median change in TOann,Median change in precipitation gap,Gateways with robust sign of the precipitation change
-Open,10,0.28,0.05,2
-Closed in temperature only,5,0.33,-0.04,0
-Closed in moisture only,5,0.22,0,1
-Closed,10,0.24,0.16,8

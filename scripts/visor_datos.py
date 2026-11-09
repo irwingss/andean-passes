@@ -1,9 +1,13 @@
 """Layers of the web viewer (docs/, GitHub Pages) of the Andean Passes Database.
-Rasters become XYZ tiles of indexed PNG (Leaflet tile layers, same breaks and colours as the figures), the divide, the montane
-gaps and the descent routes become simplified GeoJSON, and the cols go to docs/capas/indice.json with the sheets of File S4.
-Run from anywhere: python scripts/visor_datos.py [tiles]   (without "tiles" the tile pyramids are kept as they are)
+The normalized current of the main connectivity run (BIO1, both readings, as in Fig. 2) becomes XYZ
+tiles of indexed PNG; human modification and protected areas too; the cols with a depth of 100 m or more and the control
+passes go to docs/capas/indice.json, column by column to keep it small.
+python -P scripts/visor_datos.py [tiles]   (without "tiles" the tile pyramids are kept as they are)
 """
-import json, math, re, shutil, sys
+import json
+import math
+import shutil
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -14,25 +18,23 @@ import shapely
 from PIL import Image
 from rasterio import features
 from rasterio.transform import from_origin
-from rasterio.windows import from_bounds
+from rasterio.warp import Resampling, reproject
 
 REPO = Path(__file__).resolve().parents[1]
-L1 = REPO
-INT, DB, TAB = L1 / 'data/interim', L1 / 'outputs/database', L1 / 'outputs/tables'
+INT, DB = REPO / 'data/interim', REPO / 'outputs/database'
+RUN = INT / 'conectividad/principal'
 DST = REPO / 'docs/capas'
+ZMIN, ZMAX = 3, 9
+U_MIN = 1e-6                                                     # as in 51_sintesis_conectividad.py
 
-W, S, E, N, RES = -82, -56, -60, 13, 1 / 240                     # the 15" grid of M1_domains_15s.tif
-AFF = from_origin(W, N, RES, RES)
-SHAPE = (round((N - S) / RES), round((E - W) / RES))
-ZMIN, ZMAX = 3, 9                                                # z9 is the first zoom finer than 15"
-
-# palette index 0 is always transparent; colours as in the figures
-PAL = {
-    'dominios': [('#E69F00', .55, 'Pacific + Caribbean (W)'), ('#56B4E9', .55, 'Atlantic (E)'), ('#CC79A7', .55, 'Endorheic (I)')],
-    'umbrales': [('#08306b', .8, 'Below 1500 m'), ('#2b7bba', .75, '1500 to 2000 m'), ('#a6cee3', .7, '2000 to 2500 m')],
-    'ghm': [('#fee8c8', .7, '0.1 to 0.2'), ('#fdbb84', .75, '0.2 to 0.4'), ('#d7301f', .8, '0.4 or more (high)')],
-    'pa': [('#009E73', .6, 'Protected areas (WDPA, November 2026)')],
-}
+# normalized current in seven classes on a log scale; palette index 0 is always transparent
+CUR = [('#2166AC', .85, 'below 0.5'), ('#67A9CF', .8, '0.5 to 0.8'), ('#D1E5F0', .7, '0.8 to 0.95'),
+       ('#F7F7F7', .45, '0.95 to 1.05'), ('#FDDBC7', .7, '1.05 to 1.25'), ('#EF8A62', .8, '1.25 to 2'),
+       ('#B2182B', .85, '2 or more')]
+CUR_BREAKS = (0.5, 0.8, 0.95, 1.05, 1.25, 2)
+PAL = {'trans_bio01': CUR, 'longi_bio01': CUR,
+       'ghm': [('#fee8c8', .7, '0.1 to 0.2'), ('#fdbb84', .75, '0.2 to 0.4'), ('#d7301f', .8, '0.4 or more (high)')],
+       'pa': [('#009E73', .6, 'Protected areas (WDPA, November 2026)')]}
 
 
 def geoms(path, layer=None, columns=()):
@@ -40,7 +42,7 @@ def geoms(path, layer=None, columns=()):
     return shapely.from_wkb(wkb), pd.DataFrame({k: v for k, v in zip(meta['fields'], campos)})
 
 
-def tiles(nombre, idx, pal, aff=AFF, zmax=ZMAX):
+def tiles(nombre, idx, pal, aff, zmax=ZMAX):
     """XYZ tiles by nearest pixel. Plate carree to Web Mercator is separable: one lookup for rows and one for columns."""
     dst = DST / nombre
     shutil.rmtree(dst, ignore_errors=True)
@@ -76,131 +78,76 @@ def tiles(nombre, idx, pal, aff=AFF, zmax=ZMAX):
     print(nombre, n, 'tiles', flush=True)
 
 
+def corriente(var, lect):
+    """Normalized current of the main run (q 0.1, 200 km), undefined where the uniform current is below U_MIN."""
+    with rasterio.open(RUN / f'teselas/{var}_{lect}_s200_env_normalizada.tif') as s:
+        a, prof = s.read(1, masked=True, window=None).filled(np.nan), s.profile
+    with rasterio.open(RUN / f'teselas/{var}_{lect}_s200_env_corriente.tif') as s:
+        c = s.read(1, masked=True, window=None).filled(np.nan)
+    with np.errstate(all='ignore'):
+        return np.where(c / a >= U_MIN, a, np.nan).astype(np.float32), prof
+
+
 def rasters():
-    dom, c = geoms(INT / 'M1_domains.gpkg', columns=['dom'])
-    d = features.rasterize(((g, 'WEI'.index(v) + 1) for g, v in zip(dom, c['dom'])), out_shape=SHAPE, transform=AFF, dtype=np.uint8)
-    tiles('dominios', d, PAL['dominios'])
-
-    with rasterio.open(L1 / 'data/raw/hyd_sa_dem_15s/hyd_sa_dem_15s.tif') as r:
-        z = r.read(1, window=from_bounds(W, S, E, N, r.transform))
-    assert z.shape == SHAPE
-    k = np.select([z < 1500, z < 2000, z < 2500], [1, 2, 3], 0).astype(np.uint8)
-    k[d == 0] = 0                                                # footprint of the drainage domains
-    tiles('umbrales', k, PAL['umbrales'])
-
+    G = from_origin(-85, 14, 1 / 120, 1 / 120)                   # 30" geographic grid over the connectivity domain
+    shape = (round(40 * 120), round(30 * 120))
+    for lect, pref in (('baja', 'trans'), ('alta', 'longi')):
+        a, prof = corriente('bio01', lect)
+        for nombre, x in ((f'{pref}_bio01', a),):
+            g = np.full(shape, np.nan, np.float32)
+            reproject(x.astype(np.float32), g, src_transform=prof['transform'], src_crs=prof['crs'], src_nodata=np.nan,
+                      dst_transform=G, dst_crs='EPSG:4326', dst_nodata=np.nan, resampling=Resampling.nearest)
+            k = np.where(np.isfinite(g), np.digitize(g, CUR_BREAKS) + 1, 0).astype(np.uint8)
+            tiles(nombre, k, CUR, G, 9)
     with rasterio.open(INT / 'M3_ghm_andes.tif') as r:
         g, ag = r.read(1, masked=True).filled(0), r.transform
     tiles('ghm', np.digitize(np.nan_to_num(g), (.1, .2, .4)).astype(np.uint8), PAL['ghm'], ag, 8)
-
+    W, S, E, N, RES = -82, -56, -60, 13, 1 / 240
     pa, _ = geoms(INT / 'M3_wdpa_andes.gpkg')
     # ponytail: outlines drawn only as pixels, the WDPA itself is not redistributed
-    tiles('pa', features.rasterize(((g, 1) for g in pa if g is not None), out_shape=SHAPE, transform=AFF, dtype=np.uint8), PAL['pa'])
+    tiles('pa', features.rasterize(((g, 1) for g in pa if g is not None), out_shape=(round((N - S) / RES),
+          round((E - W) / RES)), transform=from_origin(W, N, RES, RES), dtype=np.uint8), PAL['pa'], from_origin(W, N, RES, RES))
 
 
-def geojson(nombre, feats):
-    """feats: (shapely geometry, properties). Coordinates to 4 decimals (11 m)."""
-    fc = {'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': p,
-          'geometry': shapely.geometry.mapping(shapely.set_precision(g, 1e-4))} for g, p in feats if not g.is_empty]}
-    (DST / nombre).write_text(json.dumps(fc, separators=(',', ':'), ensure_ascii=False), encoding='utf-8')
-    print(nombre, len(fc['features']), round((DST / nombre).stat().st_size / 1e6, 2), 'MB', flush=True)
-
-
-def tramos(p, marca):
-    """Runs of consecutive bins with marca True: one line per run, split where the divide itself jumps."""
-    grupo = (marca != marca.shift()).cumsum()
-    for _, r in p[marca].groupby(grupo[marca]):
-        partes = np.cumsum(r.gap_before_km.to_numpy() > 0)
-        lineas = [r[partes == i][['lon', 'lat']].to_numpy() for i in np.unique(partes)]
-        lineas = [l if len(l) > 1 else np.repeat(l, 2, axis=0) for l in lineas]
-        yield shapely.MultiLineString([shapely.LineString(l) for l in lineas]), r
-
-
-def vectores(gw):
-    d, _ = geoms(DB / 'APD_divide.gpkg')
-    ie, c = geoms(INT / 'M1_divide_raw.gpkg', columns=['type'])
-    geojson('divisoria.geojson', [(shapely.simplify(g, .002), {'tipo': 'W|E'}) for g in d] +
-            [(shapely.simplify(g, .002), {'tipo': 'I|E'}) for g, t in zip(ie, c['type']) if t == 'I|E'])
+def andes():
     a, _ = geoms(INT / 'M1_gmba_andes.gpkg')
-    geojson('andes.geojson', [(shapely.simplify(g, .02), {}) for g in a])
-
-    prof = pd.read_csv(INT / 'M1_profile.csv').sort_values('bin').reset_index(drop=True)
-    tabla = pd.read_csv(INT / 'M1_montane_gaps.csv')
-    fb = []
-    for th in (2000, 1500, 2500):
-        n = suma = 0
-        for g, r in tramos(prof, prof.elev_cross < th):
-            km = r.d_km.iloc[-1] - r.d_km.iloc[0] + .5
-            fb.append((g, {'umbral': th, 'km': round(km, 1), 'min': round(r.elev_cross.min()), 'lat': [round(r.lat.iloc[0], 2), round(r.lat.iloc[-1], 2)]}))
-            n += 1
-            suma += km
-        t = tabla[tabla.threshold_m == th]
-        assert n == len(t) and abs(suma - t.length_km.sum()) < 1, th   # same runs as 04_collados.R
-    geojson('brechas.geojson', fb)
-
-    b = pd.read_csv(DB / 'APD_montane_corridor.csv').sort_values('bin').reset_index(drop=True)
-    b['gap_before_km'] = (b.d_km.diff().fillna(0) > 5) * 1.0     # same jumps of the ruler as the profile
-    clase = np.select([b.gap_now, b.loss_robust_370_2090], ['gap', 'lost'], 'kept')
-    fc = []
-    for k in ('kept', 'lost', 'gap'):
-        for g, r in tramos(b, pd.Series(clase == k)):
-            fc.append((g, {'clase': k, 'km': round(r.d_km.iloc[-1] - r.d_km.iloc[0] + .5, 1), 'pa': round(100 * r.in_PA.mean()), 'ghm': round(r.ghm.mean(), 2)}))
-    geojson('corredor.geojson', fc)
-
-    rt, c = geoms(DB / 'APD_flanks.gpkg', 'flank_routes', ['col_id', 'side_lab'])
-    geojson('rutas.geojson', [(shapely.simplify(g, .001), {'col': i, 'lado': s}) for g, i, s in zip(rt, c['col_id'], c['side_lab']) if i in gw])
+    fc = {'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {}, 'geometry':
+          shapely.geometry.mapping(shapely.set_precision(shapely.simplify(g, .02), 1e-4))} for g in a]}
+    (DST / 'andes.geojson').write_text(json.dumps(fc, separators=(',', ':')), encoding='utf-8')
 
 
-def num(x, d=2):
-    return round(float(x), d) if np.isfinite(x) else None
+def indice():
+    c = pd.read_csv(DB / 'APD_cols.csv.gz', dtype={'trans_robust': str, 'longi_robust': str})
+    c = c[c.depth_m >= 100].reset_index(drop=True)
+    units = sorted(c.gmba.unique())
+    ranks = ['continental', 'terminal', 'tributary']
+    rob = {'above 1': 1, 'below 1': -1, 'depends': 0}
 
+    def arr(s, d):
+        return [None if not np.isfinite(v) else (round(float(v), d) if d else int(round(v))) for v in s]
 
-def pasos():
-    c = pd.read_csv(DB / 'APD_cols.csv')
-    h3 = pd.read_csv(TAB / 'M2_H3_tipologia.csv').set_index('col_id')
-    t3 = pd.read_csv(TAB / 'Table3_conservation_priority.csv').set_index('col_id')
-    con = pd.read_csv(DB / 'APD_conservation_gateways.csv').set_index('col_id')
-    fut = pd.read_csv(DB / 'APD_climate_future.csv').query("ssp == 370 and period == '2081-2100'").set_index('col_id')
-    atlas = {}
-    (DST / 'atlas').mkdir(exist_ok=True)
-    (DST / 'miniaturas').mkdir(exist_ok=True)
-    for f in sorted((L1 / 'outputs/supp/atlas').glob('S4_*.png')):
-        i = re.search(r'APD\d+', f.name)[0]
-        shutil.copy(f, DST / f'atlas/{i}.png')
-        with Image.open(f) as im:                                # 2x the popup width, for phones
-            assert im.size == (2007, 1417), f                    # the popup reserves this aspect ratio
-            im.convert('RGB').resize((540, 381), Image.LANCZOS).save(DST / f'miniaturas/{i}.jpg', quality=75, optimize=True)
-        atlas[i] = f'atlas/{i}.png'
-    pts, cp = geoms(DB / 'APD_flanks.gpkg', 'flank_points', ['col_id', 'side_lab', 'flank_m'])
-    fl = {}
-    for g, i, s, m in zip(pts, cp['col_id'], cp['side_lab'], cp['flank_m']):
-        if m == 1000 and g is not None and not shapely.is_empty(g):
-            fl.setdefault(i, []).append([round(g.y, 4), round(g.x, 4), s])
-    out = []
-    for r in c.itertuples():
-        e = {'id': r.col_id, 'nombre': r.name if isinstance(r.name, str) else None, 'lat': r.lat, 'lon': r.lon, 'alt': round(r.elev_cross),
-             'prof': round(r.depth), 'iso': num(r.iso_km, 0), 'ancho': num(r.width_km, 1), 'grupo': 'tropical' if r.tropical else 'temperate'}
-        if r.gateway:
-            e['puerta'] = 1
-        if r.terminal:
-            e['terminal'] = 1
-        if r.col_id in fl and r.gateway:
-            e['flancos'] = fl[r.col_id]
-        if r.col_id in h3.index:                                 # the 30 tropical gateways of Table 3
-            a, b, k, u = h3.loc[r.col_id], t3.loc[r.col_id], con.loc[r.col_id], fut.loc[r.col_id]
-            e['nombre'] = e['nombre'] or b['name']
-            e |= {'pais': b.country, 'tipo': a.h3_type, 'to': num(a.TO_ann), 'ai': num(a.AI_gap_signed), 'dto': f'{u["dTO.mean"]:+.2f} [{u["dTO.min"]:+.2f}, {u["dTO.max"]:+.2f}]',
-                  'dpg': f'{u["dPg.mean"]:+.2f} [{u["dPg.min"]:+.2f}, {u["dPg.max"]:+.2f}]', 'frac': num(k.frac_dTstar_370_2090), 'pa5': num(k.pct_PA_5km, 0),
-                  'ghm': num(k.ghm_crest), 'loss': num(k.montane_loss_km, 0), 'critica': bool(k.critical), 'crest_pa': bool(k.crest_in_PA), 'pres': bool(b.high_pressure)}
-        if r.col_id in atlas:
-            e['atlas'] = atlas[r.col_id]
-        out.append(e)
-    return out, set(c.col_id[c.gateway])
+    cols = {'id': c.apd_id.str[3:].astype(int).tolist(), 'lat': arr(c.lat, 4), 'lon': arr(c.lon, 4),
+            'z': arr(c.z_m, 0), 'd': arr(c.depth_m, 0), 'w': arr(c.width_m, 0), 'iso': arr(c.isolation_km, 1),
+            'u': [units.index(g) for g in c.gmba], 'r': [ranks.index(r) for r in c['rank']],
+            't': arr(c.trans_med, 2), 'tmin': arr(c.trans_min, 2), 'tmax': arr(c.trans_max, 2),
+            'l': arr(c.longi_med, 2), 'lmin': arr(c.longi_min, 2), 'lmax': arr(c.longi_max, 2),
+            'tr': [rob.get(v) for v in c.trans_robust.fillna('')], 'lr': [rob.get(v) for v in c.longi_robust.fillna('')]}
+    ctl = pd.read_csv(REPO / 'data/refs/pasos_control.csv')
+    ctl = ctl[ctl.in_area == 1]
+    out = {'units': units, 'ranks': ranks, 'pal': PAL, 'cols': cols,
+           'control': [[r['name'], r.lat, r.lon] for _, r in ctl.iterrows()]}
+    f = DST / 'indice.json'
+    f.write_text(json.dumps(out, separators=(',', ':'), ensure_ascii=False), encoding='utf-8')
+    print('indice.json', len(c), 'cols', round(f.stat().st_size / 1e6, 1), 'MB')
 
 
 if __name__ == '__main__':
     DST.mkdir(parents=True, exist_ok=True)
-    cols, gw = pasos()
-    vectores(gw)
+    for old in ('atlas', 'miniaturas', 'dominios', 'umbrales', 'brechas.geojson', 'corredor.geojson',
+                'divisoria.geojson', 'rutas.geojson', 'trans_med', 'longi_med'):                      # layers of the earlier census
+        p = DST / old
+        shutil.rmtree(p, ignore_errors=True) if p.is_dir() else p.unlink(missing_ok=True)
+    andes()
+    indice()
     if 'tiles' in sys.argv:
         rasters()
-    (DST / 'indice.json').write_text(json.dumps({'pal': PAL, 'cols': cols}, separators=(',', ':'), ensure_ascii=False, default=lambda x: x.item()), encoding='utf-8')

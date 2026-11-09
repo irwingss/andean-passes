@@ -1,8 +1,0 @@
-﻿Group,n,Median crossing height (m),Median TOann,Median d (°C),Gateways with ranges that do not overlap,Median annual range of flank (°C),Median mean daily range of flank (°C),"Backup flanks, western side","Backup flanks, eastern side"
-Tropical,30,3986,0.09,1.3,12,13.6,11.3,6,18
-Temperate,31,1023,0.9,19.3,0,21.8,11.9,7,13
-All non-terminal,61,3184,0.4,8.3,12,17.8,11.5,13,31
-0 to 12° of absolute latitude,17,2761,0.15,1.9,6,11.8,10.2,1,5
-12 to 23.5° of absolute latitude,13,4257,0.06,1.2,6,14.7,12.2,5,13
-23.5 to 36° of absolute latitude,11,4164,0.41,8.3,0,20.3,12.2,6,11
-36 to 60° of absolute latitude,20,797,0.98,22,0,22.6,10.5,1,2

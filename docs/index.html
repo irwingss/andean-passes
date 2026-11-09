@@ -16,181 +16,69 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; font: 13px/1.45 Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif; color: var(--tinta); background: var(--fondo); }
-  button, input { font: inherit; color: inherit; }
-  #app { display: grid; grid-template-columns: 380px 1fr; height: 100%; }
-  #panel { overflow-y: auto; background: var(--fondo); border-right: 1px solid var(--linea); display: flex; flex-direction: column; }
+  button, input, select { font: inherit; color: inherit; }
+  #app { display: grid; grid-template-columns: 370px 1fr; height: 100%; }
+  #panel { overflow-y: auto; background: var(--fondo); border-right: 1px solid var(--linea); }
   #mapa { position: relative; background: #2b2b2b; }
-
-  header { position: sticky; top: 0; z-index: 5; flex: none; padding: 20px 20px 16px; background: linear-gradient(160deg, #1d5c49 0%, #23745B 55%, #6a1d52 140%); color: #fff; }
+  header { padding: 20px 20px 16px; background: linear-gradient(160deg, #1d5c49 0%, #23745B 55%, #6a1d52 140%); color: #fff; }
   header .kicker { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; opacity: .75; font-weight: 600; }
   header h1 { font: 600 21px/1.2 "Source Serif 4", Georgia, serif; margin: 6px 0 8px; }
-  header p { margin: 0; font-size: 12px; opacity: .85; }
-
+  header p { margin: 0; font-size: 12px; opacity: .88; }
   section { padding: 16px 20px; border-bottom: 1px solid var(--linea); }
-  .titulo { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 10px; }
-  .titulo h2 { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--gris); margin: 0; font-weight: 600; }
-  .titulo small { color: var(--tenue); font-size: 11px; }
-
-  /* searchable col selector */
-  .combo { position: relative; }
-  .combo input { width: 100%; padding: 11px 36px 11px 38px; border: 1px solid #d3d8d2; border-radius: var(--r); background: var(--carta); outline: none; transition: border-color .15s, box-shadow .15s; }
-  .combo input:focus { border-color: var(--acento); box-shadow: 0 0 0 3px rgba(35,116,91,.15); }
-  .combo .lupa { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--tenue); pointer-events: none; }
-  .combo .x { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; color: var(--tenue); display: none; }
-  .combo .x:hover { background: var(--fondo); color: var(--tinta); }
-  .combo.lleno .x { display: block; }
-  #lista { position: absolute; z-index: 1000; left: 0; right: 0; top: calc(100% + 6px); max-height: min(420px, 60vh); overflow-y: auto; margin: 0; padding: 6px; list-style: none; background: var(--carta); border: 1px solid var(--linea); border-radius: var(--r); box-shadow: var(--sombra); display: none; }
-  .combo.abierto #lista { display: block; }
-  #lista .grupo { position: sticky; top: -6px; background: var(--carta); padding: 8px 8px 4px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
-  #lista li[role=option] { padding: 7px 8px; border-radius: 7px; cursor: pointer; display: flex; gap: 8px; align-items: center; }
-  #lista li[role=option] .n { flex: 1; min-width: 0; }
-  #lista li[role=option] .c { font-size: 11px; color: var(--tenue); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  #lista li[aria-selected=true] { background: var(--acento-claro); }
-  #lista li mark { background: #fbe9a6; color: inherit; border-radius: 2px; }
-  #lista .vacio { padding: 14px 8px; color: var(--tenue); text-align: center; }
-
-  /* selected-col card */
-  #ficha { margin-top: 14px; background: var(--carta); border: 1px solid var(--linea); border-radius: var(--r); box-shadow: var(--sombra); overflow: hidden; }
+  h2 { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--gris); margin: 0 0 10px; font-weight: 600; }
+  .buscar { position: relative; }
+  .buscar input { width: 100%; padding: 10px 12px; border: 1px solid #d3d8d2; border-radius: var(--r); background: var(--carta); outline: none; }
+  .buscar input:focus { border-color: var(--acento); box-shadow: 0 0 0 3px rgba(35,116,91,.15); }
+  #sugerencias { position: absolute; z-index: 1000; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; background: var(--carta);
+    border: 1px solid var(--linea); border-radius: var(--r); box-shadow: var(--sombra); max-height: 50vh; overflow-y: auto; }
+  #sugerencias:empty { display: none; }
+  #sugerencias li { padding: 7px 8px; border-radius: 7px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
+  #sugerencias li:hover, #sugerencias li.activo { background: var(--acento-claro); }
+  #sugerencias small { color: var(--tenue); }
+  .vacia { margin-top: 10px; color: var(--tenue); font-size: 12px; }
+  #ficha { margin-top: 12px; background: var(--carta); border: 1px solid var(--linea); border-radius: var(--r); box-shadow: var(--sombra); overflow: hidden; }
   #ficha[hidden] { display: none; }
-  #ficha .cab { padding: 14px 14px 10px; border-left: 4px solid var(--acento); }
+  #ficha .cab { padding: 12px 14px 10px; border-left: 4px solid var(--acento); }
   #ficha .cod { font-size: 11px; color: var(--tenue); font-variant-numeric: tabular-nums; }
-  #ficha h3 { margin: 2px 0 4px; font: 600 16px/1.25 "Source Serif 4", Georgia, serif; }
+  #ficha h3 { margin: 2px 0 2px; font: 600 16px/1.25 "Source Serif 4", Georgia, serif; }
   #ficha .meta { font-size: 12px; color: var(--gris); }
   .cifras { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--linea); }
-  .cifras div { padding: 10px 14px; }
-  .cifras div:nth-child(even) { border-left: 1px solid var(--linea); }
-  .cifras div:nth-child(n+3) { border-top: 1px solid var(--linea); }
-  .cifras b { display: block; font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
-  .cifras span { font-size: 11px; color: var(--gris); }
-  table.datos { width: 100%; border-collapse: collapse; border-top: 1px solid var(--linea); font-size: 12px; }
-  table.datos td { padding: 5px 14px; vertical-align: top; }
-  table.datos td:first-child { color: var(--gris); }
-  table.datos td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
-  table.datos tr + tr td { border-top: 1px solid #f0f1ee; }
-  .acciones { display: flex; gap: 6px; padding: 10px 14px 12px; border-top: 1px solid var(--linea); flex-wrap: wrap; }
-  .btn { border: 1px solid #d3d8d2; background: var(--carta); border-radius: 8px; padding: 6px 10px; font-size: 12px; cursor: pointer; text-decoration: none; color: var(--tinta); display: inline-flex; align-items: center; gap: 5px; }
-  .btn:hover { border-color: var(--acento); color: var(--acento); }
-  .btn.primario { background: var(--acento); border-color: var(--acento); color: #fff; }
-  .btn.primario:hover { background: #1b5e49; color: #fff; }
-  .vacia { margin-top: 14px; padding: 14px; border: 1px dashed #cfd5ce; border-radius: var(--r); color: var(--gris); font-size: 12px; text-align: center; }
-
-  /* layer switches */
-  .capas-grupo { margin-bottom: 12px; }
-  .capas-grupo h4 { margin: 0 0 4px; font-size: 11.5px; font-weight: 600; color: var(--gris); }
-  .sw { display: flex; align-items: center; gap: 10px; padding: 6px 8px; margin: 0 -8px; border-radius: 8px; cursor: pointer; position: relative; }
-  .sw:hover { background: #eceee9; }
-  .sw input { appearance: none; flex: none; width: 30px; height: 18px; border-radius: 99px; background: #cfd4ce; position: relative; cursor: pointer; transition: background .15s; margin: 0; }
-  .sw input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .15s; }
-  .sw input:checked { background: var(--acento); }
-  .sw input:checked::after { transform: translateX(12px); }
-  .sw input:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
-  .sw .muestra { flex: none; width: 14px; height: 14px; border-radius: 4px; }
-  .sw .muestra.redonda { border-radius: 50%; }
-  .sw .muestra.tri { border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-  .sw .t { flex: 1; }
-  .sw .t small { display: block; color: var(--tenue); font-size: 11px; }
-  .ayuda { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1px solid #cfd4ce; background: var(--carta); color: var(--gris); font-size: 11px; font-weight: 600; cursor: help; padding: 0; }
-  .ayuda:hover, .ayuda:focus-visible { border-color: var(--acento); color: var(--acento); outline: none; }
-  .tip { display: none; position: absolute; z-index: 900; left: 8px; right: 8px; top: calc(100% + 2px); background: var(--tinta); color: #f2f4f1; font-size: 11.5px; line-height: 1.5; padding: 9px 11px; border-radius: 8px; box-shadow: var(--sombra); pointer-events: none; }
-  .ayuda:focus-visible + .tip { display: block; }
-  @media (hover: hover) { .ayuda:hover + .tip { display: block; } }
-  .sw.ver .tip { display: block; }
-  .op { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--gris); margin-top: 4px; }
-  .op input { flex: 1; accent-color: var(--acento); }
-  .op output { width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
-
-  .nota { padding: 16px 20px 24px; font-size: 11.5px; color: var(--gris); }
-  .nota p { margin: 0 0 8px; }
-  a { color: var(--acento); }
-
-  /* floating legend */
-  #leyenda { position: absolute; z-index: 800; right: 12px; bottom: 28px; width: 250px; max-height: calc(100% - 120px); overflow-y: auto; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-radius: var(--r); box-shadow: var(--sombra); padding: 10px 12px; font-size: 11.5px; }
-  #leyenda[hidden] { display: none; }
-  #leyenda h5 { margin: 0 0 6px; font-size: 11px; font-weight: 600; color: var(--tinta); }
-  #leyenda .bloque + .bloque { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--linea); }
-  #leyenda .item { display: flex; align-items: center; gap: 7px; margin: 2px 0; color: var(--gris); }
-  #leyenda .item i { flex: none; width: 16px; height: 11px; border-radius: 2px; border: 1px solid rgba(0,0,0,.08); }
-  #leyenda .item i.linea { height: 3px; border: 0; border-radius: 1px; }
-  #leyenda .item i.punto { width: 11px; border-radius: 50%; }
-  #leyenda .item i.tri { width: 12px; border: 0; border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-
-  /* map chip */
-  #etiqueta { position: absolute; z-index: 800; left: 50%; top: 12px; transform: translateX(-50%); background: var(--tinta); color: #fff; padding: 7px 14px; border-radius: 99px; font-size: 12px; box-shadow: var(--sombra); max-width: calc(100% - 140px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
-  #etiqueta[hidden] { display: none; }
-  .leaflet-image-layer, .capa-px { image-rendering: pixelated; }
-  .leaflet-container { font: inherit; background: #2b2b2b; }
-  .leaflet-popup-content-wrapper { border-radius: var(--r); box-shadow: var(--sombra); }
-  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; line-height: 1.5; }
-  .leaflet-control-layers, .leaflet-bar { border: 0 !important; box-shadow: var(--sombra) !important; border-radius: 8px !important; }
-
-  /* collapsible legend */
-  #leyenda .ley-cab { display: flex; width: 100%; align-items: center; justify-content: space-between; border: 0; background: none; padding: 0 0 6px; margin: 0; cursor: pointer; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--tenue); }
-  #leyenda .ley-cab::after { content: "▾"; font-size: 12px; transition: transform .15s; }
-  #leyenda.plegada { width: auto; padding: 6px 12px; }
-  #leyenda.plegada .ley-cab { padding: 0; gap: 8px; }
-  #leyenda.plegada .ley-cab::after { transform: rotate(180deg); }
-  #leyenda.plegada #ley-cuerpo { display: none; }
-
-  /* sheet of File S4 */
-  #hoja { position: fixed; inset: 0; z-index: 2000; background: rgba(15,20,17,.88); display: flex; flex-direction: column; }
-  #hoja[hidden] { display: none; }
-  #hoja .barra { flex: none; display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; color: #fff; font-weight: 600; }
-  #hoja .barra span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #hoja .barra a { color: #fff; font-weight: 500; font-size: 12px; white-space: nowrap; }
-  #hoja .barra button { flex: none; width: 40px; height: 40px; border: 0; border-radius: 8px; background: rgba(255,255,255,.14); color: #fff; font-size: 16px; cursor: pointer; }
-  #hoja .lienzo { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0 12px 12px; }
-  #hoja img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 8px; }
-
-  /* popup of a col */
-  .pop .cod { font-size: 11px; color: var(--tenue); font-variant-numeric: tabular-nums; }
-  .pop h3 { margin: 1px 0 8px; padding-right: 14px; font: 600 15px/1.25 "Source Serif 4", Georgia, serif; }
-  .pop .mini { display: block; margin-bottom: 8px; border: 1px solid var(--linea); border-radius: 6px; overflow: hidden; cursor: zoom-in; }
-  .pop .mini img { display: block; width: 100%; aspect-ratio: 540 / 381; background: #eef0ec; }
-  .pop .fil { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  .pop .fil b { display: block; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .pop .fil span { font-size: 10.5px; color: var(--gris); }
-  .pop .tipo { margin-top: 8px; font-size: 11.5px; color: var(--gris); }
-  .pop .acc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .leaflet-container a.btn { color: var(--tinta); }
-  .leaflet-container a.btn.primario { color: #fff; }
-  #ficha { scroll-margin-top: 150px; }
-
-  /* drawer buttons, phone only */
-  .cerrar { display: none; flex: none; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12); color: #fff; border-radius: 99px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
-  .abrir { display: none; position: absolute; z-index: 900; left: 50%; bottom: 30px; transform: translateX(-50%); align-items: center; gap: 8px; border: 0; background: var(--acento); color: #fff; border-radius: 99px; padding: 12px 20px; font-size: 14px; font-weight: 600; box-shadow: 0 2px 6px rgba(0,0,0,.25), 0 8px 24px rgba(0,0,0,.25); cursor: pointer; white-space: nowrap; }
-
-  @media (max-width: 800px) {
-    html, body { height: 100dvh; overflow: hidden; }
-    #app { display: block; height: 100dvh; }
-    #mapa { position: absolute; inset: 0; }
-    #panel { position: fixed; inset: 0; z-index: 1500; border-right: 0; overscroll-behavior: contain; transform: translateY(100%); visibility: hidden; transition: transform .25s ease, visibility 0s .25s; }
-    #app.panel-abierto #panel { transform: none; visibility: visible; transition: transform .25s ease; }
-    header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 16px; }
-    header .kicker, header p { display: none; } header h1 { flex: 1; font-size: 16px; margin: 0; }
-    .cerrar { display: inline-flex; }
-    .abrir { display: flex; }
-    #ficha { scroll-margin-top: 64px; }
-    section { padding: 12px 16px; }
-    .combo input { font-size: 16px; padding-top: 10px; padding-bottom: 10px; }
-    .combo .x { width: 36px; height: 36px; right: 2px; }
-    #lista { max-height: 45dvh; }
-    #lista li[role=option] { padding: 10px 8px; }
-    .btn { padding: 9px 12px; font-size: 13px; }
-    .sw { padding: 9px 8px; }
-    .ayuda { width: 28px; height: 28px; font-size: 13px; }
-    .op input { height: 28px; }
-    #leyenda { width: 210px; bottom: 22px; right: 8px; max-height: calc(100% - 90px); padding: 8px 10px; font-size: 11px; }
-    #leyenda:not(.plegada) { bottom: 88px; max-height: calc(100% - 150px); }
-    #etiqueta { top: 8px; max-width: calc(100% - 120px); font-size: 11.5px; padding: 6px 12px; }
-    .leaflet-control-attribution { max-width: 100vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 9px; }
-    .leaflet-bottom.leaflet-left { bottom: 14px; }
-    .leaflet-container a.leaflet-popup-close-button { width: 34px; height: 34px; font: 20px/34px Tahoma, Verdana, sans-serif; }
-    .pop .btn { flex: 1; justify-content: center; }
-  }
-  @media (max-height: 500px) and (min-width: 801px) {   /* phones in landscape */
-    #app { grid-template-columns: 320px 1fr; }
-    header { padding: 10px 16px; } header .kicker, header p { display: none; } header h1 { font-size: 16px; margin: 0; }
-    #leyenda { max-height: calc(100% - 60px); }
+  .cifras div { padding: 9px 14px; border-bottom: 1px solid var(--linea); }
+  .cifras div:nth-child(odd) { border-right: 1px solid var(--linea); }
+  .cifras b { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .cifras span { font-size: 11px; color: var(--tenue); }
+  .lectura { padding: 10px 14px; border-top: 1px solid var(--linea); }
+  .lectura .fila { display: flex; justify-content: space-between; align-items: baseline; }
+  .lectura b { font-variant-numeric: tabular-nums; }
+  .lectura small { color: var(--tenue); font-size: 11px; }
+  .etq { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 10.5px; font-weight: 600; }
+  .etq.sube { background: #fbe1d8; color: #8c1d18; } .etq.baja { background: #dbe9f6; color: #174f86; } .etq.dep { background: #eceeea; color: var(--gris); }
+  .opcion { display: flex; gap: 9px; align-items: flex-start; padding: 6px 0; cursor: pointer; }
+  .opcion input { margin-top: 3px; accent-color: var(--acento); }
+  .opcion small { display: block; color: var(--tenue); font-size: 11px; }
+  select { width: 100%; padding: 8px 10px; border: 1px solid #d3d8d2; border-radius: 8px; background: var(--carta); }
+  .fila-ctrl { display: flex; align-items: center; gap: 10px; margin-top: 10px; color: var(--gris); font-size: 12px; }
+  .fila-ctrl input[type=range] { flex: 1; accent-color: var(--acento); }
+  .nota { padding: 14px 20px 24px; font-size: 11.5px; color: var(--gris); }
+  .nota a { color: var(--acento); }
+  #leyenda { position: absolute; z-index: 800; right: 12px; bottom: 26px; background: rgba(255,255,255,.95); border-radius: var(--r); box-shadow: var(--sombra);
+    padding: 10px 12px; font-size: 11.5px; max-width: 250px; }
+  #leyenda .bloque + .bloque { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--linea); }
+  #leyenda .t { font-weight: 600; margin-bottom: 4px; }
+  #leyenda .item { display: flex; align-items: center; gap: 7px; line-height: 1.6; }
+  #leyenda i { width: 14px; height: 10px; border-radius: 2px; flex: none; border: 1px solid rgba(0,0,0,.12); }
+  #leyenda i.pt { width: 10px; height: 10px; border-radius: 50%; }
+  .pop { min-width: 210px; font-size: 12px; }
+  .pop .cod { color: var(--tenue); font-size: 11px; }
+  .pop b.t { display: block; font: 600 14px/1.3 "Source Serif 4", Georgia, serif; margin: 2px 0 6px; }
+  .pop table { border-collapse: collapse; width: 100%; }
+  .pop td { padding: 2px 0; } .pop td + td { text-align: right; font-variant-numeric: tabular-nums; }
+  .leaflet-container { font-family: inherit; }
+  @media (max-width: 760px) {
+    #app { grid-template-columns: 1fr; grid-template-rows: 58vh 1fr; }
+    #mapa { grid-row: 1; } #panel { grid-row: 2; border-right: 0; border-top: 1px solid var(--linea); }
+    header { padding: 14px 16px 12px; } header h1 { font-size: 18px; } section { padding: 14px 16px; }
+    #leyenda { bottom: 18px; right: 8px; max-width: 200px; font-size: 10.5px; }
   }
 </style>
 </head>
@@ -198,351 +86,200 @@
 <div id="app">
   <aside id="panel">
     <header>
-      <div style="flex:1;min-width:0">
       <div class="kicker">Andean Passes Database · viewer</div>
-      <h1>Gateways through the Andes</h1>
-      <p>The cols of the W–E continental divide, 11°N to 55°S, and the map layers of the census, the montane gaps and the conservation analysis. Working viewer, article in preparation.</p>
-      </div>
-      <button type="button" class="cerrar" id="cerrar-panel" aria-label="Close panel and show the map">Map ✕</button>
+      <h1>Cols of the Andes and their climatic connectivity</h1>
+      <p>Census of the cols of the Andes from FABDEM, and how each col of the tropical Andes channels or diverts the current of lowland and montane climates.</p>
     </header>
-
     <section>
-      <div class="titulo"><h2>Col</h2><small id="cuenta"></small></div>
-      <div class="combo" id="combo">
-        <svg class="lupa" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="buscar" type="text" role="combobox" aria-expanded="false" aria-controls="lista" aria-autocomplete="list" autocomplete="off" placeholder="Search by name: Porculla, Táchira, Chocontá">
-        <button class="x" id="limpiar" aria-label="Clear selection">✕</button>
-        <ul id="lista" role="listbox" aria-label="Cols"></ul>
+      <h2>Find a col</h2>
+      <div class="buscar">
+        <input id="q" type="search" autocomplete="off" placeholder="Control pass or APD ID (e.g. APD113156)" aria-label="Search a col">
+        <ul id="sugerencias" role="listbox"></ul>
       </div>
-      <div class="vacia" id="vacia">Pick a col, or click one on the map, to see its census data and its descent routes.</div>
+      <div class="vacia" id="vacia">Or click a col on the map. The map shows the <span id="cuenta"></span> cols with a depth of 100 m or more.</div>
       <div id="ficha" hidden></div>
     </section>
-
     <section>
-      <div class="titulo"><h2>Map layers</h2><small>from the paper</small></div>
+      <h2>Climatic connectivity</h2>
       <div id="capas"></div>
-      <label class="op">Raster opacity <input id="opacidad" type="range" min="0.2" max="1" step="0.05" value="0.9"><output id="op-v">90 %</output></label>
+      <div class="fila-ctrl"><span>Opacity</span><input id="opac" type="range" min="0.2" max="1" step="0.05" value="0.85" aria-label="Opacity of the layer"></div>
     </section>
-
+    <section>
+      <h2>Cols</h2>
+      <select id="modo" aria-label="Colour of the cols">
+        <option value="r">By rank (continental, terminal, tributary)</option>
+        <option value="t">Transverse reading, median of 19 variables</option>
+        <option value="l">Longitudinal reading, median of 19 variables</option>
+        <option value="no">Hidden</option>
+      </select>
+    </section>
+    <section>
+      <h2>Context</h2>
+      <label class="opcion"><input type="checkbox" id="ghm"><span>Human modification<small>Global Human Modification (Kennedy et al. 2019)</small></span></label>
+      <label class="opcion"><input type="checkbox" id="pa"><span>Protected areas<small>WDPA, November 2026, shown as pixels only</small></span></label>
+      <label class="opcion"><input type="checkbox" id="ctl" checked><span>Control passes<small>36 named passes used to check the census</small></span></label>
+    </section>
     <div class="nota">
-      <p>Rasters are shown as tiles on the 15″ grid of the census (HydroSHEDS) and the 30″ grid of the human modification layer. Lines are simplified for the web to about 200 m.</p>
-      <p>Sources: Copernicus GLO-30; HydroSHEDS and HydroBASINS (Lehner &amp; Grill 2013); GMBA Mountain Inventory v2 (Snethlage et al. 2022); Global Human Modification (Kennedy et al. 2019); WDPA, November 2026 (UNEP-WCMC &amp; IUCN), shown as a derived map, the original vectors are not redistributed. Pass names from OpenStreetMap remain under ODbL.</p>
-      <p>Download GeoJSON: <a href="capas/divisoria.geojson" download>divide</a> · <a href="capas/brechas.geojson" download>montane gaps</a> · <a href="capas/corredor.geojson" download>montane corridor</a> · <a href="capas/rutas.geojson" download>descent routes</a></p>
+      Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it.
+      <b>Transverse reading</b>: current from west to east between lowland cells (warmer than the climate at 2000 m at that latitude), for lowland species.
+      <b>Longitudinal reading</b>: current from north to south between montane cells, for montane species.
+      Main configuration: WorldClim 2.1 (1970 to 2000), margin q = 0.1, tiles of 200 km. A col is <i>robust</i> when its median stays on the same side of 1 in five configurations of margin and tile size.
+      Connectivity covers 11°N to 23.5°S; the census covers the whole Andes. Data: <a href="https://github.com/irwingss/andean-passes">github.com/irwingss/andean-passes</a>.
     </div>
   </aside>
-  <main id="mapa">
-    <button type="button" class="abrir" id="abrir-panel" aria-controls="panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Cols &amp; layers</button>
-    <div id="etiqueta" hidden></div>
-    <div id="leyenda" hidden><button type="button" class="ley-cab" id="ley-cab" aria-expanded="true" aria-label="Legend"><span>Legend</span></button><div id="ley-cuerpo"></div></div>
-  </main>
+  <div id="mapa"><div id="leyenda"></div></div>
 </div>
-<div id="hoja" role="dialog" aria-modal="true" aria-label="Sheet of the gateway in File S4" hidden><div class="barra"><span id="hoja-t"></span><a id="hoja-a" target="_blank" rel="noopener">Full size</a><button type="button" id="hoja-x" aria-label="Close sheet">✕</button></div><div class="lienzo"><img alt=""></div></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const ANDES = [[-56, -82], [13, -60]];
-const mapa = L.map('mapa', { preferCanvas: true, zoomSnap: 0.5, zoomControl: false }).fitBounds(ANDES);
-L.control.zoom({ position: 'topleft' }).addTo(mapa);
-const bases = {
-  'Dark': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', { zIndex: 0, maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
-  'Light': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { zIndex: 0, maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
-  'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { zIndex: 0, maxZoom: 18, attribution: 'Esri, Maxar, Earthstar Geographics' }),
-  'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { zIndex: 0, maxZoom: 19, attribution: '© OpenStreetMap' }),
-};
-bases.Satellite.addTo(mapa);
-L.control.layers(bases, null, { position: 'topright', autoZIndex: false }).addTo(mapa);   // autoZIndex would lift each basemap over the rasters
-L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(mapa);
-const TACTIL = matchMedia('(hover: none)').matches;
-mapa.createPane('vectores').style.zIndex = 425;   // above rasters
-// one canvas for lines and points: a canvas in a higher pane would swallow every click meant for the one below;
-// the tolerance widens the hit area of thin marks for a finger
-const VEC = { pane: 'vectores', renderer: L.canvas({ pane: 'vectores', tolerance: TACTIL ? 12 : 2 }) };
-const Triangulo = L.CircleMarker.extend({ _updatePath() {   // temperate gateways are triangles, as in Fig. 2b; clicks use the circle
-  const R = this._renderer;
-  if (!R._drawing || this._empty()) return;
-  const { x, y } = this._point, r = this._radius * 1.25, c = R._ctx;
-  c.beginPath(); c.moveTo(x, y - r); c.lineTo(x + r * .87, y + r * .5); c.lineTo(x - r * .87, y + r * .5); c.closePath();
-  R._fillStroke(c, this);
-} });
-
 const $ = id => document.getElementById(id);
-const fmt = x => x == null ? 'n/a' : x.toLocaleString('en-US').replace(/,/g, ' ');
-const sinAcento = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const item = (c, t, a = 1, f = '') => `<div class="item"><i class="${f}" style="background:${c};opacity:${a}"></i>${t}</div>`;
-const opac = () => +$('opacidad').value;
-const MOVIL = matchMedia('(max-width: 800px)');
-const nombre = c => c.nombre || c.id;
-
-// ---------- phone: the panel is a full-screen drawer over the map
-function panel(si) {
-  if (!MOVIL.matches || $('app').classList.contains('panel-abierto') === si) return;
-  $('app').classList.toggle('panel-abierto', si);
-  $('abrir-panel').setAttribute('aria-expanded', si);
-  if (!si) { abrir(false); document.activeElement?.blur(); }
-}
-$('abrir-panel').addEventListener('click', () => panel(true));
-$('cerrar-panel').addEventListener('click', () => panel(false));
-addEventListener('keydown', e => { if (e.key === 'Escape' && e.target !== $('buscar')) $('hoja').hidden ? panel(false) : cerrarHoja(); });
-L.DomEvent.disableClickPropagation($('abrir-panel'));
-L.DomEvent.disableClickPropagation($('etiqueta'));
-$('etiqueta').addEventListener('click', () => sel && globo(sel));   // brings back a closed popup
-function verHoja(c) {
-  const h = $('hoja'), img = h.querySelector('img');
-  img.src = 'capas/' + c.atlas; img.alt = `Sheet of ${nombre(c)}`;
-  $('hoja-t').textContent = nombre(c); $('hoja-a').href = img.src;
-  if (h.hidden) { h.hidden = false; history.pushState({ hoja: 1 }, ''); }
-  $('hoja-x').focus();
-}
-const cerrarHoja = () => history.back();
-addEventListener('popstate', () => $('hoja').hidden = true);
-$('hoja').addEventListener('click', e => e.target.closest('img, a') || cerrarHoja());   // not on the image: a pinch must not close it
-document.addEventListener('click', e => {   // capture: a Leaflet popup stops propagation
-  const a = e.target.closest('a[data-hoja]');
-  if (!a || e.ctrlKey || e.metaKey || e.shiftKey) return;
-  e.preventDefault();
-  verHoja(C.find(c => c.id === a.dataset.hoja));
-}, true);
-
-// ---------- legend: one floating box that lists only what is on the map
-const leyendas = new Map();
-function leyenda(clave, html) {
-  html ? leyendas.set(clave, html) : leyendas.delete(clave);
-  $('ley-cuerpo').innerHTML = [...leyendas.values()].map(h => `<div class="bloque">${h}</div>`).join('');
-  $('leyenda').hidden = !leyendas.size;
-}
-const plegar = si => { $('leyenda').classList.toggle('plegada', si); $('ley-cab').setAttribute('aria-expanded', !si); };
-$('ley-cab').addEventListener('click', () => plegar(!$('leyenda').classList.contains('plegada')));
-L.DomEvent.disableClickPropagation($('leyenda')); L.DomEvent.disableScrollPropagation($('leyenda'));
-if (MOVIL.matches) plegar(true);
-
-// ---------- cols
-let C = [], sel = null, marca = null, rutasCol = null;
-const capasPuntos = { todas: null, p100: null, puertasE: null, puertasT: null };
-// on the shared canvas the last drawn wins the click: gateways over other cols, all of them over the lines
-const RADIO = { puertasT: [5, 10], puertasE: [5, 10], p100: [2.5, 8], todas: [1.6, 7] };   // radius at zoom 5 or less, and at zoom 10 or more
-const radio = k => { const [a, b] = RADIO[k]; return a + (b + (TACTIL ? 2 : 0) - a) * Math.min(1, Math.max(0, (mapa.getZoom() - 5) / 5)); };
-const clase = c => c.puerta ? (c.grupo === 'tropical' ? 'puertasT' : 'puertasE') : c.prof >= 100 ? 'p100' : 'todas';
-const marcaDe = (c, op) => clase(c) === 'puertasE' ? new Triangulo([c.lat, c.lon], op) : L.circleMarker([c.lat, c.lon], op);
-const radioAnillo = () => radio(clase(sel)) + 4;   // the selected col is its own mark, enlarged
-let anillo = null;
-mapa.on('zoomend', () => {
-  for (const k in RADIO) capasPuntos[k]?.eachLayer(l => l.setRadius(radio(k)));
-  anillo?.setRadius(radioAnillo());
-});
-// the canvas gives a click to the last drawn mark in reach: among close cols take the nearest to the finger instead
-const enMapa = c => { const g = capasPuntos[clase(c)]; return g && mapa.hasLayer(g); };
-const cercano = p => C.filter(enMapa).reduce((a, c) => { const d = mapa.latLngToContainerPoint([c.lat, c.lon]).distanceTo(p); return d < a[0] ? [d, c] : a; }, [Infinity])[1];
-const ordenar = () => [...Object.values(capasPuntos), marca].forEach(g => g && mapa.hasLayer(g) && g.eachLayer(l => l.bringToFront()));
-const ZONAS = { tropical: 'Tropical', temperate: 'Temperate' };
-const TIPOS = { open: 'open', hydric_only: 'closed in moisture only', thermal_only: 'closed in temperature only', closed: 'closed' };
-const ROJO = '#D55E00';
-const COLOR = { puertasT: ROJO, puertasE: ROJO, p100: '#f2c14e', todas: '#d8dcd6' };
-
-let NOMBRADOS = [], visibles = [], activo = -1;
-function pintarLista() {
-  const q = sinAcento($('buscar').value.trim());
-  const enSel = sel && $('buscar').value === sel.nombre;
-  visibles = NOMBRADOS.filter(c => enSel || !q || c.clave.includes(q));
-  $('cuenta').textContent = `${visibles.length} named`;
-  const resaltar = s => {
-    if (!q || enSel) return esc(s);
-    const i = sinAcento(s).indexOf(q);
-    return i < 0 ? esc(s) : esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + q.length)) + '</mark>' + esc(s.slice(i + q.length));
-  };
-  $('lista').innerHTML = visibles.map((c, k) => `<li role="option" id="op-${k}" data-i="${k}" data-id="${c.id}" aria-selected="false"><span class="n">${resaltar(c.nombre)}</span><span class="c">${fmt(c.alt)} m</span></li>`).join('') ||
-    '<li class="vacio">No col has that name.</li>';
-  marcar(enSel ? visibles.indexOf(sel) : (q ? 0 : -1));
-}
-function marcar(i) {
-  $('lista').querySelector('[aria-selected=true]')?.setAttribute('aria-selected', 'false');
-  activo = i;
-  const li = $('op-' + i);
-  if (li) { li.setAttribute('aria-selected', 'true'); li.scrollIntoView({ block: 'nearest' }); $('buscar').setAttribute('aria-activedescendant', li.id); }
-  else $('buscar').removeAttribute('aria-activedescendant');
-}
-const abrir = si => { $('combo').classList.toggle('abierto', si); $('buscar').setAttribute('aria-expanded', si); };
-$('buscar').addEventListener('focus', () => { $('buscar').select(); pintarLista(); abrir(true); });
-$('buscar').addEventListener('input', () => { $('combo').classList.toggle('lleno', !!$('buscar').value); pintarLista(); abrir(true); });
-$('buscar').addEventListener('keydown', e => {
-  if (e.key === 'ArrowDown') { e.preventDefault(); abrir(true); marcar(Math.min(activo + 1, visibles.length - 1)); }
-  else if (e.key === 'ArrowUp') { e.preventDefault(); marcar(Math.max(activo - 1, 0)); }
-  else if (e.key === 'Enter' && visibles[activo]) { e.preventDefault(); elegir(visibles[activo].id); }
-  else if (e.key === 'Escape') { abrir(false); sel && ($('buscar').value = sel.nombre || ''); }
-});
-$('lista').addEventListener('mousedown', e => { const li = e.target.closest('[role=option]'); if (li) { e.preventDefault(); elegir(li.dataset.id); } });
-document.addEventListener('mousedown', e => { if (!$('combo').contains(e.target)) { abrir(false); if (sel) $('buscar').value = sel.nombre || ''; } });
-document.addEventListener('pointerdown', e => e.target.closest('.ayuda') || document.querySelectorAll('.sw.ver').forEach(s => s.classList.remove('ver')), true);
-$('limpiar').addEventListener('click', () => quitar());
-
-const json = url => { let p; return () => p = p || fetch(url).then(r => r.json()); };   // fetched once, on first use
-const rutas = json('capas/rutas.geojson');
-const fila = (k, v) => v == null ? '' : `<tr><td>${k}</td><td>${v}</td></tr>`;
-
-// a real link, so a long press or ctrl+click opens the image alone; a plain click opens it over the map
-const enlaceHoja = (c, clase) => `<a class="${clase}" href="capas/${c.atlas}" target="_blank" rel="noopener" data-hoja="${c.id}">▤ Sheet, File S4</a>`;
-const POPUP = { minWidth: 262, maxWidth: 262, offset: [0, -4], autoPanPaddingTopLeft: [10, 52], autoPanPaddingBottomRight: [10, MOVIL.matches ? 84 : 20] };
-function globo(c) {
-  const d = Object.assign(document.createElement('div'), { className: 'pop', innerHTML: `<div class="cod">${c.nombre ? c.id + ' · ' : ''}${c.puerta ? 'Gateway' : 'Col'} · ${ZONAS[c.grupo]}${c.pais ? ' · ' + c.pais : ''}</div>
-    <h3>${esc(nombre(c))}</h3>
-    ${c.atlas ? `<a class="mini" href="capas/${c.atlas}" target="_blank" rel="noopener" data-hoja="${c.id}"><img src="capas/miniaturas/${c.id}.jpg" alt="Sheet of ${esc(nombre(c))}, File S4"></a>` : ''}
-    <div class="fil"><div><b>${fmt(c.alt)}</b><span>m, crossing</span></div><div><b>${fmt(c.prof)}</b><span>m, depth</span></div><div><b>${fmt(c.iso)}</b><span>km, isolation</span></div></div>
-    ${c.tipo ? `<div class="tipo">${TIPOS[c.tipo][0].toUpperCase() + TIPOS[c.tipo].slice(1)}${c.critica ? ' · critical gateway' : ''}</div>` : ''}
-    <div class="acc">${c.atlas ? enlaceHoja(c, 'btn primario') : ''}<button type="button" class="btn">All data</button></div>` });
-  d.querySelector('button').onclick = () => { panel(true); $('ficha').scrollIntoView({ block: 'start' }); };
-  L.popup({ ...POPUP, maxHeight: Math.max(240, mapa.getSize().y - 150) }).setLatLng([c.lat, c.lon]).setContent(d).openOn(mapa);
-}
-
-function elegir(id, volar = true) {
-  const c = C.find(x => x.id === id);
-  if (!c) return;
-  sel = c;
-  $('buscar').value = c.nombre || ''; $('combo').classList.add('lleno'); abrir(false); $('buscar').blur();
-  history.replaceState(null, '', '#' + c.id);
-  marca?.remove(); rutasCol?.remove(); rutasCol = null;
-  mapa.closePopup();
-  marca = L.layerGroup([...(c.flancos || []).map(([la, lo, s]) => L.circleMarker([la, lo], { ...VEC, bubblingMouseEvents: false, radius: 5, color: '#000', weight: 1, fillColor: s === 'W' ? '#E69F00' : '#56B4E9', fillOpacity: 1 }).bindTooltip(s + ' flank, 1000 m')),
-    anillo = marcaDe(c, { ...VEC, interactive: false, radius: radioAnillo(), color: '#fff', weight: 3, fillColor: COLOR[clase(c)], fillOpacity: 1 })]).addTo(mapa);
-  ordenar();
-  rutas().then(g => { if (sel !== c) return;
-    rutasCol = L.geoJSON(g, { ...VEC, interactive: false, filter: f => f.properties.col === c.id, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 3 }) }).addTo(mapa); ordenar(); });
-  $('etiqueta').hidden = false; $('etiqueta').textContent = `${nombre(c)} · ${fmt(c.alt)} m`;
-  if (volar) { mapa.once('moveend', () => sel === c && globo(c)); mapa.flyTo([c.lat, c.lon], c.flancos ? 9 : 10, { duration: .7 }); }
-  else globo(c);
-
-  $('vacia').hidden = true; $('ficha').hidden = false;
-  $('ficha').innerHTML = `<div class="cab"><div class="cod">${c.nombre ? c.id + ' · ' : ''}${c.puerta ? 'Gateway' : 'Col'} · ${ZONAS[c.grupo]}</div>
-      <h3>${esc(nombre(c))}</h3>
-      <div class="meta">${c.pais ? c.pais + ' · ' : ''}${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}${c.terminal ? ' · end of the chain, out of the tests' : ''}</div></div>
-    <div class="cifras"><div><b>${fmt(c.alt)}</b><span>m, crossing height</span></div><div><b>${fmt(c.prof)}</b><span>m, depth</span></div>
-      <div><b>${fmt(c.iso)}</b><span>km, isolation along the divide</span></div><div><b>${fmt(c.ancho)}</b><span>km, width at +100 m</span></div></div>
-    ${c.tipo ? `<table class="datos">${fila('Moisture and temperature type', TIPOS[c.tipo])}${fila('Thermal overlap, present', c.to)}${fila('Aridity gap, log ratio (larger absolute value; negative = crest drier)', c.ai)}
-      ${fila('Change in overlap, 2081–2100 SSP3-7.0', c.dto)}${fila('Change in precipitation gap', c.dpg)}${fila('Fraction of ΔT* reached', c.frac)}
-      ${fila('Crest in a protected area', c.crest_pa ? 'yes' : 'no')}${fila('Protected within 5 km', c.pa5 == null ? null : c.pa5 + ' %')}${fila('gHM at the crest', c.ghm)}
-      ${fila('Montane corridor lost within 25 km', c.loss == null ? null : c.loss + ' km')}${fila('Critical gateway', c.critica ? (c.pres ? 'yes, high pressure' : 'yes') : 'no')}</table>` : ''}
-    <div class="acciones"><button class="btn primario" id="ir-col">◎ Zoom to col</button>${c.atlas ? enlaceHoja(c, 'btn') : ''}</div>`;
-  $('ir-col').onclick = () => { panel(false); mapa.flyTo([c.lat, c.lon], 11, { duration: .6 }); };
-  panel(false);
-}
-function quitar() {
-  sel = null; marca?.remove(); rutasCol?.remove(); marca = rutasCol = anillo = null;
-  $('buscar').value = ''; $('combo').classList.remove('lleno');
-  mapa.closePopup();
-  $('ficha').hidden = true; $('vacia').hidden = false; $('etiqueta').hidden = true;
-  history.replaceState(null, '', location.pathname + location.search); pintarLista();
-}
-
-// ---------- layers as switches, created on first use
-const capasTesela = new Set();
-const AYUDA = {
-  dominios: 'Each cell belongs to the ocean its water reaches: Pacific and Caribbean basins (W), Atlantic basins (E) or endorheic basins (I), from HydroBASINS, within the footprint of the census.',
-  umbrales: 'Terrain below the three elevation thresholds of the montane gap, 2000 m by default and 1500 and 2500 m for sensitivity (HydroSHEDS 15″ DEM). Terrain at 2500 m or above is left transparent.',
-  brechas2000: 'Stretches of the divide whose W–E crossing height is below 2000 m: the montane corridor is broken there. Click one for its length.',
-  brechas1500: 'As the 2000 m gaps, at the lower sensitivity threshold.',
-  brechas2500: 'As the 2000 m gaps, at the upper sensitivity threshold.',
-  corredor: 'Tropical divide by bins of 0.5 km. Lost: montane today and below the raised 2000 m isotherm by 2081–2100 under SSP3-7.0 in at least 7 of 8 GCMs. The isotherm rises by the local warming divided by the local lapse rate.',
-  divisoria: 'W–E continental divide from Copernicus GLO-30 by marker-controlled flooding, and the I|E divide of the endorheic basins from HydroBASINS.',
-  andes: 'Outline of the Andes in the GMBA Mountain Inventory v2.',
-  puertasT: 'A gateway is a col at least 100 m deep that is the lowest within 100 km along the divide either way. Tropical: between 11°N and 23.5°S. One of the 31 lies at the end of the chain and stays out of the tests, which leaves the 30 tropical gateways of the paper.',
-  puertasE: 'Same definition as the tropical gateways, from 23.5°S to the south end of the Andes. Drawn as triangles, as in Fig. 2b. Three of the 34 lie at the end of the chain and stay out of the tests.',
-  p100: 'Cols at least 100 m deep: the local minima of the crossing height that stand out from their surroundings.',
-  todas: 'Local minima of the crossing height less than 100 m deep. With the two layers above they make up the whole census.',
-  rutas: 'Steepest-descent traces from each gateway to 1000 m on both sides. Sides whose trace fell back on the nearest lowland cell have no route.',
-  pa: 'Protected areas as rasterized for the analysis: polygons, status designated, inscribed or established, not marine, without UNESCO-MAB reserves.',
-  ghm: 'Human modification, 0 to 1 (Kennedy et al. 2019), in the tropical Andes. High pressure in the paper means 0.4 or more.',
+const ANDES = [[-56.5, -82], [13, -60]];
+const RANK_COL = ['#D55E00', '#0072B2', '#8C8C8C'];
+const RANK_LAB = ['continental', 'terminal', 'tributary'];
+const BREAKS = [0.5, 0.8, 0.95, 1.05, 1.25, 2];
+const CAPAS = [
+  ['none', 'None', ''],
+  ['trans_bio01', 'Transverse reading, BIO1', 'Lowland guild, west to east (Fig. 2a)'],
+  ['longi_bio01', 'Longitudinal reading, BIO1', 'Montane guild, north to south (Fig. 2b)'],
+];
+const mapa = L.map('mapa', { zoomSnap: 0.5, zoomControl: false, minZoom: 3 }).fitBounds([[-24, -82], [12, -62]]);
+L.control.zoom({ position: 'topright' }).addTo(mapa);
+L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(mapa);
+const fondos = {
+  'Light': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
+  'Terrain': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', { maxNativeZoom: 13, maxZoom: 16, attribution: 'Esri' }),
+  'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18, attribution: 'Esri, Maxar, Earthstar Geographics' }),
+  'Dark': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: 'Esri, HERE, Garmin, © OpenStreetMap' }),
+  'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }),
 };
-function construir(I) {
-  const pal = k => I.pal[k].map(([c, a, t]) => item(c, t, a)).join('');
-  const tesela = (k, zmax = 9) => () => L.tileLayer(`capas/${k}/{z}/{x}/{y}.png`, { minNativeZoom: 3, maxNativeZoom: zmax, maxZoom: 16, bounds: ANDES, opacity: opac(), className: 'capa-px', errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' });
-  const brechas = json('capas/brechas.geojson');
-  const COLU = { 1500: '#ffd400', 2000: '#ff2d55', 2500: '#ff9f40' };
-  const brecha = th => async () => L.geoJSON(await brechas(), { ...VEC, filter: f => f.properties.umbral === th, style: { color: COLU[th], weight: th === 2000 ? 4 : 3 },
-    onEachFeature: (f, l) => l.bindPopup(`<b>Montane gap below ${th} m</b><br>${fmt(f.properties.km)} km of divide<br>Lowest crossing: ${fmt(f.properties.min)} m<br>Latitude ${f.properties.lat[0]} to ${f.properties.lat[1]}`) });
-  const CORR = { kept: ['#0072B2', 'Montane corridor kept'], lost: [ROJO, 'Lost by 2081–2100 (at least 7 of 8 GCMs)'], gap: ['#999999', 'Montane gap today'] };
-  const corredor = async () => L.geoJSON(await json('capas/corredor.geojson')(), { ...VEC, style: f => ({ color: CORR[f.properties.clase][0], weight: 4 }),
-    onEachFeature: (f, l) => { const p = f.properties; l.bindPopup(`<b>${CORR[p.clase][1]}</b><br>${fmt(p.km)} km<br>${p.pa} % inside protected areas<br>Mean gHM ${p.ghm}`); } });
-  let fondoClaro = false, capaDiv = null;   // the W|E divide is white on dark basemaps, black on light ones
-  const estiloDiv = f => f.properties.tipo === 'W|E' ? { color: fondoClaro ? '#000' : '#fff', weight: 1.4 } : { color: '#882255', weight: 1.2, dashArray: '4 4' };
-  mapa.on('baselayerchange', e => { fondoClaro = e.name === 'Light' || e.name === 'OpenStreetMap'; capaDiv?.setStyle(estiloDiv); });
-  const divisoria = async () => capaDiv = L.geoJSON(await json('capas/divisoria.geojson')(), { ...VEC, interactive: false, style: estiloDiv });
-  const andes = async () => L.geoJSON(await json('capas/andes.geojson')(), { ...VEC, interactive: false, style: { color: '#b9c0ba', weight: .7, fill: false } });
-  const rutasCapa = async () => L.geoJSON(await rutas(), { ...VEC, interactive: false, style: f => ({ color: f.properties.lado === 'W' ? '#E69F00' : '#56B4E9', weight: 1.5 }) });
-  const puntos = k => () => L.layerGroup(C.filter(c => clase(c) === k).map(c => {
-    const m = marcaDe(c, { ...VEC, bubblingMouseEvents: false, radius: radio(k), color: '#000', weight: .7, fillColor: COLOR[k], fillOpacity: 1 }).on('click', e => elegir(cercano(mapa.mouseEventToContainerPoint(e.originalEvent)).id, false));   // e.containerPoint is the centre of the mark, not the finger
-    return TACTIL ? m : m.bindTooltip(`${esc(nombre(c))} · ${fmt(c.alt)} m`, { direction: 'top' });   // on touch the tap opens the popup
-  }));
+fondos['Terrain'].addTo(mapa);
+L.control.layers(fondos, null, { position: 'topright' }).addTo(mapa);
+mapa.createPane('rasters').style.zIndex = 350;
+mapa.createPane('puntos').style.zIndex = 450;
+const VACIO = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+const teselas = (k, zmax) => L.tileLayer(`capas/${k}/{z}/{x}/{y}.png`, { pane: 'rasters', minNativeZoom: 3, maxNativeZoom: zmax, maxZoom: 16, bounds: ANDES, opacity: +$('opac').value, errorTileUrl: VACIO });
+const fmt = (v, d = 0) => v == null ? '–' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+const clase = v => v == null ? -1 : BREAKS.findIndex(b => v < b) === -1 ? 6 : BREAKS.findIndex(b => v < b);
 
-  const GRUPOS = [
-    ['Cols', [
-      ['puertasT', 'Tropical gateways', `${C.filter(c => clase(c) === 'puertasT').length} cols · 11°N to 23.5°S`, puntos('puertasT'), COLOR.puertasT, item(ROJO, 'Tropical gateway', 1, 'punto')],
-      ['puertasE', 'Temperate gateways', `${C.filter(c => clase(c) === 'puertasE').length} cols · south of 23.5°S`, puntos('puertasE'), COLOR.puertasE, item(ROJO, 'Temperate gateway', 1, 'tri')],
-      ['p100', 'Depth ≥ 100 m', `${fmt(C.filter(c => c.prof >= 100).length)} cols`, puntos('p100'), COLOR.p100, `<h5>Cols, depth ≥ 100 m</h5>${item('#f2c14e', 'Not a gateway', 1, 'punto')}`],
-      ['todas', 'Depth under 100 m', `${fmt(C.filter(c => c.prof < 100).length)} cols`, puntos('todas'), COLOR.todas, `<h5>Cols, depth under 100 m</h5>${item('#d8dcd6', 'Other cols', 1, 'punto')}`],
-      ['rutas', 'Descent routes', 'gateways, to 1000 m', rutasCapa, '#56B4E9', `<h5>Descent routes</h5>${item('#E69F00', 'W side', 1, 'linea')}${item('#56B4E9', 'E side', 1, 'linea')}`],
-    ]],
-    ['Divide', [
-      ['divisoria', 'Continental divide', 'GLO-30, W|E and I|E', divisoria, '#ffffff', `<h5>Divide</h5>${item('#8b938c', 'W|E divide (GLO-30)', 1, 'linea')}${item('#882255', 'I|E divide (HydroBASINS)', 1, 'linea')}`],
-      ['dominios', 'Drainage domains', 'map M1 · raster 15″', tesela('dominios'), '#56B4E9', `<h5>Drainage domains</h5>${pal('dominios')}`],
-      ['andes', 'Andes outline', 'GMBA v2', andes, '#b9c0ba', `<h5>Outline</h5>${item('#b9c0ba', 'Andes (GMBA v2)', 1, 'linea')}`],
-    ]],
-    ['Montane gaps · crossing below the threshold', [
-      ['umbrales', 'Terrain below 1500, 2000 and 2500 m', 'raster 15″', tesela('umbrales'), '#2b7bba', `<h5>Terrain elevation</h5>${pal('umbrales')}`],
-      ...[1500, 2000, 2500].map(th => ['brechas' + th, `Gaps below ${th} m`, th === 2000 ? 'Fig. 1b · default' : 'sensitivity', brecha(th), COLU[th], `<h5>Montane gaps</h5>${item(COLU[th], 'Crossing below ' + th + ' m', 1, 'linea')}`]),
-    ]],
-    ['Future and conservation', [
-      ['corredor', 'Montane corridor, SSP3-7.0', 'Fig. 4a · tropical divide', corredor, ROJO, `<h5>Montane corridor</h5>${Object.values(CORR).map(([c, t]) => item(c, t, 1, 'linea')).join('')}`],
-      ['pa', 'Protected areas', 'Fig. 4a · raster 15″', tesela('pa'), I.pal.pa[0][0], `<h5>Protection</h5>${pal('pa')}`],
-      ['ghm', 'Human modification', 'tropical Andes · raster 30″', tesela('ghm', 8), I.pal.ghm[2][0], `<h5>Human modification, gHM</h5>${pal('ghm')}`],
-    ]],
-  ];
-  const inter = {};
-  const apagar = k => { const c = inter[k]; if (c.checked) { c.checked = false; c.dispatchEvent(new Event('change')); } };
-  // rasters that would pile up: turning one on turns the others off. Protected areas go over any of them.
-  const LIMPIA = ['dominios', 'andes'];
-  const EXCLUYE = { dominios: ['umbrales', 'ghm'], umbrales: [...LIMPIA, 'ghm'], ghm: [...LIMPIA, 'umbrales'], brechas1500: LIMPIA, brechas2000: LIMPIA, brechas2500: LIMPIA };
-  for (const [titulo, capas] of GRUPOS) {
-    const div = Object.assign(document.createElement('div'), { className: 'capas-grupo', innerHTML: `<h4>${titulo}</h4>` });
-    for (const [clave, nom, sub, crear, color, ley] of capas) {
-      const lab = Object.assign(document.createElement('label'), { className: 'sw',
-        innerHTML: `<input type="checkbox"><span class="muestra ${{ puertasT: 'redonda', puertasE: 'tri' }[clave] || ''}" style="background:${color}"></span><span class="t">${nom}<small>${sub}</small></span>` +
-          `<button type="button" class="ayuda" aria-label="What is ${nom}?">?</button><span class="tip" role="tooltip">${AYUDA[clave]}</span>` });
-      lab.querySelector('.ayuda').addEventListener('click', e => {
-        e.preventDefault();
-        const ver = !lab.classList.contains('ver');
-        document.querySelectorAll('.sw.ver').forEach(s => s.classList.remove('ver'));
-        lab.classList.toggle('ver', ver);
-      });
-      const chk = inter[clave] = lab.querySelector('input');
-      let capa;
-      chk.addEventListener('change', async () => {
-        leyenda(clave, chk.checked && ley);
-        if (chk.checked) (EXCLUYE[clave] || []).forEach(apagar);
-        if (!chk.checked) { capasTesela.delete(capa); return capa && capa.remove(); }
-        capa = capa || await crear();
-        if (chk.checked) { capa.addTo(mapa); if (capa.setOpacity) capasTesela.add(capa); }
-        if (clave in capasPuntos) capasPuntos[clave] = capa;
-        ordenar();
-      });
-      div.append(lab);
-    }
-    $('capas').append(div);
+fetch('capas/indice.json').then(r => r.json()).then(D => {
+  const C = D.cols, N = C.id.length, CUR = D.pal.trans_bio01.map(p => p[0]);
+  $('cuenta').textContent = N.toLocaleString('en-US');
+  const apd = i => 'APD' + String(C.id[i]).padStart(6, '0');
+
+  // spatial buckets of 1 degree for drawing and picking
+  const cubo = new Map();
+  for (let i = 0; i < N; i++) {
+    const k = Math.floor(C.lat[i]) * 1000 + Math.floor(C.lon[i]);
+    (cubo.get(k) || cubo.set(k, []).get(k)).push(i);
   }
-  ['dominios', 'andes', 'divisoria', 'puertasT', 'puertasE'].forEach(k => { inter[k].checked = true; inter[k].dispatchEvent(new Event('change')); });
-}
+  const enCaja = (s, w, n, e) => {
+    const out = [];
+    for (let la = Math.floor(s); la <= Math.floor(n); la++) for (let lo = Math.floor(w); lo <= Math.floor(e); lo++) {
+      const b = cubo.get(la * 1000 + lo); if (b) for (const i of b) if (C.lat[i] >= s && C.lat[i] <= n && C.lon[i] >= w && C.lon[i] <= e) out.push(i);
+    }
+    return out;
+  };
+  let modo = 'r', sel = null;
+  const color = i => {
+    if (modo === 'r') return RANK_COL[C.r[i]];
+    const v = C[modo][i]; const k = clase(v); return k < 0 ? null : CUR[k];
+  };
+  const radio = (z, i) => (z < 6 ? 1.3 : z < 8 ? 2.2 : z < 10 ? 3.2 : 4.5) * (C.r[i] === 0 ? 1.35 : 1);
+  const Puntos = L.GridLayer.extend({
+    createTile(c) {
+      const t = L.DomUtil.create('canvas'), s = this.getTileSize(); t.width = s.x; t.height = s.y;
+      const g = t.getContext('2d'), z = c.z, nw = c.scaleBy(s), pad = 6;
+      const a = mapa.unproject(nw.subtract([pad, pad]), z), b = mapa.unproject(nw.add(s).add([pad, pad]), z);
+      const ids = enCaja(b.lat, a.lng, a.lat, b.lng);
+      ids.sort((x, y) => (modo === 'r' ? C.r[y] - C.r[x] : Math.abs(Math.log(C[modo][x] || 1)) - Math.abs(Math.log(C[modo][y] || 1))));
+      for (const i of ids) {
+        const p = mapa.project([C.lat[i], C.lon[i]], z).subtract(nw), col = color(i), r = radio(z, i);
+        g.beginPath(); g.arc(p.x, p.y, r, 0, 6.2832);
+        if (col) { g.fillStyle = col; g.fill(); if (z >= 8) { g.lineWidth = .6; g.strokeStyle = 'rgba(0,0,0,.45)'; g.stroke(); } }
+        else { g.lineWidth = 1; g.strokeStyle = 'rgba(90,90,90,.7)'; g.stroke(); }
+      }
+      return t;
+    }
+  });
+  let puntos = new Puntos({ pane: 'puntos', updateWhenZooming: false }).addTo(mapa);
+  const marca = L.circleMarker([0, 0], { radius: 9, color: '#111', weight: 2.5, fill: false, pane: 'puntos' });
 
-fetch('capas/indice.json').then(r => r.json()).then(I => {
-  C = I.cols;
-  NOMBRADOS = C.filter(c => c.nombre).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
-  NOMBRADOS.forEach(c => c.clave = sinAcento(c.nombre));
-  pintarLista(); construir(I);
-  mapa.invalidateSize(); mapa.fitBounds(ANDES);
-  const h = decodeURIComponent(location.hash.slice(1));
-  if (C.some(c => c.id === h)) elegir(h);
-});
-addEventListener('hashchange', () => { const h = decodeURIComponent(location.hash.slice(1)); h !== sel?.id && elegir(h); });
+  const lect = (p, nombre) => {
+    const v = C[p][sel], lo = C[p + 'min'][sel], hi = C[p + 'max'][sel], r = C[p + 'r'][sel];
+    const e = r === 1 ? '<span class="etq sube">robust above 1</span>' : r === -1 ? '<span class="etq baja">robust below 1</span>' : r === 0 ? '<span class="etq dep">depends on configuration</span>' : '';
+    return `<div class="lectura"><div class="fila"><span>${nombre}</span><b>${fmt(v, 2)}</b></div>
+      <div class="fila"><small>${v == null ? 'outside the tropics or without walls' : 'range of 19 variables ' + fmt(lo, 2) + ' to ' + fmt(hi, 2)}</small>${e}</div></div>`;
+  };
+  const elegir = (i, volar) => {
+    sel = i; const ll = [C.lat[i], C.lon[i]];
+    marca.setLatLng(ll).addTo(mapa);
+    $('vacia').hidden = true; $('ficha').hidden = false;
+    $('ficha').innerHTML = `<div class="cab"><div class="cod">${apd(i)} · ${RANK_LAB[C.r[i]]} col</div><h3>${D.units[C.u[i]]}</h3>
+      <div class="meta">${C.lat[i].toFixed(4)}, ${C.lon[i].toFixed(4)}</div></div>
+      <div class="cifras"><div><b>${fmt(C.z[i])}</b><span>m, height</span></div><div><b>${fmt(C.d[i])}</b><span>m, depth</span></div>
+      <div><b>${fmt(C.w[i])}</b><span>m, width at +100 m</span></div><div><b>${fmt(C.iso[i], 1)}</b><span>km, isolation</span></div></div>
+      ${lect('t', 'Transverse reading')}${lect('l', 'Longitudinal reading')}`;
+    L.popup({ offset: [0, -4] }).setLatLng(ll).setContent(`<div class="pop"><div class="cod">${apd(i)} · ${RANK_LAB[C.r[i]]}</div><b class="t">${fmt(C.z[i])} m, depth ${fmt(C.d[i])} m</b>
+      <table><tr><td>Transverse median</td><td>${fmt(C.t[i], 2)}</td></tr><tr><td>Longitudinal median</td><td>${fmt(C.l[i], 2)}</td></tr></table></div>`).openOn(mapa);
+    if (volar) mapa.flyTo(ll, Math.max(mapa.getZoom(), 10), { duration: .8 });
+  };
+  mapa.on('click', e => {
+    if (modo === 'no') return;
+    const z = mapa.getZoom(), px = mapa.project(e.latlng, z), tol = 9;
+    const a = mapa.unproject(px.subtract([tol, tol]), z), b = mapa.unproject(px.add([tol, tol]), z);
+    let best = -1, bd = tol * tol;
+    for (const i of enCaja(b.lat, a.lng, a.lat, b.lng)) {
+      const q = mapa.project([C.lat[i], C.lon[i]], z), d = q.distanceTo(px) ** 2;
+      if (d <= bd) { bd = d; best = i; }
+    }
+    if (best >= 0) elegir(best, false);
+  });
 
-$('opacidad').addEventListener('input', e => {
-  $('op-v').textContent = Math.round(e.target.value * 100) + ' %';
-  capasTesela.forEach(l => l.setOpacity(+e.target.value));
+  // control passes
+  const ctl = L.layerGroup(D.control.map(([n, la, lo]) => L.marker([la, lo], { pane: 'puntos', icon: L.divIcon({ className: '', iconSize: [14, 14],
+    html: '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1.5 13 12.5H1Z" fill="#fff" stroke="#111" stroke-width="1.4"/></svg>' }) })
+    .bindTooltip(n, { direction: 'top', offset: [0, -6] }))).addTo(mapa);
+  $('ctl').onchange = e => e.target.checked ? ctl.addTo(mapa) : ctl.remove();
+
+  // search: control passes by name, cols by APD ID
+  const buscar = q => {
+    q = q.trim().toLowerCase(); if (!q) return [];
+    const m = q.match(/^(apd)?0*(\d+)$/);
+    if (m) { const k = C.id.indexOf(+m[2]); return k >= 0 ? [['col', k, apd(k), D.units[C.u[k]]]] : []; }
+    return D.control.filter(c => c[0].toLowerCase().includes(q)).slice(0, 12).map(c => ['paso', c, c[0], 'control pass']);
+  };
+  const lista = $('sugerencias');
+  $('q').oninput = e => {
+    lista.innerHTML = buscar(e.target.value).map((r, j) => `<li role="option" data-j="${j}">${r[2]}<small>${r[3]}</small></li>`).join('');
+    const rs = buscar(e.target.value);
+    [...lista.children].forEach((li, j) => li.onclick = () => {
+      const r = rs[j]; lista.innerHTML = ''; $('q').value = r[2];
+      if (r[0] === 'col') elegir(r[1], true);
+      else { const [, la, lo] = r[1]; const ids = enCaja(la - .05, lo - .05, la + .05, lo + .05);
+        let k = -1, bd = 1e9; for (const i of ids) { const d = (C.lat[i] - la) ** 2 + (C.lon[i] - lo) ** 2; if (d < bd) { bd = d; k = i; } }
+        if (k >= 0) elegir(k, true); else mapa.flyTo([la, lo], 11); }
+    });
+  };
+
+  // layers
+  let capa = null, capaK = 'trans_bio01';
+  const ley = () => {
+    const b = [];
+    if (capaK !== 'none') b.push(`<div class="bloque"><div class="t">${CAPAS.find(c => c[0] === capaK)[1]}</div>${D.pal[capaK].map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);
+    if (modo === 'r') b.push(`<div class="bloque"><div class="t">Cols by rank</div>${RANK_LAB.map((l, k) => `<div class="item"><i class="pt" style="background:${RANK_COL[k]}"></i>${l}</div>`).join('')}</div>`);
+    else if (modo !== 'no') b.push(`<div class="bloque"><div class="t">Cols, ${modo === 't' ? 'transverse' : 'longitudinal'} median</div><div class="item">same classes as the layer; hollow, no value</div></div>`);
+    if ($('ghm').checked) b.push(`<div class="bloque"><div class="t">Human modification</div>${D.pal.ghm.map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);
+    if ($('pa').checked) b.push(`<div class="bloque"><div class="item"><i style="background:${D.pal.pa[0][0]}"></i>Protected areas</div></div>`);
+    $('leyenda').innerHTML = b.join(''); $('leyenda').hidden = !b.length;
+  };
+  $('capas').innerHTML = CAPAS.map(([k, t, s]) => `<label class="opcion"><input type="radio" name="capa" value="${k}" ${k === capaK ? 'checked' : ''}><span>${t}${s ? `<small>${s}</small>` : ''}</span></label>`).join('');
+  const ponerCapa = k => { capaK = k; if (capa) capa.remove(); capa = k === 'none' ? null : teselas(k, 9).addTo(mapa); ley(); };
+  document.querySelectorAll('input[name=capa]').forEach(r => r.onchange = e => ponerCapa(e.target.value));
+  $('opac').oninput = e => capa && capa.setOpacity(+e.target.value);
+  const extra = { ghm: null, pa: null };
+  for (const k of ['ghm', 'pa']) $(k).onchange = e => { if (e.target.checked) extra[k] = teselas(k, k === 'ghm' ? 8 : 9).addTo(mapa); else extra[k].remove(); ley(); };
+  $('modo').onchange = e => { modo = e.target.value; puntos.remove(); if (modo !== 'no') puntos = new Puntos({ pane: 'puntos', updateWhenZooming: false }).addTo(mapa); ley(); };
+  fetch('capas/andes.geojson').then(r => r.json()).then(g => L.geoJSON(g, { pane: 'rasters', interactive: false, style: { color: '#222', weight: .8, opacity: .55, fill: false } }).addTo(mapa));
+  ponerCapa(capaK);
 });
 </script>
 </body>

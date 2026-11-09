@@ -1,0 +1,5 @@
+reference,zone,n,median_error_m,median_abs_error_m,share_within_50m
+official,temperate,10.0,-5.05,10.9,0.8
+official,tropical,18.0,-12.55,46.55,0.5
+osm_ele (may come from a DEM),temperate,373.0,-1.0,6.3,0.95
+osm_ele (may come from a DEM),tropical,320.0,-5.05,11.35,0.89

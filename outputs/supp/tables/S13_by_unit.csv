@@ -1,0 +1,23 @@
+reading,gmba,cells,median,p90,n_robust_above_1,n_robust_below_1,robust_above_1,robust_below_1
+transverse,Altiplano,245,0.592,0.713,3,11,0.012,0.045
+transverse,Cordillera Central (Central Andes),30272,0.948,1.038,7821,5684,0.258,0.188
+transverse,Cordillera Central (Northern Andes),21883,1.013,1.05,15018,2857,0.686,0.131
+transverse,Cordillera Occidental (Central Andes),45066,0.994,1.082,14416,7218,0.32,0.16
+transverse,Cordillera Occidental (Northern Andes),25335,1.019,1.096,17066,3868,0.674,0.153
+transverse,Cordillera Oriental (Central Andes),54250,1.004,1.088,31735,10847,0.585,0.2
+transverse,Cordillera Oriental (Northern Andes),40195,1.007,1.097,22877,8300,0.569,0.206
+transverse,Cordillera de Mérida,6639,1.013,1.136,4249,1267,0.64,0.191
+transverse,Dry Andes,1899,0.993,1.007,450,254,0.237,0.134
+transverse,Sierras Subandinas,28178,1.007,1.033,16483,1761,0.585,0.062
+transverse,all units,253962,1.004,1.072,130118,42067,0.512,0.166
+longitudinal,Altiplano,2639,1.016,1.078,2636,0,0.999,0.0
+longitudinal,Cordillera Central (Central Andes),46658,1.033,1.154,39598,4728,0.849,0.101
+longitudinal,Cordillera Central (Northern Andes),20831,0.997,1.165,7590,4348,0.364,0.209
+longitudinal,Cordillera Occidental (Central Andes),52310,1.055,1.212,36526,12274,0.698,0.235
+longitudinal,Cordillera Occidental (Northern Andes),21081,0.672,1.258,6368,11135,0.302,0.528
+longitudinal,Cordillera Oriental (Central Andes),53792,0.962,1.169,21854,13694,0.406,0.255
+longitudinal,Cordillera Oriental (Northern Andes),38035,1.008,1.262,17042,10816,0.448,0.284
+longitudinal,Cordillera de Mérida,2576,1.01,1.078,1058,371,0.411,0.144
+longitudinal,Dry Andes,4837,1.077,1.234,3887,720,0.804,0.149
+longitudinal,Sierras Subandinas,26749,0.554,0.848,293,17518,0.011,0.655
+longitudinal,all units,269508,1.007,1.184,136852,75604,0.508,0.281

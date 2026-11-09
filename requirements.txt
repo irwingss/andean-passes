@@ -10,3 +10,8 @@ PyYAML==6.0.3
 openpyxl==3.1.5
 python-docx==1.2.0
 Pillow==12.3.0
+scipy==1.18.1
+pyproj==3.8.0
+whitebox==2.3.6
+earthengine-api==1.7.48
+matplotlib

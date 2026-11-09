@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite the article and this archive."
-title: "Andean Passes Database (APD v1.0): code, derived data and supplementary material"
+title: "Andean Passes Database (APD): census and climatic connectivity of Andean cols, code and derived data"
 authors:
   - family-names: "Saldaña"
     given-names: "Irwing S."
@@ -19,8 +19,8 @@ license: MIT
 keywords:
   - Andes
   - mountain passes
-  - continental divide
-  - Janzen's hypothesis
-  - thermal overlap
-  - climate change
-  - protected areas
+  - drainage divides
+  - circuit theory
+  - climatic connectivity
+  - FABDEM
+  - WorldClim

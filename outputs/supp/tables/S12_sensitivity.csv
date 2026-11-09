@@ -1,0 +1,9 @@
+reading,configuration,cells_both,cells_lost,rho_with_main,top_decile_kept,same_side_of_1
+transverse,q 0.05,253962,0,0.988,0.918,0.978
+transverse,q 0.2,253962,0,0.987,0.922,0.978
+transverse,100 km,223767,30195,0.815,0.644,0.878
+transverse,400 km,253962,0,0.811,0.692,0.858
+longitudinal,q 0.05,269508,0,0.996,0.931,0.984
+longitudinal,q 0.2,269508,0,0.996,0.931,0.985
+longitudinal,100 km,238136,31372,0.93,0.658,0.94
+longitudinal,400 km,269508,0,0.954,0.725,0.945

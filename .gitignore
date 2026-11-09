@@ -1,31 +1,11 @@
 # third-party inputs: not redistributed (a junction or folder on each machine)
 data/raw
 
-# intermediate files: nothing enters git unless listed here. In particular M3_wdpa_andes.gpkg is an extract of the WDPA and must stay out
+# intermediate files: nothing enters git unless listed here. The census and connectivity runs (about 17 GB) stay
+# local; the WDPA extract (M3_wdpa_andes.gpkg) must never enter git
 data/interim/*
-!data/interim/M1_cols_raw.csv
-!data/interim/M1_divide_bins.gpkg
-!data/interim/M1_divide_glo30.gpkg
-!data/interim/M1_divide_raw.gpkg
-!data/interim/M1_domains.gpkg
-!data/interim/M1_domains_15s.tif
-!data/interim/M1_glo30_chain_pieces.csv
-!data/interim/M1_glo30_divide/
-data/interim/M1_glo30_divide/_blocks_09/
-!data/interim/M1_glo30_tiles.csv
-!data/interim/M1_glo30_tiles.txt
 !data/interim/M1_gmba_andes.gpkg
-!data/interim/M1_markers_15s.tif
-!data/interim/M1_montane_gaps.csv
-!data/interim/M1_profile.csv
-!data/interim/M1_reference_passes_dd.csv
-!data/interim/M2_flancos.csv
-!data/interim/M2_flank_routes.gpkg
-!data/interim/M2_maha_vars.txt
-!data/interim/M3_corredor_bins.csv
-!data/interim/M3_corredor_bins_proteccion.csv
-!data/interim/M3_futuro_por_lado.csv
-!data/interim/M3_lapse_rate.csv
+!data/interim/M1_domains.gpkg
 
 __pycache__/
 *.pyc
@@ -33,3 +13,5 @@ __pycache__/
 .Rhistory
 .RData
 Rplots.pdf
+
+.claude/
