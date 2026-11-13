@@ -79,6 +79,15 @@
   .boton[hidden] { display: none; }
   #usrEstado { margin-top: 8px; font-size: 12px; color: var(--gris); }
   #usrEstado.error { color: #a3221b; }
+  #usrCampos[hidden] { display: none; }
+  #usrCampos select { flex: 1; width: auto; min-width: 0; }
+  #usrClases { margin-top: 8px; max-height: 300px; overflow-y: auto; }
+  .opcion.clase { align-items: center; padding: 4px 0; }
+  .opcion.clase input[type=checkbox] { margin-top: 0; }
+  .opcion.clase input[type=color] { width: 26px; height: 20px; padding: 0; border: 1px solid #d3d8d2; border-radius: 4px; background: none; cursor: pointer; flex: none; }
+  .opcion.clase span { word-break: break-word; }
+  .todas { display: flex; gap: 6px; margin-top: 6px; }
+  .boton.chico { padding: 3px 10px; font-size: 12px; }
   #soltar { position: absolute; inset: 0; z-index: 1200; display: none; align-items: center; justify-content: center; background: rgba(35,116,91,.25);
     border: 3px dashed var(--acento); color: #fff; font-size: 16px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.5); pointer-events: none; }
   #mapa.arrastre #soltar { display: flex; }
@@ -143,6 +152,10 @@
         <input id="usrArchivo" type="file" accept=".geojson,.json,.zip" hidden>
       </div>
       <div id="usrEstado">GeoJSON or a zipped shapefile (.shp, .dbf and .prj), opened or dropped on the map. It is read in your browser only; nothing is uploaded or stored.</div>
+      <div id="usrCampos" hidden>
+        <div class="fila-ctrl"><span>Colour by</span><select id="usrCampo" aria-label="Attribute that colours your layer"></select></div>
+        <div id="usrClases"></div>
+      </div>
     </section>
     <div class="nota">
       Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it. Each layer is the median over the temperature (BIO1 to BIO11) or the precipitation variables (BIO12 to BIO19) in each cell.
@@ -194,10 +207,64 @@ const clase = v => v == null ? -1 : BREAKS.findIndex(b => v < b) === -1 ? 6 : BR
 // the user's own layer: read in the browser, never uploaded or stored
 mapa.createPane('usuario').style.zIndex = 440;
 const USR_COL = '#E6007E';
-let usrCapa = null;
+const USR_PAL = ['#E6007E', '#0072B2', '#E69F00', '#009E73', '#56B4E9', '#D55E00', '#CC79A7', '#F0E442', '#6A3D9A', '#1B9E77',
+  '#A6761D', '#666666', '#B2DF8A', '#FB9A99', '#1F78B4', '#33A02C', '#FDBF6F', '#CAB2D6', '#8DD3C7', '#BC80BD'];
+const USR_MAX = 20;                                   // more distinct values than this: numbers in 6 classes, text grouped as "other"
+let usrCapa = null, usrItems = [], usrClases = [], usrCampo = '';
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const usrEstado = (txt, err) => { $('usrEstado').textContent = txt; $('usrEstado').className = err ? 'error' : ''; };
-const usrQuitar = () => { if (usrCapa) usrCapa.remove(); usrCapa = null; $('usrQuitar').hidden = true; };
+const usrQuitar = () => { if (usrCapa) usrCapa.remove(); usrCapa = null; usrItems = []; usrClases = []; $('usrQuitar').hidden = true; $('usrCampos').hidden = true; $('usrClases').innerHTML = ''; };
+const usrValor = v => v == null || v === '' ? null : typeof v === 'object' ? JSON.stringify(v) : v;
+// classes of one field: each distinct value, or 6 equal-count classes of a numeric field with many values
+const usrClasificar = campo => {
+  if (!campo) return { clases: [{ label: 'All features', color: USR_COL, on: true, n: usrItems.length }], clave: () => 0 };
+  const vals = usrItems.map(it => usrValor(it.f.properties?.[campo]));
+  const dist = [...new Set(vals.filter(v => v != null))];
+  const num = dist.length && dist.every(v => typeof v === 'number' || (v !== '' && !isNaN(+v)));
+  let clave, etiquetas;
+  if (num && dist.length > USR_MAX) {
+    const xs = vals.filter(v => v != null).map(Number).sort((a, b) => a - b);
+    const cortes = [1, 2, 3, 4, 5].map(k => xs[Math.floor(k * xs.length / 6)]).filter((c, i, a) => a.indexOf(c) === i);
+    const lims = [xs[0], ...cortes, xs[xs.length - 1]];
+    const f = x => +x.toPrecision(4);
+    etiquetas = lims.slice(0, -1).map((a, i) => `${f(a)} to ${f(lims[i + 1])}`);
+    clave = v => v == null ? -1 : Math.max(0, cortes.filter(c => +v >= c).length);
+  } else {
+    const cuenta = new Map(); vals.forEach(v => v != null && cuenta.set(v, (cuenta.get(v) || 0) + 1));
+    let orden = [...cuenta.keys()].sort((a, b) => num ? a - b : String(a).localeCompare(String(b)));
+    const otros = orden.length > USR_MAX;
+    if (otros) orden = [...cuenta.keys()].sort((a, b) => cuenta.get(b) - cuenta.get(a)).slice(0, USR_MAX - 1);
+    const idx = new Map(orden.map((v, i) => [v, i]));
+    etiquetas = orden.map(String); if (otros) etiquetas.push('other values');
+    clave = v => v == null ? -1 : idx.has(v) ? idx.get(v) : otros ? orden.length : -1;
+  }
+  const clases = etiquetas.map((label, i) => ({ label, color: USR_PAL[i % USR_PAL.length], on: true, n: 0 }));
+  if (vals.some(v => v == null)) clases.push({ label: 'no value', color: '#9a9a9a', on: true, n: 0, nulo: true });
+  return { clases, clave: v => { const k = clave(v); return k < 0 ? clases.length - 1 : k; } };
+};
+const usrAplicar = () => {
+  for (const it of usrItems) {
+    const c = usrClases[it.k];
+    if (!c.on) { usrCapa.removeLayer(it.l); continue; }
+    it.l.setStyle(it.l instanceof L.CircleMarker ? { fillColor: c.color } : { color: c.color, fillColor: c.color });
+    if (!usrCapa.hasLayer(it.l)) usrCapa.addLayer(it.l);
+  }
+};
+const usrLista = () => {
+  $('usrClases').innerHTML = usrClases.map((c, i) => `<label class="opcion clase"><input type="checkbox" data-i="${i}" ${c.on ? 'checked' : ''}>
+    <input type="color" data-i="${i}" value="${c.color}" aria-label="Colour of ${esc(c.label)}"><span>${esc(c.label)}<small>${c.n.toLocaleString('en-US')} feature${c.n === 1 ? '' : 's'}</small></span></label>`).join('')
+    + (usrClases.length > 1 ? '<div class="todas"><button class="boton chico" type="button" data-t="1">All</button><button class="boton chico" type="button" data-t="0">None</button></div>' : '');
+  $('usrClases').querySelectorAll('input[type=checkbox]').forEach(x => x.onchange = () => { usrClases[x.dataset.i].on = x.checked; usrAplicar(); });
+  $('usrClases').querySelectorAll('input[type=color]').forEach(x => x.oninput = () => { usrClases[x.dataset.i].color = x.value; usrAplicar(); });
+  $('usrClases').querySelectorAll('button[data-t]').forEach(b => b.onclick = () => { usrClases.forEach(c => c.on = b.dataset.t === '1'); usrLista(); usrAplicar(); });
+};
+const usrColorear = campo => {
+  usrCampo = campo;
+  const { clases, clave } = usrClasificar(campo);
+  usrClases = clases;
+  for (const it of usrItems) { it.k = clave(usrValor(it.f.properties?.[campo])); clases[it.k].n++; }
+  usrLista(); usrAplicar();
+};
 const usrMostrar = (gj, nombre) => {
   const fc = (Array.isArray(gj) ? gj : [gj]).flatMap(g => g.type === 'FeatureCollection' ? g.features : g.type === 'Feature' ? [g] : g.type ? [{ type: 'Feature', properties: {}, geometry: g }] : []);
   if (!fc.length) throw new Error('the file has no features');
@@ -207,6 +274,7 @@ const usrMostrar = (gj, nombre) => {
     style: { color: USR_COL, weight: 2, opacity: .95, fillColor: USR_COL, fillOpacity: .18 },
     pointToLayer: (f, ll) => L.circleMarker(ll, { pane: 'usuario', radius: 5, color: '#fff', weight: 1.5, fillColor: USR_COL, fillOpacity: 1, bubblingMouseEvents: false }),
     onEachFeature: (f, l) => {
+      usrItems.push({ f, l, k: 0 });
       const p = Object.entries(f.properties || {});
       l.bindPopup(`<div class="pop usr"><b class="t">${esc(nombre)}</b>${p.length ? `<table>${p.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v == null ? '–' : typeof v === 'object' ? JSON.stringify(v) : v)}</td></tr>`).join('')}</table>` : '<span class="cod">no attributes</span>'}</div>`);
     },
@@ -214,6 +282,14 @@ const usrMostrar = (gj, nombre) => {
   const b = usrCapa.getBounds();
   if (b.isValid()) mapa.fitBounds(b, { maxZoom: 12, padding: [30, 30] });
   $('usrQuitar').hidden = false;
+  // attribute fields; the first with 2 to 12 values that is not an identifier is chosen to start
+  const campos = [...new Set(fc.flatMap(f => Object.keys(f.properties || {})))];
+  const nDist = c => new Set(fc.map(f => usrValor(f.properties?.[c]))).size;
+  const inicio = campos.find(c => !/^(fid|id|objectid|gid|ogc_fid|shape_?\w*)$/i.test(c) && nDist(c) >= 2 && nDist(c) <= 12) || '';
+  $('usrCampo').innerHTML = '<option value="">Single colour</option>' + campos.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  $('usrCampo').value = inicio;
+  $('usrCampos').hidden = !campos.length;
+  usrColorear(inicio);
   usrEstado(`${nombre}: ${fc.length.toLocaleString('en-US')} feature${fc.length === 1 ? '' : 's'}. Shown only in this browser; reloading the page removes it.`);
 };
 const usrLeer = async f => {
@@ -230,6 +306,7 @@ const usrLeer = async f => {
 $('usrBtn').onclick = () => $('usrArchivo').click();
 $('usrArchivo').onchange = e => { usrLeer(e.target.files[0]); e.target.value = ''; };
 $('usrQuitar').onclick = () => { usrQuitar(); usrEstado('Layer removed.'); };
+$('usrCampo').onchange = e => usrColorear(e.target.value);
 {
   const m = $('mapa'); let n = 0;
   const conArchivos = e => [...(e.dataTransfer?.types || [])].includes('Files');
