@@ -74,6 +74,8 @@
   .pop table { border-collapse: collapse; width: 100%; }
   .pop td { padding: 2px 0; } .pop td + td { text-align: right; font-variant-numeric: tabular-nums; }
   .leaflet-container { font-family: inherit; }
+  .leaflet-tooltip.banda { background: rgba(255,255,255,.9); border: 0; box-shadow: none; padding: 0 4px; font-weight: 700; font-size: 11px; }
+  .leaflet-tooltip.banda::before { display: none; }
   @media (max-width: 760px) {
     #app { grid-template-columns: 1fr; grid-template-rows: 58vh 1fr; }
     #mapa { grid-row: 1; } #panel { grid-row: 2; border-right: 0; border-top: 1px solid var(--linea); }
@@ -87,16 +89,16 @@
   <aside id="panel">
     <header>
       <div class="kicker">Andean Passes Database · viewer</div>
-      <h1>Cols of the Andes and their climatic connectivity</h1>
-      <p>Census of the cols of the Andes from FABDEM, and how each col of the tropical Andes channels or diverts the current of lowland and montane climates.</p>
+      <h1>Passes of the Andes and their climatic connectivity</h1>
+      <p>Census of the passes of the Andes from FABDEM, and how each pass of the tropical Andes channels or diverts the current of lowland and montane climates.</p>
     </header>
     <section>
-      <h2>Find a col</h2>
+      <h2>Find a pass</h2>
       <div class="buscar">
-        <input id="q" type="search" autocomplete="off" placeholder="Control pass or APD ID (e.g. APD113156)" aria-label="Search a col">
+        <input id="q" type="search" autocomplete="off" placeholder="Control pass or APD ID (e.g. APD113156)" aria-label="Search a pass">
         <ul id="sugerencias" role="listbox"></ul>
       </div>
-      <div class="vacia" id="vacia">Or click a col on the map. The map shows the <span id="cuenta"></span> cols with a depth of 100 m or more.</div>
+      <div class="vacia" id="vacia">Or click a pass on the map. The map shows the <span id="cuenta"></span> passes with a depth of 100 m or more.</div>
       <div id="ficha" hidden></div>
     </section>
     <section>
@@ -105,11 +107,11 @@
       <div class="fila-ctrl"><span>Opacity</span><input id="opac" type="range" min="0.2" max="1" step="0.05" value="0.85" aria-label="Opacity of the layer"></div>
     </section>
     <section>
-      <h2>Cols</h2>
-      <select id="modo" aria-label="Colour of the cols">
+      <h2>Passes</h2>
+      <select id="modo" aria-label="Colour of the passes">
         <option value="r">By rank (continental, terminal, tributary)</option>
-        <option value="t">Transverse reading, median of 19 variables</option>
-        <option value="l">Longitudinal reading, median of 19 variables</option>
+        <option value="t">Transverse connectivity, median of 19 variables</option>
+        <option value="l">Longitudinal connectivity, median of 19 variables</option>
         <option value="no">Hidden</option>
       </select>
     </section>
@@ -118,12 +120,16 @@
       <label class="opcion"><input type="checkbox" id="ghm"><span>Human modification<small>Global Human Modification (Kennedy et al. 2019)</small></span></label>
       <label class="opcion"><input type="checkbox" id="pa"><span>Protected areas<small>WDPA, November 2026, shown as pixels only</small></span></label>
       <label class="opcion"><input type="checkbox" id="ctl" checked><span>Control passes<small>36 named passes used to check the census</small></span></label>
+      <label class="opcion"><input type="checkbox" id="div"><span>Continental divide and bands of Table S19<small>Continental passes of the tropics; in black, the numbered bands of Fig. 3 (1 to 7 open across the cordillera, 8 to 10 barriers along it)</small></span></label>
+      <label class="opcion"><input type="checkbox" id="hz"><span>Barriers of Hazzi et al. (2018)<small>Phylogenetic breaks of Andean birds, for orientation (Fig. 3)</small></span></label>
+      <label class="opcion"><input type="checkbox" id="divnet"><span>Divide network, Huancabamba<small>Every divide of the 1 arc-second census, 4 to 7.5°S (Fig. 1b)</small></span></label>
     </section>
     <div class="nota">
       Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it.
-      <b>Transverse reading</b>: current from west to east between lowland cells (warmer than the climate at 2000 m at that latitude), for lowland species.
-      <b>Longitudinal reading</b>: current from north to south between montane cells, for montane species.
-      Main configuration: WorldClim 2.1 (1970 to 2000), margin q = 0.1, tiles of 200 km. A col is <i>robust</i> when its median stays on the same side of 1 in five configurations of margin and tile size.
+      Zone conductance: for each tile, the median over BIO1 to BIO11 of its conductance relative to uniform resistance, averaged over the tiles that cover the cell; low is a barrier, near 1 is open.
+      <b>Transverse connectivity</b>: current from west to east between lowland cells (warmer than the climate at 2000 m at that latitude), for lowland species.
+      <b>Longitudinal connectivity</b>: current from north to south between montane cells, for montane species.
+      Main configuration: WorldClim 2.1 (1970 to 2000), margin q = 0.1, tiles of 200 km. A pass is <i>robust</i> when its median stays on the same side of 1 in five configurations of margin and tile size.
       Connectivity covers 11°N to 23.5°S; the census covers the whole Andes. Data: <a href="https://github.com/irwingss/andean-passes">github.com/irwingss/andean-passes</a>.
     </div>
   </aside>
@@ -138,8 +144,10 @@ const RANK_LAB = ['continental', 'terminal', 'tributary'];
 const BREAKS = [0.5, 0.8, 0.95, 1.05, 1.25, 2];
 const CAPAS = [
   ['none', 'None', ''],
-  ['trans_bio01', 'Transverse reading, BIO1', 'Lowland guild, west to east (Fig. 2a)'],
-  ['longi_bio01', 'Longitudinal reading, BIO1', 'Montane guild, north to south (Fig. 2b)'],
+  ['trans_bio01', 'Transverse connectivity, current with BIO1', 'Normalized current, lowland climates, west to east (Fig. 2a)'],
+  ['longi_bio01', 'Longitudinal connectivity, current with BIO1', 'Normalized current, montane climates, north to south (Fig. 2b)'],
+  ['trans_zone', 'Transverse connectivity, zone conductance', 'Temperature median per tile, lowland climates (Fig. 3b)'],
+  ['longi_zone', 'Longitudinal connectivity, zone conductance', 'Temperature median per tile, montane climates (Fig. 3a)'],
 ];
 const mapa = L.map('mapa', { zoomSnap: 0.5, zoomControl: false, minZoom: 3 }).fitBounds([[-24, -82], [12, -62]]);
 L.control.zoom({ position: 'topright' }).addTo(mapa);
@@ -161,7 +169,7 @@ const fmt = (v, d = 0) => v == null ? '–' : v.toLocaleString('en-US', { minimu
 const clase = v => v == null ? -1 : BREAKS.findIndex(b => v < b) === -1 ? 6 : BREAKS.findIndex(b => v < b);
 
 fetch('capas/indice.json').then(r => r.json()).then(D => {
-  const C = D.cols, N = C.id.length, CUR = D.pal.trans_bio01.map(p => p[0]);
+  const C = D.passes, N = C.id.length, CUR = D.pal.trans_bio01.map(p => p[0]);
   $('cuenta').textContent = N.toLocaleString('en-US');
   const apd = i => 'APD' + String(C.id[i]).padStart(6, '0');
 
@@ -213,11 +221,11 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
     sel = i; const ll = [C.lat[i], C.lon[i]];
     marca.setLatLng(ll).addTo(mapa);
     $('vacia').hidden = true; $('ficha').hidden = false;
-    $('ficha').innerHTML = `<div class="cab"><div class="cod">${apd(i)} · ${RANK_LAB[C.r[i]]} col</div><h3>${D.units[C.u[i]]}</h3>
+    $('ficha').innerHTML = `<div class="cab"><div class="cod">${apd(i)} · ${RANK_LAB[C.r[i]]} pass</div><h3>${D.units[C.u[i]]}</h3>
       <div class="meta">${C.lat[i].toFixed(4)}, ${C.lon[i].toFixed(4)}</div></div>
       <div class="cifras"><div><b>${fmt(C.z[i])}</b><span>m, height</span></div><div><b>${fmt(C.d[i])}</b><span>m, depth</span></div>
       <div><b>${fmt(C.w[i])}</b><span>m, width at +100 m</span></div><div><b>${fmt(C.iso[i], 1)}</b><span>km, isolation</span></div></div>
-      ${lect('t', 'Transverse reading')}${lect('l', 'Longitudinal reading')}`;
+      ${lect('t', 'Transverse connectivity')}${lect('l', 'Longitudinal connectivity')}`;
     L.popup({ offset: [0, -4] }).setLatLng(ll).setContent(`<div class="pop"><div class="cod">${apd(i)} · ${RANK_LAB[C.r[i]]}</div><b class="t">${fmt(C.z[i])} m, depth ${fmt(C.d[i])} m</b>
       <table><tr><td>Transverse median</td><td>${fmt(C.t[i], 2)}</td></tr><tr><td>Longitudinal median</td><td>${fmt(C.l[i], 2)}</td></tr></table></div>`).openOn(mapa);
     if (volar) mapa.flyTo(ll, Math.max(mapa.getZoom(), 10), { duration: .8 });
@@ -240,11 +248,11 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
     .bindTooltip(n, { direction: 'top', offset: [0, -6] }))).addTo(mapa);
   $('ctl').onchange = e => e.target.checked ? ctl.addTo(mapa) : ctl.remove();
 
-  // search: control passes by name, cols by APD ID
+  // search: control passes by name, passes by APD ID
   const buscar = q => {
     q = q.trim().toLowerCase(); if (!q) return [];
     const m = q.match(/^(apd)?0*(\d+)$/);
-    if (m) { const k = C.id.indexOf(+m[2]); return k >= 0 ? [['col', k, apd(k), D.units[C.u[k]]]] : []; }
+    if (m) { const k = C.id.indexOf(+m[2]); return k >= 0 ? [['pass', k, apd(k), D.units[C.u[k]]]] : []; }
     return D.control.filter(c => c[0].toLowerCase().includes(q)).slice(0, 12).map(c => ['paso', c, c[0], 'control pass']);
   };
   const lista = $('sugerencias');
@@ -253,7 +261,7 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
     const rs = buscar(e.target.value);
     [...lista.children].forEach((li, j) => li.onclick = () => {
       const r = rs[j]; lista.innerHTML = ''; $('q').value = r[2];
-      if (r[0] === 'col') elegir(r[1], true);
+      if (r[0] === 'pass') elegir(r[1], true);
       else { const [, la, lo] = r[1]; const ids = enCaja(la - .05, lo - .05, la + .05, lo + .05);
         let k = -1, bd = 1e9; for (const i of ids) { const d = (C.lat[i] - la) ** 2 + (C.lon[i] - lo) ** 2; if (d < bd) { bd = d; k = i; } }
         if (k >= 0) elegir(k, true); else mapa.flyTo([la, lo], 11); }
@@ -265,9 +273,12 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   const ley = () => {
     const b = [];
     if (capaK !== 'none') b.push(`<div class="bloque"><div class="t">${CAPAS.find(c => c[0] === capaK)[1]}</div>${D.pal[capaK].map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);
-    if (modo === 'r') b.push(`<div class="bloque"><div class="t">Cols by rank</div>${RANK_LAB.map((l, k) => `<div class="item"><i class="pt" style="background:${RANK_COL[k]}"></i>${l}</div>`).join('')}</div>`);
-    else if (modo !== 'no') b.push(`<div class="bloque"><div class="t">Cols, ${modo === 't' ? 'transverse' : 'longitudinal'} median</div><div class="item">same classes as the layer; hollow, no value</div></div>`);
+    if (modo === 'r') b.push(`<div class="bloque"><div class="t">Passes by rank</div>${RANK_LAB.map((l, k) => `<div class="item"><i class="pt" style="background:${RANK_COL[k]}"></i>${l}</div>`).join('')}</div>`);
+    else if (modo !== 'no') b.push(`<div class="bloque"><div class="t">Passes, ${modo === 't' ? 'transverse' : 'longitudinal'} median</div><div class="item">same classes as the layer; hollow, no value</div></div>`);
     if ($('ghm').checked) b.push(`<div class="bloque"><div class="t">Human modification</div>${D.pal.ghm.map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);
+    if ($('div').checked) b.push(`<div class="bloque"><div class="item"><i class="pt" style="background:#fff"></i>continental divide</div><div class="item"><i class="pt" style="background:#111"></i>band of Table S19, numbered</div></div>`);
+    if ($('hz').checked) b.push(`<div class="bloque"><div class="item"><i style="background:repeating-linear-gradient(90deg,#111 0 3px,#fff 3px 6px)"></i>barrier of Hazzi et al. (2018)</div></div>`);
+    if ($('divnet').checked) b.push(`<div class="bloque"><div class="item"><i style="background:${D.pal.divnet[0][0]}"></i>divide network (Fig. 1b)</div></div>`);
     if ($('pa').checked) b.push(`<div class="bloque"><div class="item"><i style="background:${D.pal.pa[0][0]}"></i>Protected areas</div></div>`);
     $('leyenda').innerHTML = b.join(''); $('leyenda').hidden = !b.length;
   };
@@ -275,8 +286,31 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   const ponerCapa = k => { capaK = k; if (capa) capa.remove(); capa = k === 'none' ? null : teselas(k, 9).addTo(mapa); ley(); };
   document.querySelectorAll('input[name=capa]').forEach(r => r.onchange = e => ponerCapa(e.target.value));
   $('opac').oninput = e => capa && capa.setOpacity(+e.target.value);
-  const extra = { ghm: null, pa: null };
-  for (const k of ['ghm', 'pa']) $(k).onchange = e => { if (e.target.checked) extra[k] = teselas(k, k === 'ghm' ? 8 : 9).addTo(mapa); else extra[k].remove(); ley(); };
+  const extra = { ghm: null, pa: null, divnet: null };
+  const ZMAX = { ghm: 8, pa: 9, divnet: 12 };
+  for (const k of ['ghm', 'pa', 'divnet']) $(k).onchange = e => { if (e.target.checked) extra[k] = teselas(k, ZMAX[k]).addTo(mapa); else extra[k].remove(); ley(); };
+  // continental divide with the bands of Table S19, and the barriers of Hazzi et al. (2018), as in Fig. 3
+  const lienzo = L.canvas({ pane: 'puntos' }), ROM = ['', 'I', 'II', 'III', 'IV', 'V', 'VI'];
+  const divG = L.layerGroup(), hzG = L.layerGroup();
+  const etiqueta = (ll, txt, dir) => L.marker(ll, { pane: 'puntos', interactive: false, icon: L.divIcon({ className: '', iconSize: [0, 0] }) })
+    .bindTooltip(txt, { permanent: true, direction: dir, offset: [dir === 'left' ? -4 : 4, 0], className: 'banda' });
+  fetch('capas/divisoria.json').then(r => r.json()).then(V => {
+    const enBanda = new Set(V.bands.flatMap(b => b.ids));
+    for (let i = 0; i < V.lat.length; i++) if (!enBanda.has(i)) L.circleMarker([V.lat[i], V.lon[i]], { renderer: lienzo, radius: 1.6, stroke: false, fillColor: '#fff', fillOpacity: .9, interactive: false }).addTo(divG);
+    for (const b of V.bands) {
+      const ids = b.ids;
+      for (const i of ids) L.circleMarker([V.lat[i], V.lon[i]], { renderer: lienzo, radius: 2.4, stroke: false, fillColor: '#111', fillOpacity: 1, interactive: false }).addTo(divG);
+      const w = ids.reduce((a, i) => V.lon[i] < V.lon[a] ? i : a, ids[0]), la = ids.map(i => V.lat[i]).sort((x, y) => x - y)[ids.length >> 1];
+      etiqueta([la, V.lon[w]], `${b.no}`, 'left').bindPopup(`Band ${b.no}, ${b.dir}, ${Math.abs(b.n)}°${b.n < 0 ? 'S' : 'N'} to ${Math.abs(b.s)}°${b.s < 0 ? 'S' : 'N'}`).addTo(divG);
+    }
+    for (const h of V.hazzi) {
+      L.polyline(h.xy, { pane: 'puntos', color: '#fff', weight: 4, interactive: false }).addTo(hzG);
+      L.polyline(h.xy, { pane: 'puntos', color: '#111', weight: 4, dashArray: '5 5', interactive: false }).addTo(hzG);
+      etiqueta(h.xy[h.xy.length - 1], `${ROM[h.no]} ${h.name}`, 'right').addTo(hzG);
+    }
+  });
+  $('div').onchange = e => { e.target.checked ? divG.addTo(mapa) : divG.remove(); ley(); };
+  $('hz').onchange = e => { e.target.checked ? hzG.addTo(mapa) : hzG.remove(); ley(); };
   $('modo').onchange = e => { modo = e.target.value; puntos.remove(); if (modo !== 'no') puntos = new Puntos({ pane: 'puntos', updateWhenZooming: false }).addTo(mapa); ley(); };
   fetch('capas/andes.geojson').then(r => r.json()).then(g => L.geoJSON(g, { pane: 'rasters', interactive: false, style: { color: '#222', weight: .8, opacity: .55, fill: false } }).addTo(mapa));
   ponerCapa(capaK);
