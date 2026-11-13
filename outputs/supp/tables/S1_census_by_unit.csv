@@ -1,4 +1,4 @@
-zone,gmba,rank,cols,depth_100m,median_z_m,median_depth_m
+zone,gmba,rank,passes,depth_100m,median_z_m,median_depth_m
 tropics,Altiplano,terminal,69,29,3943.0,86.4
 tropics,Altiplano,tributary,2991,501,3959.4,50.5
 tropics,Cordillera Central (Central Andes),continental,824,286,4763.5,67.4

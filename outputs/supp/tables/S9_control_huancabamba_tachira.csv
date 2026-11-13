@@ -1,108 +1,106 @@
 cfg,band,tiles,median,control,in_zone
-main,-2.25,6,0.611,Huancabamba,False
+main,-2.25,5,0.611,Huancabamba,False
 main,-2.75,5,0.628,Huancabamba,False
 main,-3.25,5,0.585,Huancabamba,False
 main,-3.75,5,0.526,Huancabamba,False
-main,-4.25,5,0.47,Huancabamba,True
-main,-4.75,5,0.487,Huancabamba,True
-main,-5.25,5,0.494,Huancabamba,True
-main,-5.75,5,0.511,Huancabamba,True
-main,-6.25,12,0.556,Huancabamba,True
-main,-6.75,7,0.638,Huancabamba,True
-main,-7.25,8,0.673,Huancabamba,True
-main,-7.75,6,0.751,Huancabamba,False
+main,-4.25,4,0.495,Huancabamba,True
+main,-4.75,4,0.502,Huancabamba,True
+main,-5.25,4,0.511,Huancabamba,True
+main,-5.75,4,0.514,Huancabamba,True
+main,-6.25,11,0.547,Huancabamba,True
+main,-6.75,5,0.703,Huancabamba,True
+main,-7.25,5,0.744,Huancabamba,True
+main,-7.75,5,0.763,Huancabamba,False
 main,-8.25,5,0.796,Huancabamba,False
-main,-8.75,6,0.759,Huancabamba,False
-main,-9.25,6,0.799,Huancabamba,False
-main,-9.75,6,0.82,Huancabamba,False
-q 0.05,-2.25,6,0.547,Huancabamba,False
+main,-8.75,5,0.763,Huancabamba,False
+main,-9.25,4,0.831,Huancabamba,False
+main,-9.75,5,0.847,Huancabamba,False
+q 0.05,-2.25,5,0.549,Huancabamba,False
 q 0.05,-2.75,5,0.555,Huancabamba,False
 q 0.05,-3.25,5,0.5,Huancabamba,False
 q 0.05,-3.75,5,0.425,Huancabamba,False
-q 0.05,-4.25,5,0.367,Huancabamba,True
-q 0.05,-4.75,5,0.383,Huancabamba,True
-q 0.05,-5.25,5,0.387,Huancabamba,True
-q 0.05,-5.75,5,0.399,Huancabamba,True
-q 0.05,-6.25,12,0.442,Huancabamba,True
-q 0.05,-6.75,7,0.554,Huancabamba,True
-q 0.05,-7.25,8,0.594,Huancabamba,True
-q 0.05,-7.75,6,0.676,Huancabamba,False
+q 0.05,-4.25,4,0.39,Huancabamba,True
+q 0.05,-4.75,4,0.398,Huancabamba,True
+q 0.05,-5.25,4,0.404,Huancabamba,True
+q 0.05,-5.75,4,0.404,Huancabamba,True
+q 0.05,-6.25,11,0.435,Huancabamba,True
+q 0.05,-6.75,5,0.616,Huancabamba,True
+q 0.05,-7.25,5,0.679,Huancabamba,True
+q 0.05,-7.75,5,0.679,Huancabamba,False
 q 0.05,-8.25,5,0.738,Huancabamba,False
-q 0.05,-8.75,6,0.693,Huancabamba,False
-q 0.05,-9.25,6,0.74,Huancabamba,False
-q 0.05,-9.75,6,0.757,Huancabamba,False
-q 0.2,-2.25,6,0.688,Huancabamba,False
+q 0.05,-8.75,5,0.697,Huancabamba,False
+q 0.05,-9.25,4,0.781,Huancabamba,False
+q 0.05,-9.75,5,0.793,Huancabamba,False
+q 0.2,-2.25,5,0.688,Huancabamba,False
 q 0.2,-2.75,5,0.708,Huancabamba,False
 q 0.2,-3.25,5,0.681,Huancabamba,False
 q 0.2,-3.75,5,0.639,Huancabamba,False
-q 0.2,-4.25,5,0.591,Huancabamba,True
-q 0.2,-4.75,5,0.605,Huancabamba,True
-q 0.2,-5.25,5,0.615,Huancabamba,True
-q 0.2,-5.75,5,0.634,Huancabamba,True
-q 0.2,-6.25,12,0.673,Huancabamba,True
-q 0.2,-6.75,7,0.739,Huancabamba,True
-q 0.2,-7.25,8,0.757,Huancabamba,True
-q 0.2,-7.75,6,0.821,Huancabamba,False
+q 0.2,-4.25,4,0.614,Huancabamba,True
+q 0.2,-4.75,4,0.62,Huancabamba,True
+q 0.2,-5.25,4,0.631,Huancabamba,True
+q 0.2,-5.75,4,0.634,Huancabamba,True
+q 0.2,-6.25,11,0.663,Huancabamba,True
+q 0.2,-6.75,5,0.785,Huancabamba,True
+q 0.2,-7.25,5,0.817,Huancabamba,True
+q 0.2,-7.75,5,0.838,Huancabamba,False
 q 0.2,-8.25,5,0.851,Huancabamba,False
-q 0.2,-8.75,6,0.824,Huancabamba,False
-q 0.2,-9.25,6,0.856,Huancabamba,False
-q 0.2,-9.75,6,0.877,Huancabamba,False
-100 km,-2.25,14,0.709,Huancabamba,False
-100 km,-2.75,13,0.75,Huancabamba,False
-100 km,-3.25,14,0.715,Huancabamba,False
-100 km,-3.75,19,0.608,Huancabamba,False
-100 km,-4.25,14,0.557,Huancabamba,True
-100 km,-4.75,12,0.605,Huancabamba,True
-100 km,-5.25,14,0.598,Huancabamba,True
-100 km,-5.75,13,0.617,Huancabamba,True
-100 km,-6.25,33,0.68,Huancabamba,True
-100 km,-6.75,23,0.772,Huancabamba,True
-100 km,-7.25,18,0.801,Huancabamba,True
-100 km,-7.75,20,0.81,Huancabamba,False
-100 km,-8.25,19,0.868,Huancabamba,False
-100 km,-8.75,29,0.85,Huancabamba,False
-100 km,-9.25,21,0.838,Huancabamba,False
-100 km,-9.75,21,0.9,Huancabamba,False
+q 0.2,-8.75,5,0.834,Huancabamba,False
+q 0.2,-9.25,4,0.88,Huancabamba,False
+q 0.2,-9.75,5,0.895,Huancabamba,False
+100 km,-2.25,11,0.745,Huancabamba,False
+100 km,-2.75,10,0.839,Huancabamba,False
+100 km,-3.25,11,0.77,Huancabamba,False
+100 km,-3.75,15,0.611,Huancabamba,False
+100 km,-4.25,10,0.591,Huancabamba,True
+100 km,-4.75,9,0.621,Huancabamba,True
+100 km,-5.25,10,0.629,Huancabamba,True
+100 km,-5.75,8,0.639,Huancabamba,True
+100 km,-6.25,16,0.614,Huancabamba,True
+100 km,-6.75,11,0.845,Huancabamba,True
+100 km,-7.25,11,0.862,Huancabamba,True
+100 km,-7.75,12,0.896,Huancabamba,False
+100 km,-8.25,10,0.933,Huancabamba,False
+100 km,-8.75,14,0.902,Huancabamba,False
+100 km,-9.25,10,0.903,Huancabamba,False
+100 km,-9.75,11,0.943,Huancabamba,False
 400 km,-2.25,4,0.487,Huancabamba,False
 400 km,-3.25,4,0.447,Huancabamba,False
-400 km,-4.25,5,0.379,Huancabamba,True
-400 km,-5.25,5,0.381,Huancabamba,True
+400 km,-4.25,4,0.397,Huancabamba,True
+400 km,-5.25,4,0.398,Huancabamba,True
 400 km,-6.25,4,0.47,Huancabamba,True
 400 km,-6.75,3,0.561,Huancabamba,True
 400 km,-7.75,5,0.623,Huancabamba,False
 400 km,-8.75,4,0.703,Huancabamba,False
 400 km,-9.75,4,0.766,Huancabamba,False
-main,8.25,3,0.239,Tachira,False
+main,8.25,1,0.236,Tachira,False
 main,7.75,3,0.34,Tachira,True
-main,7.25,6,0.431,Tachira,False
+main,7.25,5,0.465,Tachira,False
 main,6.75,5,0.601,Tachira,False
 main,6.25,4,0.645,Tachira,False
 main,5.75,3,0.609,Tachira,False
 main,5.25,2,0.673,Tachira,False
-q 0.05,8.25,3,0.143,Tachira,False
+q 0.05,8.25,1,0.14,Tachira,False
 q 0.05,7.75,3,0.234,Tachira,True
-q 0.05,7.25,6,0.335,Tachira,False
+q 0.05,7.25,5,0.368,Tachira,False
 q 0.05,6.75,5,0.506,Tachira,False
 q 0.05,6.25,4,0.55,Tachira,False
 q 0.05,5.75,3,0.503,Tachira,False
 q 0.05,5.25,2,0.599,Tachira,False
-q 0.2,8.25,3,0.37,Tachira,False
+q 0.2,8.25,1,0.368,Tachira,False
 q 0.2,7.75,3,0.468,Tachira,True
-q 0.2,7.25,6,0.539,Tachira,False
+q 0.2,7.25,5,0.572,Tachira,False
 q 0.2,6.75,5,0.699,Tachira,False
 q 0.2,6.25,4,0.738,Tachira,False
 q 0.2,5.75,3,0.711,Tachira,False
 q 0.2,5.25,2,0.75,Tachira,False
-100 km,10.25,3,0.247,Tachira,False
-100 km,9.75,3,0.301,Tachira,False
 100 km,9.25,1,0.547,Tachira,False
 100 km,8.75,3,0.662,Tachira,False
 100 km,8.25,3,0.597,Tachira,False
-100 km,7.75,14,0.549,Tachira,True
-100 km,7.25,12,0.66,Tachira,False
-100 km,6.75,15,0.617,Tachira,False
-100 km,6.25,16,0.65,Tachira,False
-100 km,5.75,15,0.76,Tachira,False
+100 km,7.75,10,0.435,Tachira,True
+100 km,7.25,11,0.668,Tachira,False
+100 km,6.75,11,0.641,Tachira,False
+100 km,6.25,8,0.726,Tachira,False
+100 km,5.75,12,0.797,Tachira,False
 100 km,5.25,13,0.83,Tachira,False
 400 km,8.25,3,0.198,Tachira,False
 400 km,7.75,3,0.247,Tachira,True

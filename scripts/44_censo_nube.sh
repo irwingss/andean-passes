@@ -30,7 +30,7 @@ done
 
 # code and the small inputs (FABDEM is read on the machine from Earth Engine)
 tar czf /tmp/entrada.tar.gz config.yml requirements.txt scripts/39_descarga_fabdem.py scripts/40_censo_bloque.py \
-  scripts/41_etiquetas_cols.py data/refs/pasos_control.csv data/interim/M1_gmba_andes.gpkg data/interim/M1_domains.gpkg \
+  scripts/41_etiquetas_passes.py data/refs/pasos_control.csv data/interim/M1_gmba_andes.gpkg data/interim/M1_domains.gpkg \
   data/raw/hybas_sa_lev01-12_v1c/hybas_sa_lev12_v1c.* data/raw/GMBA_Inventory_v2.0_standard_300
 gcloud storage cp -q /tmp/entrada.tar.gz "$B/entrada.tar.gz"
 

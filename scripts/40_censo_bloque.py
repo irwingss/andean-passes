@@ -1,14 +1,14 @@
-"""40_censo_bloque.py - Census of cols on one latitude block, from FABDEM relief alone (PRD O1-O3).
+"""40_censo_bloque.py - Census of passes on one latitude block, from FABDEM relief alone (PRD O1-O3).
 python -P scripts/40_censo_bloque.py <north_edge_of_core_deg> [core_deg=1] [overlap_deg=0.5]
-e.g. -5 -> core 5-6 S, window 4.5-6.5 S. Output: data/interim/censo/cols_<tag>.csv (core cols only).
+e.g. -5 -> core 5-6 S, window 4.5-6.5 S. Output: data/interim/censo/passes_<tag>.csv (core passes only).
 
 Steps: FABDEM mosaic -> real sinks: depressions with the bottom in an endorheic HydroBASINS basin and 20 m or more
 deep, kept as in FABDEM -> breaching of every other depression (Lindsay 2016, WhiteboxTools, no depth or length limit,
 pits raised, no fill)
 -> D8 with flats drained to their outlets (Barnes, Lehman & Mulla 2014b) -> accumulation -> channel links at 0.1 km2
 -> every cell labelled by the link it drains to -> divides = cell edges between labels (never a channel cell)
--> cols and depth by a top-down merge of the divide graph (prominence principle) -> width along the crest.
-Heights of cols are always read from FABDEM without conditioning.
+-> passes and depth by a top-down merge of the divide graph (prominence principle) -> width along the crest.
+Heights of passes are always read from FABDEM without conditioning.
 """
 import glob
 import math
@@ -35,7 +35,7 @@ os.makedirs(TMP, exist_ok=True)
 RES = 1 / 3600
 CH_AREA = 0.1e6          # m2, minimum scale of a divide (O2.4)
 MIN_DEPTH = 30.0         # D15
-WIDTH_DEPTH = 100.0      # width only for cols this deep (O3)
+WIDTH_DEPTH = 100.0      # width only for passes this deep (O3)
 NODATA = -9999.0
 R_EARTH = 6371008.8
 DI = np.array([-1, -1, 0, 1, 1, 1, 0, -1], np.int64)   # D8 neighbours, clockwise from north
@@ -314,7 +314,7 @@ def labels_from_flow(rcv, flat, cell_area):
     return lab.reshape(nr, nc), ch.reshape(nr, nc), term.reshape(nr, nc), acc.reshape(nr, nc), t
 
 
-# ---------------------------------------------------------------- divide graph and cols
+# ---------------------------------------------------------------- divide graph and passes
 @nb.njit(cache=True)
 def is_div(lab, ch, z, nod, i, j, i2, j2):
     nr, nc = lab.shape
@@ -390,8 +390,8 @@ def find(par, a):
 
 
 @nb.njit(cache=True)
-def merge_cols(na, nb_, w, order, nedge, min_depth):
-    """Top-down merge of the divide graph: each crack where two higher parts of the network first meet is a col;
+def merge_passes(na, nb_, w, order, nedge, min_depth):
+    """Top-down merge of the divide graph: each crack where two higher parts of the network first meet is a pass;
     depth = lower of the two maxima - crack height. Returns crack indices. The depth is only a lower bound (flag) when
     the lower part reaches the window edge, where its true maximum may lie beyond."""
     nnodes = nedge.size
@@ -504,7 +504,7 @@ def widths(lab, ch, z, nod, rcv, keys, ea, eb, ws, dx, dy, cap):
 
 
 def sink_spills(key, w, term, rcv, flat):
-    """Col of each closed basin: the lowest crack of its rim. Along a closed rim both directions climb to the same
+    """Pass of each closed basin: the lowest crack of its rim. Along a closed rim both directions climb to the same
     highest point, so depth = highest rim crack - lowest rim crack. Returns, per sink with a rim: its terminal id,
     lowest rim crack, depth, rim maximum, whether the basin reaches the window edge (rim incomplete) and whether its
     bottom is on the edge (an artefact of the window)."""
@@ -536,7 +536,7 @@ def sink_spills(key, w, term, rcv, flat):
 
 
 def write_sinks(tag, term, rcv, flat, raw, zfill, n, w, dx, dy, area, core, north, st, si, sd, shi, str_, sedge, key, wcr):
-    """Every real sink kept by the breaching rule, for review: bottom, contributing area and rim col."""
+    """Every real sink kept by the breaching rule, for review: bottom, contributing area and rim pass."""
     nr, nc = rcv.shape
     N = nr * nc
     t = term.ravel()
@@ -681,7 +681,7 @@ def run(north, core=1.0, ov=0.5):
     nedge = (cri <= 1) | (crj <= 1) | (cri >= nr - 1) | (crj >= nc - 1)
     del cor, cri, crj
     order = np.argsort(-wcr, kind="stable")
-    ci_, cd, chi, ctr = merge_cols(na, nb_, wcr, order, nedge, MIN_DEPTH)
+    ci_, cd, chi, ctr = merge_passes(na, nb_, wcr, order, nedge, MIN_DEPTH)
     del na, nb_, uniq, order, nedge
     st, si, sd, shi, str_, sedge = sink_spills(key, wcr, term, rcv, flat)
     with rasterio.open(ff) as src:
@@ -696,7 +696,7 @@ def run(north, core=1.0, ov=0.5):
     cring = np.r_[np.zeros(len(ctr), bool), np.ones(len(si), bool)]
     ctr = np.r_[ctr, str_]
     ck, cw, cea, ceb = key[ci_], wcr[ci_], ea[ci_], eb[ci_]
-    print(f"  cells {nr}x{nc}, sink cells {nsink}, divide cracks {key.size}, cols >= {MIN_DEPTH} m: {ck.size}",
+    print(f"  cells {nr}x{nc}, sink cells {nsink}, divide cracks {key.size}, passes >= {MIN_DEPTH} m: {ck.size}",
           flush=True)
 
     cell = ck // 2
@@ -721,7 +721,7 @@ def run(north, core=1.0, ov=0.5):
     tbi, tbj = trace_down(rcv, acc, i2, j2, 5e6)
 
     import csv
-    fo = os.path.join(OUT, f"cols_{tag}.csv")
+    fo = os.path.join(OUT, f"passes_{tag}.csv")
     keep = inarea
     with open(fo, "w", newline="") as f:
         wr = csv.writer(f)
@@ -737,7 +737,7 @@ def run(north, core=1.0, ov=0.5):
                          f6(n - (tai[k] + 0.5) * RES), f6(w + (taj[k] + 0.5) * RES),
                          f6(n - (tbi[k] + 0.5) * RES), f6(w + (tbj[k] + 0.5) * RES)])
     keep = inarea & core_
-    print(f"  core cols: {keep.sum()}, with depth >= {WIDTH_DEPTH:.0f} m: {deep.sum()} -> {fo}", flush=True)
+    print(f"  core passes: {keep.sum()}, with depth >= {WIDTH_DEPTH:.0f} m: {deep.sum()} -> {fo}", flush=True)
     # divide mask for review (a cell is marked if it borders a divide crack)
     dm = np.zeros((nr, nc), np.uint8)
     c = key // 2

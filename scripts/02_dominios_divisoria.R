@@ -1,7 +1,7 @@
 # 02_dominios_divisoria.R - Study area and sea labels of the census (PRD O1 and O4).
 # Writes data/interim/M1_gmba_andes.gpkg, the union of the GMBA v2 units under "South America > Andes", and
 # data/interim/M1_domains.gpkg, the level-12 HydroBASINS dissolved by terminal outlet into W (Pacific and Caribbean),
-# E (Atlantic) and I (endorheic). 41_etiquetas_cols.py reads these domains only to label the side each col drains to.
+# E (Atlantic) and I (endorheic). 41_etiquetas_passes.py reads these domains only to label the side each pass drains to.
 # Rscript scripts/02_dominios_divisoria.R [--force]
 suppressPackageStartupMessages({ library(sf); library(terra) })
 sf_use_s2(FALSE)

@@ -1,4 +1,4 @@
-name,country,lat_dms,lon_dms,lat,lon,elev_ref_m,elev_alt_m,source,coord_source,note,col_km,col_z,col_depth,error_m,zone
+name,country,lat_dms,lon_dms,lat,lon,elev_ref_m,elev_alt_m,source,coord_source,note,census_km,census_z,census_depth,error_m,zone
 Abra de Porculla,PE,05°50'19,79°31'06,-5.84,-79.52,2144,2003.0,"INEI (2009, 2010) Compendio Estadístico Piura, cuadro 1.4; alt: INEI (2017) Compendio Piura cuadro 1.6",INEI,Weigend (2002) Bot. Rev. 68:38-54 gives 2145 m,0.42,2183.2,35.9,39.2,tropical
 Suropite (Cuello del Indio),PE,05°20'49,79°32'17,-5.35,-79.54,3100,3144.0,"INEI (2009, 2010) Compendio Piura; alt: INEI (2017)",INEI,,0.73,3111.2,352.3,11.2,tropical
 Peña Blanca,PE,05°00'16,79°35'09,-5.0,-79.59,2980,2965.0,"INEI (2009, 2010) Compendio Piura; alt: INEI (2017)",INEI,,0.1,2988.3,50.2,8.3,tropical

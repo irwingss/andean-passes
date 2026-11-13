@@ -1,4 +1,4 @@
-no,pass,system,lat,lon,apd_id,col_km,z_m,depth_m,rank,trans_med,trans_min,trans_max,trans_cfg_lo,trans_cfg_hi,longi_med,longi_min,longi_max,longi_cfg_lo,longi_cfg_hi
+no,pass,system,lat,lon,apd_id,census_km,z_m,depth_m,rank,trans_med,trans_min,trans_max,trans_cfg_lo,trans_cfg_hi,longi_med,longi_min,longi_max,longi_cfg_lo,longi_cfg_hi
 1,Paso La Gallina,Mérida,8.91,-70.96,APD071818,0.42,3629.7,293.9,tributary,0.47,0.2,1.1,0.33,0.63,,,,1.09,1.26
 2,Boquerón de Lenguerke,Oriental Colombia,6.86,-73.34,APD047769,0.26,2424.4,32.1,tributary,0.88,0.62,1.21,0.73,0.95,1.05,1.01,2.11,1.01,1.13
 3,Alto de Cruz Verde,Oriental Colombia,4.51,-74.05,APD028030,0.48,3446.9,30.6,continental,0.84,0.72,1.05,0.76,1.0,1.13,1.01,1.82,1.06,1.29

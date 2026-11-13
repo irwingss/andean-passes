@@ -30,14 +30,14 @@ bloque() {
   gsutil -q rm "$B/censo/estado/$tag.*" 2>/dev/null       # a rerun replaces the earlier state
   export NUMBA_CACHE_DIR=/censo/numba/$tag      # one cache per block: no race between parallel compilations
   if timeout -k 1m 30m python -P scripts/40_censo_bloque.py "$north" > "log_$tag.txt" 2>&1 &&
-     timeout -k 1m 10m python -P scripts/41_etiquetas_cols.py "$tag" >> "log_$tag.txt" 2>&1; then
+     timeout -k 1m 10m python -P scripts/41_etiquetas_passes.py "$tag" >> "log_$tag.txt" 2>&1; then
     st=ok
   else
     st=failed; pkill -f "whitebox_tools.*_${tag}\.tif"
   fi
   o=data/interim/censo
   rm -f $o/tmp/*_"$tag".tif
-  for f in $o/cols_"$tag".csv $o/cols_"$tag".gpkg $o/cols_"$tag"_etiquetas.csv $o/sumideros_"$tag".csv $o/divisorias_"$tag".tif; do
+  for f in $o/passes_"$tag".csv $o/passes_"$tag".gpkg $o/passes_"$tag"_etiquetas.csv $o/sumideros_"$tag".csv $o/divisorias_"$tag".tif; do
     [ -f "$f" ] && gsutil -q cp "$f" "$B/censo/"
   done
   gsutil -q cp "log_$tag.txt" "$B/censo/logs/"

@@ -6,6 +6,10 @@ source block.
   Longitudinal reading (montane species): current from the north edge to the south edge, only at montane cells.
 Tiles are squares of side S km moved by S/4; currents are summed over tiles and divided by the same sum with uniform
 resistance, so the normalized current is above 1 where climate concentrates movement and below 1 where it hinders it.
+Each tile enters the sums with a Hann window, highest at its centre and near zero at its edges, so a cell takes most of
+its value from the tiles centred near it and no step remains where a tile begins or ends; the edges, where current is
+injected and grounded, weigh least. With a step of S/4 the windows of the tiles over an interior cell add to 16, the
+same total as unweighted tiles, so the current keeps its scale.
 python -P scripts/50_conectividad_teselas.py <run> <side_km> <vars|all> <shapes>     e.g. principal 200 "1" env
 The shape "env" reads res_env{baja,alta}_bioNN.tif (first margin q of 47, 0.1); "env_q0.05" reads
 res_env{baja,alta}_bioNN_q0.05.tif.
@@ -30,6 +34,8 @@ S = int(sys.argv[2])
 INS = f"data/interim/conectividad/{RUN}/insumos"
 OUT = f"data/interim/conectividad/{RUN}/teselas"
 NB = [(0, 1, 1.0), (1, -1, 2 ** 0.5), (1, 0, 1.0), (1, 1, 2 ** 0.5)]      # each neighbour pair once; distance in km
+_h = 2 * np.sin(np.pi * (np.arange(S) + 0.5) / S) ** 2                     # 1-D Hann; four shifts of S/4 add to 4
+WIN = np.outer(_h, _h)                                                     # tile weight; sixteen tiles add to 16
 
 
 def read(n):
@@ -159,7 +165,7 @@ if __name__ == "__main__":
         for y, x, res in p.imap_unordered(tile, jobs, chunksize=2):
             for key, (c, g) in res.items():
                 a = acc[key][y:y + S, x:x + S]
-                a += np.nan_to_num(c)
+                a += np.nan_to_num(c) * WIN[:a.shape[0], :a.shape[1]]
                 if key[1] != "uni":
                     tiles.append((y + S // 2, x + S // 2, key[0], names[key[1]], g))
     print(f"solved in {time.time() - t0:.0f} s")

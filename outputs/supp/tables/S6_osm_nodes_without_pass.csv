@@ -1,4 +1,4 @@
-osm_id,lat,lon,name,pass_tag,saddle_tag,ele_osm,col_km,col_z,col_depth,gmba,rank,col_lat,col_lon,tag,on_net
+osm_id,lat,lon,name,pass_tag,saddle_tag,ele_osm,census_km,census_z,census_depth,gmba,rank,census_lat,census_lon,tag,on_net
 4319087082,-17.5912575,-69.4750952,Paso Visviri,True,False,4095.0,7.921479323515429,4153.8,35.9,Cordillera Occidental (Central Andes),tributary,-17.6475,-69.520972,S17p00,True
 9501460381,-24.1090785,-68.6790028,Portezuelo Pan de Azúcar,False,True,3015.0,7.364365153673368,3216.1,51.3,Dry Andes,tributary,-24.043889,-68.691806,S24p00,False
 12237550642,-49.1907206,-73.2571251,Paso de Los Cinco Glaciares,False,True,,6.034312972594993,1822.5,38.1,Patagonian Andes,tributary,-49.14375,-73.215556,S49p00,True

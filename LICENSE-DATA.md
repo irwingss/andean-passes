@@ -6,7 +6,7 @@ The code (`scripts/`) is under the MIT licence (`LICENSE`). Everything else in t
 
 FABDEM V1-2 is distributed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Every height, depth, width and isolation of the census comes from it, so the census and everything built on it are licensed under CC BY-NC-SA 4.0, with the attributions of section 4:
 
-- `outputs/database/APD_cols.csv.gz`
+- `outputs/database/APD_passes.csv.gz`
 - `outputs/tables/`, `outputs/supp/` (tables, figures and the Supplementary Information)
 - `data/interim/` and `data/refs/pasos_control.csv`, `data/refs/M1_reference_*.csv`
 

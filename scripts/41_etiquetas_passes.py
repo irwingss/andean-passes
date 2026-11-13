@@ -1,8 +1,8 @@
-"""41_etiquetas_cols.py - Labels for the cols of one block (PRD O1, O3, O4): GMBA level-4 unit, sea and terminal basin
+"""41_etiquetas_passes.py - Labels for the passes of one block (PRD O1, O3, O4): GMBA level-4 unit, sea and terminal basin
 of each side from HydroBASINS, rank, separated area, isolation and gateway. HydroBASINS only labels: it never adds,
-moves or removes a col.
-python -P scripts/41_etiquetas_cols.py <tag>      e.g. S05p00, after 40_censo_bloque.py
-Isolation here only sees the cols of this block's window, so it is an upper bound until the blocks are joined (R3).
+moves or removes a pass.
+python -P scripts/41_etiquetas_passes.py <tag>      e.g. S05p00, after 40_censo_bloque.py
+Isolation here only sees the passes of this block's window, so it is an upper bound until the blocks are joined (R3).
 """
 import os
 import sys
@@ -21,10 +21,10 @@ GEOD = Geod(ellps="WGS84")
 
 
 
-cols = np.genfromtxt(os.path.join(OUT, f"cols_{tag}.csv"), delimiter=",", names=True, encoding="utf-8")
-lat, lon = cols["lat"], cols["lon"]
+passes = np.genfromtxt(os.path.join(OUT, f"passes_{tag}.csv"), delimiter=",", names=True, encoding="utf-8")
+lat, lon = passes["lat"], passes["lon"]
 
-# ---- GMBA level-4 unit (point in polygon, else the nearest unit: cols in the 20 km margin)
+# ---- GMBA level-4 unit (point in polygon, else the nearest unit: passes in the 20 km margin)
 m, _, g, F = pyogrio.raw.read(os.path.join(RAW, "GMBA_Inventory_v2.0_standard_300/GMBA_Inventory_v2.0_standard_300.shp"),
                               columns=["Path"], encoding="utf-8")
 path = np.array(F[0], dtype=object)
@@ -45,8 +45,8 @@ hid = H["HYBAS_ID"].astype(np.int64)
 pos = {h: k for k, h in enumerate(hid)}
 nxt, mainb, uparea, endo = H["NEXT_DOWN"].astype(np.int64), H["MAIN_BAS"].astype(np.int64), H["UP_AREA"], H["ENDO"]
 pad = 0.5
-bb = (np.nanmin([cols["lon_a5"].min(), cols["lon_b5"].min()]) - pad, np.nanmin([cols["lat_a5"].min(), cols["lat_b5"].min()]) - pad,
-      np.nanmax([cols["lon_a5"].max(), cols["lon_b5"].max()]) + pad, np.nanmax([cols["lat_a5"].max(), cols["lat_b5"].max()]) + pad)
+bb = (np.nanmin([passes["lon_a5"].min(), passes["lon_b5"].min()]) - pad, np.nanmin([passes["lat_a5"].min(), passes["lat_b5"].min()]) - pad,
+      np.nanmax([passes["lon_a5"].max(), passes["lon_b5"].max()]) + pad, np.nanmax([passes["lat_a5"].max(), passes["lat_b5"].max()]) + pad)
 m, _, gb, Fb = pyogrio.raw.read(f12, columns=["HYBAS_ID"], bbox=bb)
 bpoly, bid = shapely.from_wkb(gb), Fb[0].astype(np.int64)
 btree = shapely.STRtree(bpoly)
@@ -87,7 +87,7 @@ def route(h):
     return r
 
 
-ba, bbb = basin_of(cols["lon_a5"], cols["lat_a5"]), basin_of(cols["lon_b5"], cols["lat_b5"])
+ba, bbb = basin_of(passes["lon_a5"], passes["lat_a5"]), basin_of(passes["lon_b5"], passes["lat_b5"])
 cache = {}
 rank, sea_a, sea_b, area_sep, term_a, term_b = [], [], [], [], [], []
 for a, b in zip(ba, bbb):
@@ -111,11 +111,11 @@ for a, b in zip(ba, bbb):
         pre = [r[r.index(j) - 1] for r in (ra, rb) if r.index(j) > 0]
         area_sep.append(min(uparea[pos[x]] for x in pre))
 
-# ---- isolation: distance to the nearest lower col with depth >= 100 m (window cols only, upper bound)
-z, depth = cols["z_m"], cols["depth_m"]
+# ---- isolation: distance to the nearest lower pass with depth >= 100 m (window passes only, upper bound)
+z, depth = passes["z_m"], passes["depth_m"]
 deep = np.flatnonzero(depth >= 100)
-iso = np.full(len(cols), np.inf)
-for k in range(len(cols)):
+iso = np.full(len(passes), np.inf)
+for k in range(len(passes)):
     cand = deep[z[deep] < z[k]]
     if cand.size:
         _, _, d = GEOD.inv(np.full(cand.size, lon[k]), np.full(cand.size, lat[k]), lon[cand], lat[cand])
@@ -123,22 +123,22 @@ for k in range(len(cols)):
 gate = (depth >= 100) & (iso >= 100)
 
 # ---- write
-names = list(cols.dtype.names)
-out = os.path.join(OUT, f"cols_{tag}_etiquetas.csv")
+names = list(passes.dtype.names)
+out = os.path.join(OUT, f"passes_{tag}_etiquetas.csv")
 with open(out, "w", encoding="utf-8", newline="") as f:
     f.write(",".join(names + ["gmba", "sea_a", "sea_b", "rank", "hybas_term_a", "hybas_term_b", "area_sep_km2",
                               "isolation_km_window", "gateway_window"]) + "\n")
-    for k in range(len(cols)):
-        row = ["" if (isinstance(v, float) and np.isnan(v)) else str(v) for v in cols[k].tolist()]
+    for k in range(len(passes)):
+        row = ["" if (isinstance(v, float) and np.isnan(v)) else str(v) for v in passes[k].tolist()]
         row += [gmba[k], sea_a[k], sea_b[k], rank[k], str(term_a[k]), str(term_b[k]),
                 "" if np.isnan(area_sep[k]) else f"{area_sep[k]:.1f}",
                 "inf" if np.isinf(iso[k]) else f"{iso[k]:.2f}", str(int(gate[k]))]
         f.write(",".join(f'"{x}"' if "," in x else x for x in row) + "\n")
-fd = {"z_m": z, "depth_m": depth, "width_m": cols["width_m"], "ring": cols["ring"].astype(int), "flat": cols["flat"].astype(int),
-      "core": cols["core"].astype(int), "gmba": gmba.astype(str), "rank": np.array(rank, dtype=str),
+fd = {"z_m": z, "depth_m": depth, "width_m": passes["width_m"], "ring": passes["ring"].astype(int), "flat": passes["flat"].astype(int),
+      "core": passes["core"].astype(int), "gmba": gmba.astype(str), "rank": np.array(rank, dtype=str),
       "area_sep_km2": np.array(area_sep, float), "isolation_km": iso, "gateway": gate.astype(int)}
-pyogrio.raw.write(os.path.join(OUT, f"cols_{tag}.gpkg"), shapely.to_wkb(pts), list(fd.values()), list(fd.keys()),
+pyogrio.raw.write(os.path.join(OUT, f"passes_{tag}.gpkg"), shapely.to_wkb(pts), list(fd.values()), list(fd.keys()),
                   geometry_type="Point", crs="EPSG:4326", driver="GPKG")
-core = cols["core"] == 1
-print(f"{tag}: {core.sum()} core cols; rank", {r: int(np.sum(np.array(rank)[core] == r)) for r in set(rank)},
+core = passes["core"] == 1
+print(f"{tag}: {core.sum()} core passes; rank", {r: int(np.sum(np.array(rank)[core] == r)) for r in set(rank)},
       f"; gateways (window) {int(gate[core].sum())} -> {out}")

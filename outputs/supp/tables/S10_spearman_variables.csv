@@ -1,4 +1,4 @@
-reading,var_a,var_b,rho_cols,rho_tiles
+reading,var_a,var_b,rho_passes,rho_tiles
 transverse,bio01,bio01,1.0,1.0
 transverse,bio01,bio02,0.551,0.746
 transverse,bio01,bio03,0.09,0.411

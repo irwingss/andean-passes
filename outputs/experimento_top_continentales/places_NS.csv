@@ -1,0 +1,11 @@
+rank_pass,place,apd_id,lat,lon,z_m,depth_m,gmba,longi_med,longi_min,longi_max,cfg_lo,cfg_hi,longi_robust
+1,1,APD044724,5.2865,-76.5378,161.0,51.0,Cordillera Occidental (Northern Andes),0.412,0.253,1.021,0.308,0.595,below 1
+19,2,APD043776,5.3386,-76.3137,328.0,672.0,Cordillera Occidental (Northern Andes),0.488,0.35,1.007,0.375,0.656,below 1
+35,3,APD045092,6.4815,-72.2956,4942.0,45.0,Cordillera Oriental (Northern Andes),0.623,0.338,1.038,0.473,0.759,below 1
+45,4,APD147997,-9.2196,-77.5172,5554.0,150.0,Cordillera Occidental (Central Andes),0.686,0.406,1.233,0.528,0.842,below 1
+52,5,APD139524,-8.8599,-77.5975,5553.0,257.0,Cordillera Occidental (Central Andes),0.701,0.392,1.153,0.532,0.847,below 1
+56,6,APD014350,2.4367,-76.8354,1746.0,43.0,Cordillera Occidental (Northern Andes),0.713,0.586,1.244,0.611,0.86,below 1
+70,7,APD040529,5.4417,-76.1079,1237.0,54.0,Cordillera Occidental (Northern Andes),0.774,0.596,1.118,0.65,0.991,below 1
+77,8,APD227060,-15.8781,-68.5546,5775.0,102.0,Cordillera Oriental (Central Andes),0.801,0.402,1.443,0.647,0.903,below 1
+79,9,APD147992,-9.3704,-77.3314,5716.0,186.0,Cordillera Occidental (Central Andes),0.807,0.382,1.266,0.632,0.945,below 1
+145,10,APD034649,5.7257,-72.7092,3592.0,45.0,Cordillera Oriental (Northern Andes),0.966,0.495,1.524,0.928,0.987,below 1

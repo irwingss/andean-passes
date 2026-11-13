@@ -1,0 +1,21 @@
+rank_pass,place,apd_id,lat,lon,z_m,depth_m,gmba,trans_med,trans_min,trans_max,cfg_lo,cfg_hi,trans_robust
+1,1,APD060810,7.7654,-72.3694,1308.0,74.0,Cordillera de Mérida,1.339,0.984,2.008,1.166,1.562,above 1
+2,2,APD021942,3.2732,-74.6358,2242.0,39.0,Cordillera Oriental (Northern Andes),1.195,0.873,1.827,1.11,1.33,above 1
+11,3,APD029895,4.7274,-76.0931,1966.0,53.0,Cordillera Occidental (Northern Andes),1.135,0.999,1.314,1.072,1.206,above 1
+27,4,APD007062,1.6636,-75.9529,1868.0,44.0,Cordillera Oriental (Northern Andes),1.095,0.999,1.263,1.033,1.151,above 1
+36,5,APD005485,1.8019,-76.7382,3029.0,315.0,Cordillera Central (Northern Andes),1.086,0.976,1.132,1.019,1.106,above 1
+37,6,APD022778,3.9668,-76.4131,1630.0,130.0,Cordillera Occidental (Northern Andes),1.081,1.001,1.296,1.033,1.13,above 1
+42,7,APD030275,4.3081,-76.2954,1733.0,71.0,Cordillera Occidental (Northern Andes),1.073,0.992,1.488,1.042,1.123,above 1
+45,8,APD039039,5.4729,-76.0783,1669.0,61.0,Cordillera Occidental (Northern Andes),1.071,0.97,1.438,1.036,1.112,above 1
+49,9,APD098908,-3.8879,-79.2631,2636.0,130.0,Cordillera Oriental (Northern Andes),1.067,1.001,1.226,1.04,1.118,above 1
+57,10,APD084298,10.1835,-69.4394,1001.0,32.0,Cordillera de Mérida,1.063,1.002,1.159,1.033,1.097,above 1
+71,11,APD113133,-5.5697,-79.5263,2156.0,882.0,Cordillera Occidental (Central Andes),1.06,1.001,1.167,1.022,1.08,above 1
+94,12,APD014384,2.4353,-76.8446,1736.0,1932.0,Cordillera Occidental (Northern Andes),1.056,1.009,1.411,1.038,1.109,above 1
+105,13,APD130901,-7.4707,-78.3531,3682.0,41.0,Cordillera Occidental (Central Andes),1.053,0.815,1.19,1.009,1.066,above 1
+106,14,APD081169,9.961,-69.5106,998.0,50.0,Cordillera de Mérida,1.053,0.93,1.116,1.032,1.082,above 1
+112,15,APD038085,5.3157,-75.9075,2054.0,216.0,Cordillera Occidental (Northern Andes),1.052,0.974,1.746,1.03,1.086,above 1
+116,16,APD023001,3.7,-76.5049,1529.0,470.0,Cordillera Occidental (Northern Andes),1.052,0.88,1.25,1.026,1.083,above 1
+154,17,APD112299,-5.8871,-79.4814,2635.0,551.0,Cordillera Occidental (Central Andes),1.044,0.872,1.224,1.003,1.082,above 1
+179,18,APD044724,5.2865,-76.5378,161.0,51.0,Cordillera Occidental (Northern Andes),1.042,0.718,1.105,1.02,1.059,above 1
+207,19,APD043250,5.3617,-76.2801,437.0,72.0,Cordillera Occidental (Northern Andes),1.039,0.916,1.202,1.015,1.046,above 1
+226,20,APD131905,-7.2469,-78.469,3226.0,773.0,Cordillera Occidental (Central Andes),1.037,0.647,1.104,1.01,1.037,above 1

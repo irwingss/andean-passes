@@ -1,4 +1,4 @@
-reading,var,median_rho_other_vars_cols,min_rho_other_vars_cols,median_rho_other_vars_tiles,rho_with_col_median
+reading,var,median_rho_other_vars_passes,min_rho_other_vars_passes,median_rho_other_vars_tiles,rho_with_pass_median
 transverse,bio01,0.184,-0.119,0.592,0.81
 transverse,bio02,0.215,-0.123,0.636,0.537
 transverse,bio03,0.111,-0.009,0.419,0.262
