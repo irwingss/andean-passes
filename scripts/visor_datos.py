@@ -1,5 +1,6 @@
 """Layers of the web viewer (docs/, GitHub Pages) of the Andean Passes Database: every layer of Figs 1 to 3.
-XYZ tiles of indexed PNG: the normalized current of the main run with BIO1 in both directions (Fig. 2), the zone
+XYZ tiles of indexed PNG: the normalized current of the main run with BIO1 in both directions (Fig. 2), its median over
+the temperature variables (BIO1 to BIO11) and over the precipitation variables (BIO12 to BIO19) in each cell, the zone
 conductance with the temperature median in both directions (Fig. 3a, b), the divide network around the Huancabamba
 Depression (Fig. 1b), human modification and protected areas. GeoJSON: the GMBA outline, the continental divide of the
 tropics with the bands of Table S19 (Fig. 3) and the barriers of Hazzi et al. (2018). The passes with a depth of 100 m
@@ -38,7 +39,9 @@ CUR_BREAKS = (0.5, 0.8, 0.95, 1.05, 1.25, 2)
 # zone conductance in five classes of 0.2, colours of the magma scale of Fig. 3
 ZONE = [('#000004', .85, 'below 0.2 (barrier)'), ('#51127C', .85, '0.2 to 0.4'), ('#B73779', .8, '0.4 to 0.6'),
         ('#FC8961', .75, '0.6 to 0.8'), ('#FCFDBF', .7, '0.8 or more (open)')]
-PAL = {'trans_bio01': CUR, 'longi_bio01': CUR, 'trans_zone': ZONE, 'longi_zone': ZONE,
+GROUPS = {'temp': range(1, 12), 'prec': range(12, 20)}          # the two groups of Fig. 3c, d
+PAL = {'trans_bio01': CUR, 'longi_bio01': CUR, 'trans_temp': CUR, 'longi_temp': CUR, 'trans_prec': CUR,
+       'longi_prec': CUR, 'trans_zone': ZONE, 'longi_zone': ZONE,
        'divnet': [('#202020', .45, 'Divide network, 1 arc-second census')],
        'ghm': [('#fee8c8', .7, '0.1 to 0.2'), ('#fdbb84', .75, '0.2 to 0.4'), ('#d7301f', .8, '0.4 or more (high)')],
        'pa': [('#009E73', .6, 'Protected areas (WDPA, November 2026)')]}
@@ -95,12 +98,24 @@ def corriente(var, lect):
         return np.where(c / a >= U_MIN, a, np.nan).astype(np.float32), prof
 
 
+def grupo(vs, lect):
+    """Median normalized current of a cell over the variables of one group, as passes are summarized over the 19;
+    undefined where any variable of the group is."""
+    a = None
+    for k, v in enumerate(vs):
+        x, prof = corriente(f'bio{v:02d}', lect)
+        a = np.empty((len(vs),) + x.shape, np.float32) if a is None else a
+        a[k] = x
+    return np.median(a, axis=0), prof          # nan if any variable is nan
+
+
 def rasters():
     G = from_origin(-85, 14, 1 / 120, 1 / 120)                   # 30" geographic grid over the connectivity domain
     shape = (round(40 * 120), round(30 * 120))
     for lect, pref in (('baja', 'trans'), ('alta', 'longi')):
         a, prof = corriente('bio01', lect)
-        for nombre, x in ((f'{pref}_bio01', a),):
+        capas = [(f'{pref}_bio01', a)] + [(f'{pref}_{g}', grupo(vs, lect)[0]) for g, vs in GROUPS.items()]
+        for nombre, x in capas:
             g = np.full(shape, np.nan, np.float32)
             reproject(x.astype(np.float32), g, src_transform=prof['transform'], src_crs=prof['crs'], src_nodata=np.nan,
                       dst_transform=G, dst_crs='EPSG:4326', dst_nodata=np.nan, resampling=Resampling.nearest)
