@@ -30,7 +30,7 @@ Code comments and some file and column names are in Spanish; the paper, figures 
 | `outputs/figures/` | Figs 1 to 3 (600 dpi PNG and vector PDF) |
 | `outputs/tables/` | Tables 1 and 2 |
 | `outputs/supp/` | Supplementary Information (Word), Supplementary Tables (Excel), Figs S1 to S6 and Tables S1 to S15 as CSV |
-| `docs/` | Web viewer (GitHub Pages), written by `scripts/visor_datos.py`: the normalized current of BIO1 in both directions (Fig. 2), its median over the temperature (BIO1 to BIO11) and the precipitation variables (BIO12 to BIO19), the zone conductance (Fig. 3) and the passes with a depth of 100 m or more, coloured by rank or by their median over the 19 variables |
+| `docs/` | Web viewer (GitHub Pages), written by `scripts/visor_datos.py`: the median normalized current over the temperature (BIO1 to BIO11) and the precipitation variables (BIO12 to BIO19) in both directions (Fig. 2), the zone conductance (Fig. 3) and the passes with a depth of 100 m or more, coloured by rank or by their median over the 19 variables |
 
 Licences differ by file: see `LICENSE` (code) and `LICENSE-DATA.md` (everything else).
 

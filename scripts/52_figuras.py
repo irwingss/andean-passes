@@ -1,7 +1,7 @@
 """52_figuras.py - Figures of the manuscript and the supplement for the census and the present connectivity.
-Reads the census (data/interim/censo), the connectivity run (data/interim/conectividad/<run>) and the tables of
-51_sintesis_conectividad.py. Writes PNG (600 dpi) and PDF to outputs/figures (Fig1 to Fig4) and outputs/supp (FigS1 to
-FigS6).
+Reads the census (data/interim/censo), the connectivity run (data/interim/conectividad/<run>, with the group summaries
+in grupos/) and the tables of 51_sintesis_conectividad.py. Writes PNG (600 dpi) and PDF to outputs/figures (Fig1 to
+Fig4) and outputs/supp (FigS1 to FigS7).
 python -P scripts/52_figuras.py principal
 Experiment, not part of the article: any second argument writes Figs 1 to 3 to
 outputs/experimento_top_continentales/figuras, without the control passes and the barriers of Hazzi et al. (2018), and
@@ -61,14 +61,14 @@ GROUP_LS = {"temperature, mean and extremes": ("temperature", "-"),      # hue i
             "temperature, range and seasonality": ("temperature", (0, (3, 1.3))),   # line style the sub-group
             "precipitation": ("precipitation", "-")}
 READ_LS = {"longitudinal": dict(ls="-", mfc=None), "transverse": dict(ls="--", mfc="w")}
-HB = (-80.6, -77.4, -7.5, -4.0)                    # box of the Huancabamba Depression in Fig. 1 and Fig. 2 (W, E, S, N)
+HB = (-80.6, -77.4, -7.5, -4.0)                    # box of the Huancabamba Depression in Fig. 1 and Fig. S7 (W, E, S, N)
 # The six barriers of congruent phylogenetic breaks of endemic Andean birds (Hazzi et al. 2018, Figs 1 and 2),
 # numbered as there. Shown for orientation only; they take no part in the analysis. Digitized from their Fig. 1 after
 # fitting a Mercator transform to its rivers against HydroRIVERS (lon, lat; about 0.3 degrees of error).
 _hz = pd.read_csv("data/refs/hazzi_2018_barreras.csv")
 HAZZI = {k: (g.name.iat[0], list(zip(g.lon, g.lat))) for k, g in _hz.groupby("no")}
 ROMAN = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI"}         # control passes already use 1 to 25
-# zones of the insets of Fig. 2
+# zones of Fig. S7, boxed in Figs 1 and 2
 ZOOM = (("Colombia and Táchira", (-77.8, -70.5, 0.6, 9.2)), ("Huancabamba Depression", HB),
         ("Southern Peru", (-75.0, -66.5, -16.5, -11.3)))
 
@@ -159,7 +159,7 @@ def box_m(b):
 
 
 def zones(ax):
-    """The boxes of the insets of Fig. 2."""
+    """The boxes of the zones of Fig. S7."""
     for _, b in ZOOM:
         ax.plot(*box_m(b), c="k", lw=0.6, zorder=6)
 
@@ -265,50 +265,70 @@ axc.legend(loc="upper left", fontsize=5.5, frameon=False, handlelength=1.2)
 panel(axc, "c", "Height of the tropical passes with a depth of 30 m or more, by rank")
 save(fig, f"{FIG}/Fig1_census")
 
-# ==== Fig. 2: normalized current with BIO1, both directions, and the Huancabamba Depression ========================
-# layout in mm: two maps, then a column of three zones with the two directions side by side
-W, g, gt, bot = 183.0, 4.0, 5.0, 20.0               # width, gap between columns, room for a title, colour bar below
-ZB = [shapely.Polygon(np.column_stack(box_m(b))).bounds for _, b in ZOOM]
-S = sum((y1 - y0) / (x1 - x0) for x0, y0, x1, y1 in ZB)
-ra = (EXT[3] - EXT[2]) / (EXT[1] - EXT[0])
-mw = (W - 3 * g + 4 * gt / S) / (2 + 2 * ra / S)     # 2 maps + 2 insets + 3 gaps = W; 3 rows + 2 titles = map height
-iw, mh = (ra * mw - 2 * gt) / S, ra * mw
+# ==== Fig. 2: normalized current summarized by group of variables, both directions ================================
+# four maps side by side: transverse with temperature and precipitation, then longitudinal; the zones of Fig. S7 boxed
+GRP_LAB = (("temp", "temperature (BIO1 to BIO11)"), ("prec", "precipitation (BIO12 to BIO19)"))
+READS = (("baja", "Transverse"), ("alta", "Longitudinal"))
+
+
+def group(g, l, tag="s200_env", step=1):
+    """Median normalized current over the variables of a group (51_sintesis_conectividad.py), nan where undefined."""
+    with rasterio.open(f"{D}/grupos/{g}_{l}_{tag}.tif") as s:
+        return np.ma.masked_invalid(s.read(1, window=win))[::step, ::step]
+
+
+W, g, gt, bot = 183.0, 2.5, 6.0, 20.0
+mw = (W - 3 * g) / 4
+mh = mw * (EXT[3] - EXT[2]) / (EXT[1] - EXT[0])
 H = bot + mh + gt
 fig = plt.figure(figsize=(W / 25.4, H / 25.4))
 F = lambda x, y, w, h: fig.add_axes([x / W, y / H, w / W, h / H])
-Z = {l: current(f"{TS}/bio01_{l}_s200_env_normalizada.tif") for l in ("baja", "alta")}
-m300 = (tr.depth_m >= 300).to_numpy()
-for i, (l, t) in enumerate((("baja", "Transverse connectivity, lowland guild"),
-                            ("alta", "Longitudinal connectivity, montane guild"))):
+GZ = {(l, gg): group(gg, l) for l, _ in READS for gg, _ in GRP_LAB}
+for i, ((l, rt), (gg, gl)) in enumerate([(r, q) for r in READS for q in GRP_LAB]):
     a = F(i * (mw + g), bot, mw, mh)
     relief(a, light=True)
-    im = a.imshow(Z[l], extent=EXT, cmap=CUR, norm=NORM, interpolation="nearest", rasterized=True, alpha=0.92)
+    im = a.imshow(GZ[(l, gg)], extent=EXT, cmap=CUR, norm=NORM, interpolation="nearest", rasterized=True, alpha=0.92)
     frame(a, labels=i == 0)
     zones(a)
-    panel(a, "ab"[i], t)
-ytop = bot + mh
-for r, ((name, _), (x0, y0, x1, y1)) in enumerate(zip(ZOOM, ZB)):
-    h = iw * (y1 - y0) / (x1 - x0)
-    for c, l in enumerate(("baja", "alta")):
-        b = F(2 * mw + 2 * g + c * (iw + g), ytop - h, iw, h)
-        relief(b, light=True)
-        b.imshow(Z[l], extent=EXT, cmap=CUR, norm=NORM, interpolation="nearest", rasterized=True, alpha=0.92)
-        b.scatter(tr_x[m300], tr_y[m300], s=0.5, c="k", lw=0, alpha=0.7, zorder=4, rasterized=True)
-        countries(b, lw=0.3)
-        b.set_xlim(x0, x1); b.set_ylim(y0, y1); b.set_xticks([]); b.set_yticks([]); b.set_aspect("equal")
-        b.text(0.03, 0.97, "transverse" if c == 0 else "longitudinal", transform=b.transAxes, fontsize=5, ha="left",
-               va="top", bbox=dict(fc="w", ec="none", pad=0.6, alpha=0.85), zorder=7)
-        panel(b, "cdefgh"[2 * r + c], name if c == 0 else "")
-    ytop -= h + gt
-cax = F(0.17 * W, 8.0, 0.36 * W, 2.6)
+    panel(a, "abcd"[i], f"{rt}, {gl.split(' (')[0]}")
+cax = F(0.3 * W, 8.0, 0.4 * W, 2.6)
 cb = fig.colorbar(im, cax=cax, orientation="horizontal")
-cb.set_label("Normalized current with BIO1 (log scale)")
+cb.set_label("Median normalized current over the variables of the group (log scale)")
 cb.minorticks_off(); cb.set_ticks([0.2, 0.5, 1, 2, 5]); cb.set_ticklabels(["0.2", "0.5", "1", "2", "5"])
 cax.annotate("diverted", (0, 0.5), xycoords="axes fraction", xytext=(-4, 0), textcoords="offset points",
              ha="right", va="center", fontsize=5.5, color=DIV)
 cax.annotate("concentrated", (1, 0.5), xycoords="axes fraction", xytext=(4, 0), textcoords="offset points",
              ha="left", va="center", fontsize=5.5, color=CONC)
-save(fig, f"{FIG}/Fig2_current_bio1")
+save(fig, f"{FIG}/Fig2_current_groups")
+
+# ==== Fig. S7: the three zones of Fig. 2, both groups and both directions ===========================================
+ZB = [shapely.Polygon(np.column_stack(box_m(b))).bounds for _, b in ZOOM]
+W, g, gt = 183.0, 2.5, 5.0
+iw = (W - 3 * g) / 4
+hs = [iw * (y1 - y0) / (x1 - x0) for x0, y0, x1, y1 in ZB]
+H = sum(hs) + 3 * gt + 16.0
+fig = plt.figure(figsize=(W / 25.4, H / 25.4))
+F = lambda x, y, w, h: fig.add_axes([x / W, y / H, w / W, h / H])
+m300 = (tr.depth_m >= 300).to_numpy()
+ytop = H - gt
+for r, ((name, _), (x0, y0, x1, y1), h) in enumerate(zip(ZOOM, ZB, hs)):
+    for c, ((l, rt), (gg, gl)) in enumerate([(rr, q) for rr in READS for q in GRP_LAB]):
+        b = F(c * (iw + g), ytop - h, iw, h)
+        relief(b, light=True)
+        im = b.imshow(GZ[(l, gg)], extent=EXT, cmap=CUR, norm=NORM, interpolation="nearest", rasterized=True,
+                      alpha=0.92)
+        b.scatter(tr_x[m300], tr_y[m300], s=0.5, c="k", lw=0, alpha=0.7, zorder=4, rasterized=True)
+        countries(b, lw=0.3)
+        b.set_xlim(x0, x1); b.set_ylim(y0, y1); b.set_xticks([]); b.set_yticks([]); b.set_aspect("equal")
+        b.text(0.03, 0.97, f"{rt.lower()}, {gl.split(' (')[0]}", transform=b.transAxes, fontsize=5, ha="left",
+               va="top", bbox=dict(fc="w", ec="none", pad=0.6, alpha=0.85), zorder=7)
+        panel(b, "abcdefghijkl"[4 * r + c], name if c == 0 else "")
+    ytop -= h + gt
+cax = F(0.3 * W, 5.0, 0.4 * W, 2.6)
+cb = fig.colorbar(im, cax=cax, orientation="horizontal")
+cb.set_label("Median normalized current over the variables of the group (log scale)")
+cb.minorticks_off(); cb.set_ticks([0.2, 0.5, 1, 2, 5]); cb.set_ticklabels(["0.2", "0.5", "1", "2", "5"])
+save(fig, f"{SUPF}/FigS7_zones")
 
 # ==== Fig. 3: the barrier as a property of the zone, and both directions of connectivity along the divide =======================
 pr = pd.read_csv("outputs/supp/tables/S8_tile_conductance_profiles.csv")
@@ -448,36 +468,41 @@ for k, (l, t) in enumerate((("baja", "transverse"), ("alta", "longitudinal"))):
     cb.minorticks_off(); cb.set_ticks([0.2, 0.5, 1, 2, 5]); cb.set_ticklabels(["0.2", "0.5", "1", "2", "5"])
     save(fig, f"{SUPF}/FigS{2 + k}_variables_{t}")
 
-# ==== Fig. S4: BIO1 under the four sensitivity configurations =======================================================
+# ==== Fig. S4: the group summaries under the four sensitivity configurations, one figure per group ==================
 conf = (("s200_env_q0.05", "q 0.05, 200 km"), ("s200_env_q0.2", "q 0.2, 200 km"), ("s100_env", "q 0.1, 100 km"),
         ("s400_env", "q 0.1, 400 km"))
-fig, ax = plt.subplots(2, 4, figsize=(7.2, 6.4), gridspec_kw={"wspace": 0.02, "hspace": 0.08})
-for i, (l, t) in enumerate((("baja", "transverse"), ("alta", "longitudinal"))):
-    for j, (f, lab) in enumerate(conf):
-        a = ax[i, j]
-        im = a.imshow(current(f"{TS}/bio01_{l}_{f}_normalizada.tif", 2), extent=EXT, cmap=CUR, norm=NORM,
-                      interpolation="nearest", rasterized=True)
-        frame(a, labels=False, names=True, passes=True)
-        panel(a, "abcdefgh"[i * 4 + j], f"{t.capitalize()}, {lab}")
-cb = fig.colorbar(im, ax=ax, orientation="horizontal", shrink=0.4, pad=0.02, aspect=30)
-cb.set_label("Normalized current with BIO1"); cb.minorticks_off(); cb.set_ticks([0.2, 0.5, 1, 2, 5])
-cb.set_ticklabels(["0.2", "0.5", "1", "2", "5"])
-save(fig, f"{SUPF}/FigS4_sensitivity_maps")
+for gg, gl in GRP_LAB:
+    fig, ax = plt.subplots(2, 4, figsize=(7.2, 6.4), gridspec_kw={"wspace": 0.02, "hspace": 0.08})
+    for i, (l, t) in enumerate(READS):
+        for j, (f, lab) in enumerate(conf):
+            a = ax[i, j]
+            im = a.imshow(group(gg, l, f, 2), extent=EXT, cmap=CUR, norm=NORM, interpolation="nearest", rasterized=True)
+            frame(a, labels=False, names=True, passes=True)
+            panel(a, "abcdefgh"[i * 4 + j], f"{t}, {lab}")
+    cb = fig.colorbar(im, ax=ax, orientation="horizontal", shrink=0.4, pad=0.02, aspect=30)
+    cb.set_label(f"Median normalized current, {gl}"); cb.minorticks_off(); cb.set_ticks([0.2, 0.5, 1, 2, 5])
+    cb.set_ticklabels(["0.2", "0.5", "1", "2", "5"])
+    save(fig, f"{SUPF}/FigS4_sensitivity_maps_{gg}")
 
-# ==== Fig. S5: profiles with BIO1 under the five configurations ======================================================
-fig, ax = plt.subplots(1, 2, figsize=(5.0, 5.2), sharey=True, gridspec_kw={"wspace": 0.08})
+# ==== Fig. S5: profiles of the tiles that cross the divide by group under the five configurations ====================
+fig, ax = plt.subplots(2, 2, figsize=(5.0, 9.0), sharey=True, gridspec_kw={"wspace": 0.08, "hspace": 0.18})
 # margins solid, tile sizes dashed; dark for the smaller value, light for the larger (no colour of the current)
 cc = {"main": ("k", "-"), "q 0.05": ("0.35", "-"), "q 0.2": ("0.7", "-"), "100 km": ("0.35", "--"),
       "400 km": ("0.7", "--")}
-for k, (a, rd) in enumerate(zip(ax, ("transverse", "longitudinal"))):
-    a.axvline(1, c="0.5", lw=0.5, ls=":", zorder=0.5)
-    for c, (col, ls) in cc.items():
-        p = pr[(pr.cfg == c) & (pr.reading == rd) & (pr["var"] == "bio01")]
-        a.plot(p["median"], p.band, c=col, ls=ls, lw=1.2 if c == "main" else 0.8, label=c, zorder=3 if c == "main" else 2)
-    a.set_xlim(0, 1.05); a.set_ylim(LS, LN); a.set_xlabel("Relative conductance of the tiles, BIO1")
-    a.spines[["top", "right"]].set_visible(False)
-    panel(a, "ab"[k], f"{rd.capitalize()} connectivity")
-ax[0].set_ylabel("Latitude (°)"); ax[0].legend(fontsize=5.5, frameon=False, loc="lower left")
+for i, gr in enumerate(("temperature", "precipitation")):
+    for k, rd in enumerate(("transverse", "longitudinal")):
+        a = ax[i, k]
+        a.axvline(1, c="0.5", lw=0.5, ls=":", zorder=0.5)
+        for c, (col, ls) in cc.items():
+            p = dv[(dv.cfg == c) & (dv.reading == rd) & (dv.group == gr)].sort_values("band")
+            a.plot(p["median"], p.band, c=col, ls=ls, lw=1.2 if c == "main" else 0.8, label=c,
+                   zorder=3 if c == "main" else 2)
+        a.set_xlim(0, 1.05); a.set_ylim(LS, LN)
+        a.set_xlabel(f"Relative conductance, {gr} median")
+        a.spines[["top", "right"]].set_visible(False)
+        panel(a, "abcd"[2 * i + k], f"{rd.capitalize()} connectivity, {gr}")
+    ax[i, 0].set_ylabel("Latitude (°)")
+ax[0, 0].legend(fontsize=5.5, frameon=False, loc="lower left")
 save(fig, f"{SUPF}/FigS5_sensitivity_profiles")
 
 # ==== Fig. S6: passes by the median over the 19 variables and its robustness ==========================================

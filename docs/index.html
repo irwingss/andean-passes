@@ -73,6 +73,18 @@
   .pop b.t { display: block; font: 600 14px/1.3 "Source Serif 4", Georgia, serif; margin: 2px 0 6px; }
   .pop table { border-collapse: collapse; width: 100%; }
   .pop td { padding: 2px 0; } .pop td + td { text-align: right; font-variant-numeric: tabular-nums; }
+  .subir { display: flex; gap: 8px; align-items: center; }
+  .boton { padding: 7px 12px; border: 1px solid #d3d8d2; border-radius: 8px; background: var(--carta); cursor: pointer; font-weight: 500; }
+  .boton:hover { border-color: var(--acento); color: var(--acento); }
+  .boton[hidden] { display: none; }
+  #usrEstado { margin-top: 8px; font-size: 12px; color: var(--gris); }
+  #usrEstado.error { color: #a3221b; }
+  #soltar { position: absolute; inset: 0; z-index: 1200; display: none; align-items: center; justify-content: center; background: rgba(35,116,91,.25);
+    border: 3px dashed var(--acento); color: #fff; font-size: 16px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.5); pointer-events: none; }
+  #mapa.arrastre #soltar { display: flex; }
+  .pop.usr { max-height: 260px; overflow-y: auto; }
+  .pop.usr td:first-child { color: var(--gris); padding-right: 10px; }
+  .pop.usr td + td { text-align: left; word-break: break-word; }
   .leaflet-container { font-family: inherit; }
   .leaflet-tooltip.banda { background: rgba(255,255,255,.9); border: 0; box-shadow: none; padding: 0 4px; font-weight: 700; font-size: 11px; }
   .leaflet-tooltip.banda::before { display: none; }
@@ -124,8 +136,17 @@
       <label class="opcion"><input type="checkbox" id="hz"><span>Barriers of Hazzi et al. (2018)<small>Phylogenetic breaks of Andean birds, for orientation (Fig. 3)</small></span></label>
       <label class="opcion"><input type="checkbox" id="divnet"><span>Divide network, Huancabamba<small>Every divide of the 1 arc-second census, 4 to 7.5°S (Fig. 1b)</small></span></label>
     </section>
+    <section>
+      <h2>Your layer</h2>
+      <div class="subir">
+        <button class="boton" id="usrBtn" type="button">Open a file</button>
+        <button class="boton" id="usrQuitar" type="button" hidden>Remove</button>
+        <input id="usrArchivo" type="file" accept=".geojson,.json,.zip" hidden>
+      </div>
+      <div id="usrEstado">GeoJSON or a zipped shapefile (.shp, .dbf and .prj), opened or dropped on the map. It is read in your browser only; nothing is uploaded or stored.</div>
+    </section>
     <div class="nota">
-      Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it.
+      Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it. Each layer is the median over the temperature (BIO1 to BIO11) or the precipitation variables (BIO12 to BIO19) in each cell.
       Zone conductance: for each tile, the median over BIO1 to BIO11 of its conductance relative to uniform resistance, averaged over the tiles that cover the cell, each weighted most at its centre; low is a barrier, near 1 is open.
       <b>Transverse connectivity</b>: current from west to east between lowland cells (warmer than the climate at 2000 m at that latitude), for lowland species.
       <b>Longitudinal connectivity</b>: current from north to south between montane cells, for montane species.
@@ -133,9 +154,10 @@
       Connectivity covers 11°N to 23.5°S; the census covers the whole Andes. Data: <a href="https://github.com/irwingss/andean-passes">github.com/irwingss/andean-passes</a>.
     </div>
   </aside>
-  <div id="mapa"><div id="leyenda"></div></div>
+  <div id="mapa"><div id="leyenda"></div><div id="soltar">Drop a GeoJSON or a zipped shapefile</div></div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/shpjs@4.0.4/dist/shp.min.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const ANDES = [[-56.5, -82], [13, -60]];
@@ -144,12 +166,10 @@ const RANK_LAB = ['continental', 'terminal', 'tributary'];
 const BREAKS = [0.5, 0.8, 0.95, 1.05, 1.25, 2];
 const CAPAS = [
   ['none', 'None', ''],
-  ['trans_bio01', 'Transverse connectivity, current with BIO1', 'Normalized current, lowland climates, west to east (Fig. 2a)'],
-  ['longi_bio01', 'Longitudinal connectivity, current with BIO1', 'Normalized current, montane climates, north to south (Fig. 2b)'],
-  ['trans_temp', 'Transverse connectivity, current with temperature', 'Median normalized current over BIO1 to BIO11, lowland climates'],
-  ['longi_temp', 'Longitudinal connectivity, current with temperature', 'Median normalized current over BIO1 to BIO11, montane climates'],
-  ['trans_prec', 'Transverse connectivity, current with precipitation', 'Median normalized current over BIO12 to BIO19, lowland climates'],
-  ['longi_prec', 'Longitudinal connectivity, current with precipitation', 'Median normalized current over BIO12 to BIO19, montane climates'],
+  ['trans_temp', 'Transverse connectivity, current with temperature', 'Median normalized current over BIO1 to BIO11, lowland climates, west to east (Fig. 2a)'],
+  ['trans_prec', 'Transverse connectivity, current with precipitation', 'Median normalized current over BIO12 to BIO19, lowland climates (Fig. 2b)'],
+  ['longi_temp', 'Longitudinal connectivity, current with temperature', 'Median normalized current over BIO1 to BIO11, montane climates, north to south (Fig. 2c)'],
+  ['longi_prec', 'Longitudinal connectivity, current with precipitation', 'Median normalized current over BIO12 to BIO19, montane climates (Fig. 2d)'],
   ['trans_zone', 'Transverse connectivity, zone conductance', 'Temperature median per tile, lowland climates (Fig. 3b)'],
   ['longi_zone', 'Longitudinal connectivity, zone conductance', 'Temperature median per tile, montane climates (Fig. 3a)'],
 ];
@@ -172,8 +192,56 @@ const teselas = (k, zmax) => L.tileLayer(`capas/${k}/{z}/{x}/{y}.png`, { pane: '
 const fmt = (v, d = 0) => v == null ? '–' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
 const clase = v => v == null ? -1 : BREAKS.findIndex(b => v < b) === -1 ? 6 : BREAKS.findIndex(b => v < b);
 
+// the user's own layer: read in the browser, never uploaded or stored
+mapa.createPane('usuario').style.zIndex = 440;
+const USR_COL = '#E6007E';
+let usrCapa = null;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const usrEstado = (txt, err) => { $('usrEstado').textContent = txt; $('usrEstado').className = err ? 'error' : ''; };
+const usrQuitar = () => { if (usrCapa) usrCapa.remove(); usrCapa = null; $('usrQuitar').hidden = true; };
+const usrMostrar = (gj, nombre) => {
+  const fc = (Array.isArray(gj) ? gj : [gj]).flatMap(g => g.type === 'FeatureCollection' ? g.features : g.type === 'Feature' ? [g] : g.type ? [{ type: 'Feature', properties: {}, geometry: g }] : []);
+  if (!fc.length) throw new Error('the file has no features');
+  usrQuitar();
+  usrCapa = L.geoJSON({ type: 'FeatureCollection', features: fc }, {
+    pane: 'usuario', bubblingMouseEvents: false,
+    style: { color: USR_COL, weight: 2, opacity: .95, fillColor: USR_COL, fillOpacity: .18 },
+    pointToLayer: (f, ll) => L.circleMarker(ll, { pane: 'usuario', radius: 5, color: '#fff', weight: 1.5, fillColor: USR_COL, fillOpacity: 1, bubblingMouseEvents: false }),
+    onEachFeature: (f, l) => {
+      const p = Object.entries(f.properties || {});
+      l.bindPopup(`<div class="pop usr"><b class="t">${esc(nombre)}</b>${p.length ? `<table>${p.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v == null ? '–' : typeof v === 'object' ? JSON.stringify(v) : v)}</td></tr>`).join('')}</table>` : '<span class="cod">no attributes</span>'}</div>`);
+    },
+  }).addTo(mapa);
+  const b = usrCapa.getBounds();
+  if (b.isValid()) mapa.fitBounds(b, { maxZoom: 12, padding: [30, 30] });
+  $('usrQuitar').hidden = false;
+  usrEstado(`${nombre}: ${fc.length.toLocaleString('en-US')} feature${fc.length === 1 ? '' : 's'}. Shown only in this browser; reloading the page removes it.`);
+};
+const usrLeer = async f => {
+  if (!f) return;
+  usrEstado(`Reading ${f.name}…`);
+  try {
+    const ext = f.name.toLowerCase().split('.').pop();
+    if (ext === 'zip') usrMostrar(await shp(await f.arrayBuffer()), f.name);
+    else if (ext === 'geojson' || ext === 'json') usrMostrar(JSON.parse(await f.text()), f.name);
+    else if (ext === 'shp') throw new Error('a shapefile needs its .dbf and .prj; put them in one .zip');
+    else throw new Error('use a .geojson, .json or .zip file');
+  } catch (e) { usrEstado(`Could not read ${f.name}: ${e.message || e}`, true); }
+};
+$('usrBtn').onclick = () => $('usrArchivo').click();
+$('usrArchivo').onchange = e => { usrLeer(e.target.files[0]); e.target.value = ''; };
+$('usrQuitar').onclick = () => { usrQuitar(); usrEstado('Layer removed.'); };
+{
+  const m = $('mapa'); let n = 0;
+  const conArchivos = e => [...(e.dataTransfer?.types || [])].includes('Files');
+  m.addEventListener('dragenter', e => { if (!conArchivos(e)) return; e.preventDefault(); n++; m.classList.add('arrastre'); });
+  m.addEventListener('dragover', e => { if (conArchivos(e)) e.preventDefault(); });
+  m.addEventListener('dragleave', () => { if (--n <= 0) { n = 0; m.classList.remove('arrastre'); } });
+  m.addEventListener('drop', e => { if (!conArchivos(e)) return; e.preventDefault(); n = 0; m.classList.remove('arrastre'); usrLeer(e.dataTransfer.files[0]); });
+}
+
 fetch('capas/indice.json').then(r => r.json()).then(D => {
-  const C = D.passes, N = C.id.length, CUR = D.pal.trans_bio01.map(p => p[0]);
+  const C = D.passes, N = C.id.length, CUR = D.pal.trans_temp.map(p => p[0]);
   $('cuenta').textContent = N.toLocaleString('en-US');
   const apd = i => 'APD' + String(C.id[i]).padStart(6, '0');
 
@@ -273,7 +341,7 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   };
 
   // layers
-  let capa = null, capaK = 'trans_bio01';
+  let capa = null, capaK = 'trans_temp';
   const ley = () => {
     const b = [];
     if (capaK !== 'none') b.push(`<div class="bloque"><div class="t">${CAPAS.find(c => c[0] === capaK)[1]}</div>${D.pal[capaK].map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);

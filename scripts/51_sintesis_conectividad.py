@@ -6,6 +6,9 @@ Reads data/interim/censo/passes_andes.csv, the pass values written by 49_passes_
                                                    variables of the normalized current in each reading and configuration
   outputs/tables/Table1_top_passes.csv, Table2_control_passes.csv
   outputs/supp/tables/S*.csv                       census, validation, envelopes, profiles, variables and sensitivity
+  data/interim/conectividad/<run>/grupos/<group>_<reading>_<tag>.tif   median normalized current of each cell over the
+                                                   temperature (temp, BIO1 to BIO11) or precipitation (prec, BIO12 to
+                                                   BIO19) variables, per configuration (tag as in the tile maps)
 python -P scripts/51_sintesis_conectividad.py principal
 Configurations: q 0.1 with 200 km tiles (main), q 0.05 and 0.2 with 200 km, and 100 and 400 km with q 0.1. A statement
 about a pass holds when it holds in all five (C8). Passes in the same 1 km cell share their values; rankings and
@@ -205,6 +208,27 @@ for lect in LECT:
         z.append(np.where(cnt > 0, su / np.where(cnt > 0, cnt, 1), np.nan))
     with rasterio.open(f"{D}/zona_temperatura_{lect}.tif", "w", **PROF) as o:
         o.write(np.stack(z).astype("float32"))
+# normalized current of each cell summarized by group, as the passes are summarized over the 19 variables: the median
+# over the variables of the group, undefined where any of them is (uniform current below U_MIN)
+os.makedirs(f"{D}/grupos", exist_ok=True)
+for q, side in CFG:
+    tag = f"s{side}_env" + ("" if q == 0.1 else f"_q{q:g}")
+    for lect in LECT:
+        for g, vs in GRP.items():
+            st = None
+            for k, v in enumerate(vs):
+                with rasterio.open(f"{D}/teselas/{v}_{lect}_{tag}_normalizada.tif") as r:
+                    a, gp = r.read(1), r.profile
+                with rasterio.open(f"{D}/teselas/{v}_{lect}_{tag}_corriente.tif") as r:
+                    c = r.read(1)
+                with np.errstate(all="ignore"):
+                    a = np.where((a != -9999) & (c != -9999) & (c / a >= U_MIN), a, np.nan).astype(np.float32)
+                st = np.empty((len(vs),) + a.shape, np.float32) if st is None else st
+                st[k] = a
+            gp.update(dtype="float32", nodata=np.nan, compress="deflate")
+            with rasterio.open(f"{D}/grupos/{g[:4]}_{lect}_{tag}.tif", "w", **gp) as o:
+                o.write(np.median(st, axis=0), 1)
+    print("group current written:", tag, flush=True)
 print("zone conductance written; tiles that cross the divide:",
       tt[tt.cfg == "main"].groupby("reading").crosses_divide.sum().to_dict())
 # ---- bands of local maxima of the divide profiles (S19), numbered as in Fig. 3 ---------------------------------------
@@ -236,17 +260,42 @@ for k, (rd, n, s) in enumerate(BANDS19, 1):
     s19.append(r)
 pd.DataFrame(s19).round(3).to_csv(f"{SUP}/S19_profile_bands.csv", index=False)
 
-# ---- control of Huancabamba and the Tachira depression (S9), on the tiles that cross the divide ------------------
-c9 = []
-m = tt[tt.crosses_divide & (tt["var"] == "bio01") & (tt.lectura == "alta")]
-for lab, s, zone in (("Huancabamba", m[(m.lat <= -2) & (m.lat >= -10)], (-7.5, -4)),
-                     ("Tachira", m[(m.lon >= -74) & (m.lon <= -70) & (m.lat >= 5)], (7.5, 8))):
-    p = s.groupby(["cfg", "band"]).conductancia_rel.agg(tiles="size", median="median").reset_index()
-    c9.append(p.assign(control=lab, in_zone=(p.band >= zone[0]) & (p.band <= zone[1])))
+# ---- control of Huancabamba and the Tachira depression (S9, S20), on the tiles that cross the divide -------------
+# each tile is summarized by the median of its group of variables, as in S17; a band is the median over its tiles
+gt = tt[tt.crosses_divide].pivot_table(index=["cfg", "reading", "row", "col", "lat", "lon", "band"], columns="var",
+                                       values="conductancia_rel").reset_index()
+for g, vs in GRP.items():
+    gt[g] = np.median(gt[vs].to_numpy(), axis=1)                 # nan if a variable of the group is missing
+gl = gt.melt(id_vars=["cfg", "reading", "lat", "lon", "band"], value_vars=list(GRP), var_name="group",
+             value_name="conductance").dropna(subset=["conductance"])
+REG = {"Huancabamba": lambda x: x[(x.lat <= -2) & (x.lat >= -10)],
+       "Tachira": lambda x: x[(x.lon >= -74) & (x.lon <= -70) & (x.lat >= 5)]}
+ZONE = {"Huancabamba": {"zone": (-7.5, -4.0), "north": (-4.0, -2.0), "south": (-9.5, -7.5)},
+        "Tachira": {"zone": (7.5, 8.0), "south": (5.0, 7.5)}}
+c9, s20 = [], []
+for lab, f in REG.items():
+    b = f(gl).groupby(["reading", "group", "cfg", "band"]).conductance.agg(tiles="size", median="median").reset_index()
+    lo, hi = ZONE[lab]["zone"]
+    b["in_zone"] = (b.band > lo) & (b.band < hi)
+    c9.append(b.assign(control=lab))
+    for (rd, g, c), x in b.groupby(["reading", "group", "cfg"]):
+        r = {"reading": rd, "control": lab, "group": g, "cfg": c}
+        for k, (a0, a1) in ZONE[lab].items():
+            r[k] = x[(x.band > a0) & (x.band < a1)]["median"].mean()
+        r["lowest_band"] = x.band.iat[x["median"].to_numpy().argmin()]
+        r["lowest_band_in_zone"] = bool(x.in_zone.iat[x["median"].to_numpy().argmin()])
+        r["zone_below_neighbours"] = r["zone"] < min(r[k] for k in ZONE[lab] if k != "zone")
+        s20.append(r)
 c9 = pd.concat(c9)
+c9 = c9[c9.reading == "longitudinal"].drop(columns="reading")      # S9 is the control of the Methods
 c9["cfg"] = pd.Categorical(c9.cfg, CFG_LAB)
-c9.sort_values(["control", "cfg", "band"], ascending=[True, True, False]).round(3).to_csv(
+c9[["control", "group", "cfg", "band", "tiles", "median", "in_zone"]].sort_values(
+    ["control", "group", "cfg", "band"], ascending=[True, False, True, False]).round(3).to_csv(
     f"{SUP}/S9_control_huancabamba_tachira.csv", index=False)
+s20 = pd.DataFrame(s20)
+s20["cfg"] = pd.Categorical(s20.cfg, CFG_LAB)
+s20.sort_values(["reading", "control", "group", "cfg"], ascending=[True, True, False, True]).round(3).to_csv(
+    f"{SUP}/S20_control_summary.csv", index=False)
 
 # every variable, main run: mean of the band medians inside each control zone (as in C9, tiles that cross the divide)
 # and in the 2 degrees next to it on each side where tiles exist (S15)

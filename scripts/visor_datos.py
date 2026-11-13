@@ -1,6 +1,6 @@
 """Layers of the web viewer (docs/, GitHub Pages) of the Andean Passes Database: every layer of Figs 1 to 3.
-XYZ tiles of indexed PNG: the normalized current of the main run with BIO1 in both directions (Fig. 2), its median over
-the temperature variables (BIO1 to BIO11) and over the precipitation variables (BIO12 to BIO19) in each cell, the zone
+XYZ tiles of indexed PNG: the median normalized current of the main run over the temperature variables (BIO1 to BIO11)
+and over the precipitation variables (BIO12 to BIO19) in both directions (Fig. 2), the zone
 conductance with the temperature median in both directions (Fig. 3a, b), the divide network around the Huancabamba
 Depression (Fig. 1b), human modification and protected areas. GeoJSON: the GMBA outline, the continental divide of the
 tropics with the bands of Table S19 (Fig. 3) and the barriers of Hazzi et al. (2018). The passes with a depth of 100 m
@@ -29,7 +29,6 @@ INT, DB = REPO / 'data/interim', REPO / 'outputs/database'
 RUN = INT / 'conectividad/principal'
 DST = REPO / 'docs/capas'
 ZMIN, ZMAX = 3, 9
-U_MIN = 1e-6                                                     # as in 51_sintesis_conectividad.py
 
 # normalized current in seven classes on a log scale; palette index 0 is always transparent
 CUR = [('#2166AC', .85, 'below 0.5'), ('#67A9CF', .8, '0.5 to 0.8'), ('#D1E5F0', .7, '0.8 to 0.95'),
@@ -39,9 +38,7 @@ CUR_BREAKS = (0.5, 0.8, 0.95, 1.05, 1.25, 2)
 # zone conductance in five classes of 0.2, colours of the magma scale of Fig. 3
 ZONE = [('#000004', .85, 'below 0.2 (barrier)'), ('#51127C', .85, '0.2 to 0.4'), ('#B73779', .8, '0.4 to 0.6'),
         ('#FC8961', .75, '0.6 to 0.8'), ('#FCFDBF', .7, '0.8 or more (open)')]
-GROUPS = {'temp': range(1, 12), 'prec': range(12, 20)}          # the two groups of Fig. 3c, d
-PAL = {'trans_bio01': CUR, 'longi_bio01': CUR, 'trans_temp': CUR, 'longi_temp': CUR, 'trans_prec': CUR,
-       'longi_prec': CUR, 'trans_zone': ZONE, 'longi_zone': ZONE,
+PAL = {'trans_temp': CUR, 'longi_temp': CUR, 'trans_prec': CUR, 'longi_prec': CUR, 'trans_zone': ZONE, 'longi_zone': ZONE,
        'divnet': [('#202020', .45, 'Divide network, 1 arc-second census')],
        'ghm': [('#fee8c8', .7, '0.1 to 0.2'), ('#fdbb84', .75, '0.2 to 0.4'), ('#d7301f', .8, '0.4 or more (high)')],
        'pa': [('#009E73', .6, 'Protected areas (WDPA, November 2026)')]}
@@ -88,34 +85,20 @@ def tiles(nombre, idx, pal, aff, zmax=ZMAX):
     print(nombre, n, 'tiles', flush=True)
 
 
-def corriente(var, lect):
-    """Normalized current of the main run (q 0.1, 200 km), undefined where the uniform current is below U_MIN."""
-    with rasterio.open(RUN / f'teselas/{var}_{lect}_s200_env_normalizada.tif') as s:
-        a, prof = s.read(1, masked=True, window=None).filled(np.nan), s.profile
-    with rasterio.open(RUN / f'teselas/{var}_{lect}_s200_env_corriente.tif') as s:
-        c = s.read(1, masked=True, window=None).filled(np.nan)
-    with np.errstate(all='ignore'):
-        return np.where(c / a >= U_MIN, a, np.nan).astype(np.float32), prof
-
-
-def grupo(vs, lect):
-    """Median normalized current of a cell over the variables of one group, as passes are summarized over the 19;
-    undefined where any variable of the group is."""
-    a = None
-    for k, v in enumerate(vs):
-        x, prof = corriente(f'bio{v:02d}', lect)
-        a = np.empty((len(vs),) + x.shape, np.float32) if a is None else a
-        a[k] = x
-    return np.median(a, axis=0), prof          # nan if any variable is nan
+def grupo(g, lect):
+    """Median normalized current of the main run (q 0.1, 200 km) over the variables of a group, written by
+    51_sintesis_conectividad.py; undefined where any variable of the group is."""
+    with rasterio.open(RUN / f'grupos/{g}_{lect}_s200_env.tif') as s:
+        return s.read(1).astype(np.float32), s.profile
 
 
 def rasters():
     G = from_origin(-85, 14, 1 / 120, 1 / 120)                   # 30" geographic grid over the connectivity domain
     shape = (round(40 * 120), round(30 * 120))
     for lect, pref in (('baja', 'trans'), ('alta', 'longi')):
-        a, prof = corriente('bio01', lect)
-        capas = [(f'{pref}_bio01', a)] + [(f'{pref}_{g}', grupo(vs, lect)[0]) for g, vs in GROUPS.items()]
-        for nombre, x in capas:
+        for g in ('temp', 'prec'):
+            x, prof = grupo(g, lect)
+            nombre = f'{pref}_{g}'
             g = np.full(shape, np.nan, np.float32)
             reproject(x.astype(np.float32), g, src_transform=prof['transform'], src_crs=prof['crs'], src_nodata=np.nan,
                       dst_transform=G, dst_crs='EPSG:4326', dst_nodata=np.nan, resampling=Resampling.nearest)
@@ -212,7 +195,7 @@ def indice():
 if __name__ == '__main__':
     DST.mkdir(parents=True, exist_ok=True)
     for old in ('atlas', 'miniaturas', 'dominios', 'umbrales', 'brechas.geojson', 'corredor.geojson',
-                'divisoria.geojson', 'rutas.geojson', 'trans_med', 'longi_med'):                      # layers of the earlier census
+                'divisoria.geojson', 'rutas.geojson', 'trans_med', 'longi_med', 'trans_bio01', 'longi_bio01'):    # earlier layers
         p = DST / old
         shutil.rmtree(p, ignore_errors=True) if p.is_dir() else p.unlink(missing_ok=True)
     andes()

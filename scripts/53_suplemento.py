@@ -30,10 +30,12 @@ TABLES = [
     ("S8", "S8_tile_conductance_profiles", "Relative conductance of the tiles per configuration, direction, variable and "
      "0.5° band of latitude of the tile centre: number of tiles, median and quartiles."),
     ("S9", "S9_control_huancabamba_tachira", "Control: relative conductance of the tiles that cross the continental "
-     "divide for longitudinal connectivity with BIO1, per configuration and 0.5° band, around the Huancabamba zone "
-     "(2 to 10°S) and the Táchira depression (74 to 70°W, north of 5°N). in_zone marks the bands of each control "
-     "zone. A band next to a 0.5° zone is not an independent comparison when its tiles still cover the zone, which "
-     "is the case north of the Táchira depression with tiles of 200 and 400 km."),
+     "divide for longitudinal connectivity, per group of variables, configuration and 0.5° band, around the "
+     "Huancabamba zone (2 to 10°S) and the Táchira depression (74 to 70°W, north of 5°N). Each tile is summarized by "
+     "its median over the temperature (BIO1 to BIO11) or the precipitation variables (BIO12 to BIO19), and a band by "
+     "the median over its tiles. in_zone marks the bands of each control zone. A band next to a 0.5° zone is not an "
+     "independent comparison when its tiles still cover the zone, which is the case north of the Táchira depression "
+     "with tiles of 200 and 400 km."),
     ("S10", "S10_spearman_variables", "Spearman correlation between pairs of variables in the normalized current of the "
      "passes (one pass per 1 km cell) and in the relative conductance of the tiles, main configuration."),
     ("S11", "S11_variable_agreement", "Agreement of each variable with the others: median and minimum Spearman "
@@ -73,6 +75,12 @@ TABLES = [
      "variable, the extreme bin median (highest for transverse, lowest for longitudinal) and the mean median over the "
      "1° on either side of the band (neighbours). Lowest pass is the lowest continental pass with a depth of 100 m or "
      "more inside the band, with its height and depth (m); control passes are those of Table 2 inside the band."),
+    ("S20", "S20_control_summary", "Summary of the controls per direction, group of variables and configuration: mean "
+     "of the 0.5° band medians of Table S9 (the same bands for transverse connectivity) inside each control zone "
+     "(Huancabamba 4 to 7.5°S; Táchira 7.5 to 8°N, 74 to 70°W) and in the 2° of latitude next to it (Huancabamba north "
+     "2 to 4°S and south 7.5 to 9.5°S; Táchira south 5 to 7.5°N), the band with the lowest median between 2 and 10°S "
+     "(Huancabamba) or north of 5°N (Táchira), whether it lies inside the zone, and whether the zone is below every "
+     "neighbour compared. North of the Táchira depression a tile of 200 km still covers it, so that side is left out."),
 ]
 INLINE_MAX = 60       # longer tables are given only in the workbook
 HEAD = {"group": "Group", "most_limiting": "Most limiting", "least_limiting": "Least limiting",
@@ -101,7 +109,9 @@ HEAD = {"group": "Group", "most_limiting": "Most limiting", "least_limiting": "L
         "p_1km": "p, 1 km", "no": "No.", "width_deg": "Width (°)", "temp_median": "Temperature median",
         "temp_extreme": "Temperature extreme", "temp_median_neighbours": "Temperature neighbours",
         "prec_median": "Precipitation median", "lowest_pass": "Lowest pass", "lowest_z_m": "Lowest pass height (m)",
-        "control_passes": "Control passes"}
+        "control_passes": "Control passes", "cfg": "Configuration", "tiles": "Tiles", "in_zone": "In zone",
+        "lowest_band": "Lowest band (°)", "lowest_band_in_zone": "Lowest band in zone",
+        "zone_below_neighbours": "Zone below neighbours"}
 DROP = {"S4": ["lat_dms", "lon_dms", "elev_alt_m", "source", "coord_source", "note"],
         "S19": ["bins", "tiles_min", "tiles_max", "temp_most_limiting", "temp_least_limiting", "prec_extreme",
                 "prec_most_limiting", "prec_least_limiting", "prec_median_neighbours", "lowest_lat", "lowest_lon",
@@ -116,18 +126,24 @@ FIGS = [
      "variables, main configuration. Colour scale as in Fig. 2."),
     ("S3", "FigS3_variables_longitudinal", "Normalized current for longitudinal connectivity for each of the 19 WorldClim "
      "2.1 variables, main configuration. Colour scale as in Fig. 2."),
-    ("S4", "FigS4_sensitivity_maps", "Normalized current with BIO1 in the four sensitivity configurations, both "
-     "directions: margins q = 0.05 and 0.2 with tiles of 200 km, and tiles of 100 and 400 km with q = 0.1. Colour "
-     "scale as in Fig. 2; uncoloured cells have no value in that configuration. Triangles are the control passes of "
-     "Table 2."),
-    ("S5", "FigS5_sensitivity_profiles", "Median relative conductance of the tiles with BIO1 per 0.5° band in the five "
-     "configurations, both directions. The main configuration is in black; solid grey lines are the margins q = 0.05 "
-     "(dark) and 0.2 (light), and dashed grey lines are the tiles of 100 km (dark) and 400 km (light). The dotted "
-     "line is uniform resistance. Every tile enters, as in Table S8; Table S9 gives the same profile over the tiles "
-     "that cross the divide, in the two control zones."),
+    ("S4", ["FigS4_sensitivity_maps_temp", "FigS4_sensitivity_maps_prec"], "Median normalized current over the "
+     "temperature variables (BIO1 to BIO11, first page) and over the precipitation variables (BIO12 to BIO19, second "
+     "page) in the four sensitivity configurations, both directions: margins q = 0.05 and 0.2 with tiles of 200 km, "
+     "and tiles of 100 and 400 km with q = 0.1. Colour scale as in Fig. 2; uncoloured cells have no value in that "
+     "configuration. Triangles are the control passes of Table 2."),
+    ("S5", "FigS5_sensitivity_profiles", "Relative conductance of the tiles that cross the continental divide per "
+     "0.5° band in the five configurations, as the median over the tiles of the band of their temperature median "
+     "(a, b) and precipitation median (c, d), for transverse (a, c) and longitudinal (b, d) connectivity. The main "
+     "configuration is in black; solid grey lines are the margins q = 0.05 (dark) and 0.2 (light), and dashed grey "
+     "lines are the tiles of 100 km (dark) and 400 km (light). The dotted line is uniform resistance. Table S17."),
     ("S6", "FigS6_robust_passes", "Cells with passes by the median normalized current over the 19 variables: above 1 in "
      "all five configurations (red), below 1 in all five (blue), or depending on the configuration (grey); one pass "
      "per 1 km cell, the deepest. Tables S13 and S16."),
+    ("S7", "FigS7_zones", "The three zones boxed in Figs 1 and 2: Colombia and Táchira (a to d), the Huancabamba "
+     "Depression (e to h, the area of Fig. 1b) and southern Peru (i to l). In each row, transverse connectivity with "
+     "the temperature and the precipitation median, then longitudinal connectivity with the same two; black dots are "
+     "passes with a depth of 300 m or more. Colour scale as in Fig. 2; shaded relief without colour marks cells "
+     "without a value."),
 ]
 DICT = [
     ("apd_id", "identifier of the pass in the Andean Passes Database"),
@@ -188,7 +204,8 @@ for n, f, cap in TABLES:
 pd.DataFrame(DICT, columns=["column", "meaning"]).to_excel(wb, sheet_name="APD dictionary", index=False)
 wb.close()
 for n, f, cap in FIGS:
-    doc.add_picture(f"{F}/{f}.png", width=Cm(16))
+    for x in ([f] if isinstance(f, str) else f):
+        doc.add_picture(f"{F}/{x}.png", width=Cm(16))
     p = doc.add_paragraph()
     p.add_run(f"Figure {n}. ").bold = True
     p.add_run(cap)
