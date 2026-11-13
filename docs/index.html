@@ -132,9 +132,8 @@
       <label class="opcion"><input type="checkbox" id="ghm"><span>Human modification<small>Global Human Modification (Kennedy et al. 2019)</small></span></label>
       <label class="opcion"><input type="checkbox" id="pa"><span>Protected areas<small>WDPA, November 2026, shown as pixels only</small></span></label>
       <label class="opcion"><input type="checkbox" id="ctl" checked><span>Control passes<small>36 named passes used to check the census</small></span></label>
-      <label class="opcion"><input type="checkbox" id="div"><span>Continental divide and bands of Table S19<small>Continental passes of the tropics; in black, the numbered bands of Fig. 3 (1 to 7 open across the cordillera, 8 to 10 barriers along it)</small></span></label>
-      <label class="opcion"><input type="checkbox" id="hz"><span>Barriers of Hazzi et al. (2018)<small>Phylogenetic breaks of Andean birds, for orientation (Fig. 3)</small></span></label>
-      <label class="opcion"><input type="checkbox" id="divnet"><span>Divide network, Huancabamba<small>Every divide of the 1 arc-second census, 4 to 7.5°S (Fig. 1b)</small></span></label>
+      <label class="opcion"><input type="checkbox" id="div" checked><span>Continental divide and bands of Table S19<small>Continental passes of the tropics; in black, the numbered bands of Fig. 3 (1 to 7 open across the cordillera, 8 to 10 barriers along it)</small></span></label>
+      <label class="opcion"><input type="checkbox" id="hz" checked><span>Barriers of Hazzi et al. (2018)<small>Phylogenetic breaks of Andean birds, for orientation (Fig. 3)</small></span></label>
     </section>
     <section>
       <h2>Your layer</h2>
@@ -350,7 +349,6 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
     if ($('ghm').checked) b.push(`<div class="bloque"><div class="t">Human modification</div>${D.pal.ghm.map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);
     if ($('div').checked) b.push(`<div class="bloque"><div class="item"><i class="pt" style="background:#fff"></i>continental divide</div><div class="item"><i class="pt" style="background:#111"></i>band of Table S19, numbered</div></div>`);
     if ($('hz').checked) b.push(`<div class="bloque"><div class="item"><i style="background:repeating-linear-gradient(90deg,#111 0 3px,#fff 3px 6px)"></i>barrier of Hazzi et al. (2018)</div></div>`);
-    if ($('divnet').checked) b.push(`<div class="bloque"><div class="item"><i style="background:${D.pal.divnet[0][0]}"></i>divide network (Fig. 1b)</div></div>`);
     if ($('pa').checked) b.push(`<div class="bloque"><div class="item"><i style="background:${D.pal.pa[0][0]}"></i>Protected areas</div></div>`);
     $('leyenda').innerHTML = b.join(''); $('leyenda').hidden = !b.length;
   };
@@ -358,9 +356,9 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   const ponerCapa = k => { capaK = k; if (capa) capa.remove(); capa = k === 'none' ? null : teselas(k, 9).addTo(mapa); ley(); };
   document.querySelectorAll('input[name=capa]').forEach(r => r.onchange = e => ponerCapa(e.target.value));
   $('opac').oninput = e => capa && capa.setOpacity(+e.target.value);
-  const extra = { ghm: null, pa: null, divnet: null };
-  const ZMAX = { ghm: 8, pa: 9, divnet: 12 };
-  for (const k of ['ghm', 'pa', 'divnet']) $(k).onchange = e => { if (e.target.checked) extra[k] = teselas(k, ZMAX[k]).addTo(mapa); else extra[k].remove(); ley(); };
+  const extra = { ghm: null, pa: null };
+  const ZMAX = { ghm: 8, pa: 9 };
+  for (const k of ['ghm', 'pa']) $(k).onchange = e => { if (e.target.checked) extra[k] = teselas(k, ZMAX[k]).addTo(mapa); else extra[k].remove(); ley(); };
   // continental divide with the bands of Table S19, and the barriers of Hazzi et al. (2018), as in Fig. 3
   const lienzo = L.canvas({ pane: 'puntos' }), ROM = ['', 'I', 'II', 'III', 'IV', 'V', 'VI'];
   const divG = L.layerGroup(), hzG = L.layerGroup();
@@ -383,6 +381,8 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   });
   $('div').onchange = e => { e.target.checked ? divG.addTo(mapa) : divG.remove(); ley(); };
   $('hz').onchange = e => { e.target.checked ? hzG.addTo(mapa) : hzG.remove(); ley(); };
+  if ($('div').checked) divG.addTo(mapa);
+  if ($('hz').checked) hzG.addTo(mapa);
   $('modo').onchange = e => { modo = e.target.value; puntos.remove(); if (modo !== 'no') puntos = new Puntos({ pane: 'puntos', updateWhenZooming: false }).addTo(mapa); ley(); };
   fetch('capas/andes.geojson').then(r => r.json()).then(g => L.geoJSON(g, { pane: 'rasters', interactive: false, style: { color: '#222', weight: .8, opacity: .55, fill: false } }).addTo(mapa));
   ponerCapa(capaK);
