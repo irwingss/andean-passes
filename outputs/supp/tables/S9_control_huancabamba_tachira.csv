@@ -1,215 +1,223 @@
 control,group,cfg,band,tiles,median,in_zone
-Huancabamba,temperature,main,-2.25,5,0.621,False
-Huancabamba,temperature,main,-2.75,5,0.638,False
-Huancabamba,temperature,main,-3.25,5,0.597,False
-Huancabamba,temperature,main,-3.75,5,0.546,False
-Huancabamba,temperature,main,-4.25,4,0.513,True
-Huancabamba,temperature,main,-4.75,4,0.523,True
-Huancabamba,temperature,main,-5.25,4,0.538,True
-Huancabamba,temperature,main,-5.75,4,0.545,True
-Huancabamba,temperature,main,-6.25,11,0.59,True
-Huancabamba,temperature,main,-6.75,5,0.714,True
-Huancabamba,temperature,main,-7.25,5,0.749,True
-Huancabamba,temperature,main,-7.75,5,0.793,False
-Huancabamba,temperature,main,-8.25,5,0.802,False
-Huancabamba,temperature,main,-8.75,5,0.767,False
-Huancabamba,temperature,main,-9.25,4,0.838,False
-Huancabamba,temperature,main,-9.75,5,0.844,False
-Huancabamba,temperature,q 0.05,-2.25,5,0.557,False
-Huancabamba,temperature,q 0.05,-2.75,5,0.563,False
-Huancabamba,temperature,q 0.05,-3.25,5,0.511,False
-Huancabamba,temperature,q 0.05,-3.75,5,0.442,False
-Huancabamba,temperature,q 0.05,-4.25,4,0.406,True
-Huancabamba,temperature,q 0.05,-4.75,4,0.416,True
-Huancabamba,temperature,q 0.05,-5.25,4,0.427,True
-Huancabamba,temperature,q 0.05,-5.75,4,0.431,True
-Huancabamba,temperature,q 0.05,-6.25,11,0.472,True
-Huancabamba,temperature,q 0.05,-6.75,5,0.628,True
-Huancabamba,temperature,q 0.05,-7.25,5,0.69,True
-Huancabamba,temperature,q 0.05,-7.75,5,0.729,False
-Huancabamba,temperature,q 0.05,-8.25,5,0.746,False
-Huancabamba,temperature,q 0.05,-8.75,5,0.71,False
-Huancabamba,temperature,q 0.05,-9.25,4,0.793,False
-Huancabamba,temperature,q 0.05,-9.75,5,0.793,False
-Huancabamba,temperature,q 0.2,-2.25,5,0.7,False
-Huancabamba,temperature,q 0.2,-2.75,5,0.721,False
-Huancabamba,temperature,q 0.2,-3.25,5,0.692,False
-Huancabamba,temperature,q 0.2,-3.75,5,0.659,False
-Huancabamba,temperature,q 0.2,-4.25,4,0.633,True
-Huancabamba,temperature,q 0.2,-4.75,4,0.642,True
-Huancabamba,temperature,q 0.2,-5.25,4,0.659,True
-Huancabamba,temperature,q 0.2,-5.75,4,0.666,True
-Huancabamba,temperature,q 0.2,-6.25,11,0.707,True
-Huancabamba,temperature,q 0.2,-6.75,5,0.794,True
-Huancabamba,temperature,q 0.2,-7.25,5,0.817,True
-Huancabamba,temperature,q 0.2,-7.75,5,0.851,False
-Huancabamba,temperature,q 0.2,-8.25,5,0.856,False
-Huancabamba,temperature,q 0.2,-8.75,5,0.826,False
-Huancabamba,temperature,q 0.2,-9.25,4,0.884,False
-Huancabamba,temperature,q 0.2,-9.75,5,0.878,False
-Huancabamba,temperature,100 km,-2.25,11,0.754,False
-Huancabamba,temperature,100 km,-2.75,10,0.845,False
-Huancabamba,temperature,100 km,-3.25,11,0.776,False
-Huancabamba,temperature,100 km,-3.75,15,0.627,False
-Huancabamba,temperature,100 km,-4.25,10,0.615,True
-Huancabamba,temperature,100 km,-4.75,9,0.642,True
-Huancabamba,temperature,100 km,-5.25,10,0.649,True
-Huancabamba,temperature,100 km,-5.75,8,0.663,True
-Huancabamba,temperature,100 km,-6.25,16,0.668,True
-Huancabamba,temperature,100 km,-6.75,11,0.855,True
-Huancabamba,temperature,100 km,-7.25,11,0.875,True
-Huancabamba,temperature,100 km,-7.75,12,0.907,False
-Huancabamba,temperature,100 km,-8.25,10,0.941,False
-Huancabamba,temperature,100 km,-8.75,14,0.908,False
-Huancabamba,temperature,100 km,-9.25,10,0.907,False
+Huancabamba,temperature,main,-2.25,5,0.589,False
+Huancabamba,temperature,main,-2.75,5,0.573,False
+Huancabamba,temperature,main,-3.25,5,0.537,False
+Huancabamba,temperature,main,-3.75,5,0.455,False
+Huancabamba,temperature,main,-4.25,4,0.451,True
+Huancabamba,temperature,main,-4.75,5,0.456,True
+Huancabamba,temperature,main,-5.25,5,0.485,True
+Huancabamba,temperature,main,-5.75,5,0.493,True
+Huancabamba,temperature,main,-6.25,11,0.611,True
+Huancabamba,temperature,main,-6.75,5,0.68,True
+Huancabamba,temperature,main,-7.25,5,0.713,True
+Huancabamba,temperature,main,-7.75,5,0.769,False
+Huancabamba,temperature,main,-8.25,6,0.74,False
+Huancabamba,temperature,main,-8.75,5,0.739,False
+Huancabamba,temperature,main,-9.25,4,0.784,False
+Huancabamba,temperature,main,-9.75,5,0.794,False
+Huancabamba,temperature,q 0.05,-2.25,5,0.529,False
+Huancabamba,temperature,q 0.05,-2.75,5,0.497,False
+Huancabamba,temperature,q 0.05,-3.25,5,0.451,False
+Huancabamba,temperature,q 0.05,-3.75,5,0.362,False
+Huancabamba,temperature,q 0.05,-4.25,4,0.349,True
+Huancabamba,temperature,q 0.05,-4.75,5,0.348,True
+Huancabamba,temperature,q 0.05,-5.25,5,0.378,True
+Huancabamba,temperature,q 0.05,-5.75,5,0.381,True
+Huancabamba,temperature,q 0.05,-6.25,11,0.501,True
+Huancabamba,temperature,q 0.05,-6.75,5,0.599,True
+Huancabamba,temperature,q 0.05,-7.25,5,0.648,True
+Huancabamba,temperature,q 0.05,-7.75,5,0.724,False
+Huancabamba,temperature,q 0.05,-8.25,6,0.669,False
+Huancabamba,temperature,q 0.05,-8.75,5,0.657,False
+Huancabamba,temperature,q 0.05,-9.25,4,0.725,False
+Huancabamba,temperature,q 0.05,-9.75,5,0.749,False
+Huancabamba,temperature,q 0.2,-2.25,5,0.665,False
+Huancabamba,temperature,q 0.2,-2.75,5,0.664,False
+Huancabamba,temperature,q 0.2,-3.25,5,0.635,False
+Huancabamba,temperature,q 0.2,-3.75,5,0.572,False
+Huancabamba,temperature,q 0.2,-4.25,4,0.572,True
+Huancabamba,temperature,q 0.2,-4.75,5,0.581,True
+Huancabamba,temperature,q 0.2,-5.25,5,0.607,True
+Huancabamba,temperature,q 0.2,-5.75,5,0.619,True
+Huancabamba,temperature,q 0.2,-6.25,11,0.722,True
+Huancabamba,temperature,q 0.2,-6.75,5,0.746,True
+Huancabamba,temperature,q 0.2,-7.25,5,0.777,True
+Huancabamba,temperature,q 0.2,-7.75,5,0.836,False
+Huancabamba,temperature,q 0.2,-8.25,6,0.806,False
+Huancabamba,temperature,q 0.2,-8.75,5,0.81,False
+Huancabamba,temperature,q 0.2,-9.25,4,0.843,False
+Huancabamba,temperature,q 0.2,-9.75,5,0.843,False
+Huancabamba,temperature,100 km,-2.25,11,0.693,False
+Huancabamba,temperature,100 km,-2.75,12,0.725,False
+Huancabamba,temperature,100 km,-3.25,11,0.725,False
+Huancabamba,temperature,100 km,-3.75,16,0.574,False
+Huancabamba,temperature,100 km,-4.25,10,0.557,True
+Huancabamba,temperature,100 km,-4.75,10,0.601,True
+Huancabamba,temperature,100 km,-5.25,10,0.622,True
+Huancabamba,temperature,100 km,-5.75,10,0.626,True
+Huancabamba,temperature,100 km,-6.25,17,0.667,True
+Huancabamba,temperature,100 km,-6.75,11,0.878,True
+Huancabamba,temperature,100 km,-7.25,12,0.875,True
+Huancabamba,temperature,100 km,-7.75,12,0.894,False
+Huancabamba,temperature,100 km,-8.25,10,0.951,False
+Huancabamba,temperature,100 km,-8.75,14,0.911,False
+Huancabamba,temperature,100 km,-9.25,10,0.908,False
 Huancabamba,temperature,100 km,-9.75,11,0.945,False
-Huancabamba,temperature,400 km,-2.25,4,0.499,False
-Huancabamba,temperature,400 km,-3.25,4,0.463,False
-Huancabamba,temperature,400 km,-4.25,4,0.416,True
-Huancabamba,temperature,400 km,-5.25,4,0.422,True
-Huancabamba,temperature,400 km,-6.25,4,0.516,True
-Huancabamba,temperature,400 km,-6.75,3,0.601,True
-Huancabamba,temperature,400 km,-7.75,5,0.647,False
-Huancabamba,temperature,400 km,-8.75,4,0.72,False
-Huancabamba,temperature,400 km,-9.75,4,0.76,False
-Huancabamba,precipitation,main,-2.25,5,0.737,False
-Huancabamba,precipitation,main,-2.75,5,0.823,False
-Huancabamba,precipitation,main,-3.25,5,0.828,False
-Huancabamba,precipitation,main,-3.75,5,0.775,False
-Huancabamba,precipitation,main,-4.25,4,0.794,True
-Huancabamba,precipitation,main,-4.75,4,0.808,True
-Huancabamba,precipitation,main,-5.25,4,0.763,True
-Huancabamba,precipitation,main,-5.75,4,0.757,True
-Huancabamba,precipitation,main,-6.25,11,0.758,True
-Huancabamba,precipitation,main,-6.75,5,0.817,True
-Huancabamba,precipitation,main,-7.25,5,0.8,True
-Huancabamba,precipitation,main,-7.75,5,0.847,False
-Huancabamba,precipitation,main,-8.25,5,0.855,False
-Huancabamba,precipitation,main,-8.75,5,0.85,False
-Huancabamba,precipitation,main,-9.25,4,0.871,False
-Huancabamba,precipitation,main,-9.75,5,0.86,False
-Huancabamba,precipitation,q 0.05,-2.25,5,0.672,False
-Huancabamba,precipitation,q 0.05,-2.75,5,0.766,False
-Huancabamba,precipitation,q 0.05,-3.25,5,0.775,False
-Huancabamba,precipitation,q 0.05,-3.75,5,0.712,False
-Huancabamba,precipitation,q 0.05,-4.25,4,0.719,True
-Huancabamba,precipitation,q 0.05,-4.75,4,0.752,True
-Huancabamba,precipitation,q 0.05,-5.25,4,0.709,True
-Huancabamba,precipitation,q 0.05,-5.75,4,0.709,True
-Huancabamba,precipitation,q 0.05,-6.25,11,0.701,True
-Huancabamba,precipitation,q 0.05,-6.75,5,0.776,True
-Huancabamba,precipitation,q 0.05,-7.25,5,0.765,True
-Huancabamba,precipitation,q 0.05,-7.75,5,0.816,False
-Huancabamba,precipitation,q 0.05,-8.25,5,0.822,False
-Huancabamba,precipitation,q 0.05,-8.75,5,0.823,False
-Huancabamba,precipitation,q 0.05,-9.25,4,0.845,False
-Huancabamba,precipitation,q 0.05,-9.75,5,0.835,False
-Huancabamba,precipitation,q 0.2,-2.25,5,0.803,False
-Huancabamba,precipitation,q 0.2,-2.75,5,0.875,False
-Huancabamba,precipitation,q 0.2,-3.25,5,0.881,False
-Huancabamba,precipitation,q 0.2,-3.75,5,0.848,False
-Huancabamba,precipitation,q 0.2,-4.25,4,0.857,True
-Huancabamba,precipitation,q 0.2,-4.75,4,0.862,True
-Huancabamba,precipitation,q 0.2,-5.25,4,0.819,True
-Huancabamba,precipitation,q 0.2,-5.75,4,0.802,True
-Huancabamba,precipitation,q 0.2,-6.25,11,0.809,True
-Huancabamba,precipitation,q 0.2,-6.75,5,0.858,True
-Huancabamba,precipitation,q 0.2,-7.25,5,0.842,True
-Huancabamba,precipitation,q 0.2,-7.75,5,0.882,False
-Huancabamba,precipitation,q 0.2,-8.25,5,0.891,False
-Huancabamba,precipitation,q 0.2,-8.75,5,0.881,False
-Huancabamba,precipitation,q 0.2,-9.25,4,0.897,False
-Huancabamba,precipitation,q 0.2,-9.75,5,0.887,False
-Huancabamba,precipitation,100 km,-2.25,11,0.832,False
-Huancabamba,precipitation,100 km,-2.75,10,0.909,False
-Huancabamba,precipitation,100 km,-3.25,11,0.908,False
-Huancabamba,precipitation,100 km,-3.75,15,0.886,False
-Huancabamba,precipitation,100 km,-4.25,10,0.9,True
-Huancabamba,precipitation,100 km,-4.75,9,0.895,True
-Huancabamba,precipitation,100 km,-5.25,10,0.793,True
-Huancabamba,precipitation,100 km,-5.75,8,0.705,True
-Huancabamba,precipitation,100 km,-6.25,16,0.806,True
-Huancabamba,precipitation,100 km,-6.75,11,0.974,True
-Huancabamba,precipitation,100 km,-7.25,11,0.973,True
+Huancabamba,temperature,400 km,-2.25,4,0.468,False
+Huancabamba,temperature,400 km,-3.25,4,0.441,False
+Huancabamba,temperature,400 km,-4.25,5,0.343,True
+Huancabamba,temperature,400 km,-5.25,5,0.354,True
+Huancabamba,temperature,400 km,-6.25,4,0.483,True
+Huancabamba,temperature,400 km,-6.75,5,0.601,True
+Huancabamba,temperature,400 km,-7.75,5,0.61,False
+Huancabamba,temperature,400 km,-8.75,5,0.65,False
+Huancabamba,temperature,400 km,-9.75,5,0.684,False
+Huancabamba,precipitation,main,-2.25,5,0.698,False
+Huancabamba,precipitation,main,-2.75,5,0.718,False
+Huancabamba,precipitation,main,-3.25,5,0.768,False
+Huancabamba,precipitation,main,-3.75,5,0.706,False
+Huancabamba,precipitation,main,-4.25,4,0.731,True
+Huancabamba,precipitation,main,-4.75,5,0.703,True
+Huancabamba,precipitation,main,-5.25,5,0.674,True
+Huancabamba,precipitation,main,-5.75,5,0.612,True
+Huancabamba,precipitation,main,-6.25,11,0.724,True
+Huancabamba,precipitation,main,-6.75,5,0.801,True
+Huancabamba,precipitation,main,-7.25,5,0.714,True
+Huancabamba,precipitation,main,-7.75,5,0.835,False
+Huancabamba,precipitation,main,-8.25,6,0.742,False
+Huancabamba,precipitation,main,-8.75,5,0.774,False
+Huancabamba,precipitation,main,-9.25,4,0.797,False
+Huancabamba,precipitation,main,-9.75,5,0.802,False
+Huancabamba,precipitation,q 0.05,-2.25,5,0.632,False
+Huancabamba,precipitation,q 0.05,-2.75,5,0.644,False
+Huancabamba,precipitation,q 0.05,-3.25,5,0.697,False
+Huancabamba,precipitation,q 0.05,-3.75,5,0.632,False
+Huancabamba,precipitation,q 0.05,-4.25,4,0.664,True
+Huancabamba,precipitation,q 0.05,-4.75,5,0.638,True
+Huancabamba,precipitation,q 0.05,-5.25,5,0.625,True
+Huancabamba,precipitation,q 0.05,-5.75,5,0.565,True
+Huancabamba,precipitation,q 0.05,-6.25,11,0.658,True
+Huancabamba,precipitation,q 0.05,-6.75,5,0.763,True
+Huancabamba,precipitation,q 0.05,-7.25,5,0.667,True
+Huancabamba,precipitation,q 0.05,-7.75,5,0.79,False
+Huancabamba,precipitation,q 0.05,-8.25,6,0.698,False
+Huancabamba,precipitation,q 0.05,-8.75,5,0.74,False
+Huancabamba,precipitation,q 0.05,-9.25,4,0.76,False
+Huancabamba,precipitation,q 0.05,-9.75,5,0.765,False
+Huancabamba,precipitation,q 0.2,-2.25,5,0.769,False
+Huancabamba,precipitation,q 0.2,-2.75,5,0.793,False
+Huancabamba,precipitation,q 0.2,-3.25,5,0.84,False
+Huancabamba,precipitation,q 0.2,-3.75,5,0.783,False
+Huancabamba,precipitation,q 0.2,-4.25,4,0.801,True
+Huancabamba,precipitation,q 0.2,-4.75,5,0.773,True
+Huancabamba,precipitation,q 0.2,-5.25,5,0.729,True
+Huancabamba,precipitation,q 0.2,-5.75,5,0.669,True
+Huancabamba,precipitation,q 0.2,-6.25,11,0.791,True
+Huancabamba,precipitation,q 0.2,-6.75,5,0.839,True
+Huancabamba,precipitation,q 0.2,-7.25,5,0.767,True
+Huancabamba,precipitation,q 0.2,-7.75,5,0.879,False
+Huancabamba,precipitation,q 0.2,-8.25,6,0.795,False
+Huancabamba,precipitation,q 0.2,-8.75,5,0.816,False
+Huancabamba,precipitation,q 0.2,-9.25,4,0.838,False
+Huancabamba,precipitation,q 0.2,-9.75,5,0.84,False
+Huancabamba,precipitation,100 km,-2.25,11,0.783,False
+Huancabamba,precipitation,100 km,-2.75,12,0.834,False
+Huancabamba,precipitation,100 km,-3.25,11,0.85,False
+Huancabamba,precipitation,100 km,-3.75,16,0.836,False
+Huancabamba,precipitation,100 km,-4.25,10,0.847,True
+Huancabamba,precipitation,100 km,-4.75,10,0.877,True
+Huancabamba,precipitation,100 km,-5.25,10,0.755,True
+Huancabamba,precipitation,100 km,-5.75,10,0.629,True
+Huancabamba,precipitation,100 km,-6.25,17,0.83,True
+Huancabamba,precipitation,100 km,-6.75,11,0.973,True
+Huancabamba,precipitation,100 km,-7.25,12,0.968,True
 Huancabamba,precipitation,100 km,-7.75,12,0.961,False
-Huancabamba,precipitation,100 km,-8.25,10,0.958,False
-Huancabamba,precipitation,100 km,-8.75,14,0.979,False
+Huancabamba,precipitation,100 km,-8.25,10,0.97,False
+Huancabamba,precipitation,100 km,-8.75,14,0.978,False
 Huancabamba,precipitation,100 km,-9.25,10,0.982,False
 Huancabamba,precipitation,100 km,-9.75,11,0.99,False
-Huancabamba,precipitation,400 km,-2.25,4,0.675,False
-Huancabamba,precipitation,400 km,-3.25,4,0.679,False
-Huancabamba,precipitation,400 km,-4.25,4,0.663,True
-Huancabamba,precipitation,400 km,-5.25,4,0.672,True
-Huancabamba,precipitation,400 km,-6.25,4,0.722,True
-Huancabamba,precipitation,400 km,-6.75,3,0.758,True
-Huancabamba,precipitation,400 km,-7.75,5,0.746,False
-Huancabamba,precipitation,400 km,-8.75,4,0.775,False
-Huancabamba,precipitation,400 km,-9.75,4,0.766,False
-Tachira,temperature,main,8.25,1,0.246,False
-Tachira,temperature,main,7.75,3,0.366,True
-Tachira,temperature,main,7.25,5,0.481,False
-Tachira,temperature,main,6.75,5,0.609,False
-Tachira,temperature,main,6.25,4,0.651,False
-Tachira,temperature,main,5.75,3,0.628,False
-Tachira,temperature,main,5.25,2,0.682,False
-Tachira,temperature,q 0.05,8.25,1,0.148,False
-Tachira,temperature,q 0.05,7.75,3,0.261,True
-Tachira,temperature,q 0.05,7.25,5,0.383,False
-Tachira,temperature,q 0.05,6.75,5,0.514,False
-Tachira,temperature,q 0.05,6.25,4,0.555,False
-Tachira,temperature,q 0.05,5.75,3,0.522,False
-Tachira,temperature,q 0.05,5.25,2,0.607,False
-Tachira,temperature,q 0.2,8.25,1,0.381,False
-Tachira,temperature,q 0.2,7.75,3,0.487,True
-Tachira,temperature,q 0.2,7.25,5,0.587,False
-Tachira,temperature,q 0.2,6.75,5,0.707,False
-Tachira,temperature,q 0.2,6.25,4,0.746,False
-Tachira,temperature,q 0.2,5.75,3,0.728,False
-Tachira,temperature,q 0.2,5.25,2,0.76,False
-Tachira,temperature,100 km,9.25,1,0.56,False
-Tachira,temperature,100 km,8.75,3,0.677,False
-Tachira,temperature,100 km,8.25,3,0.627,False
-Tachira,temperature,100 km,7.75,10,0.469,True
-Tachira,temperature,100 km,7.25,11,0.691,False
-Tachira,temperature,100 km,6.75,11,0.647,False
-Tachira,temperature,100 km,6.25,8,0.73,False
-Tachira,temperature,100 km,5.75,12,0.804,False
-Tachira,temperature,100 km,5.25,13,0.842,False
-Tachira,temperature,400 km,8.25,3,0.208,False
-Tachira,temperature,400 km,7.75,3,0.257,True
-Tachira,temperature,400 km,6.75,1,0.414,False
-Tachira,temperature,400 km,5.75,2,0.502,False
-Tachira,precipitation,main,8.25,1,0.609,False
-Tachira,precipitation,main,7.75,3,0.899,True
-Tachira,precipitation,main,7.25,5,0.947,False
-Tachira,precipitation,main,6.75,5,0.945,False
-Tachira,precipitation,main,6.25,4,0.952,False
-Tachira,precipitation,main,5.75,3,0.945,False
-Tachira,precipitation,main,5.25,2,0.924,False
-Tachira,precipitation,q 0.05,8.25,1,0.474,False
-Tachira,precipitation,q 0.05,7.75,3,0.846,True
-Tachira,precipitation,q 0.05,7.25,5,0.921,False
-Tachira,precipitation,q 0.05,6.75,5,0.919,False
-Tachira,precipitation,q 0.05,6.25,4,0.927,False
-Tachira,precipitation,q 0.05,5.75,3,0.92,False
-Tachira,precipitation,q 0.05,5.25,2,0.888,False
-Tachira,precipitation,q 0.2,8.25,1,0.739,False
-Tachira,precipitation,q 0.2,7.75,3,0.94,True
-Tachira,precipitation,q 0.2,7.25,5,0.968,False
-Tachira,precipitation,q 0.2,6.75,5,0.965,False
-Tachira,precipitation,q 0.2,6.25,4,0.97,False
-Tachira,precipitation,q 0.2,5.75,3,0.966,False
-Tachira,precipitation,q 0.2,5.25,2,0.952,False
-Tachira,precipitation,100 km,9.25,1,0.942,False
-Tachira,precipitation,100 km,8.75,3,0.961,False
-Tachira,precipitation,100 km,8.25,3,0.975,False
-Tachira,precipitation,100 km,7.75,10,0.953,True
-Tachira,precipitation,100 km,7.25,11,0.989,False
-Tachira,precipitation,100 km,6.75,11,0.902,False
-Tachira,precipitation,100 km,6.25,8,0.915,False
-Tachira,precipitation,100 km,5.75,12,0.958,False
-Tachira,precipitation,100 km,5.25,13,0.969,False
-Tachira,precipitation,400 km,8.25,3,0.772,False
-Tachira,precipitation,400 km,7.75,3,0.672,True
-Tachira,precipitation,400 km,6.75,1,0.887,False
-Tachira,precipitation,400 km,5.75,2,0.867,False
+Huancabamba,precipitation,400 km,-2.25,4,0.622,False
+Huancabamba,precipitation,400 km,-3.25,4,0.636,False
+Huancabamba,precipitation,400 km,-4.25,5,0.596,True
+Huancabamba,precipitation,400 km,-5.25,5,0.558,True
+Huancabamba,precipitation,400 km,-6.25,4,0.656,True
+Huancabamba,precipitation,400 km,-6.75,5,0.74,True
+Huancabamba,precipitation,400 km,-7.75,5,0.695,False
+Huancabamba,precipitation,400 km,-8.75,5,0.669,False
+Huancabamba,precipitation,400 km,-9.75,5,0.687,False
+Tachira,temperature,main,8.75,2,0.385,False
+Tachira,temperature,main,8.25,4,0.429,False
+Tachira,temperature,main,7.75,11,0.306,True
+Tachira,temperature,main,7.25,5,0.526,False
+Tachira,temperature,main,6.75,5,0.568,False
+Tachira,temperature,main,6.25,5,0.574,False
+Tachira,temperature,main,5.75,4,0.665,False
+Tachira,temperature,main,5.25,3,0.629,False
+Tachira,temperature,q 0.05,8.75,2,0.31,False
+Tachira,temperature,q 0.05,8.25,4,0.33,False
+Tachira,temperature,q 0.05,7.75,11,0.199,True
+Tachira,temperature,q 0.05,7.25,5,0.44,False
+Tachira,temperature,q 0.05,6.75,5,0.476,False
+Tachira,temperature,q 0.05,6.25,5,0.484,False
+Tachira,temperature,q 0.05,5.75,4,0.581,False
+Tachira,temperature,q 0.05,5.25,3,0.553,False
+Tachira,temperature,q 0.2,8.75,2,0.485,False
+Tachira,temperature,q 0.2,8.25,4,0.543,False
+Tachira,temperature,q 0.2,7.75,11,0.438,True
+Tachira,temperature,q 0.2,7.25,5,0.621,False
+Tachira,temperature,q 0.2,6.75,5,0.664,False
+Tachira,temperature,q 0.2,6.25,5,0.668,False
+Tachira,temperature,q 0.2,5.75,4,0.747,False
+Tachira,temperature,q 0.2,5.25,3,0.712,False
+Tachira,temperature,100 km,9.25,5,0.488,False
+Tachira,temperature,100 km,8.75,8,0.65,False
+Tachira,temperature,100 km,8.25,9,0.482,False
+Tachira,temperature,100 km,7.75,14,0.38,True
+Tachira,temperature,100 km,7.25,13,0.687,False
+Tachira,temperature,100 km,6.75,11,0.65,False
+Tachira,temperature,100 km,6.25,9,0.72,False
+Tachira,temperature,100 km,5.75,14,0.815,False
+Tachira,temperature,100 km,5.25,16,0.801,False
+Tachira,temperature,400 km,9.25,2,0.152,False
+Tachira,temperature,400 km,8.25,4,0.197,False
+Tachira,temperature,400 km,7.75,4,0.259,True
+Tachira,temperature,400 km,6.75,3,0.429,False
+Tachira,temperature,400 km,5.75,2,0.418,False
+Tachira,precipitation,main,8.75,2,0.937,False
+Tachira,precipitation,main,8.25,4,0.92,False
+Tachira,precipitation,main,7.75,11,0.876,True
+Tachira,precipitation,main,7.25,5,0.929,False
+Tachira,precipitation,main,6.75,5,0.916,False
+Tachira,precipitation,main,6.25,5,0.928,False
+Tachira,precipitation,main,5.75,4,0.916,False
+Tachira,precipitation,main,5.25,3,0.874,False
+Tachira,precipitation,q 0.05,8.75,2,0.902,False
+Tachira,precipitation,q 0.05,8.25,4,0.882,False
+Tachira,precipitation,q 0.05,7.75,11,0.803,True
+Tachira,precipitation,q 0.05,7.25,5,0.897,False
+Tachira,precipitation,q 0.05,6.75,5,0.876,False
+Tachira,precipitation,q 0.05,6.25,5,0.896,False
+Tachira,precipitation,q 0.05,5.75,4,0.872,False
+Tachira,precipitation,q 0.05,5.25,3,0.819,False
+Tachira,precipitation,q 0.2,8.75,2,0.962,False
+Tachira,precipitation,q 0.2,8.25,4,0.95,False
+Tachira,precipitation,q 0.2,7.75,11,0.924,True
+Tachira,precipitation,q 0.2,7.25,5,0.955,False
+Tachira,precipitation,q 0.2,6.75,5,0.947,False
+Tachira,precipitation,q 0.2,6.25,5,0.954,False
+Tachira,precipitation,q 0.2,5.75,4,0.949,False
+Tachira,precipitation,q 0.2,5.25,3,0.919,False
+Tachira,precipitation,100 km,9.25,5,0.939,False
+Tachira,precipitation,100 km,8.75,8,0.94,False
+Tachira,precipitation,100 km,8.25,9,0.962,False
+Tachira,precipitation,100 km,7.75,14,0.945,True
+Tachira,precipitation,100 km,7.25,13,0.976,False
+Tachira,precipitation,100 km,6.75,11,0.898,False
+Tachira,precipitation,100 km,6.25,9,0.893,False
+Tachira,precipitation,100 km,5.75,14,0.947,False
+Tachira,precipitation,100 km,5.25,16,0.954,False
+Tachira,precipitation,400 km,9.25,2,0.694,False
+Tachira,precipitation,400 km,8.25,4,0.734,False
+Tachira,precipitation,400 km,7.75,4,0.863,True
+Tachira,precipitation,400 km,6.75,3,0.902,False
+Tachira,precipitation,400 km,5.75,2,0.802,False

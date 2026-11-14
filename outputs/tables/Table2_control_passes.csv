@@ -1,26 +1,26 @@
 no,pass,system,lat,lon,apd_id,census_km,z_m,depth_m,rank,trans_med,trans_min,trans_max,trans_cfg_lo,trans_cfg_hi,longi_med,longi_min,longi_max,longi_cfg_lo,longi_cfg_hi
-1,Paso La Gallina,Mérida,8.91,-70.96,APD071818,0.42,3629.7,293.9,tributary,0.53,0.24,1.03,0.38,0.69,,,,1.09,1.18
-2,Boquerón de Lenguerke,Oriental Colombia,6.86,-73.34,APD047769,0.26,2424.4,32.1,tributary,0.88,0.64,1.25,0.76,0.95,1.05,1.01,2.1,1.03,1.16
-3,Alto de Cruz Verde,Oriental Colombia,4.51,-74.05,APD028030,0.48,3446.9,30.6,continental,1.0,0.67,1.05,0.81,1.0,1.2,1.01,2.06,1.06,1.34
-4,Alto del Trigo,Oriental Colombia,5.0,-74.54,APD039540,1.79,1507.6,73.8,tributary,1.0,0.97,1.2,0.88,1.1,1.0,0.58,1.04,1.0,1.08
-5,Alto de los Andakíes,Oriental Colombia,1.72,-75.9,APD007183,0.33,1813.4,41.1,tributary,1.0,0.89,1.27,1.0,1.01,0.93,0.76,1.2,0.89,1.25
-6,Páramo de Letras,Central Colombia,5.04,-75.33,APD034511,0.51,3681.7,173.6,tributary,0.99,0.82,1.43,0.98,1.0,1.1,1.0,1.81,1.05,1.27
-7,Alto de La Línea,Central Colombia,4.47,-75.56,APD028234,0.59,3261.7,1325.6,tributary,1.17,1.0,1.53,1.06,1.27,1.07,1.01,2.87,1.01,1.28
-8,El Paso,Occidental Colombia,3.33,-76.69,APD020194,0.6,3847.3,65.1,tributary,1.0,0.31,1.11,0.95,1.0,1.19,0.99,1.68,1.15,1.23
-9,Paso de Papallacta,Real Ecuador,-0.33,-78.2,APD087203,0.36,4061.8,429.9,continental,0.98,0.82,1.39,0.89,1.05,1.17,0.99,1.43,1.02,1.57
-10,Tres Cruces,Occidental Ecuador,-2.78,-79.24,APD094049,0.35,4156.2,112.2,continental,0.98,0.59,1.4,0.97,0.99,1.07,0.98,1.3,1.06,1.29
-11,Abra de Porculla,Occidental Perú,-5.84,-79.5,APD113156,0.61,2144.9,904.7,continental,1.04,0.87,1.65,1.01,1.07,1.96,1.0,2.94,1.65,2.23
-12,Abra Patricia,Central Perú,-5.7,-77.81,APD112795,0.21,2328.2,59.8,tributary,1.0,0.8,1.12,1.0,1.01,1.16,0.9,1.75,1.02,1.25
-13,Calla Calla,Central Perú,-6.73,-77.89,APD119175,0.6,3585.5,181.9,tributary,1.01,1.0,1.35,1.0,1.02,1.06,1.01,1.48,1.04,1.22
-14,Abra El Gavilán,Occidental Perú,-7.25,-78.47,APD131905,0.36,3225.5,773.3,continental,1.06,0.7,1.21,1.0,1.09,1.27,1.01,1.42,1.1,1.38
-15,Abra Punta Callán,Negra,-9.55,-77.62,APD150664,0.39,4217.0,722.8,terminal,1.02,0.99,1.12,1.02,1.02,1.22,0.95,1.36,1.15,1.31
-16,Punta Olímpica,Blanca,-9.13,-77.51,APD148306,0.15,4902.6,1019.4,continental,0.99,0.87,1.07,0.98,1.01,0.83,0.53,1.22,0.67,1.02
-17,Ticlio,Occidental Perú,-11.6,-76.19,APD168701,0.28,4811.4,597.6,continental,0.97,0.84,1.12,0.91,0.97,1.02,0.83,1.15,1.0,1.13
-18,Abra Málaga,Oriental Perú,-13.14,-72.3,APD197782,0.27,4321.8,942.1,tributary,0.68,0.36,1.12,0.59,0.79,1.16,1.02,1.23,1.09,1.23
-19,Abra Acjanaco,Oriental Perú,-13.2,-71.62,APD202580,0.32,3473.6,106.1,tributary,0.68,0.59,1.22,0.5,0.82,1.34,1.01,1.66,1.22,1.44
-20,Abra La Raya,Oriental Perú,-14.48,-70.99,APD216515,0.4,4325.1,849.5,continental,0.7,0.52,1.13,0.59,0.76,1.02,0.91,1.05,1.0,1.09
-21,Patapampa,Occidental Perú,-15.75,-71.58,APD228705,3.24,4806.4,40.5,terminal,0.81,0.19,1.39,0.75,0.87,1.11,1.0,1.27,1.02,1.15
-22,"La Cumbre, La Paz",Real Bolivia,-16.34,-68.04,APD243528,0.22,4640.9,555.3,tributary,1.0,0.11,1.08,0.99,1.01,1.19,1.04,1.25,1.12,1.29
-23,"La Cumbre, Oruro-Cochabamba",Oriental Bolivia,-17.66,-66.82,APD254566,0.44,4468.1,34.0,tributary,0.95,0.37,1.12,0.92,0.98,1.04,1.0,1.07,1.0,1.06
-24,Chungará-Tambo Quemado,Occidental Altiplano,-18.28,-69.07,APD266124,0.68,4670.2,858.9,tributary,,,,0.99,0.99,1.0,0.47,1.15,1.0,1.01
-25,Abra de Tres Cruces,Oriental Argentina,-22.9,-65.6,APD322389,0.51,3791.0,48.4,tributary,,,,0.98,0.98,1.13,1.0,1.22,1.02,1.33
+1,Paso La Gallina,Mérida,8.91,-70.96,APD071818,0.42,3629.7,293.9,tributary,0.52,0.23,1.04,0.37,0.68,1.12,0.95,1.94,1.07,1.38
+2,Boquerón de Lenguerke,Oriental Colombia,6.86,-73.34,APD047769,0.26,2424.4,32.1,tributary,0.9,0.62,1.28,0.78,0.96,1.05,1.0,2.0,1.03,1.17
+3,Alto de Cruz Verde,Oriental Colombia,4.51,-74.05,APD028030,0.48,3446.9,30.6,continental,0.86,0.62,1.06,0.74,1.0,1.15,1.0,1.9,1.06,1.26
+4,Alto del Trigo,Oriental Colombia,5.0,-74.54,APD039540,1.79,1507.6,73.8,tributary,1.0,0.97,1.13,1.0,1.09,1.01,0.43,1.04,1.0,1.08
+5,Alto de los Andakíes,Oriental Colombia,1.72,-75.9,APD007183,0.33,1813.4,41.1,tributary,1.03,0.99,1.27,1.0,1.04,1.02,0.94,1.21,1.02,1.11
+6,Páramo de Letras,Central Colombia,5.04,-75.33,APD034511,0.51,3681.7,173.6,tributary,0.99,0.79,1.42,0.98,1.0,1.13,1.0,1.88,1.06,1.28
+7,Alto de La Línea,Central Colombia,4.47,-75.56,APD028234,0.59,3261.7,1325.6,tributary,1.15,1.0,1.51,1.05,1.25,1.07,1.01,2.63,1.01,1.25
+8,El Paso,Occidental Colombia,3.33,-76.69,APD020194,0.6,3847.3,65.1,tributary,1.0,0.33,1.12,0.95,1.0,1.21,0.99,1.85,1.15,1.26
+9,Paso de Papallacta,Real Ecuador,-0.33,-78.2,APD087203,0.36,4061.8,429.9,continental,0.89,0.79,1.42,0.83,1.02,1.14,1.01,1.44,1.03,1.47
+10,Tres Cruces,Occidental Ecuador,-2.78,-79.24,APD094049,0.35,4156.2,112.2,continental,1.0,0.42,1.32,0.98,1.0,1.14,1.02,1.35,1.06,1.24
+11,Abra de Porculla,Occidental Perú,-5.84,-79.5,APD113156,0.61,2144.9,904.7,continental,1.06,0.83,1.44,1.01,1.08,1.96,1.0,2.87,1.65,2.24
+12,Abra Patricia,Central Perú,-5.7,-77.81,APD112795,0.21,2328.2,59.8,tributary,1.0,0.83,1.09,1.0,1.01,1.1,0.99,1.88,1.08,1.25
+13,Calla Calla,Central Perú,-6.73,-77.89,APD119175,0.6,3585.5,181.9,tributary,1.01,1.0,1.39,1.01,1.02,1.09,1.01,1.52,1.02,1.28
+14,Abra El Gavilán,Occidental Perú,-7.25,-78.47,APD131905,0.36,3225.5,773.3,continental,1.04,0.66,1.16,1.0,1.06,1.26,0.93,1.42,1.09,1.37
+15,Abra Punta Callán,Negra,-9.55,-77.62,APD150664,0.39,4217.0,722.8,terminal,1.03,0.9,1.14,1.02,1.08,1.23,0.98,1.42,1.14,1.29
+16,Punta Olímpica,Blanca,-9.13,-77.51,APD148306,0.15,4902.6,1019.4,continental,1.0,0.85,1.11,0.99,1.04,0.84,0.5,1.23,0.7,0.94
+17,Ticlio,Occidental Perú,-11.6,-76.19,APD168701,0.28,4811.4,597.6,continental,0.97,0.73,1.12,0.76,1.0,1.02,0.88,1.19,1.0,1.1
+18,Abra Málaga,Oriental Perú,-13.14,-72.3,APD197782,0.27,4321.8,942.1,tributary,0.74,0.38,1.08,0.61,0.9,1.16,1.03,1.25,1.05,1.22
+19,Abra Acjanaco,Oriental Perú,-13.2,-71.62,APD202580,0.32,3473.6,106.1,tributary,0.71,0.59,1.13,0.57,0.86,1.38,1.01,1.63,1.24,1.51
+20,Abra La Raya,Oriental Perú,-14.48,-70.99,APD216515,0.4,4325.1,849.5,continental,1.02,0.78,1.07,0.55,1.02,1.01,0.88,1.03,1.0,1.05
+21,Patapampa,Occidental Perú,-15.75,-71.58,APD228705,3.24,4806.4,40.5,terminal,1.0,0.64,1.17,0.75,1.01,1.1,0.99,1.28,1.01,1.16
+22,"La Cumbre, La Paz",Real Bolivia,-16.34,-68.04,APD243528,0.22,4640.9,555.3,tributary,1.01,0.49,1.24,1.01,1.01,1.23,1.03,1.31,1.1,1.35
+23,"La Cumbre, Oruro-Cochabamba",Oriental Bolivia,-17.66,-66.82,APD254566,0.44,4468.1,34.0,tributary,1.01,0.73,1.21,1.01,1.04,1.02,1.0,1.05,1.0,1.1
+24,Chungará-Tambo Quemado,Occidental Altiplano,-18.28,-69.07,APD266124,0.68,4670.2,858.9,tributary,1.0,0.76,1.32,0.98,1.03,1.0,0.47,1.15,1.0,1.01
+25,Abra de Tres Cruces,Oriental Argentina,-22.9,-65.6,APD322389,0.51,3791.0,48.4,tributary,1.03,0.91,1.13,1.02,1.04,1.15,1.0,1.26,1.02,1.38

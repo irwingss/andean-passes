@@ -159,11 +159,11 @@ def n_passes(r0, r1, c0, c1):
     return INT[r1, c1] - INT[r0, c1] - INT[r1, c0] + INT[r0, c0]
 
 
-S = tt.lado_km.to_numpy()
-r0, c0 = tt.row.to_numpy() - S // 2, tt.col.to_numpy() - S // 2
+TH, TW = tt.alto_km.to_numpy(), tt.ancho_km.to_numpy()                 # tile size north-south and west-east
+r0, c0 = tt.row.to_numpy() - TH // 2, tt.col.to_numpy() - TW // 2
 low = (tt.lectura == "baja").to_numpy()                                  # transverse: walls west and east
-tt["crosses_divide"] = np.where(low, n_passes(r0, r0 + S, c0 + S // 4, c0 + S - S // 4),
-                                n_passes(r0 + S // 4, r0 + S - S // 4, c0, c0 + S)) > 0
+tt["crosses_divide"] = np.where(low, n_passes(r0, r0 + TH, c0 + TW // 4, c0 + TW - TW // 4),
+                                n_passes(r0 + TH // 4, r0 + TH - TH // 4, c0, c0 + TW)) > 0
 GRP = {"temperature": VARS[:11], "precipitation": VARS[11:]}
 dv = tt[tt.crosses_divide & (tt.lat <= LN) & (tt.lat >= LS)]
 w = dv.pivot_table(index=["cfg", "reading", "band", "row", "col"], columns="var", values="conductancia_rel")
@@ -196,15 +196,15 @@ for lect in LECT:
     z = []
     for q, side in CFG:
         t = tt[(tt.lectura == lect) & (tt.lado_km == side) & (tt.q.round(3) == q) & tt["var"].isin(GRP["temperature"])]
-        t = t.pivot_table(index=["row", "col"], columns="var", values="conductancia_rel").dropna().median(axis=1)
-        h = np.sin(np.pi * (np.arange(side) + 0.5) / side) ** 2              # Hann window, as in 50
-        win = np.outer(h, h)
+        t = t.pivot_table(index=["row", "col", "alto_km", "ancho_km"], columns="var",
+                          values="conductancia_rel").dropna().median(axis=1)
         su, cnt = np.zeros((RH, RW)), np.zeros((RH, RW))
-        for (rw, cl), g in t.items():
-            a, b = rw - side // 2, cl - side // 2
+        for (rw, cl, th, tw), g in t.items():
+            a, b = rw - th // 2, cl - tw // 2                                # Hann window over the tile, as in 50
+            win = np.outer(*(np.sin(np.pi * (np.arange(n) + 0.5) / n) ** 2 for n in (th, tw)))
             ww = win[max(-a, 0):RH - a, max(-b, 0):RW - b]
-            su[max(a, 0):a + side, max(b, 0):b + side] += g * ww
-            cnt[max(a, 0):a + side, max(b, 0):b + side] += ww
+            su[max(a, 0):a + th, max(b, 0):b + tw] += g * ww
+            cnt[max(a, 0):a + th, max(b, 0):b + tw] += ww
         z.append(np.where(cnt > 0, su / np.where(cnt > 0, cnt, 1), np.nan))
     with rasterio.open(f"{D}/zona_temperatura_{lect}.tif", "w", **PROF) as o:
         o.write(np.stack(z).astype("float32"))

@@ -1,21 +1,21 @@
 reading,gmba,apd_id,lat,lon,z_m,depth_m,rank,med,vmin,vmax,cfg_lo,cfg_hi
-transverse,Altiplano,APD245035,-16.375,-68.295,4217.0,47.0,tributary,1.0,0.14,1.09,1.0,1.01
-transverse,Cordillera Central (Central Andes),APD187356,-12.552,-73.926,1906.0,30.0,tributary,1.69,0.74,1.96,1.07,2.06
-transverse,Cordillera Central (Northern Andes),APD028758,4.451,-75.508,2805.0,50.0,tributary,1.44,1.0,1.76,1.25,1.62
-transverse,Cordillera Occidental (Central Andes),APD207989,-13.435,-76.048,433.0,69.0,tributary,1.9,0.54,2.59,1.42,2.11
-transverse,Cordillera Occidental (Northern Andes),APD006736,1.353,-77.723,2042.0,30.0,tributary,1.49,1.02,1.86,1.33,1.49
-transverse,Cordillera Oriental (Central Andes),APD187734,-12.744,-73.578,1717.0,81.0,tributary,1.7,0.53,2.83,1.2,2.17
-transverse,Cordillera Oriental (Northern Andes),APD049383,6.52,-72.846,1924.0,32.0,tributary,1.91,0.5,2.83,1.57,2.0
-transverse,Cordillera de Mérida,APD075965,8.982,-71.214,427.0,77.0,tributary,1.51,1.0,1.97,1.33,1.75
-transverse,Dry Andes,APD333603,-23.396,-64.779,1192.0,50.0,tributary,1.09,1.0,1.24,1.02,1.14
-transverse,Sierras Subandinas,APD252670,-17.0,-65.52,538.0,54.0,tributary,1.26,1.0,1.36,1.17,1.34
-longitudinal,Altiplano,APD246724,-16.048,-68.674,3870.0,33.0,tributary,1.17,0.73,1.47,1.04,1.31
-longitudinal,Cordillera Central (Central Andes),APD173279,-11.082,-75.491,2575.0,31.0,tributary,1.6,0.99,1.79,1.39,1.92
-longitudinal,Cordillera Central (Northern Andes),APD005920,1.252,-76.822,2594.0,54.0,tributary,1.65,1.02,2.26,1.42,2.23
-longitudinal,Cordillera Occidental (Central Andes),APD112572,-5.818,-79.514,2467.0,140.0,continental,2.25,1.0,3.1,1.7,2.69
-longitudinal,Cordillera Occidental (Northern Andes),APD095723,-2.088,-78.948,2516.0,99.0,tributary,1.92,1.02,2.27,1.57,2.6
-longitudinal,Cordillera Oriental (Central Andes),APD173100,-11.883,-73.488,2787.0,43.0,tributary,2.46,0.77,4.2,1.76,3.73
-longitudinal,Cordillera Oriental (Northern Andes),APD091850,-1.047,-78.215,3057.0,77.0,tributary,1.75,0.99,1.87,1.47,2.41
-longitudinal,Cordillera de Mérida,APD072415,8.321,-71.811,2171.0,46.0,terminal,1.26,1.0,2.37,1.0,1.38
-longitudinal,Dry Andes,APD323515,-22.752,-65.078,2968.0,34.0,tributary,1.47,0.97,1.66,1.3,1.6
-longitudinal,Sierras Subandinas,APD271680,-18.543,-64.132,2655.0,43.0,tributary,1.4,0.99,1.72,1.19,1.58
+transverse,Altiplano,APD254445,-17.953,-67.847,4505.0,46.0,tributary,1.09,0.88,1.29,1.01,1.1
+transverse,Cordillera Central (Central Andes),APD174809,-11.989,-74.606,1364.0,83.0,tributary,1.67,0.99,2.72,1.28,2.46
+transverse,Cordillera Central (Northern Andes),APD028758,4.451,-75.508,2805.0,50.0,tributary,1.42,1.0,1.71,1.24,1.56
+transverse,Cordillera Occidental (Central Andes),APD208504,-13.322,-76.109,316.0,31.0,tributary,2.2,0.44,3.35,1.42,2.52
+transverse,Cordillera Occidental (Northern Andes),APD006736,1.353,-77.723,2042.0,30.0,tributary,1.47,1.02,1.86,1.3,1.47
+transverse,Cordillera Oriental (Central Andes),APD287653,-19.364,-64.917,2160.0,126.0,tributary,1.55,0.62,1.98,1.39,1.72
+transverse,Cordillera Oriental (Northern Andes),APD050448,6.499,-72.904,1648.0,61.0,tributary,1.99,0.47,2.84,1.52,2.2
+transverse,Cordillera de Mérida,APD082561,9.108,-71.041,387.0,76.0,tributary,1.49,1.0,1.89,1.3,1.71
+transverse,Dry Andes,APD323981,-22.444,-69.029,2291.0,36.0,tributary,1.2,0.99,1.69,1.13,1.23
+transverse,Sierras Subandinas,APD252670,-17.0,-65.52,538.0,54.0,tributary,1.22,0.99,1.48,1.12,1.33
+longitudinal,Altiplano,APD246724,-16.048,-68.674,3870.0,33.0,tributary,1.15,0.76,1.44,1.03,1.3
+longitudinal,Cordillera Central (Central Andes),APD173279,-11.082,-75.491,2575.0,31.0,tributary,1.65,0.99,1.86,1.42,2.0
+longitudinal,Cordillera Central (Northern Andes),APD006056,1.328,-76.734,2484.0,34.0,tributary,1.54,1.01,1.67,1.35,1.89
+longitudinal,Cordillera Occidental (Central Andes),APD112572,-5.818,-79.514,2467.0,140.0,continental,2.16,1.0,3.01,1.71,2.62
+longitudinal,Cordillera Occidental (Northern Andes),APD095723,-2.088,-78.948,2516.0,99.0,tributary,2.07,1.01,2.46,1.69,2.53
+longitudinal,Cordillera Oriental (Central Andes),APD173125,-11.715,-73.588,2766.0,695.0,tributary,2.12,0.92,2.9,1.62,2.63
+longitudinal,Cordillera Oriental (Northern Andes),APD080056,9.01,-73.425,1861.0,80.0,terminal,2.51,1.0,3.32,1.84,3.46
+longitudinal,Cordillera de Mérida,APD072892,8.532,-71.482,1698.0,43.0,tributary,1.33,1.0,1.68,1.11,1.33
+longitudinal,Dry Andes,APD323515,-22.752,-65.078,2968.0,34.0,tributary,1.53,0.99,1.72,1.35,1.65
+longitudinal,Sierras Subandinas,APD247645,-16.53,-66.682,3212.0,175.0,tributary,1.52,1.0,1.81,1.21,1.75

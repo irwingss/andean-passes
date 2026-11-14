@@ -1,9 +1,9 @@
 reading,configuration,cells_both,cells_lost,rho_with_main,top_decile_kept,same_side_of_1
-transverse,q 0.05,253314,0,0.983,0.904,0.976
-transverse,q 0.2,253314,0,0.981,0.912,0.975
-transverse,100 km,223223,30091,0.8,0.624,0.884
-transverse,400 km,253310,4,0.815,0.702,0.871
-longitudinal,q 0.05,268912,0,0.993,0.915,0.984
-longitudinal,q 0.2,268912,0,0.994,0.909,0.985
-longitudinal,100 km,237345,31567,0.934,0.67,0.949
-longitudinal,400 km,268912,0,0.95,0.738,0.948
+transverse,q 0.05,284907,0,0.979,0.891,0.976
+transverse,q 0.2,284907,0,0.976,0.892,0.974
+transverse,100 km,282563,2344,0.786,0.693,0.881
+transverse,400 km,284907,0,0.804,0.612,0.881
+longitudinal,q 0.05,280176,0,0.993,0.906,0.985
+longitudinal,q 0.2,280176,0,0.994,0.919,0.985
+longitudinal,100 km,259089,21087,0.943,0.702,0.952
+longitudinal,400 km,280176,0,0.954,0.737,0.961

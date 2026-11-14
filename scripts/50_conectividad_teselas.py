@@ -4,12 +4,15 @@ source block.
   Transverse reading (lowland species): current from the west edge to the east edge of each tile, injected and
   grounded only at lowland cells (warmer than T2000(lat)).
   Longitudinal reading (montane species): current from the north edge to the south edge, only at montane cells.
-Tiles are squares of side S km moved by S/4; currents are summed over tiles and divided by the same sum with uniform
-resistance, so the normalized current is above 1 where climate concentrates movement and below 1 where it hinders it.
-Each tile enters the sums with a Hann window, highest at its centre and near zero at its edges, so a cell takes most of
-its value from the tiles centred near it and no step remains where a tile begins or ends; the edges, where current is
-injected and grounded, weigh least. With a step of S/4 the windows of the tiles over an interior cell add to 16, the
-same total as unweighted tiles, so the current keeps its scale.
+Longitudinal tiles are squares of side S. Transverse tiles are S km from north to south and, from west to east, S km
+or the smallest of 2S, 3S, ... up to LMAX = 800 km that puts lowland cells on both walls: a tile grows only where the
+cordillera is wider than S, as on the Altiplano, so it spans one cordillera from the lowland on one side to the lowland
+on the other and never several. Longitudinal tiles do not grow, since a longer one would only add lowland gaps that a
+montane species does not cross. Tile centres are S/4 apart; currents are summed over tiles and divided by the same sum with uniform resistance, so the
+normalized current is above 1 where climate concentrates movement and below 1 where it hinders it.
+Each tile enters the sums with a Hann window over its own size, highest at its centre and near zero at its edges, so a
+cell takes most of its value from the tiles centred near it and no step remains where a tile begins or ends; the edges,
+where current is injected and grounded, weigh least.
 python -P scripts/50_conectividad_teselas.py <run> <side_km> <vars|all> <shapes>     e.g. principal 200 "1" env
 The shape "env" reads res_env{baja,alta}_bioNN.tif (first margin q of 47, 0.1); "env_q0.05" reads
 res_env{baja,alta}_bioNN_q0.05.tif.
@@ -34,8 +37,14 @@ S = int(sys.argv[2])
 INS = f"data/interim/conectividad/{RUN}/insumos"
 OUT = f"data/interim/conectividad/{RUN}/teselas"
 NB = [(0, 1, 1.0), (1, -1, 2 ** 0.5), (1, 0, 1.0), (1, 1, 2 ** 0.5)]      # each neighbour pair once; distance in km
-_h = 2 * np.sin(np.pi * (np.arange(S) + 0.5) / S) ** 2                     # 1-D Hann; four shifts of S/4 add to 4
-WIN = np.outer(_h, _h)                                                     # tile weight; sixteen tiles add to 16
+LMAX = 800                                                                 # longest tile along the current, km
+SIZES = [S * k for k in range(1, max(LMAX // S, 1) + 1)]                   # tried in this order
+
+
+def hann(h, w):
+    """Tile weight: 2-D Hann window over the tile; with tiles of side S every S/4 the windows of a cell add to 16."""
+    a, b = (2 * np.sin(np.pi * (np.arange(n) + 0.5) / n) ** 2 for n in (h, w))
+    return np.outer(a, b)
 
 
 def read(n):
@@ -88,46 +97,48 @@ def solve(r, wall0, wall1):
 
 
 def walls(guild, axis):
-    """Per row (axis 1, west-east) or column (axis 0, north-south): the first and last valid cell, if it is of the
-    guild and lies in the outer quarter of the tile. A coast or a domain edge inside the tile acts as its edge."""
-    valid = ~np.isnan(guild)
-    g = valid & (guild == 1)
-    v = valid if axis == 1 else valid.T
+    """Per row (axis 1, west-east) or column (axis 0, north-south): the outermost guild cell at each end, if it lies in
+    the outer quarter of the tile. A coast or a domain edge inside the tile acts as its edge."""
+    g = ~np.isnan(guild) & (guild == 1)
     gg = g if axis == 1 else g.T
-    n = v.shape[1]
-    w0, w1 = np.zeros_like(v), np.zeros_like(v)
-    rows = np.flatnonzero(v.any(1))
-    first = v.argmax(1)
-    last = n - 1 - v[:, ::-1].argmax(1)
+    n = gg.shape[1]
+    w0, w1 = np.zeros_like(gg), np.zeros_like(gg)
+    rows = np.flatnonzero(gg.any(1))
+    first = gg.argmax(1)
+    last = n - 1 - gg[:, ::-1].argmax(1)
     for i in rows:
-        if first[i] < n // 4 and gg[i, first[i]]:
+        if first[i] < n // 4:
             w0[i, first[i]] = True
-        if last[i] >= n - n // 4 and gg[i, last[i]]:
+        if last[i] >= n - n // 4:
             w1[i, last[i]] = True
     return (w0, w1) if axis == 1 else (w0.T, w1.T)
 
 
 def tile(args):
-    """Each worker reads only the window of its tile, so memory does not grow with the domain."""
-    y, x = args
-    win = Window(x, y, S, S)
-    G_ = {l: readw(f"fuente_{l}", win) for l in ("baja", "alta")}
-    R_ = {l: [readw(n, win) for n in F_[l]] for l in ("baja", "alta")}
-    sl = np.s_[:, :]
-    res = {}
-    for lect, axis in (("baja", 1), ("alta", 0)):
-        w0, w1 = walls(G_[lect][sl], axis)
-        if w0.sum() < 3 or w1.sum() < 3:
-            continue
-        uni = solve(np.where(np.isnan(R_["baja"][0][sl]), np.nan, 1.0), w0, w1)
-        if uni is None:
-            continue
-        res[(lect, "uni")] = uni
-        for k, r in enumerate(R_[lect]):
-            c = solve(r[sl], w0, w1)
-            if c is not None:
-                res[(lect, k)] = (c[0], c[1] / uni[1])      # conductance of the tile relative to uniform
-    return y, x, res
+    """One tile of one reading around a centre: the shortest size along the current that has walls on both sides, then
+    one solve per resistance. Each worker reads only the window of its tile, so memory does not grow with the domain."""
+    lect, cy, cx = args
+    axis = 1 if lect == "baja" else 0
+    for L in (SIZES if axis == 1 else SIZES[:1]):
+        h, w = (S, L) if axis == 1 else (L, S)
+        y0, x0 = max(cy - h // 2, 0), max(cx - w // 2, 0)
+        y1, x1 = min(cy - h // 2 + h, H_), min(cx - w // 2 + w, W_)
+        win = Window(x0, y0, x1 - x0, y1 - y0)
+        w0, w1 = walls(readw(f"fuente_{lect}", win), axis)
+        if w0.sum() >= 3 and w1.sum() >= 3:
+            break
+    else:
+        return lect, None, {}
+    mask = readw(F_["baja"][0], win)
+    uni = solve(np.where(np.isnan(mask), np.nan, 1.0), w0, w1)
+    if uni is None:
+        return lect, None, {}
+    res = {"uni": uni}
+    for k, n in enumerate(F_[lect]):
+        c = solve(readw(n, win), w0, w1)
+        if c is not None:
+            res[k] = (c[0], c[1] / uni[1])                  # conductance of the tile relative to uniform
+    return lect, (y0, x0, y1 - y0, x1 - x0), res
 
 
 def readw(n, win):
@@ -135,9 +146,10 @@ def readw(n, win):
         return s.read(1, window=win, masked=True).filled(np.nan)
 
 
-def init(files):
-    global F_
+def init(files, hw):
+    global F_, H_, W_
     F_ = files
+    H_, W_ = hw
 
 
 if __name__ == "__main__":
@@ -155,23 +167,28 @@ if __name__ == "__main__":
     step = S // 4
     ys = sorted(set(list(range(0, max(H - S, 0) + 1, step)) + [max(H - S, 0)]))
     xs = sorted(set(list(range(0, max(W - S, 0) + 1, step)) + [max(W - S, 0)]))
-    jobs = [(y, x) for y in ys for x in xs]
-    jobs = sorted(set(j for j in jobs if np.isfinite(r0[j[0]:j[0] + S, j[1]:j[1] + S]).sum() > S * S // 10))
-    print(f"{len(jobs)} tiles of {S} km, {len(names)} resistances, both readings")
+    cen = [(y + S // 2, x + S // 2) for y in ys for x in xs
+           if np.isfinite(r0[y:y + S, x:x + S]).sum() > S * S // 10]
+    jobs = [(l, cy, cx) for l in ("baja", "alta") for cy, cx in cen]
+    print(f"{len(cen)} tile centres of {S} km (up to {SIZES[-1]} km along the current), {len(names)} resistances, "
+          "both readings")
     t0 = time.time()
     tiles = []
     acc = {(l, k): np.zeros((H, W)) for l in ("baja", "alta") for k in list(range(len(names))) + ["uni"]}
-    with Pool(int(os.environ.get("NPROC", os.cpu_count())), initializer=init, initargs=(files,)) as p:
-        for y, x, res in p.imap_unordered(tile, jobs, chunksize=2):
+    with Pool(int(os.environ.get("NPROC", os.cpu_count())), initializer=init, initargs=(files, (H, W))) as p:
+        for lect, box, res in p.imap_unordered(tile, jobs, chunksize=2):
+            if box is None:
+                continue
+            y, x, h, w = box
+            wt = hann(h, w)
             for key, (c, g) in res.items():
-                a = acc[key][y:y + S, x:x + S]
-                a += np.nan_to_num(c) * WIN[:a.shape[0], :a.shape[1]]
-                if key[1] != "uni":
-                    tiles.append((y + S // 2, x + S // 2, key[0], names[key[1]], g))
+                acc[(lect, key)][y:y + h, x:x + w] += np.nan_to_num(c) * wt
+                if key != "uni":
+                    tiles.append((y + h // 2, x + w // 2, h, w, lect, names[key], g))
     print(f"solved in {time.time() - t0:.0f} s")
     import pandas as pd
     from pyproj import Transformer
-    tt = pd.DataFrame(tiles, columns=["row", "col", "lectura", "resistencia", "conductancia_rel"])
+    tt = pd.DataFrame(tiles, columns=["row", "col", "alto_km", "ancho_km", "lectura", "resistencia", "conductancia_rel"])
     xx, yy = rasterio.transform.xy(prof["transform"], tt.row, tt.col)
     tt["lon"], tt["lat"] = Transformer.from_crs(prof["crs"], "EPSG:4326", always_xy=True).transform(xx, yy)
     for nm, g in tt.groupby("resistencia"):        # one file per variable and q, so calls do not overwrite
