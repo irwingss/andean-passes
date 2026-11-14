@@ -198,14 +198,14 @@
         <button class="boton" id="gBtn" type="button">Show records</button>
         <button class="boton" id="gQuitar" type="button" hidden>Remove</button>
       </div>
-      <div id="gEstado" class="estado">Records with coordinates and no geospatial issue, read live from the GBIF API. The density layer shows every record. Points you can click: all records up to 3,000; above that, up to 1,200 records of the current view.</div>
+      <div id="gEstado" class="estado">Records with coordinates and no geospatial issue, read live from the GBIF API. Every record is read once and drawn as a point you can click, up to 300,000 records; a genus with tens of thousands of records takes a minute or two.</div>
+      <div id="gBarra" class="barra" role="progressbar" aria-label="Records read" aria-valuemin="0" aria-valuemax="100" hidden><span></span></div>
       <div id="gClases"></div>
       <div class="subir" id="gEooFila" style="margin-top:10px" hidden>
         <button class="boton" id="gEooBtn" type="button">Make EOO polygons</button>
         <button class="boton" id="gEooBajar" type="button" hidden>Download GeoJSON</button>
       </div>
       <div id="gEooEstado" class="estado" hidden></div>
-      <div id="gEooBarra" class="barra" role="progressbar" aria-label="Records read for the EOO" aria-valuemin="0" aria-valuemax="100" hidden><span></span></div>
     </section>
     <div class="nota">
       Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it. Each layer is the median over the temperature (BIO1 to BIO11) or the precipitation variables (BIO12 to BIO19) in each cell.
@@ -358,38 +358,87 @@ $('usrArchivo').onchange = e => { usrLeer(e.target.files[0]); e.target.value = '
 $('usrQuitar').onclick = () => { usrQuitar(); usrEstado('Layer removed.'); };
 $('usrCampo').onchange = e => usrColorear(e.target.value);
 
-// occurrence records of one taxon, read live from the GBIF API (nothing is stored)
-const GBIF = 'https://api.gbif.org', G_MAX = 3000, G_VISTA = 1200;
+// occurrence records of one taxon, read live from the GBIF API (nothing is stored): every record is read once, kept in memory
+// as longitude, latitude, GBIF key and species, and drawn on one canvas; the full record of a point is read when it is clicked
+const GBIF = 'https://api.gbif.org', G_TOPE = 300000;
 const G_PAL = ['#FFB000', ...USR_PAL.filter(c => c !== '#E69F00')];
-// point style of one species class: its fill colour, a darker outline of the same hue, and the radius chosen by the viewer
+// darker outline of the same hue as a fill colour
 const gOscuro = c => '#' + c.slice(1).match(/../g).map(x => Math.round(parseInt(x, 16) * .3).toString(16).padStart(2, '0')).join('');
-const gEstilo = c => ({ fillColor: c.color, color: gOscuro(c.color), radius: +$('gtam').value });
 mapa.createPane('gbifDens').style.zIndex = 430;
 mapa.createPane('gbifEoo').style.zIndex = 440;
 mapa.createPane('gbifPts').style.zIndex = 446;
-const gRender = L.canvas({ pane: 'gbifPts' });
-// gSp: species of the search (GBIF speciesKey, '0' for records not identified to species), with colour, visibility and record count
-// gTodos: every record when all were loaded at once (n <= G_MAX), reused for the EOO; gF: query of the search; gEoo: EOO polygons
-let gMarc = [], gEooCapas = [], gDens = null, gPts = null, gTaxon = null, gPedido = 0, gMover = null, gSp = new Map(), gTodos = null, gF = '', gNombre = '', gEoo = null, gEooGj = null;
-const gEstado = (html, err) => { $('gEstado').innerHTML = html; $('gEstado').className = 'estado' + (err ? ' error' : ''); };
-// status of the EOO; with a fraction (0 to 1), a green bar of the records read is shown below it
-const gEooEstado = (html, err, frac) => {
-  const e = $('gEooEstado'), b = $('gEooBarra'); e.hidden = !html; e.innerHTML = html || ''; e.className = 'estado' + (err ? ' error' : '');
-  b.hidden = frac == null;
+// gSp: species of the search (GBIF speciesKey, '0' for records not identified to species), with colour, visibility, record count
+// and the indices of its records in gD; gD: the records read (longitude, latitude, Web Mercator x and y in 0 to 1, GBIF key)
+let gEooCapas = [], gDens = null, gCapa = null, gTaxon = null, gPedido = 0, gSp = new Map(), gD = null, gListo = false, gF = '', gNombre = '', gEoo = null, gEooGj = null;
+const gNuevo = () => ({ lon: [], lat: [], x: [], y: [], key: [], vistos: new Set() });
+const gEstado = (html, err, frac) => {
+  $('gEstado').innerHTML = html; $('gEstado').className = 'estado' + (err ? ' error' : '');
+  const b = $('gBarra'); b.hidden = frac == null;
   if (frac != null) { const v = Math.round(Math.min(1, frac) * 100); b.firstChild.style.width = v + '%'; b.setAttribute('aria-valuenow', v); }
 };
+const gEooEstado = (html, err) => { const e = $('gEooEstado'); e.hidden = !html; e.innerHTML = html || ''; e.className = 'estado' + (err ? ' error' : ''); };
 const gEooQuitar = () => { if (gEoo) gEoo.remove(); gEoo = gEooGj = null; gEooCapas = []; gSp.forEach(c => delete c.eoo); $('gEooBajar').hidden = true; gEooEstado(''); };
 const gQuitar = () => {
-  if (gMover) mapa.off('moveend', gMover); if (gDens) gDens.remove(); if (gPts) gPts.remove(); gEooQuitar();
-  gDens = gPts = gMover = gTodos = null; gMarc = []; gSp = new Map(); $('gQuitar').hidden = true; $('gClases').innerHTML = ''; $('gEooFila').hidden = true;
+  if (gDens) gDens.remove(); if (gCapa) gCapa.remove(); gEooQuitar();
+  gDens = gCapa = gD = null; gListo = false; gSp = new Map(); $('gQuitar').hidden = true; $('gClases').innerHTML = ''; $('gEooFila').hidden = true; $('gBarra').hidden = true;
 };
 const gClase = r => gSp.get(String(r.speciesKey || 0)) || gSp.get('0');
+// canvas layer of all records. Each species is one path, drawn in the order of the list; where several records of one species
+// fall on the same screen pixel, one circle is drawn there (records one pixel apart get their own circles), at the size chosen
+const GPuntos = L.Layer.extend({
+  onAdd(m) {
+    this._c = L.DomUtil.create('canvas', 'leaflet-zoom-animated', m.getPane('gbifPts'));
+    this._c.style.pointerEvents = 'none';                  // clicks reach the map, which finds the point (EOO polygons below stay clickable)
+    m.on('moveend resize', this.redibujar, this); m.on('zoomanim', this._anim, this); this.redibujar();
+  },
+  onRemove(m) { this._c.remove(); m.off('moveend resize', this.redibujar, this); m.off('zoomanim', this._anim, this); },
+  _anim(e) { L.DomUtil.setTransform(this._c, this._map._latLngToNewLayerPoint(this._tl, e.zoom, e.center), this._map.getZoomScale(e.zoom, this._z)); },
+  redibujar() {
+    const m = this._map; if (!m || !gD) return;
+    const t = m.getSize(), pad = Math.round(Math.max(t.x, t.y) * .25), W = t.x + 2 * pad, H = t.y + 2 * pad, dpr = window.devicePixelRatio || 1;
+    const tl = m.containerPointToLayerPoint([-pad, -pad]), c = this._c, g = c.getContext('2d');
+    this._z = m.getZoom(); this._tl = m.layerPointToLatLng(tl);
+    L.DomUtil.setTransform(c, tl, 1);
+    c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px'; c.style.height = H + 'px';
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const S = 256 * 2 ** this._z, o = m.getPixelOrigin().add(tl), r = +$('gtam').value;
+    g.lineWidth = r >= 5 ? .9 : .6;
+    for (const cl of gSp.values()) {
+      if (!cl.on || !cl.i?.length) continue;
+      const visto = new Set(); g.beginPath();
+      for (const i of cl.i) {
+        const x = gD.x[i] * S - o.x, y = gD.y[i] * S - o.y;
+        if (x < -r || y < -r || x > W + r || y > H + r) continue;
+        const k = Math.round(x) + Math.round(y) * (W + 1);
+        if (visto.has(k)) continue; visto.add(k);
+        g.moveTo(x + r, y); g.arc(x, y, r, 0, 6.2832);
+      }
+      g.fillStyle = cl.color; g.globalAlpha = .95; g.fill();
+      g.strokeStyle = gOscuro(cl.color); g.globalAlpha = .6; g.stroke(); g.globalAlpha = 1;   // light outline, so dense clusters keep their colour
+    }
+  },
+});
 // redraw points and EOO polygons with the colour, visibility and size of each species
 const gAplicar = () => {
-  const ver = (grupo, l, on) => { if (!grupo) return; if (!on) grupo.removeLayer(l); else if (!grupo.hasLayer(l)) grupo.addLayer(l); };
-  for (const l of gMarc) { const c = l.options.clase, { radius, ...st } = gEstilo(c); l.setStyle(st); l.setRadius(radius); ver(gPts, l, c.on); }
-  for (const l of gEooCapas) { const c = l.options.clase; l.setStyle({ color: c.color, fillColor: c.color }); ver(gEoo, l, c.on); }
+  if (gCapa) gCapa.redibujar();
+  for (const l of gEooCapas) { const c = l.options.clase; l.setStyle({ color: c.color, fillColor: c.color }); if (!c.on) gEoo.removeLayer(l); else if (!gEoo.hasLayer(l)) gEoo.addLayer(l); }
 };
+// a click on a drawn point opens its full record, read from GBIF; the click then does not reach the passes underneath
+mapa.on('click', e => {
+  if (!gD || !gCapa) return;
+  const S = 256 * 2 ** mapa.getZoom(), p = mapa.project(e.latlng), tol = (+$('gtam').value + 3) ** 2;
+  let best = -1, bd = tol, n = 0;
+  for (const cl of gSp.values()) if (cl.on && cl.i) for (const i of cl.i) {
+    const dx = gD.x[i] * S - p.x, dy = gD.y[i] * S - p.y, d = dx * dx + dy * dy;
+    if (d <= tol) { n++; if (d < bd) { bd = d; best = i; } }
+  }
+  if (best < 0) return;
+  e.originalEvent._gbif = true;
+  const pop = L.popup({ offset: [0, -2] }).setLatLng([gD.lat[best], gD.lon[best]]).setContent('<div class="pop usr">Reading the record from GBIF…</div>').openOn(mapa);
+  const mas = n > 1 ? `<div class="cod" style="margin-top:6px">${fmt(n)} records under the cursor; zoom in to tell them apart.</div>` : '';
+  gJson(`${GBIF}/v1/occurrence/${gD.key[best]}`).then(r => pop.setContent(gPop(r).replace(/<\/div>$/, mas + '</div>')))
+    .catch(x => pop.setContent(`<div class="pop usr">Could not read the record: ${esc(x.message || x)}</div>`));
+});
 const gLista = () => {
   const cs = [...gSp.values()].filter(c => c.n);
   $('gClases').innerHTML = cs.map(c => `<label class="opcion clase"><input type="checkbox" data-k="${c.key}" ${c.on ? 'checked' : ''}>
@@ -404,11 +453,11 @@ const gEspecies = async f => {
   const fc = (await gJson(`${GBIF}/v1/occurrence/search?limit=0&${f}&facet=speciesKey&facetLimit=500`));
   const cuentas = fc.facets?.[0]?.counts || [];
   const nombres = await Promise.all(cuentas.map(x => gJson(`${GBIF}/v1/species/${x.name}`).then(s => s.canonicalName || s.scientificName).catch(() => `species ${x.name}`)));
-  const sp = cuentas.map((x, i) => ({ key: String(x.name), name: nombres[i], n: x.count, on: true }));
+  const sp = cuentas.map((x, i) => ({ key: String(x.name), name: nombres[i], n: x.count, on: true, i: [] }));
   sp.sort((a, b) => a.name.localeCompare(b.name));
   sp.forEach((c, i) => c.color = G_PAL[i % G_PAL.length]);
   const resto = fc.count - cuentas.reduce((a, x) => a + x.count, 0);
-  sp.push({ key: '0', name: 'Not identified to species', n: Math.max(0, resto), on: true, color: '#9a9a9a' });
+  sp.push({ key: '0', name: 'Not identified to species', n: Math.max(0, resto), on: true, color: '#9a9a9a', i: [] });
   return new Map(sp.map(c => [c.key, c]));
 };
 // EOO (IUCN): minimum convex polygon around all records of a species; hull on longitude and latitude, area on a sphere
@@ -438,66 +487,59 @@ const gArea = anillo => {
   }
   return Math.abs(s * Ra2);
 };
-// every record of one species. GBIF answers slowly past offset 10,000, so the species is split into latitude bands of at most
-// 9,900 records each (halving a band until it fits) and each band is paged from the start, 300 records per request, three at a time.
-// Records on a band edge are read twice and counted once, by their GBIF key.
-const gLeerEspecie = async (c, yo, avance) => {
-  const base = `${GBIF}/v1/occurrence/search?${gF}&speciesKey=${c.key}`, vistos = new Map();
+// every record of the search. GBIF answers slowly past offset 10,000, so the search is split into latitude bands of at most
+// 9,900 records each (halving a band until it fits) and each band is paged from the start, 300 records per request, four at a time.
+// Records on a band edge are read twice and kept once, by their GBIF key.
+const gLeerTodo = async (yo, avance) => {
+  const base = `${GBIF}/v1/occurrence/search?${gF}`;
   const banda = async (a, b) => {
     if (yo !== gPedido) return;
     const lat = `&decimalLatitude=${a},${b}`, n = (await gJson(`${base}&limit=0${lat}`)).count;
     if (!n) return;
     if (n > 9900 && b - a > 1e-4) { const m = +((a + b) / 2).toFixed(6); await banda(a, m); await banda(m, b); return; }
     const paginas = Math.ceil(n / 300);
-    for (let k = 0; k < paginas; k += 3) {
+    for (let k = 0; k < paginas; k += 4) {
       if (yo !== gPedido) return;
-      const lote = await Promise.all([k, k + 1, k + 2].filter(j => j < paginas).map(j => gJson(`${base}&limit=300&offset=${j * 300}${lat}`)));
-      lote.forEach(x => x.results.forEach(r => r.decimalLatitude != null && vistos.set(r.key, [r.decimalLongitude, r.decimalLatitude])));
-      avance(vistos.size);
+      const lote = await Promise.all([k, k + 1, k + 2, k + 3].filter(j => j < paginas).map(j => gJson(`${base}&limit=300&offset=${j * 300}${lat}`)));
+      if (yo !== gPedido) return;
+      for (const x of lote) for (const r of x.results) {
+        if (r.decimalLatitude == null || gD.vistos.has(r.key)) continue;
+        gD.vistos.add(r.key);
+        const i = gD.key.length, la = Math.max(-85.0511, Math.min(85.0511, r.decimalLatitude)), s = Math.sin(la * Math.PI / 180);
+        gD.key.push(r.key); gD.lon.push(r.decimalLongitude); gD.lat.push(r.decimalLatitude);
+        gD.x.push((r.decimalLongitude + 180) / 360); gD.y.push(.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI));
+        gClase(r).i.push(i);
+      }
+      avance(gD.key.length);
     }
   };
   await banda(-90, 90);
-  return yo === gPedido ? [...vistos.values()] : null;
 };
-const gHacerEoo = async () => {
-  const yo = gPedido, sp = [...gSp.values()].filter(c => c.key !== '0' && c.n);
+// EOO of each species from the records already read
+const gHacerEoo = () => {
+  const sp = [...gSp.values()].filter(c => c.key !== '0' && c.i?.length);
   if (!sp.length) { gEooEstado('No record of this search is identified to species.', true); return; }
-  gEooQuitar(); $('gEooBtn').disabled = true;
-  const leer = gTodos ? null : sp.reduce((a, c) => a + c.n, 0);
-  let hechos = 0;
-  if (!gTodos) gEooEstado(`Reading records for the EOO: 0 of ${fmt(leer)}…`, false, 0);
-  try {
-    const feats = [], sin = [];
-    for (const c of sp) {
-      let pts;
-      if (gTodos) pts = gTodos.filter(r => String(r.speciesKey) === c.key && r.decimalLatitude != null).map(r => [r.decimalLongitude, r.decimalLatitude]);
-      else {
-        const base = hechos;
-        pts = await gLeerEspecie(c, yo, x => gEooEstado(`Reading records for the EOO: ${fmt(base + x)} of ${fmt(leer)} (<i>${esc(c.name)}</i>)…`, false, (base + x) / leer));
-        if (!pts) return;
-        hechos += pts.length;
-      }
-      const h = gCasco(pts);
-      c.eoo = h ? gArea(h.anillo) : null;
-      if (!h) { sin.push(c.name); continue; }
-      feats.push({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [h.anillo] }, properties: {
-        species: c.name, gbif_species_key: +c.key, records: pts.length, unique_points: h.unicos, eoo_km2: Math.round(c.eoo * 10) / 10,
-        method: 'Minimum convex polygon of all records (IUCN EOO), straight edges in longitude and latitude; area on the WGS84 ellipsoid',
-        gbif_query: `${GBIF}/v1/occurrence/search?${gF}&speciesKey=${c.key}`, accessed: new Date().toISOString().slice(0, 10) } });
-    }
-    if (yo !== gPedido) return;
-    gEooGj = { type: 'FeatureCollection', features: feats };
-    gEoo = L.geoJSON(gEooGj, { pane: 'gbifEoo', style: { weight: 2, opacity: .95, fillOpacity: .12 },
-      onEachFeature: (f, l) => { l.options.clase = gSp.get(String(f.properties.gbif_species_key)); gEooCapas.push(l);
-        l.bindPopup(`<div class="pop usr"><b class="t"><i>${esc(f.properties.species)}</i></b><table><tr><td>EOO</td><td>${fmt(f.properties.eoo_km2)} km²</td></tr>
-          <tr><td>Records</td><td>${fmt(f.properties.records)} (${fmt(f.properties.unique_points)} distinct points)</td></tr></table></div>`); } }).addTo(mapa);
-    gAplicar(); gLista();
-    $('gEooBajar').hidden = !feats.length;
-    gEooEstado(`${fmt(feats.length)} EOO polygon${feats.length === 1 ? '' : 's'}: minimum convex polygon of all records of each species with the filters above.`
-      + (sin.length ? ` No polygon for ${sin.map(s => `<i>${esc(s)}</i>`).join(', ')} (fewer than three distinct points, or all in a line).` : '')
-      + ' Stray records (captive birds, wrong coordinates) enlarge the polygon; check them on the map before using the area.');
-  } catch (e) { if (yo === gPedido) gEooEstado(`Could not read GBIF: ${esc(e.message || e)}`, true); }
-  finally { $('gEooBtn').disabled = false; }
+  gEooQuitar();
+  const feats = [], sin = [];
+  for (const c of sp) {
+    const pts = c.i.map(i => [gD.lon[i], gD.lat[i]]), h = gCasco(pts);
+    c.eoo = h ? gArea(h.anillo) : null;
+    if (!h) { sin.push(c.name); continue; }
+    feats.push({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [h.anillo] }, properties: {
+      species: c.name, gbif_species_key: +c.key, records: pts.length, unique_points: h.unicos, eoo_km2: Math.round(c.eoo * 10) / 10,
+      method: 'Minimum convex polygon of all records (IUCN EOO), straight edges in longitude and latitude; area on the WGS84 ellipsoid',
+      gbif_query: `${GBIF}/v1/occurrence/search?${gF}&speciesKey=${c.key}`, accessed: new Date().toISOString().slice(0, 10) } });
+  }
+  gEooGj = { type: 'FeatureCollection', features: feats };
+  gEoo = L.geoJSON(gEooGj, { pane: 'gbifEoo', style: { weight: 2, opacity: .95, fillOpacity: .12 },
+    onEachFeature: (f, l) => { l.options.clase = gSp.get(String(f.properties.gbif_species_key)); gEooCapas.push(l);
+      l.bindPopup(`<div class="pop usr"><b class="t"><i>${esc(f.properties.species)}</i></b><table><tr><td>EOO</td><td>${fmt(f.properties.eoo_km2)} km²</td></tr>
+        <tr><td>Records</td><td>${fmt(f.properties.records)} (${fmt(f.properties.unique_points)} distinct points)</td></tr></table></div>`); } }).addTo(mapa);
+  gAplicar(); gLista();
+  $('gEooBajar').hidden = !feats.length;
+  gEooEstado(`${fmt(feats.length)} EOO polygon${feats.length === 1 ? '' : 's'}: minimum convex polygon of all records of each species with the filters above.`
+    + (sin.length ? ` No polygon for ${sin.map(s => `<i>${esc(s)}</i>`).join(', ')} (fewer than three distinct points, or all in a line).` : '')
+    + ' Stray records (captive birds, wrong coordinates) enlarge the polygon; check them on the map before using the area.');
 };
 $('gEooBtn').onclick = gHacerEoo;
 $('gEooBajar').onclick = () => {
@@ -568,59 +610,39 @@ const gMostrar = async () => {
     if (yo !== gPedido) return;
     gQuitar();
     gSp = sp; gF = f; gNombre = t.canonicalName || t.scientificName;
-    gLista(); $('gEooFila').hidden = false;
+    gLista();
+    // the density layer of GBIF shows every record at once while the points are read
     gDens = L.tileLayer(`${GBIF}/v2/map/occurrence/adhoc/{z}/{x}/{y}@1x.png?srs=EPSG:3857&style=orange.marker&mode=GEO_CENTROID&${f}`,
       { pane: 'gbifDens', opacity: .9, maxZoom: 16, attribution: 'Records: <a href="https://www.gbif.org">GBIF.org</a>' }).addTo(mapa);
     $('gQuitar').hidden = false;
-    gPts = L.layerGroup().addTo(mapa);
     const nombre = `<i>${esc(t.scientificName)}</i>${t.fuzzy ? ' (closest name)' : ''}`;
     const enlace = `<a href="https://www.gbif.org/occurrence/search?${f}" target="_blank" rel="noopener">Open in GBIF</a> to download and cite.`;
-    // up to G_MAX records: all drawn once; more: the records of the current view, reloaded when the map moves
-    let turno = 0;
-    const cargar = async (vista, primera) => {
-      const mio = ++turno;
-      let g = '';
-      if (vista) {
-        const b = mapa.getBounds().pad(.05), r4 = x => +x.toFixed(4);
-        const w = r4(Math.max(b.getWest(), -180)), e = r4(Math.min(b.getEast(), 180)), s = r4(Math.max(b.getSouth(), -90)), nn = r4(Math.min(b.getNorth(), 90));
-        if (e - w < 1e-3 || nn - s < 1e-3) return;     // map without size (hidden)
-        g = `&geometry=${encodeURIComponent(`POLYGON((${w} ${s},${e} ${s},${e} ${nn},${w} ${nn},${w} ${s}))`)}`;
-      }
-      gEstado(`${nombre}: ${fmt(n)} records. Loading points…`);
-      const nv = vista ? (await gJson(`${GBIF}/v1/occurrence/search?limit=0&${f}${g}`)).count : n;
-      const paginas = Math.ceil(Math.min(nv, vista ? G_VISTA : G_MAX) / 300), res = [];
-      for (let k = 0; k < paginas; k += 2) {                 // two pages at a time, to stay within the rate limit of GBIF
-        if (yo !== gPedido || mio !== turno) return;
-        const lote = await Promise.all([k, k + 1].filter(j => j < paginas).map(j => gJson(`${GBIF}/v1/occurrence/search?limit=300&offset=${j * 300}&${f}${g}`)));
-        lote.forEach(x => res.push(...x.results));
-      }
-      if (yo !== gPedido || mio !== turno || !gPts) return;
-      gPts.clearLayers(); gMarc = [];
-      if (!vista) gTodos = res;
-      for (const r of res) if (r.decimalLatitude != null) gMarc.push(L.circleMarker([r.decimalLatitude, r.decimalLongitude],
-        { renderer: gRender, clase: gClase(r), weight: 1, fillOpacity: .95, bubblingMouseEvents: false }).bindPopup(() => gPop(r)));
-      gAplicar();
-      const dib = gMarc.length;
-      if (primera && !vista && dib) {
-        // frame the central 96% of the records, so a few stray records do not zoom the map out
-        const cuantil = (xs, p) => { xs = xs.slice().sort((a, b) => a - b); return xs[Math.min(xs.length - 1, Math.floor(p * xs.length))]; };
-        const lat = res.map(r => r.decimalLatitude).filter(x => x != null), lon = res.map(r => r.decimalLongitude).filter(x => x != null);
-        mapa.fitBounds([[cuantil(lat, .02), cuantil(lon, .02)], [cuantil(lat, .98), cuantil(lon, .98)]], { maxZoom: 10, padding: [30, 30] });
-      }
-      gEstado(`${nombre}: ${fmt(n)} records${!vista ? ', all drawn as points' : nv > dib ? `; ${fmt(nv)} in this view, ${fmt(dib)} drawn as points (zoom in for all of them); the density layer shows every record`
-        : `; the ${fmt(dib)} in this view drawn as points, the density layer shows every record`}. ${enlace}`);
-    };
-    if (n <= G_MAX) await cargar(false, true);
-    else {
-      let espera = null;
-      gMover = () => { clearTimeout(espera); turno++; espera = setTimeout(() => cargar(true).catch(e => yo === gPedido && gEstado(`Could not read GBIF: ${esc(e.message || e)}`, true)), 500); };
-      mapa.on('moveend', gMover); await cargar(true, true);
+    if (n > G_TOPE) { gEstado(`${nombre}: ${fmt(n)} records, more than the ${fmt(G_TOPE)} the viewer draws as points; the density layer shows all of them. Narrow the source or the years to see points. ${enlace}`); return; }
+    // frame the central 96% of a first page of records, so a few stray records do not zoom the map out
+    const muestra = (await gJson(`${GBIF}/v1/occurrence/search?limit=300&${f}`)).results.filter(r => r.decimalLatitude != null);
+    if (yo !== gPedido) return;
+    if (muestra.length) {
+      const cuantil = (xs, p) => { xs = xs.slice().sort((a, b) => a - b); return xs[Math.min(xs.length - 1, Math.floor(p * xs.length))]; };
+      const lat = muestra.map(r => r.decimalLatitude), lon = muestra.map(r => r.decimalLongitude);
+      mapa.fitBounds([[cuantil(lat, .02), cuantil(lon, .02)], [cuantil(lat, .98), cuantil(lon, .98)]], { maxZoom: 10, padding: [30, 30] });
     }
+    gD = gNuevo(); gCapa = new GPuntos().addTo(mapa);
+    let ultimo = 0;
+    gEstado(`${nombre}: ${fmt(n)} records. Reading points: 0 of ${fmt(n)}…`, false, 0);
+    await gLeerTodo(yo, x => {
+      gEstado(`${nombre}: ${fmt(n)} records. Reading points: ${fmt(x)} of ${fmt(n)}…`, false, x / n);
+      if (Date.now() - ultimo > 600) { ultimo = Date.now(); gCapa.redibujar(); }
+    });
+    if (yo !== gPedido) return;
+    gListo = true; gD.vistos = null;
+    if (gDens) { gDens.remove(); gDens = null; }
+    gCapa.redibujar(); gLista(); $('gEooFila').hidden = false;
+    gEstado(`${nombre}: ${fmt(gD.key.length)} records, all drawn as points; click one for its record. ${enlace}`);
   } catch (e) { if (yo === gPedido) gEstado(`Could not read GBIF: ${esc(e.message || e)}`, true); }
 };
 $('gBtn').onclick = gMostrar;
 $('gQuitar').onclick = () => { gPedido++; gQuitar(); gEstado('Records removed.'); };
-for (const id of ['gfuente', 'gdesde', 'ghasta']) $(id).onchange = () => { if (gDens) gMostrar(); };
+for (const id of ['gfuente', 'gdesde', 'ghasta']) $(id).onchange = () => { if (gCapa || gDens) gMostrar(); };
 $('gtam').oninput = gAplicar;
 {
   const m = $('mapa'); let n = 0;
@@ -695,7 +717,7 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
     if (volar) mapa.flyTo(ll, Math.max(mapa.getZoom(), 10), { duration: .8 });
   };
   mapa.on('click', e => {
-    if (modo === 'no') return;
+    if (modo === 'no' || e.originalEvent?._gbif) return;
     const z = mapa.getZoom(), px = mapa.project(e.latlng, z), tol = 9;
     const a = mapa.unproject(px.subtract([tol, tol]), z), b = mapa.unproject(px.add([tol, tol]), z);
     let best = -1, bd = tol * tol;
