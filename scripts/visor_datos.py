@@ -4,7 +4,9 @@ and over the precipitation variables (BIO12 to BIO19) in both directions (Fig. 2
 conductance with the temperature median in both directions (Fig. 3a, b), the divide network around the Huancabamba
 Depression (Fig. 1b), human modification and protected areas. GeoJSON: the GMBA outline, the continental divide of the
 tropics with the bands of Table S19 (Fig. 3) and the barriers of Hazzi et al. (2018). The passes with a depth of 100 m
-or more and the control passes go to docs/capas/indice.json, column by column to keep it small.
+or more and the control passes go to docs/capas/indice.json, column by column to keep it small. The barriers of the
+montane belt at the nine montane limits (Fig. 5) go to docs/capas/barreras/h<limit>.json, one point per 1 km cell of a
+barrier line with its number of variables, and the pass of each barrier of Table 3 to docs/capas/barreras/pasos.json.
 python -P scripts/visor_datos.py [tiles]   (without "tiles" the tile pyramids are kept as they are)
 """
 import json
@@ -23,6 +25,7 @@ from PIL import Image
 from rasterio import features
 from rasterio.transform import from_origin
 from rasterio.warp import Resampling, reproject
+from pyproj import Transformer
 
 REPO = Path(__file__).resolve().parents[1]
 INT, DB = REPO / 'data/interim', REPO / 'outputs/database'
@@ -192,6 +195,30 @@ def indice():
     print('indice.json', len(c), 'passes', round(f.stat().st_size / 1e6, 1), 'MB')
 
 
+def barreras():
+    """Cells of the barrier lines at each montane limit with their support (56_barreras_sintesis.py), and the pass of
+    each barrier of Table 3 (57_barreras_pasos.py)."""
+    out = DST / 'barreras'
+    out.mkdir(exist_ok=True)
+    for cfg, h in (('h500', 500), ('h1000', 1000), ('h1500', 1500), ('main', 2000), ('h2500', 2500), ('h3000', 3000),
+                   ('h3500', 3500), ('h4000', 4000), ('h4500', 4500)):
+        with rasterio.open(RUN / f'barreras/lineas_{cfg}.tif') as s:
+            a, t, crs = s.read(1), s.transform, s.crs
+        r, c = np.nonzero(a)
+        lon, lat = Transformer.from_crs(crs, 'EPSG:4326', always_xy=True).transform(t.c + (c + .5) * t.a, t.f + (r + .5) * t.e)
+        o = np.argsort(a[r, c])                                  # the best supported drawn last, on top
+        d = {'lat': [round(v, 3) for v in lat[o]], 'lon': [round(v, 3) for v in lon[o]], 'n': a[r, c][o].tolist()}
+        (out / f'h{h}.json').write_text(json.dumps(d, separators=(',', ':')), encoding='utf-8')
+        print(f'barreras/h{h}.json', len(r), 'cells')
+    t3 = pd.read_csv(REPO / 'outputs/tables/Table3_barrier_passes.csv')
+    ps = [{'no': int(x.no), 'lat': round(x.pass_lat, 4), 'lon': round(x.pass_lon, 4), 'z': int(round(x.pass_z_m)),
+           'id': x.pass_id, 'rank': x.pass_rank, 'ctl': x.control_pass if isinstance(x.control_pass, str) else '',
+           'hz': x.nearest_hazzi if x.hazzi_km <= 25 else '', 'n': int(x.n_2000), 'k': x.kind}
+          for _, x in t3.dropna(subset=['pass_lat']).iterrows()]
+    (out / 'pasos.json').write_text(json.dumps(ps, separators=(',', ':'), ensure_ascii=False), encoding='utf-8')
+    print('barreras/pasos.json', len(ps), 'passes')
+
+
 if __name__ == '__main__':
     DST.mkdir(parents=True, exist_ok=True)
     for old in ('atlas', 'miniaturas', 'dominios', 'umbrales', 'brechas.geojson', 'corredor.geojson',
@@ -201,5 +228,6 @@ if __name__ == '__main__':
     andes()
     divisoria()
     indice()
+    barreras()
     if 'tiles' in sys.argv:
         rasters()

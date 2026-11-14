@@ -81,6 +81,34 @@ TABLES = [
      "2 to 4°S and south 7.5 to 9.5°S; Táchira south 5 to 7.5°N), the band with the lowest median between 2 and 10°S "
      "(Huancabamba) or north of 5°N (Táchira), whether it lies inside the zone, and whether the zone is below every "
      "neighbour compared. North of the Táchira depression a tile of 200 km still covers it, so that side is left out."),
+    ("S21", "S21_guild_contrast_by_latitude", "Contrast between the two guilds per 1° band of latitude and group of "
+     "variables, over the 1 km cells of the tropical GMBA units: the contrast is log10 of the transverse normalized "
+     "current minus log10 of the longitudinal one (group medians, main configuration), positive where a cell favours "
+     "lowland over montane climates; median, 10th and 90th percentiles, and the share of the cells defined in all five "
+     "configurations that are robust reciprocal filters: transverse above 1 and longitudinal below 1 in all five "
+     "(lowland corridor and montane barrier), or the reverse."),
+    ("S22", "S22_guild_contrast_by_unit", "Contrast between the two guilds at the tropical passes by GMBA unit and group "
+     "(one pass per 1 km cell, the deepest): median, 10th and 90th percentiles of the contrast, and share of the "
+     "cells that are robust reciprocal filters of each kind (as in Table S21)."),
+    ("S23", "S23_guild_contrast_control_passes", "Contrast between the two guilds at the control passes of Table 2 "
+     "per group: main configuration, range over the five configurations and robust reciprocal filter, if any."),
+    ("S24", "S24_barriers", "Barriers of the montane belt from the patch graphs of each variable (Fig. 5; one row per "
+     "barrier, north to south). defined_by: design, a barrier traced in some configuration of the design (montane "
+     "limit of 2000 m with q 0.05 and 0.2 and patches of 100 and 1000 km2, and limits of 1500 and 2500 m), or the "
+     "montane limit at which a barrier traced only at other limits appears. Position, cells within 10 km of a barrier "
+     "line, median height, nearest barrier of Hazzi et al. (2018) and distance to it (km), variables with a barrier "
+     "line in the main configuration (2000 m, q 0.1, patches of 500 km2) and the median excess cost of their links, "
+     "and per configuration the number of variables of 19, of the 11 of temperature and of the 8 of precipitation."),
+    ("S25", "S25_barrier_links", "Every link of the patch graphs that is a barrier for some variable and configuration: "
+     "the two patches and their area (km2), cost, length (km) and excess cost of the least-cost path, position of "
+     "the contact on the common boundary, position and resistance of the gap floor (the cell of highest resistance "
+     "along the path), and the barrier of Table S24 it belongs to."),
+    ("S26", "S26_barrier_passes", "The pass of each barrier of Table S24. Number of variables (of 19) that support the "
+     "barrier at each montane limit, the lowest limit at which seven or more do, and the limit at which most do. At "
+     "that limit, the census pass (depth of 100 m or more) that most links of the barrier point to, nearest to their "
+     "gap floors: identifier, position, height, depth, rank and GMBA unit, the control pass within 3 km if any, the "
+     "share of links that point to it, and the median distance (km) and height (m) of their gap floors. pass_z_<h>: "
+     "height of the pass of the barrier at each montane limit h."),
 ]
 INLINE_MAX = 60       # longer tables are given only in the workbook
 HEAD = {"group": "Group", "most_limiting": "Most limiting", "least_limiting": "Least limiting",
@@ -144,6 +172,14 @@ FIGS = [
      "the temperature and the precipitation median, then longitudinal connectivity with the same two; black dots are "
      "passes with a depth of 300 m or more. Colour scale as in Fig. 2; shaded relief without colour marks cells "
      "without a value."),
+    ("S8", "FigS8_guild_contrast", "Contrast between the two guilds. a, b, log10 of the transverse normalized current "
+     "minus log10 of the longitudinal one, temperature and precipitation medians, main configuration: orange where "
+     "a cell favours lowland climates over montane ones (a corridor for the first, a barrier for the second), purple "
+     "for the reverse. c, d, robust reciprocal filters: transverse above 1 and longitudinal below 1 in all five "
+     "configurations (orange) or the reverse (purple); grey, not robust; shaded relief without colour, undefined in "
+     "some configuration. e to g, the temperature contrast in the three zones of Fig. S7, with the control passes "
+     "numbered as in Table 2. h, share of the cells of the tropical GMBA units in each kind of robust filter per 1° "
+     "band (Table S21). Tables S21 to S23."),
 ]
 DICT = [
     ("apd_id", "identifier of the pass in the Andean Passes Database"),
