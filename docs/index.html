@@ -162,9 +162,9 @@
       <h2>Context</h2>
       <label class="opcion"><input type="checkbox" id="ghm"><span>Human modification<small>Global Human Modification (Kennedy et al. 2019)</small></span></label>
       <label class="opcion"><input type="checkbox" id="pa"><span>Protected areas<small>WDPA, November 2026, shown as pixels only</small></span></label>
-      <label class="opcion"><input type="checkbox" id="ctl" checked><span>Control passes<small>36 named passes used to check the census</small></span></label>
+      <label class="opcion"><input type="checkbox" id="ctl"><span>Control passes<small>36 named passes used to check the census</small></span></label>
       <label class="opcion"><input type="checkbox" id="div" checked><span>Continental divide and bands of Table S19<small>Continental passes of the tropics; in black, the numbered bands of Fig. 3 (1 to 7 open across the cordillera, 8 to 10 barriers along it)</small></span></label>
-      <label class="opcion"><input type="checkbox" id="hz" checked><span>Barriers of Hazzi et al. (2018)<small>Phylogenetic breaks of Andean birds, for orientation (Fig. 3)</small></span></label>
+      <label class="opcion"><input type="checkbox" id="hz"><span>Barriers of Hazzi et al. (2018)<small>Phylogenetic breaks of Andean birds, for orientation (Fig. 3)</small></span></label>
     </section>
     <section>
       <h2>Your layer</h2>
@@ -731,7 +731,8 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   // control passes
   const ctl = L.layerGroup(D.control.map(([n, la, lo]) => L.marker([la, lo], { pane: 'puntos', icon: L.divIcon({ className: '', iconSize: [14, 14],
     html: '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1.5 13 12.5H1Z" fill="#fff" stroke="#111" stroke-width="1.4"/></svg>' }) })
-    .bindTooltip(n, { direction: 'top', offset: [0, -6] }))).addTo(mapa);
+    .bindTooltip(n, { direction: 'top', offset: [0, -6] })));
+  if ($('ctl').checked) ctl.addTo(mapa);
   $('ctl').onchange = e => e.target.checked ? ctl.addTo(mapa) : ctl.remove();
 
   // search: control passes by name, passes by APD ID
