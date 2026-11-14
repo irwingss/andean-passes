@@ -91,6 +91,8 @@
   #gClases:empty { display: none; }
   .opcion.clase i { font-style: italic; }
   .anio { flex: 1; min-width: 0; padding: 7px 8px; border: 1px solid #d3d8d2; border-radius: 8px; background: var(--carta); }
+  .barra { margin-top: 6px; height: 8px; border-radius: 4px; background: var(--acento-claro); overflow: hidden; }
+  .barra span { display: block; height: 100%; width: 0; background: var(--acento); border-radius: 4px; transition: width .3s; }
   .estado { margin-top: 8px; font-size: 12px; color: var(--gris); }
   .estado.error { color: #a3221b; }
   .estado a { color: var(--acento); }
@@ -203,6 +205,7 @@
         <button class="boton" id="gEooBajar" type="button" hidden>Download GeoJSON</button>
       </div>
       <div id="gEooEstado" class="estado" hidden></div>
+      <div id="gEooBarra" class="barra" role="progressbar" aria-label="Records read for the EOO" aria-valuemin="0" aria-valuemax="100" hidden><span></span></div>
     </section>
     <div class="nota">
       Normalized current: above 1, climate concentrates the current in that cell relative to a uniform landscape; below 1, it diverts it. Each layer is the median over the temperature (BIO1 to BIO11) or the precipitation variables (BIO12 to BIO19) in each cell.
@@ -369,7 +372,12 @@ const gRender = L.canvas({ pane: 'gbifPts' });
 // gTodos: every record when all were loaded at once (n <= G_MAX), reused for the EOO; gF: query of the search; gEoo: EOO polygons
 let gMarc = [], gEooCapas = [], gDens = null, gPts = null, gTaxon = null, gPedido = 0, gMover = null, gSp = new Map(), gTodos = null, gF = '', gNombre = '', gEoo = null, gEooGj = null;
 const gEstado = (html, err) => { $('gEstado').innerHTML = html; $('gEstado').className = 'estado' + (err ? ' error' : ''); };
-const gEooEstado = (html, err) => { const e = $('gEooEstado'); e.hidden = !html; e.innerHTML = html || ''; e.className = 'estado' + (err ? ' error' : ''); };
+// status of the EOO; with a fraction (0 to 1), a green bar of the records read is shown below it
+const gEooEstado = (html, err, frac) => {
+  const e = $('gEooEstado'), b = $('gEooBarra'); e.hidden = !html; e.innerHTML = html || ''; e.className = 'estado' + (err ? ' error' : '');
+  b.hidden = frac == null;
+  if (frac != null) { const v = Math.round(Math.min(1, frac) * 100); b.firstChild.style.width = v + '%'; b.setAttribute('aria-valuenow', v); }
+};
 const gEooQuitar = () => { if (gEoo) gEoo.remove(); gEoo = gEooGj = null; gEooCapas = []; gSp.forEach(c => delete c.eoo); $('gEooBajar').hidden = true; gEooEstado(''); };
 const gQuitar = () => {
   if (gMover) mapa.off('moveend', gMover); if (gDens) gDens.remove(); if (gPts) gPts.remove(); gEooQuitar();
@@ -457,6 +465,7 @@ const gHacerEoo = async () => {
   gEooQuitar(); $('gEooBtn').disabled = true;
   const leer = gTodos ? null : sp.reduce((a, c) => a + c.n, 0);
   let hechos = 0;
+  if (!gTodos) gEooEstado(`Reading records for the EOO: 0 of ${fmt(leer)}…`, false, 0);
   try {
     const feats = [], sin = [];
     for (const c of sp) {
@@ -464,7 +473,7 @@ const gHacerEoo = async () => {
       if (gTodos) pts = gTodos.filter(r => String(r.speciesKey) === c.key && r.decimalLatitude != null).map(r => [r.decimalLongitude, r.decimalLatitude]);
       else {
         const base = hechos;
-        pts = await gLeerEspecie(c, yo, x => gEooEstado(`Reading records for the EOO: ${fmt(base + x)} of ${fmt(leer)} (<i>${esc(c.name)}</i>)…`));
+        pts = await gLeerEspecie(c, yo, x => gEooEstado(`Reading records for the EOO: ${fmt(base + x)} of ${fmt(leer)} (<i>${esc(c.name)}</i>)…`, false, (base + x) / leer));
         if (!pts) return;
         hechos += pts.length;
       }
