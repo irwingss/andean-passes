@@ -6,7 +6,8 @@ Depression (Fig. 1b), human modification and protected areas. GeoJSON: the GMBA 
 tropics with the bands of Table S19 (Fig. 3) and the barriers of Hazzi et al. (2018). The passes with a depth of 100 m
 or more and the control passes go to docs/capas/indice.json, column by column to keep it small. The barriers of the
 montane belt at the nine montane limits (Fig. 5) go to docs/capas/barreras/h<limit>.json, one point per 1 km cell of a
-barrier line with its number of variables, and the pass of each barrier of Table 3 to docs/capas/barreras/pasos.json.
+barrier line with its number of variables, and the bridge of each barrier at each limit (Table S26) to
+docs/capas/barreras/puentes.json.
 python -P scripts/visor_datos.py [tiles]   (without "tiles" the tile pyramids are kept as they are)
 """
 import json
@@ -196,8 +197,8 @@ def indice():
 
 
 def barreras():
-    """Cells of the barrier lines at each montane limit with their support (56_barreras_sintesis.py), and the pass of
-    each barrier of Table 3 (57_barreras_pasos.py)."""
+    """Cells of the barrier lines at each montane limit with their support (56_barreras_sintesis.py), and the bridge of
+    each barrier at each limit (57_barreras_pasos.py)."""
     out = DST / 'barreras'
     out.mkdir(exist_ok=True)
     for cfg, h in (('h500', 500), ('h1000', 1000), ('h1500', 1500), ('main', 2000), ('h2500', 2500), ('h3000', 3000),
@@ -210,13 +211,16 @@ def barreras():
         d = {'lat': [round(v, 3) for v in lat[o]], 'lon': [round(v, 3) for v in lon[o]], 'n': a[r, c][o].tolist()}
         (out / f'h{h}.json').write_text(json.dumps(d, separators=(',', ':')), encoding='utf-8')
         print(f'barreras/h{h}.json', len(r), 'cells')
-    t3 = pd.read_csv(REPO / 'outputs/tables/Table3_barrier_passes.csv')
-    ps = [{'no': int(x.no), 'lat': round(x.pass_lat, 4), 'lon': round(x.pass_lon, 4), 'z': int(round(x.pass_z_m)),
-           'id': x.pass_id, 'rank': x.pass_rank, 'ctl': x.control_pass if isinstance(x.control_pass, str) else '',
-           'hz': x.nearest_hazzi if x.hazzi_km <= 25 else '', 'n': int(x.n_2000), 'k': x.kind}
-          for _, x in t3.dropna(subset=['pass_lat']).iterrows()]
-    (out / 'pasos.json').write_text(json.dumps(ps, separators=(',', ':'), ensure_ascii=False), encoding='utf-8')
-    print('barreras/pasos.json', len(ps), 'passes')
+    b = pd.read_csv(REPO / 'outputs/supp/tables/S26_barrier_passes.csv')
+    s24 = pd.read_csv(REPO / 'outputs/supp/tables/S24_barriers.csv').set_index('no')
+    ps = [{'h': int(x.limit_m), 'no': int(x.no), 'lat': round(x.bridge_lat, 4), 'lon': round(x.bridge_lon, 4),
+           'z': int(round(x.bridge_z_m)), 'id': x.bridge_id, 'rank': x.bridge_rank,
+           'ctl': x.bridge_name if isinstance(x.bridge_name, str) else '', 'n': int(x.n_vars),
+           'hz': s24.nearest_hazzi[x.no] if s24.hazzi_km[x.no] <= 25 else ''}
+          for _, x in b.dropna(subset=['bridge_lat']).iterrows()]
+    (out / 'puentes.json').write_text(json.dumps(ps, separators=(',', ':'), ensure_ascii=False), encoding='utf-8')
+    (out / 'pasos.json').unlink(missing_ok=True)
+    print('barreras/puentes.json', len(ps), 'bridges')
 
 
 if __name__ == '__main__':

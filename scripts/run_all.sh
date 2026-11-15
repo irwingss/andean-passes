@@ -24,5 +24,6 @@ python -P scripts/52_figuras.py principal                          # figures
 python -P scripts/54_contraste_gremios.py principal                # contrast between the two guilds, Fig. S8
 python -P scripts/55_barreras_grafo.py principal                   # barriers from patch graphs, every variable
 python -P scripts/56_barreras_sintesis.py principal                # support of the barriers, Fig. 5, Tables S24 and S25
-python -P scripts/57_barreras_pasos.py principal                   # the pass of each barrier, Tables 3 and S26
+python -P scripts/58_puentes_links.py principal                    # the bridge of every barrier link
+python -P scripts/57_barreras_pasos.py principal                   # the bridge of each barrier, Tables 3 and S26
 python -P scripts/53_suplemento.py                                 # Supplementary Information

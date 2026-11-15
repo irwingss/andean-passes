@@ -156,7 +156,7 @@
       <h2>Barriers of the montane belt</h2>
       <p class="nota" style="margin:0 0 6px;font-size:12px;opacity:.8">Where climate splits montane habitat into patches, one variable at a time (Fig. 5). Colour: variables of 19 with a barrier line within 10 km.</p>
       <div id="barH"></div>
-      <label class="opcion"><input type="checkbox" id="barP" checked><span>Pass of each barrier<small>Census pass through which each barrier of Table 3 is crossed</small></span></label>
+      <label class="opcion"><input type="checkbox" id="barP" checked><span>Bridge of each barrier<small>Pass where montane land comes closest to joining across the barrier, at each montane limit shown (Table S26)</small></span></label>
     </section>
     <section>
       <h2>Context</h2>
@@ -765,7 +765,7 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
     if ($('ghm').checked) b.push(`<div class="bloque"><div class="t">Human modification</div>${D.pal.ghm.map(p => `<div class="item"><i style="background:${p[0]}"></i>${p[2]}</div>`).join('')}</div>`);
     if ($('div').checked) b.push(`<div class="bloque"><div class="item"><i class="pt" style="background:#fff"></i>continental divide</div><div class="item"><i class="pt" style="background:#111"></i>band of Table S19, numbered</div></div>`);
     if ($('hz').checked) b.push(`<div class="bloque"><div class="item"><i style="background:repeating-linear-gradient(90deg,#111 0 3px,#fff 3px 6px)"></i>barrier of Hazzi et al. (2018)</div></div>`);
-    if (barOn.size) b.push(`<div class="bloque"><div class="t">Barriers, montane limit ${[...barOn].sort((x, y) => x - y).join(', ')} m</div><div class="item"><i style="background:linear-gradient(90deg,${BAR_COL.join(',')})"></i>variables of 19, from 1 (yellow) to 19 (purple)</div>${$('barP').checked ? '<div class="item"><i class="pt" style="background:#fff;border:2px solid #7201a8"></i>pass of a barrier (Table 3)</div>' : ''}</div>`);
+    if (barOn.size) b.push(`<div class="bloque"><div class="t">Barriers, montane limit ${[...barOn].sort((x, y) => x - y).join(', ')} m</div><div class="item"><i style="background:linear-gradient(90deg,${BAR_COL.join(',')})"></i>variables of 19, from 1 (yellow) to 19 (purple)</div>${$('barP').checked ? '<div class="item"><i class="pt" style="background:#fff;border:2px solid #7201a8"></i>bridge of a barrier (Table S26)</div>' : ''}</div>`);
     if ($('pa').checked) b.push(`<div class="bloque"><div class="item"><i style="background:${D.pal.pa[0][0]}"></i>Protected areas</div></div>`);
     $('leyenda').innerHTML = b.join(''); $('leyenda').hidden = !b.length;
   };
@@ -776,7 +776,7 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
   const extra = { ghm: null, pa: null };
   const ZMAX = { ghm: 8, pa: 9 };
   for (const k of ['ghm', 'pa']) $(k).onchange = e => { if (e.target.checked) extra[k] = teselas(k, ZMAX[k]).addTo(mapa); else extra[k].remove(); ley(); };
-  // barriers of the montane belt at the nine montane limits (Fig. 5) and the pass of each barrier (Table 3)
+  // barriers of the montane belt at the nine montane limits (Fig. 5) and the bridge of each barrier at each limit (Table S26)
   const BAR_COL = ['#f0f921', '#f8e125', '#fdca26', '#fdb42f', '#fb9f3a', '#f58b47', '#ed7953', '#e3685f', '#d8576b', '#cb4679',
     '#bd3786', '#ad2793', '#9c179e', '#8808a6', '#7201a8', '#5c01a6', '#46039f', '#2e0595', '#0d0887'];
   const BAR_H = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500], barG = {}, barOn = new Set([2000]);
@@ -789,13 +789,15 @@ fetch('capas/indice.json').then(r => r.json()).then(D => {
       for (let i = 0; i < B.lat.length; i++) L.circleMarker([B.lat[i], B.lon[i]], { renderer: barLienzo, radius: 2, stroke: false, fillColor: BAR_COL[B.n[i] - 1], fillOpacity: .95, interactive: false }).addTo(barG[h]);
     });
   };
-  $('barH').querySelectorAll('input').forEach(x => x.onchange = () => { const h = +x.dataset.h; if (x.checked) { barOn.add(h); barPoner(h); } else { barOn.delete(h); barG[h] && barG[h].remove(); } ley(); });
+  $('barH').querySelectorAll('input').forEach(x => x.onchange = () => { const h = +x.dataset.h; if (x.checked) { barOn.add(h); barPoner(h); } else { barOn.delete(h); barG[h] && barG[h].remove(); } barPDibujar(); ley(); });
   for (const h of barOn) barPoner(h);
-  const barP = L.layerGroup();
-  fetch('capas/barreras/pasos.json').then(r => r.json()).then(P => {
-    for (const p of P) L.marker([p.lat, p.lon], { pane: 'puntos', icon: L.divIcon({ className: '', iconSize: [14, 14],
+  const barP = L.layerGroup(), barPH = {};
+  const barPDibujar = () => { barP.clearLayers(); for (const h of barOn) (barPH[h] || []).forEach(m => m.addTo(barP)); };
+  fetch('capas/barreras/puentes.json').then(r => r.json()).then(P => {
+    for (const p of P) (barPH[p.h] = barPH[p.h] || []).push(L.marker([p.lat, p.lon], { pane: 'puntos', icon: L.divIcon({ className: '', iconSize: [14, 14],
       html: '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="#fff" stroke="#7201a8" stroke-width="2.4"/></svg>' }) })
-      .bindTooltip(`Barrier ${p.no}${p.hz ? ', ' + p.hz : ''}: ${p.ctl || p.id}, ${p.z.toLocaleString('en-US')} m, ${p.rank}<br>${p.n} of 19 variables at 2000 m; ${p.k === 'divide' ? 'lowest continental pass of the barrier' : 'valley barrier, pass nearest to its gap floor'}`, { direction: 'top', offset: [0, -6] }).addTo(barP);
+      .bindTooltip(`Bridge of barrier ${p.no}${p.hz ? ' (' + p.hz + ')' : ''}, montane limit ${p.h.toLocaleString('en-US')} m<br>${p.ctl || p.id}, ${p.z.toLocaleString('en-US')} m, ${p.rank} pass; ${p.n} of 19 variables`, { direction: 'top', offset: [0, -6] }));
+    barPDibujar();
   });
   if ($('barP').checked) barP.addTo(mapa);
   $('barP').onchange = e => { e.target.checked ? barP.addTo(mapa) : barP.remove(); ley(); };

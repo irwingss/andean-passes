@@ -103,12 +103,15 @@ TABLES = [
      "the two patches and their area (km2), cost, length (km) and excess cost of the least-cost path, position of "
      "the contact on the common boundary, position and resistance of the gap floor (the cell of highest resistance "
      "along the path), and the barrier of Table S24 it belongs to."),
-    ("S26", "S26_barrier_passes", "The pass of each barrier of Table S24. Number of variables (of 19) that support the "
-     "barrier at each montane limit, the lowest limit at which seven or more do, and the limit at which most do. At "
-     "that limit, the census pass (depth of 100 m or more) that most links of the barrier point to, nearest to their "
-     "gap floors: identifier, position, height, depth, rank and GMBA unit, the control pass within 3 km if any, the "
-     "share of links that point to it, and the median distance (km) and height (m) of their gap floors. pass_z_<h>: "
-     "height of the pass of the barrier at each montane limit h."),
+    ("S26", "S26_barrier_passes", "The bridge of each barrier of Table S24 at each montane limit where it has barrier "
+     "links: the census pass where montane land comes closest to joining across the barrier. For every link, the "
+     "highest route over the 1 km elevation between its two patches, through cells nearer to one of them than to any "
+     "other patch, has a saddle at its lowest point; the bridge of the link is the pass with a depth of 100 m or more "
+     "within 5 km of that saddle whose height is closest to it, and the bridge of the barrier is the pass that most "
+     "of its links point to. Columns: montane limit (m), number of variables (of 19) that support the barrier there, "
+     "identifier, position, height, depth, rank and GMBA unit of the bridge, median height of the saddles on the "
+     "1 km elevation (bridge_z1km), the control pass within 3 km if any, and the links that point to the bridge out "
+     "of all links of the barrier at that limit."),
 ]
 INLINE_MAX = 60       # longer tables are given only in the workbook
 HEAD = {"group": "Group", "most_limiting": "Most limiting", "least_limiting": "Least limiting",

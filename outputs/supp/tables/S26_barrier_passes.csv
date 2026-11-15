@@ -1,293 +1,181 @@
-no,barrier_id,defined_by,lat,lon,nearest_hazzi,hazzi_km,n_max,n_500,n_1000,n_1500,n_2000,n_2500,n_3000,n_3500,n_4000,n_4500,lowest_limit_nmin,passes_inside,continental_inside,kind,share_links,gap_km_to_pass,gap_z_m,pass_id,pass_lat,pass_lon,pass_z_m,pass_depth_m,pass_rank,pass_unit,control_pass,first_limit_above_pass
-1,1,design,10.992,-72.707,Táchira Depression,321.6,2,0,0,0,0,2,0,0,0,0,,41,0,valley,,,,,,,,,,,,
-2,233,h3500,10.031,-72.655,Táchira Depression,218.0,1,0,0,0,0,0,0,1,0,0,,40,0,valley,,,,,,,,,,,,
-3,2,design,9.637,-73.042,Táchira Depression,163.3,8,0,0,0,0,0,0,0,0,0,,218,0,valley,0.75,2.638,1051.78,APD080291,9.556,-73.104,1629.0,419.2,terminal,Cordillera Oriental (Northern Andes),,
-4,108,h3000,9.414,-73.127,Táchira Depression,141.0,7,0,0,0,0,0,7,1,0,0,3000.0,125,0,valley,1.0,8.843,156.814,APD086065,10.603,-73.169,414.5,136.3,tributary,Cordillera Oriental (Northern Andes),,
-5,3,design,9.337,-70.001,Táchira Depression,287.6,8,0,0,0,0,0,0,0,0,0,,601,18,divide,,,,APD079948,9.41,-70.253,2019.9,1539.3,continental,Cordillera de Mérida,,2500.0
-6,110,h3000,9.217,-73.437,Táchira Depression,132.5,2,0,0,0,0,0,2,1,0,0,,40,0,valley,1.0,3.597,1264.824,APD080291,9.556,-73.104,1629.0,419.2,terminal,Cordillera Oriental (Northern Andes),,
-7,4,design,8.928,-73.292,Táchira Depression,64.5,19,0,0,11,16,18,18,19,0,0,1500.0,1743,0,valley,0.203,0.899,1316.597,APD080311,9.105,-73.428,1612.4,177.1,terminal,Cordillera Oriental (Northern Andes),,
-8,244,h3500,8.446,-74.431,Táchira Depression,156.5,5,0,0,0,0,0,0,5,0,0,,188,0,valley,,,,,,,,,,,,
-9,7,design,8.424,-72.514,Táchira Depression,55.6,4,0,0,0,0,2,1,4,0,0,,92,0,valley,,,,,,,,,,,,
-10,241,h3500,8.309,-72.968,Táchira Depression,10.1,5,0,0,0,0,0,0,5,0,0,,771,0,valley,1.0,4.691,127.449,APD076299,8.402,-73.598,373.4,150.6,tributary,Cordillera Oriental (Northern Andes),,
-11,118,h3000,8.144,-76.348,Táchira Depression,367.1,1,0,0,0,0,0,1,0,0,0,,172,0,valley,,,,,,,,,,,,
-12,117,h3000,8.137,-75.83,Táchira Depression,309.9,2,0,0,0,0,0,1,1,2,0,,137,0,valley,,,,,,,,,,,,
-13,119,h3000,8.134,-73.998,Táchira Depression,117.6,1,0,0,0,0,0,0,1,0,0,,8,0,valley,,,,,,,,,,,,
-14,249,h3500,8.117,-74.274,Táchira Depression,140.3,1,0,0,0,0,0,0,1,0,0,,41,0,valley,,,,,,,,,,,,
-15,250,h3500,8.09,-73.926,Táchira Depression,103.6,1,0,0,0,0,0,0,1,0,0,,28,0,valley,,,,,,,,,,,,
-16,6,design,8.073,-71.67,Táchira Depression,78.7,7,0,0,0,0,7,0,0,0,0,2500.0,429,16,divide,,,,APD072227,8.26,-71.719,2480.7,1158.5,continental,Cordillera de Mérida,,2500.0
-17,247,h3500,7.973,-76.307,Táchira Depression,312.9,5,0,0,0,0,0,0,5,0,0,,933,0,valley,0.5,2.533,776.086,APD039053,5.438,-75.612,1663.9,166.5,tributary,Cordillera Central (Northern Andes),,
-18,116,h3000,7.939,-72.1,Táchira Depression,27.9,17,0,0,0,0,0,14,17,0,0,3000.0,591,28,divide,,,,APD060412,7.874,-72.258,1495.3,563.9,continental,Cordillera de Mérida,,1500.0
-19,121,h3000,7.89,-76.072,Táchira Depression,319.2,2,0,0,0,0,0,1,2,0,0,,354,0,valley,,,,,,,,,,,,
-20,8,design,7.704,-72.262,Táchira Depression,17.0,11,0,0,7,7,7,8,11,0,0,1500.0,256,10,divide,,,,APD061838,7.686,-72.416,1023.3,799.1,continental,Cordillera Oriental (Northern Andes),,1500.0
-21,123,h3000,7.625,-76.167,Táchira Depression,294.4,4,0,0,0,0,0,4,4,0,0,,738,0,valley,,,,,,,,,,,,
-22,126,h3000,7.547,-75.42,Táchira Depression,269.3,3,0,0,0,0,0,3,2,0,0,,118,0,valley,0.333,2.299,1566.877,APD059760,7.382,-75.52,1910.6,130.6,tributary,Cordillera Occidental (Northern Andes),,
-23,128,h3000,7.497,-76.865,Táchira Depression,428.6,1,0,0,0,0,0,1,0,0,0,,8,0,valley,,,,,,,,,,,,
-24,256,h3500,7.402,-72.022,Táchira Depression,19.7,1,0,0,0,0,0,0,1,0,0,,62,0,valley,,,,,,,,,,,,
-25,259,h3500,7.395,-75.505,Táchira Depression,284.1,3,0,0,0,0,0,0,3,0,0,,21,0,valley,0.5,3.306,589.675,APD051205,6.074,-75.889,1418.3,177.6,tributary,Cordillera Occidental (Northern Andes),,
-26,253,h3500,7.391,-76.186,Táchira Depression,317.4,3,0,0,0,0,0,0,3,0,0,,410,0,valley,,,,,,,,,,,,
-27,260,h3500,7.178,-76.746,Táchira Depression,424.0,1,0,0,0,0,0,0,1,0,0,,19,0,valley,,,,,,,,,,,,
-28,35,h500,7.157,-74.717,Táchira Depression,210.4,7,7,0,0,0,0,3,3,0,0,500.0,327,0,valley,1.0,2.509,680.965,APD064333,7.049,-74.697,645.0,107.4,tributary,Cordillera Central (Northern Andes),,
-29,129,h3000,7.103,-74.961,Táchira Depression,215.8,7,0,0,0,0,0,6,6,7,0,4000.0,1435,0,valley,0.333,4.502,1895.025,APD055028,6.591,-75.783,672.2,102.9,tributary,Cordillera Occidental (Northern Andes),,
-30,261,h3500,6.969,-75.237,Táchira Depression,266.3,2,0,0,0,0,0,0,2,1,0,,180,0,valley,,,,,,,,,,,,
-31,130,h3000,6.893,-73.468,Táchira Depression,102.1,8,0,0,0,0,0,8,0,0,0,3000.0,323,0,valley,,,,,,,,,,,,
-32,9,design,6.575,-73.38,Táchira Depression,76.7,10,0,0,0,7,0,10,2,0,0,2000.0,928,0,valley,0.296,2.37,1862.811,APD049182,6.193,-73.6,1980.9,167.0,tributary,Cordillera Oriental (Northern Andes),,
-33,134,h3000,6.551,-75.0,Táchira Depression,277.1,1,0,0,0,0,0,1,0,0,0,,1,0,valley,,,,,,,,,,,,
-34,132,h3000,6.496,-73.633,Táchira Depression,161.3,8,0,0,0,0,0,8,0,0,0,3000.0,237,0,valley,,,,,,,,,,,,
-35,5,design,6.274,-75.416,Táchira Depression,103.8,18,7,11,7,15,17,17,18,16,0,500.0,15538,189,divide,,,,APD044586,5.35,-76.388,183.8,121.0,continental,Cordillera Occidental (Northern Andes),,500.0
-36,267,h3500,6.191,-73.96,Táchira Depression,201.1,2,0,0,0,0,0,0,2,0,0,,243,0,valley,1.0,6.097,135.8,APD057744,6.27,-74.15,179.4,119.7,tributary,Cordillera Oriental (Northern Andes),,
-37,138,h3000,5.984,-74.784,Táchira Depression,290.0,5,0,0,0,0,0,1,0,5,0,,104,0,valley,,,,,,,,,,,,
-38,371,h4000,5.927,-76.488,Las Cruces Pass,326.2,2,0,0,0,0,0,0,0,2,0,,0,0,valley,,,,,,,,,,,,
-39,270,h3500,5.79,-73.982,Táchira Depression,239.1,9,0,0,0,0,0,0,9,0,0,3500.0,38,0,valley,,,,,,,,,,,,
-40,268,h3500,5.753,-73.508,Táchira Depression,189.0,3,0,0,0,0,0,0,3,0,0,,60,0,valley,,,,,,,,,,,,
-41,269,h3500,5.569,-74.461,Las Cruces Pass,233.7,12,0,0,0,0,0,0,12,0,0,3500.0,415,0,valley,,,,,,,,,,,,
-42,374,h4000,5.567,-76.252,Las Cruces Pass,266.9,2,0,0,0,0,0,0,0,2,0,,77,5,divide,,,,APD038853,5.539,-76.08,1741.5,180.1,continental,Cordillera Occidental (Northern Andes),,2000.0
-43,139,h3000,5.45,-74.747,Las Cruces Pass,241.0,8,0,0,0,0,0,3,8,5,0,3500.0,114,0,valley,,,,,,,,,,,,
-44,131,h3000,5.368,-73.712,Táchira Depression,79.1,17,0,0,0,0,0,13,17,0,0,3000.0,4049,59,divide,,,,APD036432,5.103,-73.669,2718.0,879.9,continental,Cordillera Oriental (Northern Andes),,3000.0
-45,10,design,5.277,-74.711,Las Cruces Pass,213.8,11,0,0,0,7,7,11,11,0,0,2000.0,301,0,valley,1.0,2.249,238.181,APD043226,5.134,-74.681,442.7,110.4,tributary,Cordillera Oriental (Northern Andes),,
-46,368,h4000,5.218,-74.971,Las Cruces Pass,136.2,7,0,0,0,0,0,0,0,7,0,4000.0,1155,0,valley,0.714,13.167,242.857,APD033910,4.826,-74.727,262.0,110.2,tributary,Cordillera Oriental (Northern Andes),,
-47,377,h4000,5.144,-76.2,Las Cruces Pass,220.1,2,0,0,0,0,0,0,0,2,0,,189,8,divide,,,,APD035359,5.045,-76.082,3122.8,346.3,continental,Cordillera Occidental (Northern Andes),,3500.0
-48,271,h3500,5.047,-73.031,Táchira Depression,225.2,3,0,0,0,0,0,0,3,0,0,,162,0,valley,,,,,,,,,,,,
-49,276,h3500,4.894,-74.511,Las Cruces Pass,192.1,2,0,0,0,0,0,0,2,0,0,,44,0,valley,,,,,,,,,,,,
-50,277,h3500,4.813,-76.645,Las Cruces Pass,229.4,1,0,0,0,0,0,0,0,1,0,,2,0,valley,,,,,,,,,,,,
-51,379,h4000,4.797,-75.984,Las Cruces Pass,187.2,1,0,0,0,0,0,0,0,1,0,,12,0,valley,,,,,,,,,,,,
-52,141,h3000,4.56,-74.902,Las Cruces Pass,153.3,1,0,0,0,0,0,0,0,1,0,,3,0,valley,,,,,,,,,,,,
-53,11,design,4.482,-74.804,Las Cruces Pass,121.6,14,0,0,0,7,7,10,14,5,0,2000.0,296,0,valley,0.81,14.629,242.857,APD033910,4.826,-74.727,262.0,110.2,tributary,Cordillera Oriental (Northern Andes),,
-54,280,h3500,4.385,-75.442,Las Cruces Pass,102.1,9,0,0,0,0,0,0,7,9,0,3500.0,524,0,valley,0.875,1.031,3206.706,APD028234,4.472,-75.555,3261.7,1325.6,tributary,Cordillera Central (Northern Andes),Alto de La Línea,
-55,142,h3000,4.264,-74.942,Las Cruces Pass,132.7,5,0,0,0,0,0,0,0,5,0,,6,0,valley,,,,,,,,,,,,
-56,388,h4000,4.04,-75.192,Las Cruces Pass,79.2,2,0,0,0,0,0,0,0,2,0,,160,0,valley,1.0,2.297,567.722,APD033170,4.041,-75.185,493.9,318.6,tributary,Cordillera Central (Northern Andes),,
-57,286,h3500,3.535,-75.272,Las Cruces Pass,2.9,2,0,0,0,0,0,0,0,2,0,,93,0,valley,,,,,,,,,,,,
-58,385,h4000,3.487,-75.794,Las Cruces Pass,1.1,9,0,0,0,0,0,0,0,9,0,4000.0,2553,0,valley,0.656,7.156,940.125,APD023956,3.934,-76.246,1127.9,128.1,tributary,Cordillera Central (Northern Andes),,
-59,392,h4000,3.292,-76.796,Colombian Massif,126.8,1,0,0,0,0,0,0,0,1,0,,336,28,divide,,,,APD021814,3.214,-76.791,2380.7,510.2,continental,Cordillera Occidental (Northern Andes),,2500.0
-60,12,design,3.249,-74.854,Las Cruces Pass,0.3,12,0,0,0,9,8,10,12,10,0,2000.0,1090,40,divide,,,,APD022335,3.288,-74.617,1904.8,1722.3,continental,Cordillera Oriental (Northern Andes),,2000.0
-61,287,h3500,3.069,-77.035,Colombian Massif,118.1,2,0,0,0,0,0,0,1,2,0,,426,7,divide,,,,APD012837,2.975,-76.859,2508.1,353.0,continental,Cordillera Occidental (Northern Andes),,3000.0
-62,395,h4000,3.016,-76.812,Colombian Massif,114.2,1,0,0,0,0,0,0,0,1,0,,16,6,divide,,,,APD021754,3.037,-76.811,2435.1,195.4,continental,Cordillera Occidental (Northern Andes),,2500.0
-63,397,h4000,2.964,-77.197,Colombian Massif,140.5,1,0,0,0,0,0,0,0,1,0,,160,0,valley,,,,,,,,,,,,
-64,14,design,2.79,-75.38,Las Cruces Pass,28.0,9,0,0,0,7,9,6,2,2,0,2000.0,100,0,valley,0.6,7.409,473.983,APD016480,2.806,-75.381,848.0,130.5,tributary,Cordillera Central (Northern Andes),,
-65,394,h4000,2.666,-76.171,Colombian Massif,14.0,1,0,0,0,0,0,0,0,1,0,,439,0,valley,1.0,1.143,1085.299,APD008649,1.491,-77.298,1121.4,361.0,tributary,Cordillera Oriental (Northern Andes),,
-66,292,h3500,2.656,-77.463,Colombian Massif,140.6,1,0,0,0,0,0,0,1,0,0,,125,0,valley,,,,,,,,,,,,
-67,398,h4000,2.636,-74.605,Las Cruces Pass,0.4,5,0,0,0,0,0,0,0,5,0,,373,0,valley,1.0,0.627,2007.378,APD029722,4.959,-73.268,2097.6,671.5,tributary,Cordillera Oriental (Northern Andes),,
-68,290,h3500,2.604,-74.753,Las Cruces Pass,2.0,5,0,0,0,0,0,0,1,5,0,,90,1,divide,,,,APD012399,2.954,-74.903,2786.7,300.6,continental,Cordillera Oriental (Northern Andes),,3000.0
-69,13,design,2.315,-77.112,Colombian Massif,50.2,15,0,0,2,11,0,11,15,2,2,2000.0,2281,49,divide,,,,APD014384,2.435,-76.845,1736.2,1931.8,continental,Cordillera Occidental (Northern Andes),,2000.0
-70,293,h3500,2.314,-75.032,Las Cruces Pass,48.4,8,0,0,0,0,0,0,7,8,0,3500.0,252,9,divide,,,,APD012779,2.596,-75.137,2536.7,856.9,continental,Cordillera Oriental (Northern Andes),,3000.0
-71,146,h3000,2.295,-75.216,Las Cruces Pass,1.9,17,0,0,0,0,0,10,12,17,0,3000.0,1788,86,divide,,,,APD013545,2.658,-75.151,2147.1,1118.9,continental,Cordillera Oriental (Northern Andes),,2500.0
-72,147,h3000,2.289,-77.413,Colombian Massif,75.1,13,0,0,0,0,0,11,13,0,0,3000.0,929,0,valley,0.5,2.672,631.736,APD016267,2.168,-77.064,915.0,111.2,tributary,Cordillera Occidental (Northern Andes),,
-73,400,h4000,2.079,-76.266,Colombian Massif,1.0,1,0,0,0,0,0,0,0,1,0,,432,4,divide,,,,APD005941,1.585,-76.074,2576.0,306.3,continental,Cordillera Oriental (Northern Andes),,3000.0
-74,401,h4000,2.017,-75.217,Colombian Massif,82.6,1,0,0,0,0,0,0,0,1,0,,129,0,valley,,,,,,,,,,,,
-75,297,h3500,2.002,-76.826,Colombian Massif,40.1,1,0,0,0,0,0,0,1,0,0,,28,1,divide,,,,APD005352,1.908,-76.714,3193.1,147.5,continental,Cordillera Central (Northern Andes),,3500.0
-76,15,design,1.996,-75.786,Colombian Massif,21.0,10,0,0,0,7,10,2,0,4,0,2000.0,1117,29,divide,,,,APD007333,1.628,-75.98,1753.1,389.4,continental,Cordillera Oriental (Northern Andes),,2000.0
-77,148,h3000,1.548,-76.563,Colombian Massif,0.0,15,0,0,0,0,0,3,15,0,0,3500.0,453,27,divide,,,,APD005570,1.771,-76.755,2940.2,1253.5,continental,Cordillera Central (Northern Andes),,3000.0
-78,298,h3500,1.449,-76.785,Colombian Massif,0.1,15,0,0,0,0,0,0,15,0,0,3500.0,468,34,divide,,,,APD005225,1.516,-76.895,3345.4,361.2,continental,Cordillera Central (Northern Andes),,3500.0
-79,519,h4500,1.445,-77.499,Colombian Massif,0.4,3,0,0,0,0,0,0,0,0,3,,812,10,divide,,,,APD005311,1.175,-77.181,3238.6,482.3,continental,Cordillera Oriental (Northern Andes),,3500.0
-80,299,h3500,1.323,-76.143,Colombian Massif,22.1,4,0,0,0,0,0,0,4,1,0,,241,0,valley,,,,,,,,,,,,
-81,149,h3000,1.215,-76.967,Colombian Massif,1.1,7,0,0,0,0,0,7,4,0,3,3000.0,359,21,divide,,,,APD005743,1.222,-76.983,2767.6,73.9,continental,Cordillera Oriental (Northern Andes),,3000.0
-82,300,h3500,0.747,-78.475,Colombian Massif,136.6,3,0,0,0,0,0,0,3,0,0,,126,0,valley,,,,,,,,,,,,
-83,303,h3500,0.499,-77.498,Colombian Massif,21.3,3,0,0,0,0,0,0,3,0,0,,663,48,divide,,,,APD001127,0.653,-77.684,3183.8,969.2,continental,Cordillera Oriental (Northern Andes),,3500.0
-84,521,h4500,0.447,-78.845,Colombian Massif,176.1,1,0,0,0,0,0,0,0,0,1,,339,0,valley,,,,,,,,,,,,
-85,150,h3000,0.347,-78.456,Colombian Massif,113.0,4,0,0,0,0,0,3,3,0,4,,1005,0,valley,0.333,5.359,3149.168,APD001084,0.124,-78.117,3226.8,114.0,tributary,Cordillera Oriental (Northern Andes),,
-86,304,h3500,-0.451,-78.844,Colombian Massif,236.2,9,0,0,0,0,0,0,7,9,5,3500.0,376,9,divide,,,,APD088051,-0.756,-78.77,3514.2,1053.5,continental,Cordillera Occidental (Northern Andes),,4000.0
-87,409,h4000,-0.564,-78.964,Colombian Massif,262.6,2,0,0,0,0,0,0,0,2,2,,134,4,divide,,,,APD087910,-0.769,-78.775,3637.0,48.4,continental,Cordillera Occidental (Northern Andes),,4000.0
-88,522,h4500,-0.871,-78.388,Colombian Massif,153.1,13,0,0,0,0,0,0,0,0,13,4500.0,3345,151,divide,,,,APD087730,-0.132,-78.012,3772.2,293.4,continental,Cordillera Oriental (Northern Andes),,4000.0
-89,411,h4000,-1.121,-78.419,Colombian Massif,271.1,2,0,0,0,0,0,0,0,2,1,,41,0,valley,,,,,,,,,,,,
-90,417,h4000,-1.614,-78.096,Colombian Massif,308.4,1,0,0,0,0,0,0,0,0,1,,21,0,valley,,,,,,,,,,,,
-91,418,h4000,-1.751,-77.788,Colombian Massif,299.4,5,0,0,0,0,0,0,0,5,2,,105,0,valley,,,,,,,,,,,,
-92,523,h4500,-1.767,-78.262,Marañón River Valley,305.1,2,0,0,0,0,0,0,0,0,2,,276,0,valley,,,,,,,,,,,,
-93,305,h3500,-1.771,-78.54,Marañón River Valley,250.5,14,0,0,0,0,0,0,14,9,10,3500.0,1197,41,divide,,,,APD095304,-2.062,-78.742,3248.3,75.9,continental,Cordillera Occidental (Northern Andes),,3500.0
-94,525,h4500,-1.958,-77.792,Marañón River Valley,294.0,1,0,0,0,0,0,0,0,0,1,,41,0,valley,1.0,4.458,1897.38,APD143814,-8.695,-77.928,2102.6,115.7,tributary,Cordillera Occidental (Central Andes),,
-95,527,h4500,-2.05,-79.183,Marañón River Valley,325.8,1,0,0,0,0,0,0,0,0,1,,17,0,valley,,,,,,,,,,,,
-96,526,h4500,-2.216,-78.254,Marañón River Valley,250.1,3,0,0,0,0,0,0,0,0,3,,947,24,divide,,,,APD094496,-2.247,-78.659,3891.0,405.1,continental,Cordillera Oriental (Northern Andes),,4000.0
-97,151,h3000,-3.01,-78.905,Marañón River Valley,209.3,11,0,0,0,0,0,11,9,0,1,3000.0,1449,12,divide,,,,APD098787,-3.106,-79.111,2760.7,1027.2,continental,Cordillera Occidental (Northern Andes),,3000.0
-98,306,h3500,-3.098,-78.693,Marañón River Valley,172.6,9,0,0,0,0,0,0,9,0,0,3500.0,350,0,valley,,,,,,,,,,,,
-99,152,h3000,-3.202,-77.77,Marañón River Valley,155.3,7,0,0,0,0,0,7,1,0,0,3000.0,75,0,valley,,,,,,,,,,,,
-100,307,h3500,-3.484,-78.167,Marañón River Valley,103.9,9,0,0,0,0,0,0,9,0,0,3500.0,405,0,valley,,,,,,,,,,,,
-101,71,h1000,-3.775,-80.33,Marañón River Valley,258.9,9,0,9,0,0,0,1,0,0,0,1000.0,150,0,valley,,,,,,,,,,,,
-102,157,h3000,-3.848,-80.647,Marañón River Valley,294.9,4,0,0,0,0,0,4,0,0,0,,35,0,valley,,,,,,,,,,,,
-103,158,h3000,-3.876,-79.422,Marañón River Valley,187.0,1,0,0,0,0,0,1,0,0,0,,43,0,valley,,,,,,,,,,,,
-104,160,h3000,-4.017,-79.925,Marañón River Valley,221.1,4,0,0,0,0,0,4,0,0,0,,37,0,valley,,,,,,,,,,,,
-105,72,h1000,-4.107,-80.231,Marañón River Valley,237.8,9,0,9,0,0,0,7,0,0,0,1000.0,169,0,valley,0.333,5.455,1005.566,APD103331,-3.185,-79.759,73.0,278.4,tributary,Cordillera Occidental (Northern Andes),,
-106,426,h4000,-4.508,-79.808,Marañón River Valley,182.2,4,0,0,0,0,0,0,0,4,0,,11,0,valley,,,,,,,,,,,,
-107,421,h4000,-4.525,-79.333,Marañón River Valley,125.5,2,0,0,0,0,0,0,0,2,0,,181,29,divide,,,,APD103687,-4.488,-79.238,3344.4,308.8,continental,Cordillera Occidental (Central Andes),,3500.0
-108,319,h3500,-4.566,-79.752,Marañón River Valley,171.9,3,0,0,0,0,0,0,0,3,0,,6,0,valley,,,,,,,,,,,,
-109,316,h3500,-4.665,-77.718,Marañón River Valley,0.1,2,0,0,0,0,0,0,2,1,0,,49,0,valley,,,,,,,,,,,,
-110,320,h3500,-4.726,-78.72,Marañón River Valley,50.5,17,0,0,0,0,0,0,11,17,0,3500.0,313,0,valley,0.25,0.626,2781.847,APD098787,-3.106,-79.111,2760.7,1027.2,continental,Cordillera Occidental (Northern Andes),,
-111,16,design,-4.876,-78.758,Marañón River Valley,0.0,19,0,10,12,7,17,18,19,19,1,1000.0,13521,85,divide,,,,APD113156,-5.84,-79.506,2144.9,904.7,continental,Cordillera Occidental (Central Andes),Abra de Porculla,2500.0
-112,318,h3500,-5.036,-79.657,Marañón River Valley,45.8,19,0,0,0,0,0,0,19,18,0,3500.0,1529,88,divide,,,,APD112167,-5.451,-79.487,2747.5,653.1,continental,Cordillera Occidental (Central Andes),,3000.0
-113,177,h3000,-5.205,-77.924,Marañón River Valley,23.6,1,0,0,0,0,0,0,0,1,0,,2,0,valley,,,,,,,,,,,,
-114,439,h4000,-5.205,-79.711,Marañón River Valley,118.0,2,0,0,0,0,0,0,0,2,0,,50,1,divide,,,,APD111565,-5.117,-79.546,3442.2,50.8,continental,Cordillera Occidental (Central Andes),,3500.0
-115,438,h4000,-5.344,-77.115,Marañón River Valley,67.2,3,0,0,0,0,0,0,0,3,0,,332,0,valley,,,,,,,,,,,,
-116,178,h3000,-5.516,-78.226,Marañón River Valley,2.1,5,0,0,0,0,0,5,3,0,0,,189,0,valley,1.0,3.352,2157.492,APD114370,-5.518,-78.388,1592.8,116.6,tributary,Cordillera Oriental (Central Andes),,
-117,324,h3500,-5.601,-78.178,Marañón River Valley,23.2,1,0,0,0,0,0,0,1,0,0,,56,0,valley,,,,,,,,,,,,
-118,182,h3000,-5.733,-79.064,Marañón River Valley,16.3,15,0,0,0,0,0,15,0,0,0,3000.0,176,0,valley,0.5,8.615,1205.402,APD121388,-6.071,-79.218,2407.2,403.0,tributary,Cordillera Occidental (Central Andes),,
-119,189,h3000,-6.098,-78.033,Marañón River Valley,78.7,1,0,0,0,0,0,0,1,0,0,,0,0,valley,,,,,,,,,,,,
-120,184,h3000,-6.58,-79.026,Marañón River Valley,9.4,8,0,0,0,0,0,8,0,0,0,3000.0,312,4,divide,,,,APD121239,-6.553,-78.794,2489.3,218.8,continental,Cordillera Occidental (Central Andes),,2500.0
-121,530,h4500,-6.741,-75.69,Marañón River Valley,306.6,1,0,0,0,0,0,0,0,0,1,,549,0,valley,,,,,,,,,,,,
-122,204,h3000,-6.851,-76.817,Marañón River Valley,185.3,5,0,0,0,0,0,5,0,0,0,,166,0,valley,,,,,,,,,,,,
-123,205,h3000,-6.95,-75.479,Marañón River Valley,311.6,2,0,0,0,0,0,2,0,0,1,,233,0,valley,,,,,,,,,,,,
-124,327,h3500,-7.014,-78.431,Marañón River Valley,16.4,10,0,0,0,0,0,0,10,0,0,3500.0,2028,30,divide,,,,APD131905,-7.247,-78.469,3225.5,773.3,continental,Cordillera Occidental (Central Andes),Abra El Gavilán,3500.0
-125,17,design,-7.059,-75.89,Marañón River Valley,292.1,7,0,3,0,0,7,7,0,0,1,2500.0,662,0,valley,,,,,,,,,,,,
-126,74,h1000,-7.526,-76.508,Marañón River Valley,278.3,3,0,3,0,0,0,0,0,0,0,,1242,0,valley,1.0,5.391,438.186,APD135549,-7.833,-76.764,922.0,149.3,tributary,Cordillera Central (Central Andes),,
-127,444,h4000,-7.822,-75.861,Marañón River Valley,370.6,1,0,0,0,0,0,0,0,1,0,,147,0,valley,,,,,,,,,,,,
-128,75,h1000,-7.855,-76.093,Marañón River Valley,341.8,3,0,3,0,0,0,0,0,1,0,,836,0,valley,0.667,1.338,1122.897,APD145428,-8.221,-76.274,1107.7,999.6,tributary,Cordillera Oriental (Central Andes),,
-129,18,design,-9.258,-75.819,Apurímac River Valley,276.2,10,0,0,0,0,0,0,0,10,0,4000.0,1024,0,valley,1.0,0.536,2414.699,APD152538,-9.729,-75.723,2458.3,632.2,tributary,Cordillera Oriental (Central Andes),,
-130,449,h4000,-9.29,-76.321,Apurímac River Valley,280.3,10,0,0,0,0,0,0,0,10,0,4000.0,1989,0,valley,1.0,3.788,3023.444,APD150233,-9.313,-76.774,4315.7,122.6,tributary,Cordillera Occidental (Central Andes),,
-131,451,h4000,-9.368,-75.654,Apurímac River Valley,296.2,9,0,0,0,0,0,0,0,9,0,4000.0,285,0,valley,,,,,,,,,,,,
-132,452,h4000,-10.624,-74.912,Apurímac River Valley,154.9,4,0,0,0,0,0,0,0,4,0,,163,0,valley,,,,,,,,,,,,
-133,19,design,-11.072,-74.172,Apurímac River Valley,0.1,17,0,5,2,15,17,6,1,17,17,2000.0,6900,0,valley,0.243,2.19,1780.849,APD187104,-12.913,-73.43,2059.3,1935.5,tributary,Cordillera Oriental (Central Andes),,
-134,20,design,-11.232,-77.303,Apurímac River Valley,311.6,1,0,0,0,0,0,0,0,0,0,,799,0,valley,1.0,4.175,817.227,APD177027,-11.417,-77.161,553.7,133.1,terminal,Cordillera Occidental (Central Andes),,
-135,535,h4500,-11.368,-74.973,Apurímac River Valley,87.3,10,0,0,0,0,0,0,0,0,10,4500.0,1306,0,valley,,,,,,,,,,,,
-136,455,h4000,-11.453,-73.516,Apurímac River Valley,66.6,4,0,0,0,0,0,0,0,4,0,,59,0,valley,,,,,,,,,,,,
-137,453,h4000,-11.505,-75.345,Apurímac River Valley,119.1,10,0,0,0,0,0,0,0,4,10,4500.0,796,0,valley,,,,,,,,,,,,
-138,215,h3000,-11.54,-73.661,Apurímac River Valley,61.6,3,0,0,0,0,0,0,0,3,0,,22,0,valley,,,,,,,,,,,,
-139,328,h3500,-11.582,-73.477,Apurímac River Valley,61.3,8,0,0,0,0,0,0,1,8,1,4000.0,142,0,valley,,,,,,,,,,,,
-140,21,design,-11.888,-72.765,Apurímac River Valley,131.6,1,0,0,0,0,0,0,0,0,0,,177,0,valley,,,,,,,,,,,,
-141,541,h4500,-12.151,-73.437,Apurímac River Valley,60.5,1,0,0,0,0,0,0,0,0,1,,12,0,valley,,,,,,,,,,,,
-142,459,h4000,-12.176,-73.104,Apurímac River Valley,88.9,5,0,0,0,0,0,0,0,1,5,,61,0,valley,,,,,,,,,,,,
-143,77,h1000,-12.21,-72.753,Apurímac River Valley,126.7,4,0,0,0,0,0,1,0,0,4,,3,0,valley,,,,,,,,,,,,
-144,463,h4000,-12.242,-74.386,Apurímac River Valley,18.4,4,0,0,0,0,0,0,0,4,0,,106,0,valley,,,,,,,,,,,,
-145,460,h4000,-12.279,-75.077,Apurímac River Valley,83.4,4,0,0,0,0,0,0,0,4,0,,173,0,valley,1.0,7.279,3113.936,APD184942,-12.377,-75.043,3643.8,108.9,tributary,Cordillera Occidental (Central Andes),,
-146,542,h4500,-12.297,-73.106,Apurímac River Valley,93.3,3,0,0,0,0,0,0,0,0,3,,2,0,valley,,,,,,,,,,,,
-147,330,h3500,-12.303,-73.267,Apurímac River Valley,40.8,12,0,0,0,0,0,0,1,4,12,4500.0,176,0,valley,1.0,3.663,1811.609,APD186376,-12.78,-73.817,2522.0,209.5,tributary,Cordillera Central (Central Andes),,
-148,79,h1000,-12.327,-72.766,Apurímac River Valley,122.8,4,0,0,0,0,0,0,0,4,2,,0,0,valley,,,,,,,,,,,,
-149,461,h4000,-12.343,-73.574,Apurímac River Valley,16.8,12,0,0,0,0,0,0,0,12,9,4000.0,435,0,valley,,,,,,,,,,,,
-150,81,h1000,-12.378,-72.784,Apurímac River Valley,120.3,4,0,0,0,0,0,0,0,4,0,,2,0,valley,,,,,,,,,,,,
-151,80,h1000,-12.382,-73.806,Apurímac River Valley,15.9,1,0,0,0,0,0,0,0,0,1,,2,0,valley,,,,,,,,,,,,
-152,536,h4500,-12.445,-75.837,Apurímac River Valley,140.5,10,0,0,0,0,0,0,0,0,10,4500.0,656,27,divide,,,,APD181863,-12.116,-75.645,4542.3,407.1,continental,Cordillera Occidental (Central Andes),,
-153,82,h1000,-12.517,-73.261,Apurímac River Valley,67.8,3,0,0,0,0,0,0,0,0,3,,2,0,valley,,,,,,,,,,,,
-154,216,h3000,-12.655,-72.031,Apurímac River Valley,117.5,9,0,0,0,0,0,2,0,9,6,4000.0,910,0,valley,1.0,6.66,1905.58,APD184454,-12.744,-71.941,3829.8,156.2,tributary,Cordillera Oriental (Central Andes),,
-155,465,h4000,-12.672,-71.381,Apurímac River Valley,154.0,7,0,0,0,0,0,0,0,7,0,4000.0,99,0,valley,,,,,,,,,,,,
-156,219,h3000,-12.681,-73.44,Apurímac River Valley,46.6,3,0,0,0,0,0,0,0,2,3,,1,0,valley,,,,,,,,,,,,
-157,22,design,-12.769,-76.44,Apurímac River Valley,234.5,10,3,3,3,0,0,0,0,0,10,4500.0,1272,0,valley,0.444,7.805,308.6,APD206815,-13.618,-75.948,741.0,216.7,terminal,Cordillera Occidental (Central Andes),,
-158,543,h4500,-12.775,-74.032,Apurímac River Valley,12.0,1,0,0,0,0,0,0,0,0,1,,188,0,valley,1.0,1.497,2721.376,APD186103,-12.962,-74.346,2780.1,116.7,tributary,Cordillera Occidental (Central Andes),,
-159,544,h4500,-12.951,-72.417,Apurímac River Valley,71.8,4,0,0,0,0,0,0,0,0,4,,171,0,valley,,,,,,,,,,,,
-160,547,h4500,-13.026,-73.254,Apurímac River Valley,36.4,1,0,0,0,0,0,0,0,0,1,,68,0,valley,,,,,,,,,,,,
-161,329,h3500,-13.034,-74.076,Apurímac River Valley,0.3,16,0,0,0,0,0,0,1,16,16,4000.0,1317,0,valley,0.381,3.507,1105.622,APD204897,-13.439,-73.2,1461.8,495.2,tributary,Cordillera Central (Central Andes),,
-162,467,h4000,-13.256,-73.723,Apurímac River Valley,0.0,16,0,0,0,0,0,0,0,16,16,4000.0,782,0,valley,0.348,3.726,2197.265,APD202623,-13.594,-73.766,3451.3,286.5,tributary,Cordillera Central (Central Andes),,
-163,464,h4000,-13.512,-72.561,Apurímac River Valley,0.1,17,0,0,0,0,0,0,0,17,8,4000.0,1925,0,valley,0.175,5.884,2526.317,APD202852,-13.557,-72.403,3319.0,147.2,tributary,Cordillera Central (Central Andes),,
-164,554,h4500,-13.52,-74.003,Apurímac River Valley,42.0,8,0,0,0,0,0,0,0,0,8,4500.0,17,0,valley,,,,,,,,,,,,
-165,553,h4500,-13.719,-69.14,Yungas Inter-Andean Valley,122.1,8,0,0,0,0,0,0,0,0,8,4500.0,461,0,valley,,,,,,,,,,,,
-166,25,design,-13.885,-76.376,Apurímac River Valley,294.7,1,0,0,1,0,0,0,0,0,0,,19,0,valley,,,,,,,,,,,,
-167,555,h4500,-13.902,-74.898,Apurímac River Valley,78.4,8,0,0,0,0,0,0,0,0,8,4500.0,892,21,divide,,,,APD199706,-13.742,-74.933,4114.0,588.6,continental,Cordillera Occidental (Central Andes),,4500.0
-168,86,h1000,-13.931,-68.063,Yungas Inter-Andean Valley,42.8,1,0,1,0,0,0,0,0,0,0,,38,0,valley,,,,,,,,,,,,
-169,24,design,-14.009,-75.427,Apurímac River Valley,194.6,1,0,0,0,0,0,0,0,0,0,,454,0,valley,1.0,3.536,2422.531,APD204293,-13.63,-75.56,1911.1,163.5,tributary,Cordillera Occidental (Central Andes),,
-170,559,h4500,-14.009,-73.482,Apurímac River Valley,43.8,1,0,0,0,0,0,0,0,0,1,,25,0,valley,,,,,,,,,,,,
-171,47,h500,-14.051,-68.013,Yungas Inter-Andean Valley,24.5,1,1,1,0,0,0,0,0,0,0,,112,0,valley,,,,,,,,,,,,
-172,26,design,-14.069,-75.668,Apurímac River Valley,235.2,1,0,0,1,0,0,0,0,0,0,,50,0,valley,1.0,5.31,379.23,APD226932,-14.176,-75.779,560.5,126.7,tributary,Cordillera Occidental (Central Andes),,
-173,557,h4500,-14.175,-71.577,Apurímac River Valley,89.2,6,0,0,0,0,0,0,0,0,6,,506,0,valley,1.0,3.219,3762.975,APD218305,-14.428,-71.479,4106.6,209.5,tributary,Cordillera Central (Central Andes),,
-174,48,h500,-14.183,-68.288,Yungas Inter-Andean Valley,38.0,1,1,1,0,0,0,0,0,0,0,,117,0,valley,,,,,,,,,,,,
-175,27,design,-14.345,-75.721,Apurímac River Valley,250.8,1,0,0,1,0,0,0,0,0,0,,20,0,valley,,,,,,,,,,,,
-176,49,h500,-14.512,-67.483,Yungas Inter-Andean Valley,32.3,4,4,0,0,0,0,0,0,1,1,,190,0,valley,,,,,,,,,,,,
-177,558,h4500,-14.579,-74.559,Apurímac River Valley,62.6,8,0,0,0,0,0,0,0,0,8,4500.0,883,16,divide,,,,APD217996,-14.384,-74.502,4144.5,160.9,continental,Cordillera Occidental (Central Andes),,4500.0
-178,560,h4500,-14.595,-69.921,Yungas Inter-Andean Valley,111.5,9,0,0,0,0,0,0,0,0,9,4500.0,1534,40,divide,,,,APD215093,-14.467,-69.641,4479.4,465.8,continental,Cordillera Oriental (Central Andes),,4500.0
-179,54,h500,-14.665,-67.327,Yungas Inter-Andean Valley,58.9,7,1,0,0,0,0,0,0,7,7,4000.0,105,0,valley,,,,,,,,,,,,
-180,468,h4000,-14.745,-67.514,Yungas Inter-Andean Valley,51.2,9,0,0,0,0,0,0,0,9,3,4000.0,193,0,valley,,,,,,,,,,,,
-181,561,h4500,-14.758,-73.477,Apurímac River Valley,91.5,3,0,0,0,0,0,0,0,0,3,,249,4,divide,,,,APD215446,-14.609,-73.644,4439.0,516.5,continental,Cordillera Occidental (Central Andes),,4500.0
-182,564,h4500,-14.819,-70.983,Apurímac River Valley,217.5,6,0,0,0,0,0,0,0,0,6,,256,34,divide,,,,APD216849,-14.988,-71.004,4285.0,890.9,continental,Cordillera Central (Central Andes),,4500.0
-183,28,design,-14.85,-75.397,Apurímac River Valley,228.4,8,2,5,7,0,0,0,0,0,8,1500.0,160,0,valley,0.5,7.466,107.267,APD225574,-14.785,-75.39,581.2,140.9,terminal,Cordillera Occidental (Central Andes),,
-184,57,h500,-14.897,-68.28,Yungas Inter-Andean Valley,2.4,1,0,0,0,0,0,0,0,1,1,,16,0,valley,,,,,,,,,,,,
-185,56,h500,-14.911,-67.746,Yungas Inter-Andean Valley,25.9,12,5,0,0,0,0,0,0,9,12,4000.0,328,0,valley,,,,,,,,,,,,
-186,470,h4000,-14.964,-68.044,Yungas Inter-Andean Valley,11.0,11,0,0,0,0,0,0,0,9,11,4000.0,337,0,valley,,,,,,,,,,,,
-187,23,design,-15.057,-67.929,Yungas Inter-Andean Valley,1.0,15,5,1,6,0,0,7,0,12,15,3000.0,6358,0,valley,0.154,7.669,1153.796,APD247790,-16.427,-67.351,3086.3,217.7,tributary,Cordillera Oriental (Central Andes),,
-188,60,h500,-15.061,-75.463,Apurímac River Valley,278.5,2,0,0,0,0,0,0,0,0,2,,0,0,valley,,,,,,,,,,,,
-189,61,h500,-15.064,-68.175,Yungas Inter-Andean Valley,26.9,7,0,0,0,0,0,0,0,7,7,4000.0,2,0,valley,,,,,,,,,,,,
-190,580,h4500,-15.103,-75.436,Apurímac River Valley,268.2,2,0,0,0,0,0,0,0,0,2,,0,0,valley,,,,,,,,,,,,
-191,29,design,-15.183,-74.63,Apurímac River Valley,200.5,4,0,0,0,0,0,0,1,0,4,,254,0,valley,1.0,4.171,1799.483,APD236367,-15.172,-74.581,1822.4,123.7,terminal,Cordillera Occidental (Central Andes),,
-192,587,h4500,-15.208,-67.899,Yungas Inter-Andean Valley,44.6,2,0,0,0,0,0,0,0,0,2,,85,0,valley,,,,,,,,,,,,
-193,588,h4500,-15.306,-68.916,Yungas Inter-Andean Valley,5.9,1,0,0,0,0,0,0,0,0,1,,101,6,divide,,,,APD231762,-15.366,-69.051,4237.1,153.9,continental,Cordillera Oriental (Central Andes),,4500.0
-194,89,h1000,-15.327,-75.087,Apurímac River Valley,251.6,3,0,3,0,0,0,0,0,0,2,,16,0,valley,1.0,2.739,600.705,APD240187,-15.254,-75.015,697.9,147.5,terminal,Cordillera Occidental (Central Andes),,
-195,331,h3500,-15.337,-73.628,Apurímac River Valley,175.5,4,0,0,0,0,0,0,1,0,4,,429,0,valley,1.0,4.771,3224.267,APD232296,-15.177,-73.474,4121.0,100.3,tributary,Cordillera Occidental (Central Andes),,
-196,474,h4000,-15.44,-68.789,Yungas Inter-Andean Valley,0.1,11,0,0,0,0,0,0,0,9,11,4000.0,531,25,divide,,,,APD233027,-15.534,-69.049,3977.7,352.6,continental,Cordillera Oriental (Central Andes),,4000.0
-197,570,h4500,-15.452,-71.724,Apurímac River Valley,183.5,8,0,0,0,0,0,0,0,0,8,4500.0,1013,31,divide,,,,APD231462,-15.153,-71.551,4290.3,813.3,continental,Cordillera Central (Central Andes),,4500.0
-198,64,h500,-15.496,-67.387,Yungas Inter-Andean Valley,117.0,7,1,0,0,0,0,7,0,3,0,3000.0,12,0,valley,1.0,3.605,2338.486,APD236091,-15.708,-68.174,1954.7,115.3,tributary,Cordillera Oriental (Central Andes),,
-199,593,h4500,-15.515,-69.912,Yungas Inter-Andean Valley,100.7,5,0,0,0,0,0,0,0,0,5,,80,0,valley,1.0,3.46,3808.5,APD233405,-15.581,-69.845,3900.1,110.7,tributary,Altiplano,,
-200,63,h500,-15.55,-68.031,Yungas Inter-Andean Valley,51.2,1,0,0,0,0,0,0,0,0,1,,80,0,valley,,,,,,,,,,,,
-201,594,h4500,-15.59,-74.467,Apurímac River Valley,233.2,1,0,0,0,0,0,0,0,0,1,,40,0,valley,,,,,,,,,,,,
-202,222,h3000,-15.649,-66.648,Yungas Inter-Andean Valley,183.9,7,0,0,0,0,0,7,0,0,1,3000.0,48,0,valley,,,,,,,,,,,,
-203,595,h4500,-15.691,-70.867,Yungas Inter-Andean Valley,206.3,1,0,0,0,0,0,0,0,0,1,,55,11,divide,,,,APD230820,-15.75,-70.838,4400.1,147.5,continental,Cordillera Central (Central Andes),,4500.0
-204,592,h4500,-15.71,-68.644,Yungas Inter-Andean Valley,27.4,2,0,0,0,0,0,0,0,0,2,,425,31,divide,,,,APD232163,-15.88,-68.701,4152.3,65.0,continental,Cordillera Oriental (Central Andes),,4500.0
-205,65,h500,-15.829,-66.694,Yungas Inter-Andean Valley,189.2,7,1,0,0,0,0,7,0,1,1,3000.0,290,0,valley,,,,,,,,,,,,
-206,591,h4500,-15.853,-73.381,Apurímac River Valley,199.2,3,0,0,0,0,0,0,0,0,3,,128,0,valley,,,,,,,,,,,,
-207,598,h4500,-16.126,-67.986,Yungas Inter-Andean Valley,109.6,1,0,0,0,0,0,0,0,0,1,,128,0,valley,1.0,2.392,3966.661,APD244314,-16.169,-68.05,4427.9,137.3,tributary,Cordillera Oriental (Central Andes),,
-208,334,h3500,-16.184,-73.129,Apurímac River Valley,265.5,1,0,0,0,0,0,0,0,0,1,,4,0,valley,,,,,,,,,,,,
-209,478,h4000,-16.264,-69.077,Yungas Inter-Andean Valley,66.5,8,0,0,0,0,0,0,0,8,7,4000.0,128,0,valley,0.5,2.465,3808.5,APD246816,-16.251,-69.082,3850.0,570.5,tributary,Altiplano,,
-210,30,design,-16.297,-72.787,Apurímac River Valley,239.1,9,1,1,1,0,0,0,1,0,9,4500.0,416,0,valley,0.4,5.615,749.173,APD251444,-16.308,-72.524,1261.7,120.7,tributary,Cordillera Occidental (Central Andes),,
-211,596,h4500,-16.311,-70.641,Yungas Inter-Andean Valley,151.3,10,0,0,0,0,0,0,0,0,10,4500.0,1148,49,divide,,,,APD232017,-15.858,-70.577,4185.2,362.1,continental,Cordillera Central (Central Andes),,4500.0
-212,93,h1000,-16.341,-73.049,Apurímac River Valley,300.1,1,0,0,0,0,0,0,0,0,1,,0,0,valley,,,,,,,,,,,,
-213,601,h4500,-16.348,-73.099,Apurímac River Valley,290.0,1,0,0,0,0,0,0,0,0,1,,5,0,valley,,,,,,,,,,,,
-214,479,h4000,-16.4,-68.583,Yungas Inter-Andean Valley,100.9,1,0,0,0,0,0,0,0,1,0,,27,0,valley,,,,,,,,,,,,
-215,66,h500,-16.445,-73.0,Apurímac River Valley,292.4,2,1,1,0,0,0,0,0,0,2,,18,0,valley,1.0,14.712,1246.08,APD253154,-16.482,-72.999,300.4,174.9,terminal,Cordillera Occidental (Central Andes),,
-216,67,h500,-16.501,-72.643,Apurímac River Valley,304.4,3,1,1,0,0,0,0,0,0,3,,19,0,valley,,,,,,,,,,,,
-217,597,h4500,-16.541,-66.426,Yungas Inter-Andean Valley,215.3,7,0,0,0,0,0,0,0,0,7,4500.0,1555,0,valley,,,,,,,,,,,,
-218,223,h3000,-16.586,-66.897,Yungas Inter-Andean Valley,210.5,7,0,0,0,0,0,7,0,7,3,3000.0,445,0,valley,1.0,2.126,2578.307,APD248238,-16.866,-67.161,2808.9,1656.1,tributary,Cordillera Oriental (Central Andes),,
-219,480,h4000,-16.607,-67.013,Yungas Inter-Andean Valley,200.7,7,0,0,0,0,0,0,0,7,0,4000.0,78,0,valley,,,,,,,,,,,,
-220,605,h4500,-16.612,-68.947,Yungas Inter-Andean Valley,116.7,6,0,0,0,0,0,0,0,0,6,,41,0,valley,0.75,7.593,3833.89,APD246343,-16.629,-69.284,3951.4,148.7,tributary,Cordillera Central (Central Andes),,
-221,608,h4500,-16.663,-72.698,Apurímac River Valley,326.3,1,0,0,0,0,0,0,0,0,1,,5,0,valley,,,,,,,,,,,,
-222,69,h500,-16.753,-72.209,Apurímac River Valley,329.4,1,1,1,0,0,0,0,0,0,0,,143,0,valley,,,,,,,,,,,,
-223,481,h4000,-16.849,-67.874,Yungas Inter-Andean Valley,148.6,9,0,0,0,0,0,0,0,9,1,4000.0,527,20,divide,,,,APD245587,-16.669,-68.123,4104.4,38.7,continental,Cordillera Oriental (Central Andes),,4500.0
-224,31,design,-16.91,-72.1,Apurímac River Valley,357.8,1,1,1,0,0,0,0,0,0,1,,85,0,valley,1.0,3.87,1724.328,APD234522,-15.795,-72.42,3172.4,114.6,tributary,Cordillera Occidental (Central Andes),,
-225,612,h4500,-17.019,-71.941,Yungas Inter-Andean Valley,353.4,2,0,0,0,0,0,0,0,0,2,,19,0,valley,1.0,4.412,2133.542,APD234660,-15.702,-72.987,3045.1,207.1,tributary,Cordillera Occidental (Central Andes),,
-226,100,h1000,-17.029,-72.085,Apurímac River Valley,380.1,1,0,0,0,0,0,0,0,0,1,,0,0,valley,,,,,,,,,,,,
-227,613,h4500,-17.077,-68.627,Yungas Inter-Andean Valley,167.8,6,0,0,0,0,0,0,0,0,6,,54,0,valley,1.0,14.242,3805.324,APD256839,-17.088,-68.64,4055.6,118.4,tributary,Altiplano,,
-228,615,h4500,-17.154,-71.426,Yungas Inter-Andean Valley,315.9,8,0,0,0,0,0,0,0,0,8,4500.0,39,0,valley,,,,,,,,,,,,
-229,614,h4500,-17.181,-65.547,Yungas Inter-Andean Valley,381.2,1,0,0,0,0,0,0,0,0,1,,265,0,valley,,,,,,,,,,,,
-230,617,h4500,-17.257,-68.275,Yungas Inter-Andean Valley,190.3,6,0,0,0,0,0,0,0,0,6,,78,0,valley,1.0,14.22,3783.704,APD258101,-17.397,-68.41,3856.0,107.3,tributary,Altiplano,,
-231,616,h4500,-17.306,-69.225,Yungas Inter-Andean Valley,182.5,10,0,0,0,0,0,0,0,0,10,4500.0,240,0,valley,,,,,,,,,,,,
-232,618,h4500,-17.319,-67.736,Yungas Inter-Andean Valley,215.2,6,0,0,0,0,0,0,0,0,6,,169,18,divide,,,,APD257042,-17.194,-67.595,4027.6,486.4,continental,Cordillera Oriental (Central Andes),,4500.0
-233,335,h3500,-17.393,-65.891,Yungas Inter-Andean Valley,291.9,9,0,0,0,0,0,0,6,9,6,4000.0,2247,0,valley,0.286,3.981,2798.556,APD260368,-17.778,-66.101,2905.2,122.9,tributary,Cordillera Oriental (Central Andes),,
-234,619,h4500,-17.515,-66.996,Yungas Inter-Andean Valley,264.7,10,0,0,0,0,0,0,0,0,10,4500.0,831,47,divide,,,,APD255296,-17.48,-67.001,4290.4,389.5,continental,Cordillera Oriental (Central Andes),,4500.0
-235,32,design,-17.521,-70.936,Yungas Inter-Andean Valley,283.3,12,0,1,2,0,0,0,0,0,12,4500.0,1188,0,valley,0.182,14.973,413.851,APD263773,-17.729,-70.515,1022.3,101.4,tributary,Cordillera Occidental (Central Andes),,
-236,622,h4500,-17.675,-64.866,Yungas Inter-Andean Valley,407.6,1,0,0,0,0,0,0,0,0,1,,703,0,valley,,,,,,,,,,,,
-237,623,h4500,-17.772,-69.637,Yungas Inter-Andean Valley,237.5,10,0,0,0,0,0,0,0,0,10,4500.0,65,8,divide,,,,APD254896,-17.702,-69.627,4374.2,31.3,continental,Cordillera Occidental (Central Andes),,4500.0
-238,482,h4000,-17.777,-66.591,Yungas Inter-Andean Valley,273.3,10,0,0,0,0,0,0,0,10,9,4000.0,1612,24,divide,,,,APD256202,-17.866,-66.76,4136.1,124.8,continental,Cordillera Oriental (Central Andes),,4500.0
-239,625,h4500,-17.838,-67.337,Yungas Inter-Andean Valley,296.8,7,0,0,0,0,0,0,0,0,7,4500.0,20,0,valley,,,,,,,,,,,,
-240,626,h4500,-17.942,-69.912,Yungas Inter-Andean Valley,287.0,1,0,0,0,0,0,0,0,0,1,,39,0,valley,,,,,,,,,,,,
-241,484,h4000,-17.967,-63.413,Yungas Inter-Andean Valley,611.8,1,0,0,0,0,0,0,0,1,0,,54,0,valley,,,,,,,,,,,,
-242,628,h4500,-18.08,-70.413,Yungas Inter-Andean Valley,320.4,3,0,0,0,0,0,0,0,0,3,,0,0,valley,,,,,,,,,,,,
-243,339,h3500,-18.188,-65.341,Yungas Inter-Andean Valley,477.4,7,0,0,0,0,0,0,4,7,0,4000.0,57,0,valley,,,,,,,,,,,,
-244,343,h3500,-18.681,-63.688,Yungas Inter-Andean Valley,646.8,1,0,0,0,0,0,0,1,0,0,,1,0,valley,,,,,,,,,,,,
-245,33,design,-18.714,-64.158,Yungas Inter-Andean Valley,451.6,14,0,3,1,6,0,8,14,11,1,3000.0,12967,0,valley,0.103,6.297,1309.575,APD274887,-18.578,-64.426,1919.0,264.7,tributary,Cordillera Oriental (Central Andes),,
-246,228,h3000,-18.733,-63.779,Yungas Inter-Andean Valley,629.5,5,0,0,0,0,0,1,5,2,0,,68,0,valley,,,,,,,,,,,,
-247,106,h1000,-18.802,-63.589,Yungas Inter-Andean Valley,651.8,3,0,3,0,0,0,1,3,2,0,,210,0,valley,,,,,,,,,,,,
-248,342,h3500,-19.08,-64.765,Yungas Inter-Andean Valley,550.2,10,0,0,0,0,0,0,10,4,0,3500.0,1125,0,valley,,,,,,,,,,,,
-249,346,h3500,-19.103,-64.283,Yungas Inter-Andean Valley,603.5,3,0,0,0,0,0,0,3,0,0,,163,0,valley,,,,,,,,,,,,
-250,630,h4500,-19.543,-67.475,Yungas Inter-Andean Valley,451.8,9,0,0,0,0,0,0,0,0,9,4500.0,91,0,valley,0.333,4.623,3866.273,APD281832,-19.566,-66.746,3950.0,138.3,tributary,Cordillera Central (Central Andes),,
-251,353,h3500,-19.587,-64.331,Yungas Inter-Andean Valley,661.0,1,0,0,0,0,0,0,1,0,0,,3,0,valley,,,,,,,,,,,,
-252,354,h3500,-19.608,-64.269,Yungas Inter-Andean Valley,668.1,1,0,0,0,0,0,0,1,0,0,,3,0,valley,,,,,,,,,,,,
-253,229,h3000,-19.682,-64.799,Yungas Inter-Andean Valley,532.4,10,0,0,0,0,0,8,10,6,0,3000.0,1577,0,valley,0.875,6.512,1995.027,APD284420,-19.714,-64.816,3411.5,114.8,tributary,Cordillera Oriental (Central Andes),,
-254,495,h4000,-19.849,-67.086,Yungas Inter-Andean Valley,480.6,5,0,0,0,0,0,0,0,5,0,,369,0,valley,1.0,3.496,3707.072,APD296197,-20.079,-67.033,3803.9,340.4,tributary,Altiplano,,
-255,491,h4000,-19.884,-65.825,Yungas Inter-Andean Valley,518.4,6,0,0,0,0,0,0,0,6,0,,2075,17,divide,,,,APD294968,-20.536,-66.317,4030.7,1024.3,continental,Cordillera Central (Central Andes),,4500.0
-256,357,h3500,-19.885,-64.059,Yungas Inter-Andean Valley,691.3,1,0,0,0,0,0,0,1,0,0,,91,0,valley,,,,,,,,,,,,
-257,499,h4000,-19.959,-63.566,Yungas Inter-Andean Valley,745.2,1,0,0,0,0,0,0,0,1,1,,74,0,valley,,,,,,,,,,,,
-258,498,h4000,-20.023,-64.389,Yungas Inter-Andean Valley,660.9,1,0,0,0,0,0,0,0,1,0,,309,0,valley,,,,,,,,,,,,
-259,358,h3500,-20.235,-63.537,Yungas Inter-Andean Valley,737.9,2,0,0,0,0,0,0,2,1,1,,779,0,valley,1.0,0.83,1532.247,APD301813,-20.345,-63.906,1669.2,138.9,tributary,Sierras Subandinas,,
-260,501,h4000,-20.305,-63.738,Yungas Inter-Andean Valley,753.6,1,0,0,0,0,0,0,0,1,0,,39,0,valley,,,,,,,,,,,,
-261,500,h4000,-20.308,-65.268,Yungas Inter-Andean Valley,648.2,1,0,0,0,0,0,0,0,1,0,,42,0,valley,,,,,,,,,,,,
-262,635,h4500,-20.619,-68.208,Yungas Inter-Andean Valley,563.4,1,0,0,0,0,0,0,0,0,1,,19,0,valley,0.333,14.084,3654.589,APD293630,-20.632,-68.272,4766.6,131.1,tributary,Cordillera Occidental (Central Andes),,
-263,231,h3000,-20.647,-63.421,Yungas Inter-Andean Valley,772.8,7,0,0,0,0,0,3,3,7,1,4000.0,552,0,valley,,,,,,,,,,,,
-264,502,h4000,-20.649,-64.538,Yungas Inter-Andean Valley,706.3,9,0,0,0,0,0,0,0,9,1,4000.0,366,0,valley,,,,,,,,,,,,
-265,352,h3500,-20.697,-65.146,Yungas Inter-Andean Valley,567.3,15,0,0,0,0,0,0,10,15,10,3500.0,5728,0,valley,0.178,2.245,1929.328,APD314821,-21.096,-64.846,2053.1,122.5,tributary,Cordillera Oriental (Central Andes),,
-266,232,h3000,-20.782,-63.829,Yungas Inter-Andean Valley,765.3,8,0,0,0,0,0,7,7,8,2,3000.0,231,0,valley,,,,,,,,,,,,
-267,636,h4500,-20.808,-67.05,Yungas Inter-Andean Valley,606.6,6,0,0,0,0,0,0,0,0,6,,39,0,valley,0.75,10.657,3657.996,APD296755,-20.561,-66.791,3687.5,125.8,tributary,Cordillera Central (Central Andes),,
-268,107,h1000,-20.845,-63.826,Yungas Inter-Andean Valley,709.1,13,0,3,0,0,0,8,10,13,9,3000.0,4110,0,valley,1.0,0.807,1501.367,APD301669,-20.497,-64.321,1759.1,153.5,tributary,Cordillera Oriental (Central Andes),,
-269,637,h4500,-20.911,-66.057,Yungas Inter-Andean Valley,644.0,10,0,0,0,0,0,0,0,0,10,4500.0,706,20,divide,,,,APD294847,-20.805,-66.26,4054.4,138.4,continental,Cordillera Central (Central Andes),,4500.0
-270,639,h4500,-20.986,-65.426,Yungas Inter-Andean Valley,689.9,10,0,0,0,0,0,0,0,0,10,4500.0,237,0,valley,,,,,,,,,,,,
-271,641,h4500,-21.029,-64.761,Yungas Inter-Andean Valley,750.7,1,0,0,0,0,0,0,0,0,1,,0,0,valley,,,,,,,,,,,,
-272,360,h3500,-21.239,-63.686,Yungas Inter-Andean Valley,784.2,9,0,0,0,0,0,0,9,4,9,3500.0,807,0,valley,1.0,0.374,929.867,APD317724,-21.459,-63.694,959.9,135.1,tributary,Sierras Subandinas,,
-273,642,h4500,-21.289,-65.009,Yungas Inter-Andean Valley,745.2,2,0,0,0,0,0,0,0,0,2,,163,0,valley,,,,,,,,,,,,
-274,505,h4000,-21.315,-65.388,Yungas Inter-Andean Valley,713.2,8,0,0,0,0,0,0,0,8,2,4000.0,294,0,valley,,,,,,,,,,,,
-275,634,h4500,-21.365,-68.267,Yungas Inter-Andean Valley,559.6,12,0,0,0,0,0,0,0,0,12,4500.0,478,16,divide,,,,APD307843,-21.691,-68.345,4703.9,548.2,continental,Cordillera Occidental (Central Andes),,
-276,507,h4000,-21.446,-63.712,Yungas Inter-Andean Valley,841.0,1,0,0,0,0,0,0,0,1,0,,76,0,valley,,,,,,,,,,,,
-277,645,h4500,-21.619,-64.356,Yungas Inter-Andean Valley,816.1,1,0,0,0,0,0,0,0,0,1,,238,0,valley,,,,,,,,,,,,
-278,648,h4500,-21.826,-65.07,Yungas Inter-Andean Valley,805.2,1,0,0,0,0,0,0,0,0,1,,8,0,valley,,,,,,,,,,,,
-279,649,h4500,-21.913,-65.788,Yungas Inter-Andean Valley,767.6,3,0,0,0,0,0,0,0,0,3,,126,0,valley,,,,,,,,,,,,
-280,514,h4000,-21.965,-64.551,Yungas Inter-Andean Valley,838.2,1,0,0,0,0,0,0,0,1,0,,48,0,valley,,,,,,,,,,,,
-281,653,h4500,-22.117,-65.08,Yungas Inter-Andean Valley,833.8,1,0,0,0,0,0,0,0,0,1,,8,0,valley,,,,,,,,,,,,
-282,650,h4500,-22.136,-66.442,Yungas Inter-Andean Valley,762.6,3,0,0,0,0,0,0,0,0,3,,438,10,divide,,,,APD320744,-22.121,-66.793,4476.3,534.7,continental,Cordillera Central (Central Andes),,4500.0
-283,652,h4500,-22.14,-67.23,Yungas Inter-Andean Valley,745.0,2,0,0,0,0,0,0,0,0,2,,105,0,valley,0.5,6.321,4551.665,APD327697,-22.132,-67.059,4580.5,482.2,tributary,Cordillera Central (Central Andes),,
-284,34,design,-22.162,-64.336,Yungas Inter-Andean Valley,805.1,9,0,0,0,0,0,0,0,9,9,4000.0,2116,0,valley,0.75,2.525,1736.398,APD314736,-21.781,-64.57,2126.4,214.4,tributary,Cordillera Oriental (Central Andes),,
-285,506,h4000,-22.389,-65.029,Yungas Inter-Andean Valley,741.5,12,0,0,0,0,0,0,0,12,12,4000.0,3773,0,valley,0.2,2.98,3316.442,APD330641,-23.343,-65.536,3921.9,140.0,tributary,Dry Andes,,
-286,654,h4500,-22.441,-64.219,Yungas Inter-Andean Valley,862.0,1,0,0,0,0,0,0,0,0,1,,168,0,valley,,,,,,,,,,,,
-287,656,h4500,-22.64,-68.976,Yungas Inter-Andean Valley,771.2,6,0,0,0,0,0,0,0,0,6,,79,0,valley,,,,,,,,,,,,
-288,660,h4500,-23.021,-65.131,Yungas Inter-Andean Valley,902.9,5,0,0,0,0,0,0,0,0,5,,73,0,valley,,,,,,,,,,,,
-289,661,h4500,-23.286,-64.824,Yungas Inter-Andean Valley,937.4,3,0,0,0,0,0,0,0,0,3,,485,0,valley,,,,,,,,,,,,
-290,663,h4500,-23.32,-65.597,Yungas Inter-Andean Valley,922.3,7,0,0,0,0,0,0,0,0,7,4500.0,24,0,valley,,,,,,,,,,,,
-291,662,h4500,-23.408,-68.903,Yungas Inter-Andean Valley,857.9,11,0,0,0,0,0,0,0,0,11,4500.0,155,17,divide,,,,APD332546,-23.492,-69.03,2647.4,78.6,continental,Dry Andes,,3000.0
-292,664,h4500,-23.476,-66.432,Yungas Inter-Andean Valley,900.6,6,0,0,0,0,0,0,0,0,6,,118,4,divide,,,,APD329664,-23.374,-66.512,4252.0,134.2,continental,Dry Andes,,4500.0
+no,barrier_id,limit_m,n_vars,bridge_id,bridge_lat,bridge_lon,bridge_z_m,bridge_z1km,bridge_depth_m,bridge_rank,bridge_unit,bridge_name,bridge_links,links
+4,108,3000,7,APD086270,10.804,-72.986,283.0,192.0,53.8,tributary,Cordillera Oriental (Northern Andes),,1,1
+6,110,3000,2,APD086270,10.804,-72.986,283.0,192.0,53.8,tributary,Cordillera Oriental (Northern Andes),,1,1
+7,4,1500,11,APD080519,9.057,-73.393,1458.2,1421.0,144.5,tributary,Cordillera Oriental (Northern Andes),,11,11
+7,4,2000,16,APD080519,9.057,-73.393,1458.2,1421.0,144.5,tributary,Cordillera Oriental (Northern Andes),,16,16
+7,4,2500,18,APD080519,9.057,-73.393,1458.2,1421.0,144.5,tributary,Cordillera Oriental (Northern Andes),,16,17
+7,4,3000,18,APD086270,10.804,-72.986,283.0,192.0,53.8,tributary,Cordillera Oriental (Northern Andes),,15,15
+7,4,3500,19,APD086270,10.804,-72.986,283.0,192.0,53.8,tributary,Cordillera Oriental (Northern Andes),,15,15
+10,241,3500,5,APD086270,10.804,-72.986,283.0,192.0,53.8,tributary,Cordillera Oriental (Northern Andes),,1,1
+16,6,2500,7,APD072176,8.274,-71.602,2565.1,2396.0,651.7,continental,Cordillera de Mérida,,7,7
+17,247,3500,5,APD086559,10.976,-72.176,25.5,26.0,33.8,tributary,Cordillera Oriental (Northern Andes),,2,2
+18,116,3000,14,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,8,8
+18,116,3500,17,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,12,13
+20,8,1500,7,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,7,7
+20,8,2000,7,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,7,7
+20,8,2500,7,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,7,7
+20,8,3000,8,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,6,6
+20,8,3500,11,APD061838,7.686,-72.416,1023.3,1052.0,799.1,continental,Cordillera Oriental (Northern Andes),,4,4
+22,126,3000,3,APD079505,8.945,-74.122,24.5,17.0,42.3,tributary,Cordillera Central (Northern Andes),,2,3
+25,259,3500,3,APD086559,10.976,-72.176,25.5,26.0,33.8,tributary,Cordillera Oriental (Northern Andes),,2,2
+29,129,3000,6,APD058146,6.851,-74.292,117.9,88.0,37.9,tributary,Cordillera Central (Northern Andes),,3,3
+32,9,2000,7,APD049107,6.251,-73.49,2005.2,1882.0,313.0,tributary,Cordillera Oriental (Northern Andes),,7,7
+35,5,500,7,APD055733,6.99,-74.595,562.5,562.0,453.4,tributary,Cordillera Central (Northern Andes),,7,7
+35,5,1000,11,APD055733,6.99,-74.595,562.5,562.0,453.4,tributary,Cordillera Central (Northern Andes),,7,7
+35,5,1500,7,APD023018,3.906,-76.429,1523.6,1520.0,1687.6,continental,Cordillera Occidental (Northern Andes),,5,11
+35,5,2000,15,APD052824,6.042,-75.837,1019.7,775.0,219.5,tributary,Cordillera Central (Northern Andes),,9,81
+35,5,2500,17,APD049457,6.058,-75.645,1906.3,1944.0,814.1,tributary,Cordillera Central (Northern Andes),,11,18
+35,5,3000,17,APD058146,6.851,-74.292,117.9,88.0,37.9,tributary,Cordillera Central (Northern Andes),,13,14
+35,5,3500,18,APD033330,4.53,-74.763,431.3,352.0,143.2,tributary,Cordillera Oriental (Northern Andes),,4,5
+36,267,3500,2,APD033330,4.53,-74.763,431.3,352.0,143.2,tributary,Cordillera Oriental (Northern Andes),,1,1
+44,131,3000,13,APD036432,5.103,-73.669,2718.0,2711.0,879.9,continental,Cordillera Oriental (Northern Andes),,16,63
+44,131,3500,17,APD036432,5.103,-73.669,2718.0,2711.0,879.9,continental,Cordillera Oriental (Northern Andes),,10,14
+45,10,3500,11,APD033330,4.53,-74.763,431.3,352.0,143.2,tributary,Cordillera Oriental (Northern Andes),,1,1
+46,368,4000,7,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,7,7
+53,11,2000,7,APD033330,4.53,-74.763,431.3,352.0,143.2,tributary,Cordillera Oriental (Northern Andes),,7,7
+53,11,2500,7,APD017499,2.886,-75.243,503.3,443.0,31.9,tributary,Cordillera Oriental (Northern Andes),,3,7
+53,11,3000,10,APD033330,4.53,-74.763,431.3,352.0,143.2,tributary,Cordillera Oriental (Northern Andes),,7,8
+53,11,3500,14,APD033330,4.53,-74.763,431.3,352.0,143.2,tributary,Cordillera Oriental (Northern Andes),,13,13
+54,280,3500,7,APD028234,4.472,-75.555,3261.7,3206.0,1325.6,tributary,Cordillera Central (Northern Andes),Alto de La Línea,7,8
+58,385,2000,0,APD024258,3.681,-76.436,1005.4,944.0,94.2,tributary,Cordillera Occidental (Northern Andes),,7,7
+58,385,4000,9,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,4,4
+60,12,2000,9,APD022335,3.288,-74.617,1904.8,1920.0,1722.3,continental,Cordillera Oriental (Northern Andes),,5,5
+60,12,2500,8,APD022335,3.288,-74.617,1904.8,1920.0,1722.3,continental,Cordillera Oriental (Northern Andes),,8,8
+60,12,3500,12,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,2,2
+60,12,4000,10,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+64,14,3000,6,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,5,5
+65,394,4000,1,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+67,398,4000,5,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+69,13,1500,2,APD014384,2.435,-76.845,1736.2,1727.0,1931.8,continental,Cordillera Occidental (Northern Andes),,1,2
+69,13,2000,11,APD014384,2.435,-76.845,1736.2,1727.0,1931.8,continental,Cordillera Occidental (Northern Andes),,8,21
+69,13,3000,11,APD018355,2.157,-77.724,154.3,121.0,103.4,tributary,Cordillera Occidental (Northern Andes),,1,1
+71,146,3000,10,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,3,3
+71,146,3500,12,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,8,8
+71,146,4000,17,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,2,2
+72,147,3000,11,APD018011,2.154,-77.691,262.7,185.0,131.6,terminal,Cordillera Occidental (Northern Andes),,6,12
+73,400,4000,1,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+76,15,2000,7,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,7,7
+76,15,2500,10,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,10,10
+76,15,4000,4,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+77,148,3000,3,APD005584,1.757,-76.712,2924.9,2900.0,165.6,tributary,Cordillera Central (Northern Andes),,3,3
+77,148,3500,15,APD005772,1.218,-76.992,2730.9,2750.0,1440.4,tributary,Cordillera Oriental (Northern Andes),,8,8
+78,298,3500,15,APD005772,1.218,-76.992,2730.9,2750.0,1440.4,tributary,Cordillera Oriental (Northern Andes),,4,4
+79,519,4500,3,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,2,2
+81,149,3000,7,APD005772,1.218,-76.992,2730.9,2750.0,1440.4,tributary,Cordillera Oriental (Northern Andes),,7,7
+81,149,3500,4,APD005772,1.218,-76.992,2730.9,2750.0,1440.4,tributary,Cordillera Oriental (Northern Andes),,3,3
+81,149,4500,3,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+83,303,3500,3,APD001127,0.653,-77.684,3183.8,3196.0,969.2,continental,Cordillera Oriental (Northern Andes),,3,3
+85,150,3000,3,APD000308,0.145,-78.151,3740.1,3110.0,142.4,terminal,Cordillera Oriental (Northern Andes),,3,3
+86,304,3500,7,APD088014,-0.641,-78.637,3553.9,3498.0,277.0,tributary,Cordillera Occidental (Northern Andes),,5,5
+86,304,4000,9,APD088014,-0.641,-78.637,3553.9,3498.0,277.0,tributary,Cordillera Occidental (Northern Andes),,9,9
+88,522,4500,13,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,8,8
+93,305,3500,14,APD095275,-2.082,-78.773,3309.2,3258.0,113.3,tributary,Cordillera Occidental (Northern Andes),,12,35
+93,305,4500,10,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,4,4
+94,525,4500,1,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,1,1
+96,526,4500,3,APD007333,1.628,-75.98,1753.1,1693.0,389.4,continental,Cordillera Oriental (Northern Andes),,2,2
+97,151,3000,11,APD098787,-3.106,-79.111,2760.7,2787.0,1027.2,continental,Cordillera Occidental (Northern Andes),,11,15
+105,72,1000,9,APD109119,-4.197,-80.368,437.6,438.0,596.6,terminal,Cordillera Occidental (Northern Andes),,1,1
+105,72,3000,7,APD102134,-3.945,-80.377,424.5,395.0,100.2,tributary,Cordillera Occidental (Northern Andes),,2,2
+107,421,4000,2,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,1,1
+110,320,3500,11,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,5,5
+110,320,4000,17,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,3,3
+111,16,1000,10,APD109119,-4.197,-80.368,437.6,438.0,596.6,terminal,Cordillera Occidental (Northern Andes),,8,8
+111,16,1500,12,APD107253,-4.264,-78.656,932.2,992.0,1503.2,tributary,Cordillera Oriental (Northern Andes),,11,19
+111,16,2000,7,APD104848,-4.628,-78.898,1934.9,1932.0,273.7,tributary,Cordillera Oriental (Northern Andes),,5,7
+111,16,2500,17,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,15,84
+111,16,3000,18,APD121585,-6.423,-78.936,2293.0,2281.0,373.1,tributary,Cordillera Occidental (Central Andes),,11,65
+111,16,3500,19,APD110787,-4.609,-77.905,219.9,205.0,120.1,tributary,Cordillera Oriental (Central Andes),,16,22
+111,16,4000,19,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,7,7
+112,318,3500,19,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,9,9
+112,318,4000,18,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,8,8
+116,178,3000,5,APD115685,-5.484,-78.511,1193.2,695.0,174.8,tributary,Cordillera Oriental (Central Andes),,1,1
+118,182,3000,15,APD113104,-5.579,-79.532,2170.2,2181.0,111.5,continental,Cordillera Occidental (Central Andes),,6,6
+124,327,3500,10,APD131905,-7.247,-78.469,3225.5,3244.0,773.3,continental,Cordillera Occidental (Central Andes),Abra El Gavilán,9,18
+126,74,1000,3,APD136582,-7.526,-76.783,684.4,526.0,156.5,tributary,Cordillera Oriental (Central Andes),,3,3
+128,75,1000,3,APD134506,-7.982,-76.507,1223.6,1148.0,448.6,tributary,Cordillera Oriental (Central Andes),,3,3
+130,449,4000,10,APD151289,-9.868,-76.517,3949.2,3940.0,956.3,tributary,Cordillera Occidental (Central Andes),,10,10
+133,19,1000,5,APD154371,-9.891,-74.478,962.5,937.0,120.5,tributary,Cordillera Oriental (Central Andes),,3,5
+133,19,1500,2,APD187104,-12.913,-73.43,2059.3,1982.0,1935.5,tributary,Cordillera Oriental (Central Andes),,2,2
+133,19,2000,15,APD187104,-12.913,-73.43,2059.3,1982.0,1935.5,tributary,Cordillera Oriental (Central Andes),,15,19
+133,19,2500,17,APD187104,-12.913,-73.43,2059.3,1982.0,1935.5,tributary,Cordillera Oriental (Central Andes),,17,17
+133,19,3000,6,APD187104,-12.913,-73.43,2059.3,1982.0,1935.5,tributary,Cordillera Oriental (Central Andes),,6,9
+133,19,4000,17,APD176781,-11.52,-74.105,592.5,589.0,129.7,tributary,Cordillera Oriental (Central Andes),,9,9
+133,19,4500,17,APD178937,-11.7,-72.825,420.5,343.0,58.3,tributary,Cordillera Oriental (Central Andes),,3,6
+145,460,4000,4,APD172023,-11.593,-75.562,3984.5,3965.0,908.8,tributary,Cordillera Central (Central Andes),,4,4
+147,330,4500,12,APD178937,-11.7,-72.825,420.5,343.0,58.3,tributary,Cordillera Oriental (Central Andes),,1,1
+152,536,4500,10,APD181739,-12.034,-75.784,4566.0,4555.0,107.2,tributary,Cordillera Occidental (Central Andes),,10,10
+154,216,3000,2,APD185473,-12.896,-71.852,3351.8,3307.0,390.8,tributary,Cordillera Oriental (Central Andes),,1,1
+157,22,500,3,APD189508,-12.774,-76.454,892.4,733.0,37.5,terminal,Cordillera Occidental (Central Andes),,2,3
+157,22,1000,3,APD189508,-12.774,-76.454,892.4,808.0,37.5,terminal,Cordillera Occidental (Central Andes),,2,3
+157,22,1500,3,APD189508,-12.774,-76.454,892.4,808.0,37.5,terminal,Cordillera Occidental (Central Andes),,2,3
+158,543,4500,1,APD202623,-13.594,-73.766,3451.3,2197.0,286.5,tributary,Cordillera Central (Central Andes),,1,1
+161,329,3500,1,APD201996,-13.438,-74.236,3694.8,3708.0,1216.8,tributary,Cordillera Occidental (Central Andes),,1,2
+161,329,4000,16,APD203022,-13.647,-72.983,3176.8,2075.0,30.9,tributary,Cordillera Central (Central Andes),,8,13
+161,329,4500,16,APD202623,-13.594,-73.766,3451.3,2197.0,286.5,tributary,Cordillera Central (Central Andes),,3,6
+162,467,4500,16,APD202623,-13.594,-73.766,3451.3,2197.0,286.5,tributary,Cordillera Central (Central Andes),,18,21
+163,464,4000,17,APD201627,-13.686,-71.904,3784.0,3405.0,509.0,tributary,Cordillera Central (Central Andes),,15,40
+167,555,4500,8,APD199706,-13.742,-74.933,4114.0,4145.0,588.6,continental,Cordillera Occidental (Central Andes),,8,8
+172,26,1500,1,APD207899,-13.993,-75.816,452.6,433.0,250.4,terminal,Cordillera Occidental (Central Andes),,1,1
+173,557,4500,6,APD219074,-14.608,-71.472,4008.0,4001.0,115.8,tributary,Cordillera Central (Central Andes),,6,6
+177,558,500,0,APD240432,-15.247,-74.935,601.1,621.0,116.6,tributary,Cordillera Occidental (Central Andes),,2,2
+177,558,1000,0,APD240432,-15.247,-74.935,601.1,621.0,116.6,tributary,Cordillera Occidental (Central Andes),,2,4
+177,558,1500,0,APD240432,-15.247,-74.935,601.1,621.0,116.6,tributary,Cordillera Occidental (Central Andes),,2,2
+177,558,4500,8,APD217996,-14.384,-74.502,4144.5,4149.0,160.9,continental,Cordillera Occidental (Central Andes),,8,8
+178,560,4500,9,APD214942,-14.536,-69.588,4496.1,4508.0,123.0,continental,Cordillera Oriental (Central Andes),,8,16
+181,561,4500,3,APD216543,-14.606,-73.428,4321.5,4375.0,211.1,continental,Cordillera Occidental (Central Andes),,3,3
+182,564,4500,6,APD216849,-14.988,-71.004,4285.0,4285.0,890.9,continental,Cordillera Central (Central Andes),,6,6
+183,28,1500,7,APD225673,-14.888,-75.411,553.8,268.0,30.4,terminal,Cordillera Occidental (Central Andes),,2,2
+187,23,500,5,APD225892,-14.966,-67.666,485.2,587.0,123.3,tributary,Sierras Subandinas,,3,5
+187,23,1000,1,APD224726,-14.231,-68.536,866.7,962.0,30.6,tributary,Sierras Subandinas,,1,1
+187,23,1500,6,APD223283,-14.645,-68.412,1511.3,1528.0,643.9,tributary,Sierras Subandinas,,5,8
+187,23,4000,12,APD240323,-15.866,-66.934,644.5,534.0,159.8,tributary,Sierras Subandinas,,7,10
+187,23,4500,15,APD257483,-17.083,-68.653,3963.8,3827.0,31.3,tributary,Altiplano,,1,2
+194,89,1000,3,APD240187,-15.254,-75.015,697.9,693.0,147.5,terminal,Cordillera Occidental (Central Andes),,1,1
+195,331,3500,1,APD234074,-15.231,-73.766,3571.9,3499.0,169.2,terminal,Cordillera Occidental (Central Andes),,1,1
+196,474,4000,9,APD233027,-15.534,-69.049,3977.7,3992.0,352.6,continental,Cordillera Oriental (Central Andes),,9,9
+196,474,4500,11,APD233027,-15.534,-69.049,3977.7,3992.0,352.6,continental,Cordillera Oriental (Central Andes),,10,10
+197,570,4500,8,APD231462,-15.153,-71.551,4290.3,4307.0,813.3,continental,Cordillera Central (Central Andes),,7,11
+198,64,4000,3,APD240129,-15.996,-66.921,716.1,810.0,42.1,tributary,Sierras Subandinas,,1,1
+199,593,4500,5,APD217295,-14.463,-69.516,4229.6,3808.0,110.2,tributary,Cordillera Oriental (Central Andes),,1,1
+204,592,4500,2,APD246795,-16.429,-69.251,3853.3,3837.0,172.9,tributary,Cordillera Central (Central Andes),,2,2
+207,598,4500,1,APD257483,-17.083,-68.653,3963.8,3827.0,31.3,tributary,Altiplano,,1,1
+209,478,4500,7,APD246795,-16.429,-69.251,3853.3,3837.0,172.9,tributary,Cordillera Central (Central Andes),,4,4
+211,596,4500,10,APD231767,-15.762,-70.658,4236.4,4241.0,401.4,tributary,Cordillera Central (Central Andes),,8,14
+215,66,500,1,APD251723,-16.392,-72.882,1145.4,1265.0,32.2,tributary,Cordillera Occidental (Central Andes),,1,1
+215,66,1000,1,APD251723,-16.392,-72.882,1145.4,1226.0,32.2,tributary,Cordillera Occidental (Central Andes),,1,1
+218,223,3000,7,APD248238,-16.866,-67.161,2808.9,2723.0,1656.1,tributary,Cordillera Oriental (Central Andes),,7,7
+220,605,4000,0,APD257483,-17.083,-68.653,3963.8,3827.0,31.3,tributary,Altiplano,,1,1
+220,605,4500,6,APD246795,-16.429,-69.251,3853.3,3837.0,172.9,tributary,Cordillera Central (Central Andes),,3,3
+223,481,4000,9,APD245938,-16.978,-68.174,4037.9,3955.0,133.4,tributary,Altiplano,,6,17
+227,613,4500,6,APD257483,-17.083,-68.653,3963.8,3827.0,31.3,tributary,Altiplano,,1,1
+230,617,4500,6,APD257483,-17.083,-68.653,3963.8,3827.0,31.3,tributary,Altiplano,,6,6
+232,618,4000,0,APD257988,-17.408,-67.809,3879.6,3735.0,90.9,tributary,Cordillera Oriental (Central Andes),,1,1
+233,335,3500,6,APD259042,-17.369,-65.808,3492.1,3401.0,128.1,tributary,Cordillera Oriental (Central Andes),,6,9
+233,335,4000,9,APD273047,-18.134,-65.605,2302.8,2148.0,116.9,tributary,Cordillera Oriental (Central Andes),,2,5
+234,619,4500,10,APD246273,-16.581,-68.181,3966.6,3960.0,59.5,continental,Cordillera Oriental (Central Andes),,7,7
+235,32,1000,1,APD278335,-18.016,-70.196,838.5,618.0,65.3,tributary,Cordillera Occidental (Central Andes),,1,1
+235,32,1500,2,APD251639,-16.779,-71.993,1177.3,1154.0,30.6,tributary,Cordillera Occidental (Central Andes),,1,2
+237,623,4500,10,APD255025,-17.679,-69.628,4344.5,4255.0,45.1,tributary,Cordillera Occidental (Central Andes),,10,10
+238,482,4000,10,APD258185,-17.444,-66.722,3836.1,3870.0,1177.9,tributary,Cordillera Oriental (Central Andes),,7,13
+238,482,4500,9,APD246273,-16.581,-68.181,3966.6,3960.0,59.5,continental,Cordillera Oriental (Central Andes),,1,1
+245,33,1000,3,APD291464,-19.726,-63.429,1080.5,1092.0,134.8,tributary,Sierras Subandinas,,2,4
+245,33,1500,1,APD272671,-18.24,-65.158,2390.9,2409.0,138.9,tributary,Cordillera Oriental (Central Andes),,1,1
+245,33,2000,6,APD287296,-19.301,-64.412,2284.7,2286.0,1151.3,tributary,Cordillera Oriental (Central Andes),,4,17
+245,33,3500,14,APD277980,-18.543,-64.299,1045.0,1066.0,104.7,tributary,Cordillera Oriental (Central Andes),,3,6
+245,33,4000,11,APD277069,-18.212,-64.513,1421.5,1449.0,150.2,tributary,Cordillera Oriental (Central Andes),,4,9
+250,630,4500,9,APD258068,-17.541,-67.504,3862.6,3722.0,32.1,tributary,Cordillera Oriental (Central Andes),,3,3
+253,229,3000,8,APD286024,-19.125,-65.225,2776.8,2788.0,125.9,tributary,Cordillera Oriental (Central Andes),,8,8
+254,495,4000,5,APD295927,-20.28,-66.423,3852.6,3852.0,136.8,continental,Cordillera Central (Central Andes),,2,2
+255,491,4000,6,APD281815,-19.67,-65.872,3952.0,3973.0,929.0,tributary,Cordillera Central (Central Andes),,3,4
+262,635,4500,1,APD296330,-20.552,-68.597,3779.2,3782.0,47.3,tributary,Cordillera Occidental (Central Andes),,3,3
+265,352,3500,10,APD300364,-20.656,-65.498,2875.8,2746.0,33.1,tributary,Cordillera Central (Central Andes),,6,24
+265,352,4000,15,APD314321,-21.04,-64.935,2432.6,2350.0,160.5,tributary,Cordillera Oriental (Central Andes),,10,20
+267,636,4500,6,APD296779,-20.922,-66.99,3683.2,3675.0,48.9,tributary,Altiplano,,3,4
+269,637,4500,10,APD295927,-20.28,-66.423,3852.6,3852.0,136.8,continental,Cordillera Central (Central Andes),,8,8
+275,634,4500,12,APD310154,-21.723,-68.273,3966.1,4023.0,37.0,continental,Cordillera Occidental (Central Andes),,9,23
+282,650,4500,3,APD322588,-22.151,-66.407,3715.0,3786.0,293.7,tributary,Cordillera Central (Central Andes),,3,3
+283,652,4500,2,APD320491,-22.187,-67.038,4575.5,4575.0,503.0,terminal,Cordillera Central (Central Andes),,2,2
+285,506,4000,12,APD322101,-22.874,-65.254,3887.4,3902.0,326.0,tributary,Dry Andes,,7,26
+285,506,4500,12,APD314736,-21.781,-64.57,2126.4,1948.0,214.4,tributary,Cordillera Oriental (Central Andes),,3,5
+291,662,4500,11,APD332546,-23.492,-69.03,2647.4,2481.0,78.6,continental,Dry Andes,,2,4
+292,664,4500,6,APD330994,-23.498,-66.451,3776.1,3775.0,105.5,tributary,Dry Andes,,3,3
